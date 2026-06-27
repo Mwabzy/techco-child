@@ -2,15 +2,15 @@
 /**
  * Template Name: Visioner — Program / Curriculum
  *
- * 14-week fullstack curriculum ladder.
+ * 14-week fullstack curriculum ladder, with a Udemy-style course hero.
+ * NOTE: this template intentionally omits techco_child_page_banner() — the
+ * .tc-hero below provides its own breadcrumb + title so a banner would duplicate it.
  * @package Techco Child
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 get_header();
-require_once get_stylesheet_directory() . '/inc/page-banner.php';
-techco_child_page_banner( 'Program & Curriculum', 'Fullstack Developer Training — 14-week structured ladder' );
 
 /**
  * CLAUDE CODE: Placeholder curriculum — realistic fullstack ladder, swap the
@@ -38,33 +38,109 @@ $tc_weeks = array(
 <div id="primary" class="content-area page-content-area tc-page pt-120 pb-120">
     <div class="container">
 
-        <!-- SECTION: Program overview -->
+        <!-- SECTION: Course-style hero -->
+        <section class="tc-hero">
+            <div class="row">
+
+                <!-- LEFT: title block -->
+                <div class="col-lg-8">
+                    <nav class="tc-hero__crumbs" aria-label="Breadcrumb">
+                        <a href="/">Home</a><span>›</span>
+                        <a href="/program-curriculum/">Programs</a><span>›</span>
+                        <span class="tc-hero__crumbs-current">Fullstack Developer</span>
+                    </nav>
+
+                    <h1 class="tc-hero__title">Visioner Fullstack Developer Bootcamp</h1>
+                    <p class="tc-hero__sub">Master modern fullstack development by building real projects
+                        in 14 weeks. Go from fundamentals to a deployed MERN app — and become job-ready.</p>
+
+                    <span class="tc-badge tc-badge--bestseller">Most Popular Track</span>
+
+                    <p class="tc-hero__author">Mentored by
+                        <a href="/admissions-apply/">Visioner industry mentors &amp; lead instructors</a>
+                    </p>
+
+                    <div class="tc-hero__meta">
+                        <span class="tc-hero__meta-item">🗓 Curriculum updated <strong>2026</strong></span>
+                        <span class="tc-hero__meta-item">🌐 English &amp; Hindi</span>
+                        <span class="tc-hero__meta-item">🎓 Certificate on completion</span>
+                    </div>
+
+                    <!-- CLAUDE CODE: rating + learner numbers are PLACEHOLDERS — swap for real figures. -->
+                    <div class="tc-hero__stats">
+                        <div class="tc-stat">
+                            <strong class="tc-stat__num">4.8*</strong>
+                            <span class="tc-stars" aria-hidden="true">★★★★★</span>
+                            <span class="tc-stat__label">2,400+ ratings*</span>
+                        </div>
+                        <div class="tc-stat tc-stat--divider">
+                            <strong class="tc-stat__num">12,000+*</strong>
+                            <span class="tc-stat__label">learners trained</span>
+                        </div>
+                        <div class="tc-stat tc-stat--divider">
+                            <strong class="tc-stat__num">14</strong>
+                            <span class="tc-stat__label">weeks · project-first</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT: sticky enrolment card -->
+                <div class="col-lg-4">
+                    <aside class="tc-enrol-card">
+                        <div class="tc-enrol-card__preview">
+                            <!-- CLAUDE CODE: swap href for the real preview video / thumbnail image. -->
+                            <a href="#program-preview" class="tc-enrol-card__play" aria-label="Preview the program">
+                                <span class="tc-enrol-card__play-icon">▶</span>
+                            </a>
+                            <span class="tc-enrol-card__preview-label">Preview the program</span>
+                        </div>
+                        <div class="tc-enrol-card__body">
+                            <!-- CLAUDE CODE: pricing is a PLACEHOLDER — final numbers live on Fees & Batches. -->
+                            <div class="tc-enrol-card__price">
+                                <span class="tc-enrol-card__price-now">EMI from ₹ —/mo*</span>
+                                <span class="tc-enrol-card__price-was">₹ — one-time</span>
+                            </div>
+                            <p class="tc-enrol-card__price-note">*Indicative. See Fees &amp; Batches for final
+                                pricing, inclusive of 18% GST.</p>
+
+                            <a class="tc-btn tc-btn--primary tc-btn--block" href="/admissions-apply/">Apply Now</a>
+                            <a class="tc-btn tc-btn--ghost tc-btn--block" href="/fees-batches/">View Fees &amp; EMI</a>
+
+                            <ul class="tc-enrol-card__features">
+                                <li>14 weeks · online / hybrid cohort</li>
+                                <li>Live mentorship &amp; code reviews</li>
+                                <li>Capstone project + portfolio</li>
+                                <li>Placement &amp; TPO support</li>
+                                <li>Certificate on completion</li>
+                            </ul>
+                        </div>
+                    </aside>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION: What you'll master -->
         <section class="tc-section tc-program-intro">
-            <div class="row align-items-center">
-                <div class="col-lg-7">
-                    <span class="tc-eyebrow">The Programme</span>
-                    <h2 class="tc-section__title">What you'll master</h2>
+            <span class="tc-eyebrow">The Programme</span>
+            <h2 class="tc-section__title">What you'll master</h2>
+            <div class="row">
+                <div class="col-lg-8">
                     <p class="tc-lead">Visioner's Fullstack Developer track turns absolute beginners and
                         career-switchers into job-ready engineers in 14 focused weeks — no fluff, all build.</p>
                     <p class="tc-muted">You'll progress from web fundamentals to a production-grade MERN
                         stack, writing real code from day one. Every module is project-first: you ship
-                        working features, review them with industry mentors, and push them to your GitHub.</p>
-                    <p class="tc-muted">By graduation you'll have a deployed capstone app, a polished
-                        portfolio and interview-ready DSA — backed by our placement &amp; TPO network.</p>
+                        working features, review them with industry mentors, and push them to your GitHub.
+                        By graduation you'll have a deployed capstone app, a polished portfolio and
+                        interview-ready DSA — backed by our placement &amp; TPO network.</p>
                 </div>
-                <div class="col-lg-5">
-                    <div class="tc-quickfacts-card">
-                        <h3 class="tc-quickfacts-card__title">Quick Facts</h3>
-                        <ul class="tc-quickfacts">
-                            <li><span>Duration</span><strong>14 weeks</strong></li>
-                            <li><span>Mode</span><strong>Online / Hybrid</strong></li>
-                            <li><span>Batch size</span><strong>Limited cohort*</strong></li>
-                            <li><span>Level</span><strong>Beginner → Job-ready</strong></li>
-                            <li><span>Outcome</span><strong>Fullstack portfolio + placement support</strong></li>
-                        </ul>
-                        <p class="tc-quickfacts-card__note">*Placeholder — confirm exact batch size from the deck.</p>
-                    </div>
-                </div>
+            </div>
+
+            <div class="tc-factstrip">
+                <div class="tc-fact"><strong>14 weeks</strong><span>Structured ladder</span></div>
+                <div class="tc-fact"><strong>Online / Hybrid</strong><span>Flexible cohorts</span></div>
+                <div class="tc-fact"><strong>Beginner → Pro</strong><span>No prior code needed</span></div>
+                <div class="tc-fact"><strong>Job-ready</strong><span>Portfolio + placement</span></div>
             </div>
         </section>
 

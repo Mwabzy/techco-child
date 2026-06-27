@@ -73,22 +73,76 @@
 .tc-btn--ghost:hover { background: rgba(255, 255, 255, .12); color: #fff; }
 
 /* -----------------------------------------------------------
-   Quick facts card (program intro)
+   Course-style hero (Udemy-inspired)
    ----------------------------------------------------------- */
-.tc-quickfacts-card {
-    background: var(--tc-navy-2); border: 1px solid var(--tc-border);
-    border-radius: var(--tc-radius); padding: 28px; box-shadow: var(--tc-shadow);
+.tc-hero { margin-bottom: 72px; }
+.tc-hero__crumbs { font-size: 14px; font-weight: 600; margin-bottom: 22px; }
+.tc-hero__crumbs a { color: var(--tc-blue); text-decoration: none; }
+.tc-hero__crumbs a:hover { text-decoration: underline; }
+.tc-hero__crumbs span { color: var(--tc-muted); margin: 0 8px; }
+.tc-hero__crumbs-current { color: var(--tc-muted); margin: 0; }
+.tc-hero__title { font-size: clamp(30px, 4vw, 46px); font-weight: 800; line-height: 1.12; margin: 0 0 18px; }
+.tc-hero__sub { font-size: 19px; line-height: 1.55; color: var(--tc-text); max-width: 620px; margin: 0 0 20px; }
+.tc-hero__author { margin: 18px 0 0; color: var(--tc-text); font-weight: 600; }
+.tc-hero__author a { color: var(--tc-blue); text-decoration: underline; }
+.tc-hero__meta { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 16px; color: var(--tc-muted); font-size: 14px; }
+.tc-hero__meta-item strong { color: var(--tc-text); }
+
+.tc-badge {
+    display: inline-block; font-size: 12px; font-weight: 800; letter-spacing: .04em;
+    text-transform: uppercase; padding: 6px 12px; border-radius: 6px; margin-top: 6px;
 }
-.tc-quickfacts-card__title { font-size: 18px; margin-bottom: 14px; }
-.tc-quickfacts-card__note { margin: 14px 0 0; font-size: 12px; color: var(--tc-muted); font-style: italic; }
-.tc-quickfacts { list-style: none; padding: 0; margin: 0; }
-.tc-quickfacts li {
-    display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
-    padding: 12px 0; border-bottom: 1px solid var(--tc-border);
+.tc-badge--bestseller { background: var(--tc-orange); color: #1a1205; }
+
+.tc-hero__stats { display: flex; flex-wrap: wrap; gap: 28px; margin-top: 24px; }
+.tc-stat { display: flex; flex-direction: column; }
+.tc-stat--divider { padding-left: 28px; border-left: 1px solid var(--tc-border); }
+.tc-stat__num { font-size: 22px; font-weight: 800; color: #fff; line-height: 1.1; }
+.tc-stat__label { font-size: 13px; color: var(--tc-muted); margin-top: 2px; }
+.tc-stars { color: var(--tc-orange); letter-spacing: 2px; font-size: 14px; margin-top: 2px; }
+
+/* Sticky enrolment card */
+.tc-enrol-card {
+    position: sticky; top: 100px;
+    background: var(--tc-navy-2); border: 1px solid var(--tc-border-strong);
+    border-radius: var(--tc-radius); overflow: hidden; box-shadow: var(--tc-shadow);
 }
-.tc-quickfacts li:last-child { border-bottom: 0; }
-.tc-quickfacts li span { color: var(--tc-muted); }
-.tc-quickfacts li strong { color: #fff; text-align: right; }
+.tc-enrol-card__preview {
+    position: relative; aspect-ratio: 16 / 10; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 12px; text-decoration: none;
+    background:
+        radial-gradient(120px 120px at 50% 42%, rgba(255,255,255,.10), transparent 70%),
+        linear-gradient(135deg, #3a1d6e 0%, var(--tc-blue) 55%, var(--tc-orange) 120%);
+}
+.tc-enrol-card__play {
+    width: 64px; height: 64px; border-radius: 50%; background: rgba(255,255,255,.95);
+    color: var(--tc-navy); display: flex; align-items: center; justify-content: center;
+    font-size: 22px; text-decoration: none; transition: transform .2s ease; padding-left: 4px;
+}
+.tc-enrol-card__play:hover { transform: scale(1.08); color: var(--tc-blue); }
+.tc-enrol-card__preview-label { color: #fff; font-weight: 700; font-size: 15px; text-shadow: 0 2px 8px rgba(0,0,0,.4); }
+.tc-enrol-card__body { padding: 24px; }
+.tc-enrol-card__price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px; }
+.tc-enrol-card__price-now { font-size: 26px; font-weight: 800; color: #fff; }
+.tc-enrol-card__price-was { font-size: 16px; color: var(--tc-muted); text-decoration: line-through; }
+.tc-enrol-card__price-note { font-size: 12px; color: var(--tc-muted); margin: 8px 0 18px; font-style: italic; }
+.tc-btn--block { display: block; width: 100%; text-align: center; margin-bottom: 12px; }
+.tc-enrol-card__features { list-style: none; padding: 18px 0 0; margin: 8px 0 0; border-top: 1px solid var(--tc-border); }
+.tc-enrol-card__features li { position: relative; padding: 8px 0 8px 26px; font-size: 14px; color: var(--tc-text); }
+.tc-enrol-card__features li::before {
+    content: "✓"; position: absolute; left: 0; top: 8px; color: var(--tc-blue); font-weight: 800;
+}
+
+/* Horizontal fact strip (program intro) */
+.tc-factstrip {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 32px;
+}
+.tc-fact {
+    background: var(--tc-navy-2); border: 1px solid var(--tc-border); border-radius: var(--tc-radius);
+    padding: 20px; text-align: center;
+}
+.tc-fact strong { display: block; font-size: 18px; color: #fff; margin-bottom: 4px; }
+.tc-fact span { font-size: 13px; color: var(--tc-muted); }
 
 /* Checklist (apply aside / general) */
 .tc-checklist { list-style: none; padding: 0; margin: 0; }
@@ -163,12 +217,17 @@
    Responsive
    ----------------------------------------------------------- */
 @media (max-width: 991px) {
-    .tc-program-intro .col-lg-5 { margin-top: 32px; }
     .tc-section { margin-bottom: 56px; }
+    .tc-hero .col-lg-4 { margin-top: 32px; }
+    .tc-enrol-card { position: static; max-width: 480px; }
+    .tc-factstrip { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 575px) {
     .tc-wa-float__label { display: none; }
     .tc-wa-float { padding: 14px; }
     .tc-cta-band { padding: 40px 20px; }
     .tc-btn { padding: 12px 24px; }
+    .tc-hero__stats { gap: 18px; }
+    .tc-stat--divider { padding-left: 18px; }
+    .tc-factstrip { grid-template-columns: 1fr 1fr; gap: 12px; }
 }
