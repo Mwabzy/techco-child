@@ -77,14 +77,14 @@
     font-weight: 700; text-decoration: none; transition: .2s ease; cursor: pointer;
     border: 2px solid transparent; line-height: 1.2;
 }
-.tc-btn--primary { background: var(--tc-blue); color: #fff; box-shadow: 0 10px 26px rgba(47, 107, 255, .35); }
-.tc-btn--primary:hover { background: #1b54e6; color: #fff; transform: translateY(-2px); }
-.tc-btn--accent { background: var(--tc-orange); color: #fff; box-shadow: 0 10px 26px rgba(255, 122, 24, .35); }
-.tc-btn--accent:hover { background: #ec6a08; color: #fff; transform: translateY(-2px); }
-.tc-btn--outline { border-color: var(--tc-blue); color: #fff; background: transparent; }
-.tc-btn--outline:hover { background: var(--tc-blue); color: #fff; }
-.tc-btn--ghost { border-color: var(--tc-border-strong); color: #fff; background: rgba(255, 255, 255, .04); }
-.tc-btn--ghost:hover { background: rgba(255, 255, 255, .12); color: #fff; }
+.tc-btn.tc-btn--primary { background: var(--tc-blue); color: #fff; box-shadow: 0 10px 26px rgba(47, 107, 255, .35); }
+.tc-btn.tc-btn--primary:hover { background: #1b54e6; color: #fff; transform: translateY(-2px); }
+.tc-btn.tc-btn--accent { background: var(--tc-orange); color: #fff; box-shadow: 0 10px 26px rgba(255, 122, 24, .35); }
+.tc-btn.tc-btn--accent:hover { background: #ec6a08; color: #fff; transform: translateY(-2px); }
+.tc-btn.tc-btn--outline { border-color: var(--tc-blue); color: #fff; background: transparent; }
+.tc-btn.tc-btn--outline:hover { background: var(--tc-blue); color: #fff; }
+.tc-btn.tc-btn--ghost { border-color: var(--tc-border-strong); color: #fff; background: rgba(255, 255, 255, .04); }
+.tc-btn.tc-btn--ghost:hover { background: rgba(255, 255, 255, .12); color: #fff; }
 
 /* -----------------------------------------------------------
    Sticky fix: the parent's `.site_wrapper { overflow: clip }` makes
@@ -361,6 +361,155 @@
 .tc-cta-band__actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
 /* -----------------------------------------------------------
+<<<<<<< HEAD
+   Admissions — how-to-apply steps
+   ----------------------------------------------------------- */
+.tc-steps {
+    display: grid; gap: 20px; grid-template-columns: repeat(4, 1fr);
+    position: relative;
+}
+.tc-step {
+    background: var(--tc-navy-2); border: 1px solid var(--tc-border); border-radius: var(--tc-radius);
+    padding: 26px 22px; text-align: center; position: relative;
+    transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.tc-step:hover { transform: translateY(-4px); border-color: var(--tc-border-strong); box-shadow: var(--tc-shadow); }
+.tc-step__node {
+    width: 28px; height: 28px; border-radius: 50%; margin: 0 auto 12px;
+    background: linear-gradient(135deg, var(--tc-blue), var(--tc-orange));
+    color: #fff; font-weight: 800; font-size: 13px; display: flex; align-items: center; justify-content: center;
+}
+.tc-step__icon { display: block; font-size: 28px; margin-bottom: 10px; }
+.tc-step__title { font-size: 17px; margin: 0 0 8px; }
+
+/* -----------------------------------------------------------
+   Admissions — eligibility grid
+   ----------------------------------------------------------- */
+.tc-eligibility-grid {
+    display: grid; gap: 0 32px; grid-template-columns: repeat(2, 1fr);
+}
+.tc-eligibility-grid li { border-bottom: 1px solid var(--tc-border); }
+
+/* -----------------------------------------------------------
+   Admissions — batches / dates
+   ----------------------------------------------------------- */
+.tc-batches { display: grid; gap: 14px; margin-top: 24px; }
+.tc-batch-row {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    background: var(--tc-navy-2); border: 1px solid var(--tc-border); border-radius: var(--tc-radius);
+    padding: 20px 24px; flex-wrap: wrap;
+}
+.tc-batch-row__name { font-size: 17px; margin: 0 0 4px; }
+.tc-seats-badge {
+    font-size: 12px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase;
+    padding: 7px 14px; border-radius: 999px; background: var(--tc-blue-soft); color: #9cbcff;
+    border: 1px solid rgba(47, 107, 255, .4); white-space: nowrap;
+}
+
+/* -----------------------------------------------------------
+   Fees — pricing cards
+   ----------------------------------------------------------- */
+.tc-price-card {
+    position: relative; height: 100%; display: flex; flex-direction: column;
+    background: var(--tc-navy-2); border: 1px solid var(--tc-border); border-radius: var(--tc-radius);
+    padding: 32px 28px; transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.tc-price-card:hover { transform: translateY(-4px); border-color: var(--tc-border-strong); box-shadow: var(--tc-shadow); }
+.tc-price-card--recommended {
+    border-color: rgba(47, 107, 255, .5);
+    box-shadow: 0 0 0 1px rgba(47, 107, 255, .25), var(--tc-shadow);
+}
+.tc-price-card__tag {
+    position: absolute; top: -13px; left: 28px; font-size: 11px; font-weight: 800;
+    letter-spacing: .06em; text-transform: uppercase; padding: 6px 14px; border-radius: 999px;
+    background: linear-gradient(90deg, var(--tc-blue), var(--tc-orange)); color: #fff;
+}
+.tc-price-card__header { margin-bottom: 22px; }
+.tc-price-card__name { font-size: 20px; margin: 0 0 6px; }
+.tc-price-card__tagline { font-size: 14px; margin: 0; }
+.tc-price-card__price { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+.tc-price-card__price-amount { font-size: 32px; font-weight: 800; color: #fff; line-height: 1.1; }
+.tc-price-card__price-breakdown { font-size: 13px; margin: 0 0 22px; }
+.tc-price-card__features { margin-bottom: 26px; flex-grow: 1; }
+.tc-price-card__features li { font-size: 14px; padding: 8px 0 8px 26px; }
+
+.tc-gst-note {
+    display: flex; align-items: center; gap: 10px; justify-content: center;
+    margin: 28px 0 0; padding: 14px 20px; font-size: 14px; color: var(--tc-muted);
+    background: rgba(255, 255, 255, .03); border: 1px solid var(--tc-border); border-radius: 999px;
+}
+.tc-gst-note svg { color: var(--tc-blue); flex-shrink: 0; }
+
+/* -----------------------------------------------------------
+   Fees — EMI grid + refund card
+   ----------------------------------------------------------- */
+.tc-emi-grid { display: grid; gap: 14px; grid-template-columns: repeat(3, 1fr); height: 100%; }
+.tc-emi-card {
+    background: var(--tc-navy-2); border: 1px solid var(--tc-border); border-radius: var(--tc-radius);
+    padding: 22px 18px; text-align: center; display: flex; flex-direction: column; gap: 6px;
+}
+.tc-emi-card__tenure { font-size: 13px; font-weight: 700; color: var(--tc-orange); text-transform: uppercase; letter-spacing: .05em; }
+.tc-emi-card__amount { font-size: 19px; font-weight: 800; color: #fff; }
+.tc-emi-card__note { font-size: 12px; }
+
+.tc-refund-card {
+    height: 100%; background: var(--tc-navy-2); border: 1px solid var(--tc-border-strong);
+    border-radius: var(--tc-radius); padding: 26px 24px;
+}
+.tc-refund-card h3 { margin: 0 0 12px; }
+.tc-refund-card p { margin: 0; font-size: 14px; line-height: 1.6; }
+
+/* -----------------------------------------------------------
+   Fees — payment card (Razorpay slot wrapper)
+   ----------------------------------------------------------- */
+.tc-payment-card {
+    background: var(--tc-navy-2); border: 1px solid var(--tc-border-strong); border-radius: var(--tc-radius);
+    padding: 30px; box-shadow: var(--tc-shadow);
+}
+.tc-payment-card__head { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
+.tc-payment-card__icon {
+    flex-shrink: 0; color: var(--tc-blue); background: var(--tc-blue-soft);
+    border-radius: 50%; padding: 10px; box-sizing: content-box;
+}
+.tc-payment-card__head h3 { margin: 0 0 4px; font-size: 17px; }
+.tc-payment-card__head p { margin: 0; font-size: 14px; }
+.tc-razorpay-slot {
+    border: 1px dashed var(--tc-border-strong); border-radius: var(--tc-radius);
+    padding: 28px; text-align: center; background: rgba(255, 255, 255, .02);
+}
+
+/* -----------------------------------------------------------
+   Admissions — apply form aside (trust panel card)
+   ----------------------------------------------------------- */
+.tc-apply-aside {
+    background: var(--tc-navy-2); border: 1px solid var(--tc-border-strong); border-radius: var(--tc-radius);
+    padding: 28px; box-shadow: var(--tc-shadow);
+}
+.tc-apply-aside h3 { margin: 0 0 16px; }
+.tc-brochure { margin-top: 22px; padding-top: 22px; border-top: 1px solid var(--tc-border); }
+.tc-brochure__locked { font-size: 14px; color: var(--tc-muted); margin: 0 0 14px; }
+
+/* -----------------------------------------------------------
+   Admissions — FAQ accordion
+   ----------------------------------------------------------- */
+.tc-faq { display: grid; gap: 12px; }
+.tc-faq__item {
+    background: var(--tc-navy-2); border: 1px solid var(--tc-border); border-radius: var(--tc-radius);
+    padding: 4px 24px; transition: border-color .2s ease;
+}
+.tc-faq__item[open] { border-color: var(--tc-border-strong); }
+.tc-faq__q {
+    cursor: pointer; list-style: none; font-weight: 700; color: #fff;
+    padding: 18px 28px 18px 0; position: relative;
+}
+.tc-faq__q::-webkit-details-marker { display: none; }
+.tc-faq__q::after {
+    content: "+"; position: absolute; right: 0; top: 16px; font-size: 20px; color: var(--tc-orange);
+    transition: transform .2s ease;
+}
+.tc-faq__item[open] .tc-faq__q::after { content: "−"; }
+.tc-faq__a { margin: 0 0 18px; font-size: 15px; line-height: 1.6; }
+=======
    Fluent Forms on dark navy (Apply + TPO pages)
    ----------------------------------------------------------- */
 .tc-page .fluentform .ff-el-input--label label,
@@ -384,6 +533,7 @@
     font-weight: 700; color: #fff; box-shadow: 0 10px 26px rgba(47, 107, 255, .35);
 }
 .tc-page .fluentform .ff-btn-submit:hover { background: #1b54e6; }
+>>>>>>> 13902e8fc0a3d435ef4769f55a3337404a4b6089
 
 /* -----------------------------------------------------------
    WhatsApp floating widget
@@ -406,6 +556,11 @@
     .tc-program-body .col-lg-4 { margin-bottom: 32px; }
     .tc-enrol-card, .tc-side-card { position: static; max-width: 480px; }
     .tc-factstrip { grid-template-columns: repeat(2, 1fr); }
+    .tc-steps { grid-template-columns: repeat(2, 1fr); }
+    .tc-eligibility-grid { grid-template-columns: 1fr; }
+    .tc-apply-section .col-lg-5 { margin-top: 32px; }
+    .tc-fees .col-lg-4 { margin-bottom: 24px; }
+    .tc-emi-section .col-lg-5 { margin-top: 24px; }
 }
 @media (max-width: 767px) {
     .tc-college-value [class^="col-"], .tc-models [class^="col-"] { margin-bottom: 20px; }
@@ -421,9 +576,17 @@
     .tc-hero__stats { gap: 18px; }
     .tc-stat--divider { padding-left: 18px; }
     .tc-factstrip { grid-template-columns: 1fr 1fr; gap: 12px; }
+<<<<<<< HEAD
+    .tc-steps { grid-template-columns: 1fr; }
+    .tc-batch-row { padding: 18px; }
+    .tc-emi-grid { grid-template-columns: 1fr; }
+    .tc-payment-card { padding: 22px; }
+    .tc-payment-card__head { flex-direction: column; }
+=======
 
     /* Accordion: stack meta under the title, tighten body indent */
     .tc-acc__summary-row { flex-wrap: wrap; padding: 16px; }
     .tc-acc__meta { flex-basis: 100%; padding-left: 34px; }
     .tc-acc__body { padding: 0 16px 18px 34px; }
+>>>>>>> 13902e8fc0a3d435ef4769f55a3337404a4b6089
 }

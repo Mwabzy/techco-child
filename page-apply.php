@@ -2,65 +2,206 @@
 /**
  * Template Name: Visioner — Admissions / Apply
  *
- * Registration form (Fluent Forms) + brochure download gated on submit success.
+ * Premium admissions funnel: hero, how-to-apply steps, eligibility,
+ * batches, application form + trust panel, FAQ, CTA.
+ * NOTE: intentionally omits techco_child_page_banner() — the .tc-hero
+ * below provides its own breadcrumb + title, mirrors page-program.php.
  * @package Techco Child
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 get_header();
-require_once get_stylesheet_directory() . '/inc/page-banner.php';
-techco_child_page_banner( 'Admissions — Apply Now', 'Fill the form below. We\'ll confirm your seat over email + WhatsApp.' );
+
+/**
+ * CLAUDE CODE: Placeholder admissions content — swap copy/dates for the
+ * final deck wording before launch.
+ */
+$tc_steps = array(
+	array( 'icon' => '📝', 'title' => 'Apply Online',      'desc' => 'Submit the form below with your details and preferred batch.' ),
+	array( 'icon' => '📞', 'title' => 'Counselling Call',  'desc' => 'Our team calls within 24h to discuss the track, fit and timing.' ),
+	array( 'icon' => '🎓', 'title' => 'Offer & Seat Lock',  'desc' => 'Get your offer letter and lock your seat with the first payment.' ),
+	array( 'icon' => '🚀', 'title' => 'Onboarding',        'desc' => 'Join the orientation session and meet your mentors before Day 1.' ),
+);
+
+$tc_eligibility = array(
+	'Open to graduates, final-year students &amp; career-switchers',
+	'No prior coding experience required — we start from fundamentals',
+	'Basic computer literacy and a stable internet connection',
+	'Comfortable committing 15–20 hrs/week for the duration of the cohort',
+);
+
+$tc_batches = array(
+	array( 'name' => 'Cohort — July 2026',      'date' => 'Starts 6 Jul 2026',  'mode' => 'Online · Hybrid', 'seats' => 'Few seats left' ),
+	array( 'name' => 'Cohort — September 2026', 'date' => 'Starts 7 Sep 2026',  'mode' => 'Online',          'seats' => 'Open' ),
+	array( 'name' => 'Cohort — November 2026',  'date' => 'Starts 2 Nov 2026',  'mode' => 'Hybrid',          'seats' => 'Open' ),
+);
+
+$tc_faqs = array(
+	array( 'q' => 'Is there a refund if I change my mind after enrolling?', 'a' => 'Our No-Refund policy applies once a seat is confirmed — please review it carefully before paying. We\'re happy to answer questions on a counselling call first.' ),
+	array( 'q' => 'Can I pay in EMIs?',                                     'a' => 'Yes — EMI-friendly plans are available. Exact EMI amounts are on the Fees &amp; Batches page.' ),
+	array( 'q' => 'Do I need prior coding experience to apply?',            'a' => 'No. The programme is designed for absolute beginners and ramps up from web fundamentals.' ),
+	array( 'q' => 'Will I get a certificate?',                              'a' => 'Yes, you receive a certificate of completion once you finish the capstone project.' ),
+	array( 'q' => 'Is placement support included?',                         'a' => 'Yes — every cohort includes placement &amp; TPO support as part of the programme.' ),
+	array( 'q' => 'What if my preferred batch is full?',                    'a' => 'We\'ll offer you the next available cohort and hold your application on file.' ),
+);
 ?>
 
-<div id="primary" class="content-area page-content-area pt-120 pb-120">
+<div id="primary" class="content-area page-content-area tc-page pt-120 pb-120">
     <div class="container">
-        <div class="row">
 
-            <!-- LEFT: the registration form -->
-            <div class="col-lg-7">
-                <div class="tc-apply-form">
-                    <?php
-                    /**
-                     * CLAUDE CODE / KUWAYA:
-                     * 1. Build the form in Fluent Forms with these fields (from the deck):
-                     *    Full name · Email (.ff-validate-email) · Phone/WhatsApp (.ff-number-only) ·
-                     *    College/Company · Program & preferred batch · Timing track · Payment plan ·
-                     *    How did you hear about us? · Accept No-Refund policy (required checkbox).
-                     * 2. Integrations: Google Sheets (Fluent Forms → Integrations),
-                     *    confirmation Email (Settings → Notifications),
-                     *    WhatsApp (webhook → Cloud API / provider on submit).
-                     * 3. Replace the id below with the real form ID.
-                     */
-                    if ( function_exists( 'do_shortcode' ) ) {
-                        echo do_shortcode( '[fluentform id="1"]' );
-                    }
-                    ?>
+        <!-- SECTION: Hero -->
+        <section class="tc-hero">
+            <nav class="tc-hero__crumbs" aria-label="Breadcrumb">
+                <a href="/">Home</a><span>›</span>
+                <span class="tc-hero__crumbs-current">Admissions</span>
+            </nav>
+
+            <h1 class="tc-hero__title">Admissions are open</h1>
+            <p class="tc-hero__sub">Apply in minutes. Our team will confirm your seat over email &amp;
+                WhatsApp, and walk you through fees, batches and onboarding.</p>
+
+            <span class="tc-badge tc-badge--bestseller">Admissions Open</span>
+
+            <div class="tc-hero__stats">
+                <div class="tc-stat">
+                    <strong class="tc-stat__num">6 Jul 2026*</strong>
+                    <span class="tc-stat__label">next intake</span>
+                </div>
+                <div class="tc-stat tc-stat--divider">
+                    <strong class="tc-stat__num">24 hrs</strong>
+                    <span class="tc-stat__label">avg. response time</span>
+                </div>
+                <div class="tc-stat tc-stat--divider">
+                    <strong class="tc-stat__num">Limited</strong>
+                    <span class="tc-stat__label">seats per cohort</span>
                 </div>
             </div>
+        </section>
 
-            <!-- RIGHT: trust panel + gated brochure -->
-            <div class="col-lg-5">
-                <aside class="tc-apply-aside">
-                    <h3>Why Visioner</h3>
-                    <!-- CLAUDE CODE: 3–4 trust bullets (placement, mentors, projects). -->
-                    <ul class="tc-checklist">
-                        <li>Industry-mentored, project-first</li>
-                        <li>Placement &amp; TPO support</li>
-                        <li>EMI-friendly fees</li>
-                    </ul>
-
-                    <div class="tc-brochure" data-state="locked">
-                        <p class="tc-brochure__locked">📄 Submit the form to unlock the brochure download.</p>
-                        <!-- CLAUDE CODE / KUWAYA: upload the brochure to Media, put its URL in href. -->
-                        <a class="tc-btn tc-btn--primary tc-brochure__link" href="#BROCHURE_PDF_URL" download hidden>
-                            Download Brochure (PDF)
-                        </a>
-                    </div>
-                </aside>
+        <!-- SECTION: How to apply -->
+        <section class="tc-section tc-steps-section">
+            <span class="tc-eyebrow">The Process</span>
+            <h2 class="tc-section__title">How admissions work</h2>
+            <div class="tc-steps">
+                <?php foreach ( $tc_steps as $i => $s ) : ?>
+                <div class="tc-step">
+                    <div class="tc-step__node"><?php echo esc_html( $i + 1 ); ?></div>
+                    <span class="tc-step__icon" aria-hidden="true"><?php echo esc_html( $s['icon'] ); ?></span>
+                    <h3 class="tc-step__title"><?php echo esc_html( $s['title'] ); ?></h3>
+                    <p class="tc-muted"><?php echo esc_html( $s['desc'] ); ?></p>
+                </div>
+                <?php endforeach; ?>
             </div>
+        </section>
 
-        </div>
+        <!-- SECTION: Eligibility -->
+        <section class="tc-section tc-eligibility-section">
+            <span class="tc-eyebrow">Who can apply</span>
+            <h2 class="tc-section__title">Eligibility</h2>
+            <ul class="tc-checklist tc-eligibility-grid">
+                <?php foreach ( $tc_eligibility as $item ) : ?>
+                <li><?php echo wp_kses_post( $item ); ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </section>
+
+        <!-- SECTION: Dates & batches -->
+        <section class="tc-section tc-batches-section">
+            <span class="tc-eyebrow">Plan ahead</span>
+            <h2 class="tc-section__title">Upcoming batches</h2>
+            <p class="tc-muted tc-placeholder-note">*Dates shown are indicative — confirm final batch dates on the Fees &amp; Batches page.</p>
+            <div class="tc-batches">
+                <?php foreach ( $tc_batches as $b ) : ?>
+                <div class="tc-batch-row">
+                    <div class="tc-batch-row__main">
+                        <h3 class="tc-batch-row__name"><?php echo esc_html( $b['name'] ); ?></h3>
+                        <span class="tc-muted"><?php echo esc_html( $b['date'] ); ?> · <?php echo esc_html( $b['mode'] ); ?></span>
+                    </div>
+                    <span class="tc-seats-badge"><?php echo esc_html( $b['seats'] ); ?></span>
+                </div>
+                <?php endforeach; ?>
+            </div>
+        </section>
+
+        <!-- SECTION: Application form + trust panel -->
+        <section class="tc-section tc-apply-section">
+            <span class="tc-eyebrow">Apply</span>
+            <h2 class="tc-section__title">Start your application</h2>
+
+            <div class="row">
+
+                <!-- LEFT: the registration form -->
+                <div class="col-lg-7">
+                    <div class="tc-apply-form">
+                        <?php
+                        /**
+                         * CLAUDE CODE / KUWAYA:
+                         * 1. Build the form in Fluent Forms with these fields (from the deck):
+                         *    Full name · Email (.ff-validate-email) · Phone/WhatsApp (.ff-number-only) ·
+                         *    College/Company · Program & preferred batch · Timing track · Payment plan ·
+                         *    How did you hear about us? · Accept No-Refund policy (required checkbox).
+                         * 2. Integrations: Google Sheets (Fluent Forms → Integrations),
+                         *    confirmation Email (Settings → Notifications),
+                         *    WhatsApp (webhook → Cloud API / provider on submit).
+                         * 3. Replace the id below with the real form ID.
+                         */
+                        if ( function_exists( 'do_shortcode' ) ) {
+                            echo do_shortcode( '[fluentform id="1"]' );
+                        }
+                        ?>
+                    </div>
+                </div>
+
+                <!-- RIGHT: trust panel + gated brochure -->
+                <div class="col-lg-5">
+                    <aside class="tc-apply-aside">
+                        <h3>Why Visioner</h3>
+                        <!-- CLAUDE CODE: 3–4 trust bullets (placement, mentors, projects). -->
+                        <ul class="tc-checklist">
+                            <li>Industry-mentored, project-first</li>
+                            <li>Placement &amp; TPO support</li>
+                            <li>EMI-friendly fees</li>
+                        </ul>
+
+                        <div class="tc-brochure" data-state="locked">
+                            <p class="tc-brochure__locked">📄 Submit the form to unlock the brochure download.</p>
+                            <!-- CLAUDE CODE / KUWAYA: upload the brochure to Media, put its URL in href. -->
+                            <a class="tc-btn tc-btn--primary tc-brochure__link" href="#BROCHURE_PDF_URL" download hidden>
+                                Download Brochure (PDF)
+                            </a>
+                        </div>
+                    </aside>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION: FAQ -->
+        <section class="tc-section tc-faq-section">
+            <span class="tc-eyebrow">Questions</span>
+            <h2 class="tc-section__title">Frequently asked questions</h2>
+            <div class="tc-faq">
+                <?php foreach ( $tc_faqs as $faq ) : ?>
+                <details class="tc-faq__item">
+                    <summary class="tc-faq__q"><?php echo esc_html( $faq['q'] ); ?></summary>
+                    <p class="tc-faq__a tc-muted"><?php echo wp_kses_post( $faq['a'] ); ?></p>
+                </details>
+                <?php endforeach; ?>
+            </div>
+        </section>
+
+        <!-- SECTION: CTA -->
+        <section class="tc-section tc-cta-band text-center">
+            <h2>Seats fill up fast each cohort</h2>
+            <p class="tc-cta-band__sub">Apply now and our team will confirm your batch over email &amp; WhatsApp
+                within 24 hours.</p>
+            <div class="tc-cta-band__actions">
+                <a class="tc-btn tc-btn--primary" href="#tc-apply-form-anchor">Apply Now</a>
+                <a class="tc-btn tc-btn--ghost" href="/fees-batches/">View Fees &amp; Batches</a>
+            </div>
+        </section>
+
     </div>
 </div>
 
