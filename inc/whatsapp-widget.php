@@ -12,8 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 if ( ! function_exists( 'techco_child_whatsapp_widget' ) ) {
     function techco_child_whatsapp_widget() {
 
-        // CLAUDE CODE / KUWAYA: set the real Visioner WhatsApp number here (intl format, digits only, no +).
-        $number  = apply_filters( 'techco_child_wa_number', '919000000000' );
+        // VisionOne WhatsApp line (intl format, digits only, no +).
+        $number  = apply_filters( 'techco_child_wa_number', '918143533535' );
         $message = apply_filters( 'techco_child_wa_message', 'Hi Visioner, I\'d like to know more about the Fullstack Training program.' );
 
         if ( empty( $number ) ) { return; }

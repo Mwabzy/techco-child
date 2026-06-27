@@ -34,7 +34,18 @@
     color: var(--tc-text);
 }
 .tc-page h1, .tc-page h2, .tc-page h3, .tc-page h4 { color: var(--tc-heading); }
-.tc-page a { color: var(--tc-blue); }
+.tc-page a:not(.tc-btn) { color: var(--tc-blue); }
+
+/* Parent `.container` is 1320px with only 15px gutters — too tight against our
+   full-bleed navy on laptop widths. Give Visioner pages more breathing room. */
+.tc-page > .container {
+    max-width: 1240px;
+    padding-left: 28px;
+    padding-right: 28px;
+}
+@media (max-width: 575px) {
+    .tc-page > .container { padding-left: 18px; padding-right: 18px; }
+}
 
 .tc-section { margin-bottom: 72px; }
 .tc-section:last-child { margin-bottom: 0; }
@@ -78,7 +89,8 @@
    for descendants. Re-enable it for THIS template only (scoped via the
    page-template body class) so the viewport drives the sticky card.
    ----------------------------------------------------------- */
-.page-template-page-program-php .site_wrapper { overflow: visible; }
+.page-template-page-program-php .site_wrapper,
+.page-template-page-colleges-php .site_wrapper { overflow: visible; }
 
 /* -----------------------------------------------------------
    Course-style hero (Udemy-inspired)
@@ -177,25 +189,160 @@
 .tc-phase-tag--career   { background: rgba(255, 255, 255, .06); color: #d7e0f5; }
 
 /* -----------------------------------------------------------
-   Curriculum ladder
+   Course content — accordion (Udemy-style, dark theme)
    ----------------------------------------------------------- */
-.tc-ladder { display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
-.tc-ladder__week {
-    position: relative; background: var(--tc-navy-2); border: 1px solid var(--tc-border);
-    border-radius: var(--tc-radius); padding: 24px; overflow: hidden;
-    transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+.tc-acc__head { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.tc-section__title--flush { margin-bottom: 0; }
+.tc-acc__toggle-all {
+    background: none; border: 0; padding: 0; cursor: pointer;
+    color: var(--tc-blue); font-weight: 700; font-size: 15px;
 }
-.tc-ladder__week::before {
-    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
-    background: var(--tc-blue);
+.tc-acc__toggle-all:hover { text-decoration: underline; }
+.tc-acc__summary { color: var(--tc-muted); margin: 14px 0 18px; font-size: 15px; }
+.tc-acc__summary-note { font-style: italic; }
+
+.tc-acc { border: 1px solid var(--tc-border); border-radius: var(--tc-radius); overflow: hidden; }
+.tc-acc__item { border-bottom: 1px solid var(--tc-border); background: var(--tc-navy-2); }
+.tc-acc__item:last-child { border-bottom: 0; }
+
+.tc-acc__summary-row {
+    list-style: none; cursor: pointer; user-select: none;
+    display: flex; align-items: center; gap: 14px; padding: 18px 22px;
+    transition: background .15s ease;
 }
-.tc-ladder__week--backend::before { background: var(--tc-orange); }
-.tc-ladder__week--career::before  { background: linear-gradient(180deg, var(--tc-blue), var(--tc-orange)); }
-.tc-ladder__week:hover { transform: translateY(-4px); border-color: var(--tc-border-strong); box-shadow: var(--tc-shadow); }
-.tc-ladder__head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-.tc-ladder__num { font-size: 13px; font-weight: 800; color: var(--tc-orange); letter-spacing: .05em; text-transform: uppercase; }
-.tc-ladder__phase { font-size: 11px; font-weight: 700; color: var(--tc-muted); text-transform: uppercase; letter-spacing: .08em; }
-.tc-ladder__topic { margin: 0 0 10px; font-size: 19px; }
+.tc-acc__summary-row::-webkit-details-marker { display: none; }
+.tc-acc__item:hover > .tc-acc__summary-row { background: rgba(255, 255, 255, .03); }
+.tc-acc__item[open] > .tc-acc__summary-row { background: rgba(255, 255, 255, .04); }
+
+.tc-acc__chevron {
+    flex: 0 0 auto; font-size: 20px; line-height: 1; color: var(--tc-blue);
+    transition: transform .2s ease; transform: translateY(-2px);
+}
+.tc-acc__item[open] .tc-acc__chevron { transform: rotate(180deg) translateY(-2px); }
+
+.tc-acc__title { flex: 1 1 auto; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.tc-acc__day { font-size: 12px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--tc-orange); }
+.tc-acc__item--backend .tc-acc__day { color: #ffb277; }
+.tc-acc__item--career  .tc-acc__day { color: #cdd8f2; }
+.tc-acc__topic { font-size: 17px; font-weight: 700; color: #fff; }
+.tc-acc__meta { flex: 0 0 auto; font-size: 13px; color: var(--tc-muted); white-space: nowrap; }
+
+.tc-acc__body { padding: 0 22px 22px 50px; }
+.tc-acc__lessons { list-style: none; padding: 0; margin: 14px 0 0; }
+.tc-acc__lessons li {
+    display: flex; align-items: center; gap: 10px; padding: 9px 0;
+    border-top: 1px solid var(--tc-border); color: var(--tc-text); font-size: 14px;
+}
+.tc-acc__lesson-ic { color: var(--tc-blue); font-size: 11px; }
+
+/* -----------------------------------------------------------
+   Colleges page — sticky enquiry side card
+   ----------------------------------------------------------- */
+.tc-side-card {
+    position: sticky; top: 100px;
+    background: var(--tc-navy-2); border: 1px solid var(--tc-border-strong);
+    border-radius: var(--tc-radius); overflow: hidden; box-shadow: var(--tc-shadow);
+}
+.tc-side-card__head {
+    padding: 24px; background: linear-gradient(135deg, var(--tc-blue), #16265a);
+    border-bottom: 1px solid var(--tc-border-strong);
+}
+.tc-side-card__kicker { font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #cfe0ff; }
+.tc-side-card__title { margin: 8px 0 4px; font-size: 22px; }
+.tc-side-card__sub { margin: 0; color: #dce6ff; font-size: 14px; }
+.tc-side-card__body { padding: 24px; }
+.tc-side-card__contact { list-style: none; padding: 18px 0 0; margin: 16px 0 0; border-top: 1px solid var(--tc-border); }
+.tc-side-card__contact li { display: flex; align-items: center; gap: 10px; padding: 7px 0; font-size: 14px; color: var(--tc-text); }
+.tc-side-card__contact a { word-break: break-all; }
+.tc-side-card__ic { flex: 0 0 auto; }
+.tc-side-card__note { margin: 16px 0 0; font-size: 12.5px; color: var(--tc-muted); }
+
+/* -----------------------------------------------------------
+   Feature cards
+   ----------------------------------------------------------- */
+.tc-feature {
+    background: var(--tc-navy-2); border: 1px solid var(--tc-border); border-radius: var(--tc-radius);
+    padding: 26px; height: 100%; transition: transform .2s ease, border-color .2s ease;
+}
+.tc-feature:hover { transform: translateY(-4px); border-color: var(--tc-border-strong); }
+.tc-feature__ic {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 48px; height: 48px; border-radius: 12px; font-size: 22px; font-weight: 800; margin-bottom: 14px;
+}
+.tc-feature__ic--blue { background: var(--tc-blue-soft); color: #9cbcff; }
+.tc-feature__ic--orange { background: var(--tc-orange-soft); color: #ffb277; }
+.tc-feature h3 { font-size: 19px; margin: 0 0 8px; }
+
+/* -----------------------------------------------------------
+   Pricing / bulk table
+   ----------------------------------------------------------- */
+.tc-bulk__lead { margin-top: -10px; margin-bottom: 24px; }
+.tc-ptable-wrap { overflow-x: auto; border: 1px solid var(--tc-border); border-radius: var(--tc-radius); }
+.tc-ptable { width: 100%; border-collapse: collapse; min-width: 620px; }
+.tc-ptable th, .tc-ptable td { padding: 18px 22px; text-align: left; }
+.tc-ptable thead th {
+    background: rgba(47, 107, 255, .14); color: #cfe0ff; font-size: 13px;
+    text-transform: uppercase; letter-spacing: .05em; font-weight: 800;
+    border-bottom: 1px solid var(--tc-border-strong);
+}
+.tc-ptable tbody tr { border-bottom: 1px solid var(--tc-border); background: var(--tc-navy-2); }
+.tc-ptable tbody tr:last-child { border-bottom: 0; }
+.tc-ptable td { color: var(--tc-text); }
+.tc-ptable td strong { color: #fff; font-size: 17px; }
+.tc-ptable__plan { font-weight: 700; color: #fff; }
+.tc-ptable__gst { color: var(--tc-muted); font-size: 13px; }
+.tc-ptable__row--rec { position: relative; background: rgba(255, 122, 24, .10) !important; box-shadow: inset 4px 0 0 var(--tc-orange); }
+.tc-ptable__row--rec td strong { color: #fff; }
+.tc-ptable__star { color: var(--tc-orange); margin-left: 6px; }
+.tc-ptable__badge {
+    display: inline-block; margin-left: 8px; font-size: 11px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: .05em; padding: 3px 9px; border-radius: 999px;
+    background: var(--tc-orange); color: #1a1205; vertical-align: middle;
+}
+
+/* -----------------------------------------------------------
+   Engagement model cards
+   ----------------------------------------------------------- */
+.tc-model {
+    position: relative; height: 100%; padding: 28px; border-radius: var(--tc-radius);
+    background: var(--tc-navy-2); border: 1px solid var(--tc-border); overflow: hidden;
+}
+.tc-model::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
+.tc-model--a::before { background: var(--tc-blue); }
+.tc-model--b::before { background: var(--tc-orange); }
+.tc-model__tag { font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.tc-model--a .tc-model__tag { color: #9cbcff; }
+.tc-model--b .tc-model__tag { color: #ffb277; }
+.tc-model__name { margin: 6px 0 10px; font-size: 22px; }
+
+/* -----------------------------------------------------------
+   TPO enquiry panel + contact block
+   ----------------------------------------------------------- */
+.tc-tpo-panel {
+    background: linear-gradient(120deg, var(--tc-navy-2), #16265a);
+    border: 1px solid var(--tc-border-strong); border-radius: 20px;
+    padding: 44px; box-shadow: var(--tc-shadow);
+}
+.tc-tpo-panel .tc-section__title { margin-bottom: 16px; }
+.tc-tpo-panel .tc-checklist { margin-top: 18px; }
+.tc-tpo-formwrap {
+    background: rgba(255, 255, 255, .03); border: 1px solid var(--tc-border);
+    border-radius: var(--tc-radius); padding: 26px;
+}
+@media (max-width: 991px) {
+    .tc-tpo-panel .col-lg-7 { margin-top: 28px; }
+}
+
+.tc-contact__grid {
+    display: grid; grid-template-columns: 1.4fr 1fr; gap: 28px;
+    background: var(--tc-navy-2); border: 1px solid var(--tc-border);
+    border-radius: var(--tc-radius); padding: 32px;
+}
+.tc-contact__org { font-size: 18px; margin: 0 0 10px; }
+.tc-contact__list { list-style: none; padding: 0; margin: 0; }
+.tc-contact__list li { display: flex; gap: 14px; padding: 9px 0; border-bottom: 1px solid var(--tc-border); font-size: 14px; }
+.tc-contact__list li:last-child { border-bottom: 0; }
+.tc-contact__list li span { flex: 0 0 64px; color: var(--tc-muted); text-transform: uppercase; font-size: 12px; letter-spacing: .05em; font-weight: 700; }
 
 /* -----------------------------------------------------------
    CTA band
@@ -210,6 +357,7 @@
 .tc-cta-band__actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
 /* -----------------------------------------------------------
+<<<<<<< HEAD
    Admissions — how-to-apply steps
    ----------------------------------------------------------- */
 .tc-steps {
@@ -357,6 +505,31 @@
 }
 .tc-faq__item[open] .tc-faq__q::after { content: "−"; }
 .tc-faq__a { margin: 0 0 18px; font-size: 15px; line-height: 1.6; }
+=======
+   Fluent Forms on dark navy (Apply + TPO pages)
+   ----------------------------------------------------------- */
+.tc-page .fluentform .ff-el-input--label label,
+.tc-page .fluentform .ff-el-is-required label { color: var(--tc-text); font-weight: 600; }
+.tc-page .fluentform .ff-el-input--content input:not([type="checkbox"]):not([type="radio"]),
+.tc-page .fluentform .ff-el-input--content textarea,
+.tc-page .fluentform .ff-el-input--content select {
+    background: #fff; color: #0b1736; border: 1px solid var(--tc-border-strong);
+    border-radius: 10px; box-shadow: none;
+}
+.tc-page .fluentform .ff-el-input--content input::placeholder,
+.tc-page .fluentform .ff-el-input--content textarea::placeholder { color: #8a97b5; }
+.tc-page .fluentform input:focus,
+.tc-page .fluentform textarea:focus,
+.tc-page .fluentform select:focus { border-color: var(--tc-blue); box-shadow: 0 0 0 3px var(--tc-blue-soft); }
+.tc-page .fluentform .ff-el-group { margin-bottom: 18px; }
+.tc-page .fluentform .ff-el-form-check-label,
+.tc-page .fluentform .ff-el-custom-html { color: var(--tc-muted); }
+.tc-page .fluentform .ff-btn-submit {
+    background: var(--tc-blue); border: 0; border-radius: 999px; padding: 13px 30px;
+    font-weight: 700; color: #fff; box-shadow: 0 10px 26px rgba(47, 107, 255, .35);
+}
+.tc-page .fluentform .ff-btn-submit:hover { background: #1b54e6; }
+>>>>>>> 13902e8fc0a3d435ef4769f55a3337404a4b6089
 
 /* -----------------------------------------------------------
    WhatsApp floating widget
@@ -377,13 +550,19 @@
 @media (max-width: 991px) {
     .tc-section { margin-bottom: 56px; }
     .tc-program-body .col-lg-4 { margin-bottom: 32px; }
-    .tc-enrol-card { position: static; max-width: 480px; }
+    .tc-enrol-card, .tc-side-card { position: static; max-width: 480px; }
     .tc-factstrip { grid-template-columns: repeat(2, 1fr); }
     .tc-steps { grid-template-columns: repeat(2, 1fr); }
     .tc-eligibility-grid { grid-template-columns: 1fr; }
     .tc-apply-section .col-lg-5 { margin-top: 32px; }
     .tc-fees .col-lg-4 { margin-bottom: 24px; }
     .tc-emi-section .col-lg-5 { margin-top: 24px; }
+}
+@media (max-width: 767px) {
+    .tc-college-value [class^="col-"], .tc-models [class^="col-"] { margin-bottom: 20px; }
+    .tc-college-value [class^="col-"]:last-child, .tc-models [class^="col-"]:last-child { margin-bottom: 0; }
+    .tc-contact__grid { grid-template-columns: 1fr; gap: 20px; }
+    .tc-tpo-panel { padding: 28px 20px; }
 }
 @media (max-width: 575px) {
     .tc-wa-float__label { display: none; }
@@ -393,9 +572,17 @@
     .tc-hero__stats { gap: 18px; }
     .tc-stat--divider { padding-left: 18px; }
     .tc-factstrip { grid-template-columns: 1fr 1fr; gap: 12px; }
+<<<<<<< HEAD
     .tc-steps { grid-template-columns: 1fr; }
     .tc-batch-row { padding: 18px; }
     .tc-emi-grid { grid-template-columns: 1fr; }
     .tc-payment-card { padding: 22px; }
     .tc-payment-card__head { flex-direction: column; }
+=======
+
+    /* Accordion: stack meta under the title, tighten body indent */
+    .tc-acc__summary-row { flex-wrap: wrap; padding: 16px; }
+    .tc-acc__meta { flex-basis: 100%; padding-left: 34px; }
+    .tc-acc__body { padding: 0 16px 18px 34px; }
+>>>>>>> 13902e8fc0a3d435ef4769f55a3337404a4b6089
 }
