@@ -1,0 +1,174 @@
+/* ===========================================================
+   Techco Child — custom styles for Visioner Training pages
+   Dark-navy base with blue (--tc-blue) + orange (--tc-orange) accents.
+   Aligns with Techco's Bootstrap grid + spacing utilities.
+   All custom classes are namespaced `tc-`.
+   =========================================================== */
+
+:root {
+    --tc-navy: #0b1736;
+    --tc-navy-2: #111f44;          /* raised navy (cards) */
+    --tc-navy-3: #0a132c;          /* deepest navy (page base) */
+    --tc-blue: #2f6bff;
+    --tc-blue-soft: rgba(47, 107, 255, .14);
+    --tc-orange: #ff7a18;
+    --tc-orange-soft: rgba(255, 122, 24, .14);
+    --tc-muted: #9fb0d4;           /* readable muted on navy */
+    --tc-text: #e8eefc;            /* body text on navy */
+    --tc-heading: #ffffff;
+    --tc-border: rgba(255, 255, 255, .10);
+    --tc-border-strong: rgba(255, 255, 255, .18);
+    --tc-radius: 14px;
+    --tc-shadow: 0 18px 50px rgba(2, 8, 23, .45);
+}
+
+/* -----------------------------------------------------------
+   Page base — dark-navy backdrop for the whole content area.
+   `.tc-page` is added to #primary in each Visioner template.
+   ----------------------------------------------------------- */
+.tc-page {
+    background:
+        radial-gradient(1100px 520px at 12% -8%, rgba(47, 107, 255, .18), transparent 60%),
+        radial-gradient(900px 480px at 100% 0%, rgba(255, 122, 24, .10), transparent 55%),
+        linear-gradient(180deg, var(--tc-navy) 0%, var(--tc-navy-3) 100%);
+    color: var(--tc-text);
+}
+.tc-page h1, .tc-page h2, .tc-page h3, .tc-page h4 { color: var(--tc-heading); }
+.tc-page a { color: var(--tc-blue); }
+
+.tc-section { margin-bottom: 72px; }
+.tc-section:last-child { margin-bottom: 0; }
+.tc-section__title {
+    font-weight: 800; margin-bottom: 28px; position: relative;
+    padding-bottom: 16px; font-size: clamp(26px, 3vw, 36px);
+}
+.tc-section__title::after {
+    content: ""; position: absolute; left: 0; bottom: 0;
+    width: 64px; height: 4px; border-radius: 4px;
+    background: linear-gradient(90deg, var(--tc-blue), var(--tc-orange));
+}
+.tc-muted { color: var(--tc-muted); }
+.tc-lead { font-size: 19px; line-height: 1.6; color: var(--tc-text); margin-bottom: 18px; }
+.tc-placeholder-note { color: var(--tc-muted); font-style: italic; }
+.tc-eyebrow {
+    display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--tc-orange); margin-bottom: 12px;
+}
+
+/* -----------------------------------------------------------
+   Buttons
+   ----------------------------------------------------------- */
+.tc-btn {
+    display: inline-block; padding: 13px 30px; border-radius: 999px;
+    font-weight: 700; text-decoration: none; transition: .2s ease; cursor: pointer;
+    border: 2px solid transparent; line-height: 1.2;
+}
+.tc-btn--primary { background: var(--tc-blue); color: #fff; box-shadow: 0 10px 26px rgba(47, 107, 255, .35); }
+.tc-btn--primary:hover { background: #1b54e6; color: #fff; transform: translateY(-2px); }
+.tc-btn--accent { background: var(--tc-orange); color: #fff; box-shadow: 0 10px 26px rgba(255, 122, 24, .35); }
+.tc-btn--accent:hover { background: #ec6a08; color: #fff; transform: translateY(-2px); }
+.tc-btn--outline { border-color: var(--tc-blue); color: #fff; background: transparent; }
+.tc-btn--outline:hover { background: var(--tc-blue); color: #fff; }
+.tc-btn--ghost { border-color: var(--tc-border-strong); color: #fff; background: rgba(255, 255, 255, .04); }
+.tc-btn--ghost:hover { background: rgba(255, 255, 255, .12); color: #fff; }
+
+/* -----------------------------------------------------------
+   Quick facts card (program intro)
+   ----------------------------------------------------------- */
+.tc-quickfacts-card {
+    background: var(--tc-navy-2); border: 1px solid var(--tc-border);
+    border-radius: var(--tc-radius); padding: 28px; box-shadow: var(--tc-shadow);
+}
+.tc-quickfacts-card__title { font-size: 18px; margin-bottom: 14px; }
+.tc-quickfacts-card__note { margin: 14px 0 0; font-size: 12px; color: var(--tc-muted); font-style: italic; }
+.tc-quickfacts { list-style: none; padding: 0; margin: 0; }
+.tc-quickfacts li {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
+    padding: 12px 0; border-bottom: 1px solid var(--tc-border);
+}
+.tc-quickfacts li:last-child { border-bottom: 0; }
+.tc-quickfacts li span { color: var(--tc-muted); }
+.tc-quickfacts li strong { color: #fff; text-align: right; }
+
+/* Checklist (apply aside / general) */
+.tc-checklist { list-style: none; padding: 0; margin: 0; }
+.tc-checklist li { position: relative; padding: 10px 0 10px 30px; border-bottom: 1px solid var(--tc-border); }
+.tc-checklist li:last-child { border-bottom: 0; }
+.tc-checklist li::before {
+    content: "✓"; position: absolute; left: 0; top: 9px;
+    width: 20px; height: 20px; border-radius: 50%; background: var(--tc-blue-soft);
+    color: var(--tc-blue); font-size: 12px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+}
+
+/* -----------------------------------------------------------
+   Phase legend
+   ----------------------------------------------------------- */
+.tc-phase-legend { display: flex; flex-wrap: wrap; gap: 12px; }
+.tc-phase-tag {
+    font-size: 13px; font-weight: 700; padding: 8px 16px; border-radius: 999px;
+    border: 1px solid var(--tc-border-strong);
+}
+.tc-phase-tag--frontend { background: var(--tc-blue-soft); color: #9cbcff; border-color: rgba(47, 107, 255, .4); }
+.tc-phase-tag--backend  { background: var(--tc-orange-soft); color: #ffb277; border-color: rgba(255, 122, 24, .4); }
+.tc-phase-tag--career   { background: rgba(255, 255, 255, .06); color: #d7e0f5; }
+
+/* -----------------------------------------------------------
+   Curriculum ladder
+   ----------------------------------------------------------- */
+.tc-ladder { display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.tc-ladder__week {
+    position: relative; background: var(--tc-navy-2); border: 1px solid var(--tc-border);
+    border-radius: var(--tc-radius); padding: 24px; overflow: hidden;
+    transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.tc-ladder__week::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+    background: var(--tc-blue);
+}
+.tc-ladder__week--backend::before { background: var(--tc-orange); }
+.tc-ladder__week--career::before  { background: linear-gradient(180deg, var(--tc-blue), var(--tc-orange)); }
+.tc-ladder__week:hover { transform: translateY(-4px); border-color: var(--tc-border-strong); box-shadow: var(--tc-shadow); }
+.tc-ladder__head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.tc-ladder__num { font-size: 13px; font-weight: 800; color: var(--tc-orange); letter-spacing: .05em; text-transform: uppercase; }
+.tc-ladder__phase { font-size: 11px; font-weight: 700; color: var(--tc-muted); text-transform: uppercase; letter-spacing: .08em; }
+.tc-ladder__topic { margin: 0 0 10px; font-size: 19px; }
+
+/* -----------------------------------------------------------
+   CTA band
+   ----------------------------------------------------------- */
+.tc-cta-band {
+    background: linear-gradient(120deg, var(--tc-navy-2), #16265a);
+    border: 1px solid var(--tc-border-strong); color: #fff;
+    border-radius: 20px; padding: 56px 32px; box-shadow: var(--tc-shadow);
+}
+.tc-cta-band h2 { color: #fff; margin-bottom: 14px; }
+.tc-cta-band__sub { color: var(--tc-muted); max-width: 620px; margin: 0 auto 28px; font-size: 17px; }
+.tc-cta-band__actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+/* -----------------------------------------------------------
+   WhatsApp floating widget
+   ----------------------------------------------------------- */
+.tc-wa-float {
+    position: fixed; right: 22px; bottom: 22px; z-index: 9999;
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #25D366; color: #fff; padding: 12px 18px 12px 14px;
+    border-radius: 999px; text-decoration: none; font-weight: 600;
+    box-shadow: 0 8px 24px rgba(0,0,0,.28); transition: transform .2s;
+}
+.tc-wa-float:hover { transform: translateY(-2px); color: #fff; }
+.tc-wa-float__label { font-size: 14px; }
+
+/* -----------------------------------------------------------
+   Responsive
+   ----------------------------------------------------------- */
+@media (max-width: 991px) {
+    .tc-program-intro .col-lg-5 { margin-top: 32px; }
+    .tc-section { margin-bottom: 56px; }
+}
+@media (max-width: 575px) {
+    .tc-wa-float__label { display: none; }
+    .tc-wa-float { padding: 14px; }
+    .tc-cta-band { padding: 40px 20px; }
+    .tc-btn { padding: 12px 24px; }
+}
