@@ -73,9 +73,18 @@
 .tc-btn--ghost:hover { background: rgba(255, 255, 255, .12); color: #fff; }
 
 /* -----------------------------------------------------------
+   Sticky fix: the parent's `.site_wrapper { overflow: clip }` makes
+   itself the sticky scroll-container, which disables position:sticky
+   for descendants. Re-enable it for THIS template only (scoped via the
+   page-template body class) so the viewport drives the sticky card.
+   ----------------------------------------------------------- */
+.page-template-page-program-php .site_wrapper { overflow: visible; }
+
+/* -----------------------------------------------------------
    Course-style hero (Udemy-inspired)
    ----------------------------------------------------------- */
-.tc-hero { margin-bottom: 72px; }
+.tc-hero { margin-bottom: 56px; }
+.tc-program-body { margin-bottom: 72px; }
 .tc-hero__crumbs { font-size: 14px; font-weight: 600; margin-bottom: 22px; }
 .tc-hero__crumbs a { color: var(--tc-blue); text-decoration: none; }
 .tc-hero__crumbs a:hover { text-decoration: underline; }
@@ -218,7 +227,7 @@
    ----------------------------------------------------------- */
 @media (max-width: 991px) {
     .tc-section { margin-bottom: 56px; }
-    .tc-hero .col-lg-4 { margin-top: 32px; }
+    .tc-program-body .col-lg-4 { margin-bottom: 32px; }
     .tc-enrol-card { position: static; max-width: 480px; }
     .tc-factstrip { grid-template-columns: repeat(2, 1fr); }
 }
