@@ -34,7 +34,18 @@
     color: var(--tc-text);
 }
 .tc-page h1, .tc-page h2, .tc-page h3, .tc-page h4 { color: var(--tc-heading); }
-.tc-page a { color: var(--tc-blue); }
+.tc-page a:not(.tc-btn) { color: var(--tc-blue); }
+
+/* Parent `.container` is 1320px with only 15px gutters — too tight against our
+   full-bleed navy on laptop widths. Give Visioner pages more breathing room. */
+.tc-page > .container {
+    max-width: 1240px;
+    padding-left: 28px;
+    padding-right: 28px;
+}
+@media (max-width: 575px) {
+    .tc-page > .container { padding-left: 18px; padding-right: 18px; }
+}
 
 .tc-section { margin-bottom: 72px; }
 .tc-section:last-child { margin-bottom: 0; }
@@ -177,25 +188,51 @@
 .tc-phase-tag--career   { background: rgba(255, 255, 255, .06); color: #d7e0f5; }
 
 /* -----------------------------------------------------------
-   Curriculum ladder
+   Course content — accordion (Udemy-style, dark theme)
    ----------------------------------------------------------- */
-.tc-ladder { display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
-.tc-ladder__week {
-    position: relative; background: var(--tc-navy-2); border: 1px solid var(--tc-border);
-    border-radius: var(--tc-radius); padding: 24px; overflow: hidden;
-    transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+.tc-acc__head { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.tc-section__title--flush { margin-bottom: 0; }
+.tc-acc__toggle-all {
+    background: none; border: 0; padding: 0; cursor: pointer;
+    color: var(--tc-blue); font-weight: 700; font-size: 15px;
 }
-.tc-ladder__week::before {
-    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
-    background: var(--tc-blue);
+.tc-acc__toggle-all:hover { text-decoration: underline; }
+.tc-acc__summary { color: var(--tc-muted); margin: 14px 0 18px; font-size: 15px; }
+.tc-acc__summary-note { font-style: italic; }
+
+.tc-acc { border: 1px solid var(--tc-border); border-radius: var(--tc-radius); overflow: hidden; }
+.tc-acc__item { border-bottom: 1px solid var(--tc-border); background: var(--tc-navy-2); }
+.tc-acc__item:last-child { border-bottom: 0; }
+
+.tc-acc__summary-row {
+    list-style: none; cursor: pointer; user-select: none;
+    display: flex; align-items: center; gap: 14px; padding: 18px 22px;
+    transition: background .15s ease;
 }
-.tc-ladder__week--backend::before { background: var(--tc-orange); }
-.tc-ladder__week--career::before  { background: linear-gradient(180deg, var(--tc-blue), var(--tc-orange)); }
-.tc-ladder__week:hover { transform: translateY(-4px); border-color: var(--tc-border-strong); box-shadow: var(--tc-shadow); }
-.tc-ladder__head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-.tc-ladder__num { font-size: 13px; font-weight: 800; color: var(--tc-orange); letter-spacing: .05em; text-transform: uppercase; }
-.tc-ladder__phase { font-size: 11px; font-weight: 700; color: var(--tc-muted); text-transform: uppercase; letter-spacing: .08em; }
-.tc-ladder__topic { margin: 0 0 10px; font-size: 19px; }
+.tc-acc__summary-row::-webkit-details-marker { display: none; }
+.tc-acc__item:hover > .tc-acc__summary-row { background: rgba(255, 255, 255, .03); }
+.tc-acc__item[open] > .tc-acc__summary-row { background: rgba(255, 255, 255, .04); }
+
+.tc-acc__chevron {
+    flex: 0 0 auto; font-size: 20px; line-height: 1; color: var(--tc-blue);
+    transition: transform .2s ease; transform: translateY(-2px);
+}
+.tc-acc__item[open] .tc-acc__chevron { transform: rotate(180deg) translateY(-2px); }
+
+.tc-acc__title { flex: 1 1 auto; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.tc-acc__day { font-size: 12px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--tc-orange); }
+.tc-acc__item--backend .tc-acc__day { color: #ffb277; }
+.tc-acc__item--career  .tc-acc__day { color: #cdd8f2; }
+.tc-acc__topic { font-size: 17px; font-weight: 700; color: #fff; }
+.tc-acc__meta { flex: 0 0 auto; font-size: 13px; color: var(--tc-muted); white-space: nowrap; }
+
+.tc-acc__body { padding: 0 22px 22px 50px; }
+.tc-acc__lessons { list-style: none; padding: 0; margin: 14px 0 0; }
+.tc-acc__lessons li {
+    display: flex; align-items: center; gap: 10px; padding: 9px 0;
+    border-top: 1px solid var(--tc-border); color: var(--tc-text); font-size: 14px;
+}
+.tc-acc__lesson-ic { color: var(--tc-blue); font-size: 11px; }
 
 /* -----------------------------------------------------------
    CTA band
@@ -239,4 +276,9 @@
     .tc-hero__stats { gap: 18px; }
     .tc-stat--divider { padding-left: 18px; }
     .tc-factstrip { grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    /* Accordion: stack meta under the title, tighten body indent */
+    .tc-acc__summary-row { flex-wrap: wrap; padding: 16px; }
+    .tc-acc__meta { flex-basis: 100%; padding-left: 34px; }
+    .tc-acc__body { padding: 0 16px 18px 34px; }
 }
