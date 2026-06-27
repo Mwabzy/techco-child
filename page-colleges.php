@@ -59,7 +59,8 @@ $tc_wa_tel = preg_replace( '/[^0-9+]/', '', $tc_org['wa'] );
 
                         <ul class="tc-side-card__contact">
                             <li><span class="tc-side-card__ic">📧</span><a href="mailto:<?php echo esc_attr( $tc_org['email'] ); ?>"><?php echo esc_html( $tc_org['email'] ); ?></a></li>
-                            <li><span class="tc-side-card__ic">📞</span><?php echo esc_html( $tc_org['phone'] ); ?></li>
+                            <li><span class="tc-side-card__ic">📞</span><a href="tel:<?php echo esc_attr( $tc_tel ); ?>"><?php echo esc_html( $tc_org['phone'] ); ?></a></li>
+                            <li><span class="tc-side-card__ic">💬</span><a href="https://wa.me/<?php echo esc_attr( ltrim( $tc_wa_tel, '+' ) ); ?>" target="_blank" rel="noopener">WhatsApp <?php echo esc_html( $tc_org['wa'] ); ?></a></li>
                             <li><span class="tc-side-card__ic">🧾</span>GSTIN <?php echo esc_html( $tc_org['gstin'] ); ?></li>
                         </ul>
                         <p class="tc-side-card__note">No commission. No revenue-share. GST invoice provided.</p>
@@ -235,10 +236,13 @@ $tc_wa_tel = preg_replace( '/[^0-9+]/', '', $tc_org['wa'] );
                 </div>
                 <div class="tc-contact__col">
                     <ul class="tc-contact__list">
+                        <li><span>Phone</span><a href="tel:<?php echo esc_attr( $tc_tel ); ?>"><?php echo esc_html( $tc_org['phone'] ); ?></a></li>
+                        <li><span>WhatsApp</span><a href="https://wa.me/<?php echo esc_attr( ltrim( $tc_wa_tel, '+' ) ); ?>" target="_blank" rel="noopener"><?php echo esc_html( $tc_org['wa'] ); ?></a></li>
                         <li><span>Email</span><a href="mailto:<?php echo esc_attr( $tc_org['email'] ); ?>"><?php echo esc_html( $tc_org['email'] ); ?></a></li>
                         <li><span>Web</span><a href="https://<?php echo esc_attr( $tc_org['web'] ); ?>" target="_blank" rel="noopener"><?php echo esc_html( $tc_org['web'] ); ?></a></li>
-                        <li><span>Phone</span><a href="tel:<?php echo esc_attr( $tc_tel ); ?>"><?php echo esc_html( $tc_org['phone'] ); ?></a></li>
+                        <li><span>Hours</span><?php echo wp_kses_post( $tc_org['hours'] ); ?></li>
                         <li><span>GSTIN</span><?php echo esc_html( $tc_org['gstin'] ); ?></li>
+                        <li><span>CIN</span><?php echo esc_html( $tc_org['cin'] ); ?></li>
                     </ul>
                 </div>
             </div>
