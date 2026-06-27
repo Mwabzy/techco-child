@@ -62,7 +62,7 @@ if ( ! function_exists( 'tc_fmt_len' ) ) {
                     <div class="tc-enrol-card__preview">
                         <!-- CLAUDE CODE: swap href for the real preview video / thumbnail image. -->
                         <a href="#program-preview" class="tc-enrol-card__play" aria-label="Preview the program">
-                            <span class="tc-enrol-card__play-icon">▶</span>
+                            <?php echo tc_icon( 'play', 24 ); ?>
                         </a>
                         <span class="tc-enrol-card__preview-label">Preview the program</span>
                     </div>
@@ -111,9 +111,9 @@ if ( ! function_exists( 'tc_fmt_len' ) ) {
                     </p>
 
                     <div class="tc-hero__meta">
-                        <span class="tc-hero__meta-item">🗓 Curriculum updated <strong>2026</strong></span>
-                        <span class="tc-hero__meta-item">🌐 English &amp; Hindi</span>
-                        <span class="tc-hero__meta-item">🎓 Certificate on completion</span>
+                        <span class="tc-hero__meta-item"><?php echo tc_icon( 'calendar', 16 ); ?> Curriculum updated <strong>2026</strong></span>
+                        <span class="tc-hero__meta-item"><?php echo tc_icon( 'globe', 16 ); ?> English &amp; Hindi</span>
+                        <span class="tc-hero__meta-item"><?php echo tc_icon( 'award', 16 ); ?> Certificate on completion</span>
                     </div>
 
                     <!-- CLAUDE CODE: rating + learner numbers are PLACEHOLDERS — swap for real figures. -->
@@ -182,7 +182,7 @@ if ( ! function_exists( 'tc_fmt_len' ) ) {
                         ?>
                         <details class="tc-acc__item tc-acc__item--<?php echo esc_attr( $phase ); ?>" open>
                             <summary class="tc-acc__summary-row">
-                                <span class="tc-acc__chevron" aria-hidden="true">⌄</span>
+                                <span class="tc-acc__chevron" aria-hidden="true"><?php echo tc_icon( 'chevron-down', 20 ); ?></span>
                                 <span class="tc-acc__title">
                                     <span class="tc-acc__day">Week <?php echo esc_html( $num ); ?> &middot; <?php echo esc_html( $w['phase'] ); ?></span>
                                     <span class="tc-acc__topic"><?php echo esc_html( $w['topic'] ); ?></span>
@@ -195,9 +195,9 @@ if ( ! function_exists( 'tc_fmt_len' ) ) {
                                 <p class="tc-muted"><?php echo esc_html( $w['desc'] ); ?></p>
                                 <!-- CLAUDE CODE: generic lesson rows — swap for the real lecture titles per week. -->
                                 <ul class="tc-acc__lessons">
-                                    <li><span class="tc-acc__lesson-ic">▶</span> Concept walkthrough &amp; live demo</li>
-                                    <li><span class="tc-acc__lesson-ic">▶</span> Guided hands-on coding</li>
-                                    <li><span class="tc-acc__lesson-ic">▶</span> Practice exercise / mini-project</li>
+                                    <li><span class="tc-acc__lesson-ic"><?php echo tc_icon( 'play', 11 ); ?></span> Concept walkthrough &amp; live demo</li>
+                                    <li><span class="tc-acc__lesson-ic"><?php echo tc_icon( 'play', 11 ); ?></span> Guided hands-on coding</li>
+                                    <li><span class="tc-acc__lesson-ic"><?php echo tc_icon( 'play', 11 ); ?></span> Practice exercise / mini-project</li>
                                 </ul>
                             </div>
                         </details>

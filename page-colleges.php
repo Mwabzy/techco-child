@@ -58,10 +58,10 @@ $tc_wa_tel = preg_replace( '/[^0-9+]/', '', $tc_org['wa'] );
                         <a class="tc-btn tc-btn--ghost tc-btn--block" href="tel:<?php echo esc_attr( $tc_tel ); ?>">Call the placements team</a>
 
                         <ul class="tc-side-card__contact">
-                            <li><span class="tc-side-card__ic">📧</span><a href="mailto:<?php echo esc_attr( $tc_org['email'] ); ?>"><?php echo esc_html( $tc_org['email'] ); ?></a></li>
-                            <li><span class="tc-side-card__ic">📞</span><a href="tel:<?php echo esc_attr( $tc_tel ); ?>"><?php echo esc_html( $tc_org['phone'] ); ?></a></li>
-                            <li><span class="tc-side-card__ic">💬</span><a href="https://wa.me/<?php echo esc_attr( ltrim( $tc_wa_tel, '+' ) ); ?>" target="_blank" rel="noopener">WhatsApp <?php echo esc_html( $tc_org['wa'] ); ?></a></li>
-                            <li><span class="tc-side-card__ic">🧾</span>GSTIN <?php echo esc_html( $tc_org['gstin'] ); ?></li>
+                            <li><span class="tc-side-card__ic"><?php echo tc_icon( 'mail', 18 ); ?></span><a href="mailto:<?php echo esc_attr( $tc_org['email'] ); ?>"><?php echo esc_html( $tc_org['email'] ); ?></a></li>
+                            <li><span class="tc-side-card__ic"><?php echo tc_icon( 'phone', 18 ); ?></span><a href="tel:<?php echo esc_attr( $tc_tel ); ?>"><?php echo esc_html( $tc_org['phone'] ); ?></a></li>
+                            <li><span class="tc-side-card__ic"><?php echo tc_icon( 'chat', 18 ); ?></span><a href="https://wa.me/<?php echo esc_attr( ltrim( $tc_wa_tel, '+' ) ); ?>" target="_blank" rel="noopener">WhatsApp <?php echo esc_html( $tc_org['wa'] ); ?></a></li>
+                            <li><span class="tc-side-card__ic"><?php echo tc_icon( 'receipt', 18 ); ?></span>GSTIN <?php echo esc_html( $tc_org['gstin'] ); ?></li>
                         </ul>
                         <p class="tc-side-card__note">No commission. No revenue-share. GST invoice provided.</p>
                     </div>
@@ -117,7 +117,7 @@ $tc_wa_tel = preg_replace( '/[^0-9+]/', '', $tc_org['wa'] );
                         </div>
                         <div class="col-md-4">
                             <div class="tc-feature">
-                                <span class="tc-feature__ic tc-feature__ic--orange">⚙</span>
+                                <span class="tc-feature__ic tc-feature__ic--orange"><?php echo tc_icon( 'sliders', 24 ); ?></span>
                                 <h3>Flexible cohorts</h3>
                                 <p class="tc-muted">On-campus or fully online, weekday or weekend tracks,
                                     scheduled around your academic calendar.</p>
@@ -125,7 +125,7 @@ $tc_wa_tel = preg_replace( '/[^0-9+]/', '', $tc_org['wa'] );
                         </div>
                         <div class="col-md-4">
                             <div class="tc-feature">
-                                <span class="tc-feature__ic tc-feature__ic--blue">📊</span>
+                                <span class="tc-feature__ic tc-feature__ic--blue"><?php echo tc_icon( 'chart', 24 ); ?></span>
                                 <h3>Placement reporting</h3>
                                 <p class="tc-muted">Attendance, assessment scores and a placement-ready
                                     pipeline, reported back to your TPO cell.</p>

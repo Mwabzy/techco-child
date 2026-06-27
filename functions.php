@@ -140,5 +140,8 @@ add_action( 'wp_enqueue_scripts', function () {
     );
 }, 100 );
 
+// Inline SVG icon helper (tc_icon) used across the Visioner templates.
+require_once get_stylesheet_directory() . '/inc/icons.php';
+
 // Floating WhatsApp click-to-chat widget (hooks wp_footer itself).
 require_once get_stylesheet_directory() . '/inc/whatsapp-widget.php';
