@@ -17,11 +17,25 @@ get_header();
  * CLAUDE CODE: Placeholder admissions content — swap copy/dates for the
  * final deck wording before launch.
  */
+
+/**
+ * Minimal line-icon set (24x24, stroke = currentColor) — keeps the page
+ * SVG-based instead of relying on emoji glyphs for visual consistency
+ * across OS/browser fonts.
+ */
+$tc_icons = array(
+	'apply'  => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>',
+	'call'   => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.69 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.33 1.85.56 2.81.69A2 2 0 0 1 22 16.92Z"/></svg>',
+	'offer'  => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1.1 2.7 2 6 2s6-.9 6-2v-5"/></svg>',
+	'rocket' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09Z"/><path d="M12 15l-3-3 4.5-9 5.5 1.5L20 9.5 11 12.5"/><path d="M15 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/></svg>',
+	'doc'    => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/></svg>',
+);
+
 $tc_steps = array(
-	array( 'icon' => '📝', 'title' => 'Apply Online',      'desc' => 'Submit the form below with your details and preferred batch.' ),
-	array( 'icon' => '📞', 'title' => 'Counselling Call',  'desc' => 'Our team calls within 24h to discuss the track, fit and timing.' ),
-	array( 'icon' => '🎓', 'title' => 'Offer & Seat Lock',  'desc' => 'Get your offer letter and lock your seat with the first payment.' ),
-	array( 'icon' => '🚀', 'title' => 'Onboarding',        'desc' => 'Join the orientation session and meet your mentors before Day 1.' ),
+	array( 'icon' => 'apply',  'title' => 'Apply Online',      'desc' => 'Submit the form below with your details and preferred batch.' ),
+	array( 'icon' => 'call',   'title' => 'Counselling Call',  'desc' => 'Our team calls within 24h to discuss the track, fit and timing.' ),
+	array( 'icon' => 'offer',  'title' => 'Offer & Seat Lock',  'desc' => 'Get your offer letter and lock your seat with the first payment.' ),
+	array( 'icon' => 'rocket', 'title' => 'Onboarding',        'desc' => 'Join the orientation session and meet your mentors before Day 1.' ),
 );
 
 $tc_eligibility = array(

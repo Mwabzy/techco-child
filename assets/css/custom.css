@@ -357,7 +357,6 @@
 .tc-cta-band__actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
 /* -----------------------------------------------------------
-<<<<<<< HEAD
    Admissions — how-to-apply steps
    ----------------------------------------------------------- */
 .tc-steps {
@@ -505,7 +504,8 @@
 }
 .tc-faq__item[open] .tc-faq__q::after { content: "−"; }
 .tc-faq__a { margin: 0 0 18px; font-size: 15px; line-height: 1.6; }
-=======
+
+/* -----------------------------------------------------------
    Fluent Forms on dark navy (Apply + TPO pages)
    ----------------------------------------------------------- */
 .tc-page .fluentform .ff-el-input--label label,
@@ -529,7 +529,6 @@
     font-weight: 700; color: #fff; box-shadow: 0 10px 26px rgba(47, 107, 255, .35);
 }
 .tc-page .fluentform .ff-btn-submit:hover { background: #1b54e6; }
->>>>>>> 13902e8fc0a3d435ef4769f55a3337404a4b6089
 
 /* -----------------------------------------------------------
    WhatsApp floating widget
@@ -572,17 +571,420 @@
     .tc-hero__stats { gap: 18px; }
     .tc-stat--divider { padding-left: 18px; }
     .tc-factstrip { grid-template-columns: 1fr 1fr; gap: 12px; }
-<<<<<<< HEAD
     .tc-steps { grid-template-columns: 1fr; }
     .tc-batch-row { padding: 18px; }
     .tc-emi-grid { grid-template-columns: 1fr; }
     .tc-payment-card { padding: 22px; }
     .tc-payment-card__head { flex-direction: column; }
-=======
 
     /* Accordion: stack meta under the title, tighten body indent */
     .tc-acc__summary-row { flex-wrap: wrap; padding: 16px; }
     .tc-acc__meta { flex-basis: 100%; padding-left: 34px; }
     .tc-acc__body { padding: 0 16px 18px 34px; }
->>>>>>> 13902e8fc0a3d435ef4769f55a3337404a4b6089
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PREMIUM MICRO-INTERACTIONS & VISUAL UPGRADES
+   Fees & Batches page — glassmorphism, animated borders,
+   scroll reveals, tilt, shimmer, glow orbs, smooth FAQ.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* -----------------------------------------------------------
+   @property for animated gradient rotation
+   ----------------------------------------------------------- */
+@property --tc-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+/* -----------------------------------------------------------
+   Keyframes
+   ----------------------------------------------------------- */
+@keyframes tc-rotate-gradient {
+    to { --tc-angle: 360deg; }
+}
+@keyframes tc-shimmer {
+    0%   { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+@keyframes tc-pulse-ring {
+    0%   { box-shadow: 0 0 0 0 rgba(47, 107, 255, .35); }
+    70%  { box-shadow: 0 0 0 8px rgba(47, 107, 255, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(47, 107, 255, 0); }
+}
+@keyframes tc-pulse-urgent {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: .6; }
+}
+@keyframes tc-float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-12px); }
+}
+@keyframes tc-glow-drift {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: .5; }
+    33%      { transform: translate(30px, -20px) scale(1.1); opacity: .7; }
+    66%      { transform: translate(-20px, 15px) scale(.95); opacity: .4; }
+}
+@keyframes tc-mesh-shift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+@keyframes tc-counter-fade {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* -----------------------------------------------------------
+   Scroll-triggered reveal system
+   ----------------------------------------------------------- */
+.tc-reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity .7s cubic-bezier(.22, 1, .36, 1),
+                transform .7s cubic-bezier(.22, 1, .36, 1);
+}
+.tc-reveal.tc-revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* Stagger children via custom property */
+.tc-reveal[style*="--delay"] {
+    transition-delay: var(--delay, 0ms);
+}
+
+/* -----------------------------------------------------------
+   Animated gradient text (hero headline)
+   ----------------------------------------------------------- */
+.tc-gradient-text {
+    background: linear-gradient(
+        90deg,
+        #fff 0%,
+        var(--tc-blue) 30%,
+        var(--tc-orange) 60%,
+        #fff 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: tc-shimmer 6s linear infinite;
+}
+
+/* -----------------------------------------------------------
+   Ambient glow orbs (decorative)
+   ----------------------------------------------------------- */
+.tc-glow-orb {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(80px);
+    z-index: 0;
+    animation: tc-glow-drift 12s ease-in-out infinite;
+}
+.tc-glow-orb--blue {
+    width: 400px; height: 400px;
+    background: rgba(47, 107, 255, .12);
+}
+.tc-glow-orb--orange {
+    width: 300px; height: 300px;
+    background: rgba(255, 122, 24, .08);
+}
+/* Hero orbs positioning */
+.tc-hero { position: relative; overflow: visible; }
+.tc-hero .tc-glow-orb--blue  { top: -80px; left: -120px; }
+.tc-hero .tc-glow-orb--orange { top: 40px; right: -80px; animation-delay: -4s; }
+
+/* CTA orbs positioning */
+.tc-cta-band { position: relative; overflow: hidden; }
+.tc-cta-band .tc-glow-orb--blue  { bottom: -60px; left: 10%; }
+.tc-cta-band .tc-glow-orb--orange { top: -40px; right: 15%; animation-delay: -6s; }
+
+/* Ensure content sits above orbs */
+.tc-hero > *:not(.tc-glow-orb),
+.tc-cta-band > *:not(.tc-glow-orb) { position: relative; z-index: 1; }
+
+/* -----------------------------------------------------------
+   Premium pricing cards — glassmorphism + tilt
+   ----------------------------------------------------------- */
+.tc-price-card {
+    background: rgba(17, 31, 68, .55);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, .08);
+    transition:
+        transform .4s cubic-bezier(.22, 1, .36, 1),
+        border-color .4s ease,
+        box-shadow .4s ease;
+    will-change: transform;
+}
+.tc-price-card:hover {
+    border-color: rgba(255, 255, 255, .18);
+    box-shadow:
+        0 24px 60px rgba(2, 8, 23, .5),
+        0 0 40px rgba(47, 107, 255, .06);
+}
+
+/* Animated gradient border on recommended card */
+.tc-price-card--recommended {
+    border: none;
+    background:
+        linear-gradient(var(--tc-navy-2), var(--tc-navy-2)) padding-box,
+        conic-gradient(from var(--tc-angle, 0deg), var(--tc-blue), var(--tc-orange), #a855f7, var(--tc-blue)) border-box;
+    border: 2px solid transparent;
+    animation: tc-rotate-gradient 4s linear infinite;
+    box-shadow:
+        0 0 0 1px rgba(47, 107, 255, .15),
+        0 24px 60px rgba(2, 8, 23, .5),
+        0 0 60px rgba(47, 107, 255, .08);
+}
+.tc-price-card--recommended:hover {
+    box-shadow:
+        0 0 0 1px rgba(47, 107, 255, .25),
+        0 30px 70px rgba(2, 8, 23, .55),
+        0 0 80px rgba(47, 107, 255, .12);
+}
+
+/* Shimmer on "Most Popular" tag */
+.tc-price-card__tag {
+    background:
+        linear-gradient(
+            90deg,
+            var(--tc-blue) 0%,
+            #a855f7 25%,
+            var(--tc-orange) 50%,
+            #a855f7 75%,
+            var(--tc-blue) 100%
+        );
+    background-size: 200% auto;
+    animation: tc-shimmer 3s linear infinite;
+    box-shadow: 0 4px 16px rgba(47, 107, 255, .3);
+}
+
+/* Tilt effect (applied via JS mousemove) */
+[data-tilt] {
+    transform-style: preserve-3d;
+    perspective: 800px;
+}
+[data-tilt] .tc-price-card__header,
+[data-tilt] .tc-price-card__price-amount {
+    transform: translateZ(20px);
+}
+
+/* Card inner glow on hover */
+.tc-price-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--tc-radius);
+    opacity: 0;
+    transition: opacity .4s ease;
+    background: radial-gradient(
+        300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(47, 107, 255, .06),
+        transparent 60%
+    );
+    pointer-events: none;
+    z-index: 0;
+}
+.tc-price-card:hover::after { opacity: 1; }
+.tc-price-card > * { position: relative; z-index: 1; }
+
+/* -----------------------------------------------------------
+   Premium batch rows — timeline accent
+   ----------------------------------------------------------- */
+.tc-batch-row {
+    background: rgba(17, 31, 68, .5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-left: 3px solid var(--tc-blue);
+    transition:
+        transform .3s cubic-bezier(.22, 1, .36, 1),
+        border-color .3s ease,
+        box-shadow .3s ease;
+}
+.tc-batch-row:hover {
+    transform: translateX(6px);
+    border-left-color: var(--tc-orange);
+    box-shadow: 0 8px 30px rgba(2, 8, 23, .4);
+}
+
+/* Pulse on "Few seats left" badge */
+.tc-seats-badge--urgent {
+    background: rgba(255, 122, 24, .14);
+    color: #ffb277;
+    border-color: rgba(255, 122, 24, .4);
+    animation: tc-pulse-urgent 2s ease-in-out infinite;
+}
+
+/* -----------------------------------------------------------
+   Premium EMI cards — icon accent + inner glow
+   ----------------------------------------------------------- */
+.tc-emi-card {
+    background: rgba(17, 31, 68, .5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+.tc-emi-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--tc-border-strong);
+    box-shadow: 0 16px 40px rgba(2, 8, 23, .4);
+}
+.tc-emi-card__icon {
+    display: flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--tc-orange-soft); color: #ffb277;
+    margin: 0 auto 8px; font-size: 18px;
+}
+
+/* -----------------------------------------------------------
+   Premium refund card — frosted + warning accent
+   ----------------------------------------------------------- */
+.tc-refund-card {
+    background: rgba(17, 31, 68, .5);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-left: 3px solid var(--tc-orange);
+}
+.tc-refund-card__icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px; border-radius: 10px;
+    background: var(--tc-orange-soft); color: #ffb277;
+    margin-bottom: 12px;
+}
+
+/* -----------------------------------------------------------
+   Premium payment card — radial glow halo
+   ----------------------------------------------------------- */
+.tc-payment-card {
+    background: rgba(17, 31, 68, .55);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    position: relative;
+    overflow: hidden;
+}
+.tc-payment-card::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -20%;
+    width: 140%; height: 100%;
+    background: radial-gradient(ellipse at 50% 0%, rgba(47, 107, 255, .08), transparent 65%);
+    pointer-events: none;
+}
+
+/* Trust badges row */
+.tc-trust-badges {
+    display: flex; align-items: center; justify-content: center;
+    gap: 24px; margin-top: 20px; padding-top: 20px;
+    border-top: 1px solid var(--tc-border);
+}
+.tc-trust-badge {
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    font-size: 11px; font-weight: 700; letter-spacing: .04em;
+    text-transform: uppercase; color: var(--tc-muted);
+}
+.tc-trust-badge__icon {
+    display: flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px; border-radius: 10px;
+    background: var(--tc-blue-soft); color: #9cbcff;
+}
+
+/* -----------------------------------------------------------
+   Premium FAQ — smooth animated open/close
+   ----------------------------------------------------------- */
+.tc-faq__item {
+    background: rgba(17, 31, 68, .5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: border-color .3s ease, box-shadow .3s ease;
+}
+.tc-faq__item:hover {
+    border-color: var(--tc-border-strong);
+}
+.tc-faq__item[open] {
+    box-shadow: 0 8px 30px rgba(2, 8, 23, .3);
+}
+
+/* Smooth height animation wrapper */
+.tc-faq__body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows .35s cubic-bezier(.22, 1, .36, 1);
+}
+.tc-faq__item[open] .tc-faq__body {
+    grid-template-rows: 1fr;
+}
+.tc-faq__body-inner {
+    overflow: hidden;
+}
+
+/* Rotating chevron instead of +/- */
+.tc-faq__q::after {
+    content: '';
+    width: 10px; height: 10px;
+    border-right: 2px solid var(--tc-orange);
+    border-bottom: 2px solid var(--tc-orange);
+    transform: rotate(-45deg);
+    transition: transform .35s cubic-bezier(.22, 1, .36, 1);
+    position: absolute; right: 4px; top: 20px;
+    font-size: 0;
+}
+.tc-faq__item[open] .tc-faq__q::after {
+    transform: rotate(45deg);
+    content: '';
+}
+
+/* -----------------------------------------------------------
+   Premium CTA band — animated mesh gradient
+   ----------------------------------------------------------- */
+.tc-cta-band {
+    background:
+        linear-gradient(-45deg, #0b1736, #16265a, #1a1060, #162050, #0f2847);
+    background-size: 300% 300%;
+    animation: tc-mesh-shift 12s ease infinite;
+}
+
+/* Pulsing CTA button */
+.tc-cta-band .tc-btn--primary {
+    animation: tc-pulse-ring 2.5s ease-out infinite;
+}
+.tc-cta-band .tc-btn--primary:hover {
+    animation: none;
+}
+
+/* -----------------------------------------------------------
+   GST note — glassmorphic
+   ----------------------------------------------------------- */
+.tc-gst-note {
+    background: rgba(17, 31, 68, .4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+/* -----------------------------------------------------------
+   Hero stat counter animation
+   ----------------------------------------------------------- */
+.tc-stat__num[data-animate] {
+    animation: tc-counter-fade .6s ease both;
+}
+
+/* -----------------------------------------------------------
+   Premium responsive overrides
+   ----------------------------------------------------------- */
+@media (max-width: 991px) {
+    .tc-glow-orb { display: none; } /* Remove heavy blurs on tablet */
+    .tc-price-card::after { display: none; } /* Remove cursor-follow glow */
+}
+@media (max-width: 575px) {
+    .tc-reveal {
+        transform: translateY(20px); /* Smaller reveal distance on mobile */
+    }
+    .tc-price-card--recommended {
+        animation: none; /* Reduce GPU load on mobile */
+        border: 2px solid rgba(47, 107, 255, .5);
+    }
+    .tc-trust-badges { gap: 16px; }
+    .tc-trust-badge__icon { width: 30px; height: 30px; }
 }

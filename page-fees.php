@@ -63,6 +63,12 @@ $tc_emi_plans = array(
 	array( 'tenure' => '12 Months', 'amount' => '₹ 5,417 / mo',  'note' => 'Subject to bank approval' ),
 );
 
+$tc_emi_icons = array(
+	'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>',
+	'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg>',
+	'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>',
+);
+
 $tc_faqs = array(
 	array( 'q' => 'Are the prices shown inclusive of GST?',          'a' => 'Yes — every total shown above already includes 18% GST. The breakdown under each price is for your reference; there are no extra taxes or convenience fees at checkout.' ),
 	array( 'q' => 'Can I pay in EMIs?',                               'a' => 'Yes. EMI tenures of 3, 6 and 12 months are available, including no-cost EMI on select cards. Exact eligibility is shown by your bank at checkout.' ),
@@ -76,40 +82,44 @@ $tc_faqs = array(
 	<div class="container">
 
 		<!-- SECTION: Hero -->
-		<section class="tc-hero">
+		<section class="tc-hero tc-reveal">
+			<!-- Ambient glow orbs -->
+			<div class="tc-glow-orb tc-glow-orb--blue" aria-hidden="true"></div>
+			<div class="tc-glow-orb tc-glow-orb--orange" aria-hidden="true"></div>
+
 			<nav class="tc-hero__crumbs" aria-label="Breadcrumb">
 				<a href="/">Home</a><span>›</span>
 				<span class="tc-hero__crumbs-current">Fees &amp; Batches</span>
 			</nav>
 
-			<h1 class="tc-hero__title">Transparent fees. No surprises.</h1>
+			<h1 class="tc-hero__title"><span class="tc-gradient-text">Transparent fees. No surprises.</span></h1>
 			<p class="tc-hero__sub">Every price below is final and inclusive of GST. Choose a plan, pick
-				a batch that fits your schedule, and pay securely online — in full or in EMIs.</p>
+			a batch that fits your schedule, and pay securely online — in full or in EMIs.</p>
 
 			<div class="tc-hero__stats">
 				<div class="tc-stat">
-					<strong class="tc-stat__num">18% GST</strong>
+					<strong class="tc-stat__num" data-animate>18% GST</strong>
 					<span class="tc-stat__label">included in every price</span>
 				</div>
 				<div class="tc-stat tc-stat--divider">
-					<strong class="tc-stat__num">3 / 6 / 12 mo</strong>
+					<strong class="tc-stat__num" data-animate>3 / 6 / 12 mo</strong>
 					<span class="tc-stat__label">EMI tenures available</span>
 				</div>
 				<div class="tc-stat tc-stat--divider">
-					<strong class="tc-stat__num">Zero</strong>
+					<strong class="tc-stat__num" data-animate>Zero</strong>
 					<span class="tc-stat__label">hidden or convenience fees</span>
 				</div>
 			</div>
 		</section>
 
 		<!-- SECTION: Fee plans -->
-		<section class="tc-section tc-fees">
+		<section class="tc-section tc-fees tc-reveal">
 			<span class="tc-eyebrow">Choose a plan</span>
 			<h2 class="tc-section__title">Fee Plans</h2>
 			<div class="row">
-				<?php foreach ( $tc_plans as $plan ) : ?>
-				<div class="col-lg-4">
-					<div class="tc-price-card <?php echo $plan['recommended'] ? 'tc-price-card--recommended' : ''; ?>">
+				<?php foreach ( $tc_plans as $i => $plan ) : ?>
+				<div class="col-lg-4 tc-reveal" style="--delay: <?php echo $i * 120; ?>ms">
+					<div class="tc-price-card <?php echo $plan['recommended'] ? 'tc-price-card--recommended' : ''; ?>" data-tilt>
 						<?php if ( $plan['recommended'] ) : ?>
 							<span class="tc-price-card__tag">Most Popular</span>
 						<?php endif; ?>
@@ -144,32 +154,35 @@ $tc_faqs = array(
 		</section>
 
 		<!-- SECTION: Batch schedule -->
-		<section class="tc-section tc-batches-section">
+		<section class="tc-section tc-batches-section tc-reveal">
 			<span class="tc-eyebrow">Plan ahead</span>
 			<h2 class="tc-section__title">Batch Schedule &amp; Timings</h2>
 			<p class="tc-muted tc-placeholder-note">*Dates shown are indicative — confirm before publishing.</p>
 			<div class="tc-batches">
-				<?php foreach ( $tc_batches as $b ) : ?>
-				<div class="tc-batch-row">
+				<?php foreach ( $tc_batches as $i => $b ) : ?>
+				<div class="tc-batch-row tc-reveal" style="--delay: <?php echo $i * 100; ?>ms">
 					<div class="tc-batch-row__main">
 						<h3 class="tc-batch-row__name"><?php echo esc_html( $b['name'] ); ?></h3>
 						<span class="tc-muted"><?php echo esc_html( $b['date'] ); ?> · <?php echo esc_html( $b['mode'] ); ?></span>
 					</div>
-					<span class="tc-seats-badge"><?php echo esc_html( $b['seats'] ); ?></span>
+					<span class="tc-seats-badge<?php echo ( $b['seats'] === 'Few seats left' ) ? ' tc-seats-badge--urgent' : ''; ?>"><?php echo esc_html( $b['seats'] ); ?></span>
 				</div>
 				<?php endforeach; ?>
 			</div>
 		</section>
 
 		<!-- SECTION: EMI plans + refund policy -->
-		<section class="tc-section tc-emi-section">
+		<section class="tc-section tc-emi-section tc-reveal">
 			<span class="tc-eyebrow">Pay your way</span>
 			<h2 class="tc-section__title">EMI &amp; Payment Plans</h2>
 			<div class="row">
 				<div class="col-lg-7">
 					<div class="tc-emi-grid">
-						<?php foreach ( $tc_emi_plans as $emi ) : ?>
-						<div class="tc-emi-card">
+						<?php foreach ( $tc_emi_plans as $i => $emi ) : ?>
+						<div class="tc-emi-card tc-reveal" style="--delay: <?php echo $i * 120; ?>ms">
+							<div class="tc-emi-card__icon" aria-hidden="true">
+								<?php echo $tc_emi_icons[ $i ]; ?>
+							</div>
 							<strong class="tc-emi-card__tenure"><?php echo esc_html( $emi['tenure'] ); ?></strong>
 							<span class="tc-emi-card__amount"><?php echo esc_html( $emi['amount'] ); ?></span>
 							<span class="tc-emi-card__note tc-muted"><?php echo esc_html( $emi['note'] ); ?></span>
@@ -178,19 +191,22 @@ $tc_faqs = array(
 					</div>
 				</div>
 				<div class="col-lg-5">
-					<div class="tc-refund-card">
+					<div class="tc-refund-card tc-reveal" style="--delay: 200ms">
+						<div class="tc-refund-card__icon" aria-hidden="true">
+							<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+						</div>
 						<h3>No-Refund Policy</h3>
 						<!-- CLAUDE CODE: replace with the exact policy wording from slide 7. -->
 						<p class="tc-muted">Once a seat is confirmed and payment is received, fees are
-							non-refundable. We strongly encourage a free counselling call before you
-							enrol so you're confident in the programme, batch and payment plan.</p>
+						non-refundable. We strongly encourage a free counselling call before you
+						enrol so you're confident in the programme, batch and payment plan.</p>
 					</div>
 				</div>
 			</div>
 		</section>
 
 		<!-- SECTION: Pay online -->
-		<section class="tc-section tc-payment">
+		<section class="tc-section tc-payment tc-reveal">
 			<span class="tc-eyebrow">Checkout</span>
 			<h2 class="tc-section__title">Pay Online</h2>
 			<div class="tc-payment-card">
@@ -208,28 +224,64 @@ $tc_faqs = array(
 					     It is a hosted button; no server code needed. Keep the live key on live only. -->
 					<p class="tc-placeholder-note">[ Razorpay Payment Button goes here ]</p>
 				</div>
+
+				<!-- Trust badges -->
+				<div class="tc-trust-badges">
+					<div class="tc-trust-badge">
+						<span class="tc-trust-badge__icon" aria-hidden="true">
+							<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>
+						</span>
+						<span>Secure</span>
+					</div>
+					<div class="tc-trust-badge">
+						<span class="tc-trust-badge__icon" aria-hidden="true">
+							<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+						</span>
+						<span>Encrypted</span>
+					</div>
+					<div class="tc-trust-badge">
+						<span class="tc-trust-badge__icon" aria-hidden="true">
+							<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+						</span>
+						<span>PCI-DSS</span>
+					</div>
+					<div class="tc-trust-badge">
+						<span class="tc-trust-badge__icon" aria-hidden="true">
+							<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg>
+						</span>
+						<span>EMI Ready</span>
+					</div>
+				</div>
 			</div>
 		</section>
 
 		<!-- SECTION: FAQ -->
-		<section class="tc-section tc-faq-section">
+		<section class="tc-section tc-faq-section tc-reveal">
 			<span class="tc-eyebrow">Questions</span>
 			<h2 class="tc-section__title">Frequently asked questions</h2>
 			<div class="tc-faq">
-				<?php foreach ( $tc_faqs as $faq ) : ?>
-				<details class="tc-faq__item">
+				<?php foreach ( $tc_faqs as $i => $faq ) : ?>
+				<details class="tc-faq__item tc-reveal" style="--delay: <?php echo $i * 80; ?>ms">
 					<summary class="tc-faq__q"><?php echo esc_html( $faq['q'] ); ?></summary>
-					<p class="tc-faq__a tc-muted"><?php echo wp_kses_post( $faq['a'] ); ?></p>
+					<div class="tc-faq__body">
+						<div class="tc-faq__body-inner">
+							<p class="tc-faq__a tc-muted"><?php echo wp_kses_post( $faq['a'] ); ?></p>
+						</div>
+					</div>
 				</details>
 				<?php endforeach; ?>
 			</div>
 		</section>
 
 		<!-- SECTION: CTA -->
-		<section class="tc-section tc-cta-band text-center">
+		<section class="tc-section tc-cta-band text-center tc-reveal">
+			<!-- Ambient glow orbs -->
+			<div class="tc-glow-orb tc-glow-orb--blue" aria-hidden="true"></div>
+			<div class="tc-glow-orb tc-glow-orb--orange" aria-hidden="true"></div>
+
 			<h2>Ready to lock your seat?</h2>
 			<p class="tc-cta-band__sub">Apply now and our team will help you pick the right plan and
-				batch — then confirm everything over email &amp; WhatsApp within 24 hours.</p>
+			batch — then confirm everything over email &amp; WhatsApp within 24 hours.</p>
 			<div class="tc-cta-band__actions">
 				<a class="tc-btn tc-btn--primary" href="/admissions-apply/">Apply Now</a>
 				<a class="tc-btn tc-btn--ghost" href="/program/">View Curriculum</a>
