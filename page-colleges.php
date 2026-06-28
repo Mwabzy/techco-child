@@ -74,7 +74,7 @@ $tc_wa_tel = preg_replace( '/[^0-9+]/', '', $tc_org['wa'] );
                 <!-- Hero head -->
                 <section class="tc-hero">
                     <nav class="tc-hero__crumbs" aria-label="Breadcrumb">
-                        <a href="/">Home</a><span>›</span>
+                        <a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a><span>›</span>
                         <span class="tc-hero__crumbs-current">For Colleges &amp; TPOs</span>
                     </nav>
 

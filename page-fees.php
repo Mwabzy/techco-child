@@ -78,7 +78,7 @@ $tc_faqs = array(
 		<!-- SECTION: Hero -->
 		<section class="tc-hero">
 			<nav class="tc-hero__crumbs" aria-label="Breadcrumb">
-				<a href="/">Home</a><span>›</span>
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a><span>›</span>
 				<span class="tc-hero__crumbs-current">Fees &amp; Batches</span>
 			</nav>
 
@@ -129,7 +129,7 @@ $tc_faqs = array(
 							<?php endforeach; ?>
 						</ul>
 						<a class="tc-btn <?php echo $plan['recommended'] ? 'tc-btn--primary' : 'tc-btn--outline'; ?> tc-btn--block"
-						   href="<?php echo $plan['cta'] === 'Talk to Us' ? '/for-colleges/' : '/admissions-apply/'; ?>">
+						   href="<?php echo esc_url( $plan['cta'] === 'Talk to Us' ? tc_tpl_url( 'page-colleges.php', '/for-colleges/' ) : tc_tpl_url( 'page-apply.php', '/admissions-apply/' ) ); ?>">
 							<?php echo esc_html( $plan['cta'] ); ?>
 						</a>
 					</div>
@@ -231,8 +231,8 @@ $tc_faqs = array(
 			<p class="tc-cta-band__sub">Apply now and our team will help you pick the right plan and
 				batch — then confirm everything over email &amp; WhatsApp within 24 hours.</p>
 			<div class="tc-cta-band__actions">
-				<a class="tc-btn tc-btn--primary" href="/admissions-apply/">Apply Now</a>
-				<a class="tc-btn tc-btn--ghost" href="/program/">View Curriculum</a>
+				<a class="tc-btn tc-btn--primary" href="<?php echo esc_url( tc_tpl_url( 'page-apply.php', '/admissions-apply/' ) ); ?>">Apply Now</a>
+				<a class="tc-btn tc-btn--ghost" href="<?php echo esc_url( tc_tpl_url( 'page-program.php', '/program-curriculum/' ) ); ?>">View Curriculum</a>
 			</div>
 		</section>
 

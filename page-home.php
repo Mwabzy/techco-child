@@ -51,8 +51,8 @@ $tc_tests = array(
                         by working engineers — from fundamentals to a deployed MERN app, backed by placement support.</p>
 
                     <div class="tc-home__hero-actions">
-                        <a class="tc-btn tc-btn--primary" href="/admissions-apply/">Apply Now</a>
-                        <a class="tc-btn tc-btn--ghost" href="/program-curriculum/">Explore the curriculum</a>
+                        <a class="tc-btn tc-btn--primary" href="<?php echo esc_url( tc_tpl_url( 'page-apply.php', '/admissions-apply/' ) ); ?>">Apply Now</a>
+                        <a class="tc-btn tc-btn--ghost" href="<?php echo esc_url( tc_tpl_url( 'page-program.php', '/program-curriculum/' ) ); ?>">Explore the curriculum</a>
                     </div>
 
                     <!-- CLAUDE CODE: hero stats are PLACEHOLDERS — swap for real figures. -->
@@ -86,7 +86,7 @@ $tc_tests = array(
                             <li><?php echo tc_icon( 'award', 18 ); ?> Certificate + placement support</li>
                             <li><?php echo tc_icon( 'receipt', 18 ); ?> EMI &amp; No-Cost EMI available</li>
                         </ul>
-                        <a class="tc-btn tc-btn--accent tc-btn--block" href="/admissions-apply/">Reserve your seat</a>
+                        <a class="tc-btn tc-btn--accent tc-btn--block" href="<?php echo esc_url( tc_tpl_url( 'page-apply.php', '/admissions-apply/' ) ); ?>">Reserve your seat</a>
                         <p class="tc-home__herocard-note">Seats are limited each cohort.</p>
                     </aside>
                 </div>
@@ -130,7 +130,7 @@ $tc_tests = array(
                     <h2 class="tc-section__title">Everything you need, end to end</h2>
                     <p class="tc-muted">A structured 14-week ladder takes you from web fundamentals through
                         frontend, backend, databases and deployment — finishing with a portfolio-grade capstone.</p>
-                    <a class="tc-btn tc-btn--outline" href="/program-curriculum/">See the full curriculum</a>
+                    <a class="tc-btn tc-btn--outline" href="<?php echo esc_url( tc_tpl_url( 'page-program.php', '/program-curriculum/' ) ); ?>">See the full curriculum</a>
                 </div>
                 <div class="col-lg-7">
                     <div class="tc-stack">
@@ -178,7 +178,7 @@ $tc_tests = array(
                         secure online payment via Razorpay.</p>
                 </div>
                 <div class="tc-priceteaser__cta">
-                    <a class="tc-btn tc-btn--primary" href="/fees-batches/">View Fees &amp; Batches</a>
+                    <a class="tc-btn tc-btn--primary" href="<?php echo esc_url( tc_tpl_url( 'page-fees.php', '/fees-batches/' ) ); ?>">View Fees &amp; Batches</a>
                 </div>
             </div>
         </section>
@@ -192,7 +192,7 @@ $tc_tests = array(
                     <p class="tc-muted">Bulk fullstack training on campus or online, transparent per-student
                         rates, placement reporting — and zero revenue-share.</p>
                 </div>
-                <a class="tc-btn tc-btn--ghost" href="/for-colleges/">Explore college partnerships</a>
+                <a class="tc-btn tc-btn--ghost" href="<?php echo esc_url( tc_tpl_url( 'page-colleges.php', '/for-colleges/' ) ); ?>">Explore college partnerships</a>
             </div>
         </section>
 
@@ -225,8 +225,8 @@ $tc_tests = array(
             <p class="tc-cta-band__sub">Join the next VisionOne cohort. Apply now and our team will confirm
                 your batch over email &amp; WhatsApp.</p>
             <div class="tc-cta-band__actions">
-                <a class="tc-btn tc-btn--primary" href="/admissions-apply/">Apply Now</a>
-                <a class="tc-btn tc-btn--ghost" href="/program-curriculum/">View the Program</a>
+                <a class="tc-btn tc-btn--primary" href="<?php echo esc_url( tc_tpl_url( 'page-apply.php', '/admissions-apply/' ) ); ?>">Apply Now</a>
+                <a class="tc-btn tc-btn--ghost" href="<?php echo esc_url( tc_tpl_url( 'page-program.php', '/program-curriculum/' ) ); ?>">View the Program</a>
             </div>
         </section>
 

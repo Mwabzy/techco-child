@@ -75,8 +75,8 @@ if ( ! function_exists( 'tc_fmt_len' ) ) {
                         <p class="tc-enrol-card__price-note">*Indicative. See Fees &amp; Batches for final
                             pricing, inclusive of 18% GST.</p>
 
-                        <a class="tc-btn tc-btn--primary tc-btn--block" href="/admissions-apply/">Apply Now</a>
-                        <a class="tc-btn tc-btn--ghost tc-btn--block" href="/fees-batches/">View Fees &amp; EMI</a>
+                        <a class="tc-btn tc-btn--primary tc-btn--block" href="<?php echo esc_url( tc_tpl_url( 'page-apply.php', '/admissions-apply/' ) ); ?>">Apply Now</a>
+                        <a class="tc-btn tc-btn--ghost tc-btn--block" href="<?php echo esc_url( tc_tpl_url( 'page-fees.php', '/fees-batches/' ) ); ?>">View Fees &amp; EMI</a>
 
                         <ul class="tc-enrol-card__features">
                             <li>14 weeks · online / hybrid cohort</li>
@@ -95,8 +95,8 @@ if ( ! function_exists( 'tc_fmt_len' ) ) {
                 <!-- Hero head -->
                 <section class="tc-hero">
                     <nav class="tc-hero__crumbs" aria-label="Breadcrumb">
-                        <a href="/">Home</a><span>›</span>
-                        <a href="/program-curriculum/">Programs</a><span>›</span>
+                        <a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a><span>›</span>
+                        <a href="<?php echo esc_url( tc_tpl_url( 'page-program.php', '/program-curriculum/' ) ); ?>">Programs</a><span>›</span>
                         <span class="tc-hero__crumbs-current">Fullstack Developer</span>
                     </nav>
 
@@ -107,7 +107,7 @@ if ( ! function_exists( 'tc_fmt_len' ) ) {
                     <span class="tc-badge tc-badge--bestseller">Most Popular Track</span>
 
                     <p class="tc-hero__author">Mentored by
-                        <a href="/admissions-apply/">Visioner industry mentors &amp; lead instructors</a>
+                        <a href="<?php echo esc_url( tc_tpl_url( 'page-apply.php', '/admissions-apply/' ) ); ?>">Visioner industry mentors &amp; lead instructors</a>
                     </p>
 
                     <div class="tc-hero__meta">
@@ -214,8 +214,8 @@ if ( ! function_exists( 'tc_fmt_len' ) ) {
             <p class="tc-cta-band__sub">Seats are limited each cohort. Apply now and our team will confirm
                 your batch over email &amp; WhatsApp.</p>
             <div class="tc-cta-band__actions">
-                <a class="tc-btn tc-btn--primary" href="/admissions-apply/">Apply Now</a>
-                <a class="tc-btn tc-btn--ghost" href="/fees-batches/">View Fees &amp; Batches</a>
+                <a class="tc-btn tc-btn--primary" href="<?php echo esc_url( tc_tpl_url( 'page-apply.php', '/admissions-apply/' ) ); ?>">Apply Now</a>
+                <a class="tc-btn tc-btn--ghost" href="<?php echo esc_url( tc_tpl_url( 'page-fees.php', '/fees-batches/' ) ); ?>">View Fees &amp; Batches</a>
             </div>
         </section>
 
