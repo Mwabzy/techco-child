@@ -110,15 +110,85 @@
     }
 
     /* ---------------------------------------------------------
-       Hero stat counter fade-in
-       Stagger the data-animate attributes so they pop in sequence.
+       Hero stat counter: real 0 → target count-up on scroll into
+       view, staggered. Parses the leading number out of the
+       element's own text (keeping any prefix/suffix, e.g. "4.8★",
+       "12,000+", decimals via toFixed) so no markup changes are
+       needed beyond the existing data-animate attribute.
        --------------------------------------------------------- */
     function initStatAnimation() {
         var stats = document.querySelectorAll('.tc-stat__num[data-animate]');
         if ( ! stats.length ) { return; }
 
+        var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
         Array.prototype.forEach.call(stats, function (el, i) {
             el.style.animationDelay = (i * 150) + 'ms';
+
+            var raw = el.textContent.trim();
+            var match = raw.match(/^([^\d]*)([\d,]*\.?\d+)([^\d]*)$/);
+            if ( ! match || reduceMotion ) { return; }
+
+            var prefix = match[1];
+            var numStr = match[2];
+            var suffix = match[3];
+            var target = parseFloat(numStr.replace(/,/g, ''));
+            var decimals = (numStr.split('.')[1] || '').length;
+            var hasCommas = numStr.indexOf(',') !== -1;
+
+            function format(value) {
+                var fixed = value.toFixed(decimals);
+                if ( hasCommas ) {
+                    var parts = fixed.split('.');
+                    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                    fixed = parts.join('.');
+                }
+                return prefix + fixed + suffix;
+            }
+
+            el.textContent = format(0);
+
+            var trigger = function () {
+                var duration = 1200;
+                var start = null;
+
+                function step(timestamp) {
+                    if ( start === null ) { start = timestamp; }
+                    var progress = Math.min((timestamp - start) / duration, 1);
+                    var eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+                    el.textContent = format(target * eased);
+                    if ( progress < 1 ) {
+                        requestAnimationFrame(step);
+                    }
+                }
+                requestAnimationFrame(step);
+            };
+
+            if ( 'IntersectionObserver' in window ) {
+                var observer = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if ( entry.isIntersecting ) {
+                            setTimeout(trigger, i * 150);
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.4 });
+                observer.observe(el);
+            } else {
+                trigger();
+            }
+        });
+    }
+
+    /* ---------------------------------------------------------
+       Page-load fade-in
+       Adds .tc-loaded so the CSS opacity transition can run.
+       --------------------------------------------------------- */
+    function initPageLoad() {
+        var page = document.querySelector('.tc-page');
+        if ( ! page ) { return; }
+        requestAnimationFrame(function () {
+            page.classList.add('tc-loaded');
         });
     }
 
@@ -127,6 +197,7 @@
        --------------------------------------------------------- */
     document.addEventListener('DOMContentLoaded', function () {
 
+        initPageLoad();
         initExpandAll();
         initScrollReveal();
         initCardTilt();

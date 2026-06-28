@@ -10,6 +10,16 @@ add_action( 'wp_enqueue_scripts', 'techco_child_enqueue_styles', 99 );
 function techco_child_enqueue_styles() {
    wp_enqueue_style( 'parent-style', get_stylesheet_directory_uri() . '/style.css' );
 }
+
+// Premium variable webfont (Inter) for the Visioner pages' refined type scale.
+add_action( 'wp_enqueue_scripts', function () {
+    wp_enqueue_style(
+        'tc-font-inter',
+        'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap',
+        array(),
+        null
+    );
+}, 5 );
 /**
  * Fluent Forms – Email + Mobile validation (JS only)
  */
@@ -119,6 +129,9 @@ document.addEventListener('DOMContentLoaded', function () {
  * ------------------------------------------------------------------
  */
 
+// Disable the parent theme's scroll-up button
+add_filter( 'techco_option_scroll_up_btn', '__return_false' );
+
 // Enqueue custom CSS/JS (loaded after parent/child base styles).
 add_action( 'wp_enqueue_scripts', function () {
     $dir = get_stylesheet_directory();
@@ -142,6 +155,9 @@ add_action( 'wp_enqueue_scripts', function () {
 
 // Inline SVG icon helper (tc_icon) used across the Visioner templates.
 require_once get_stylesheet_directory() . '/inc/icons.php';
+
+// Inline brand-logo SVG helper (tc_brand_icon) for the home "Stack" grid.
+require_once get_stylesheet_directory() . '/inc/brand-icons.php';
 
 // Floating WhatsApp click-to-chat widget (hooks wp_footer itself).
 require_once get_stylesheet_directory() . '/inc/whatsapp-widget.php';

@@ -65,13 +65,17 @@ $tc_faqs = array(
     <div class="container">
 
         <!-- SECTION: Hero -->
-        <section class="tc-hero">
+        <section class="tc-hero tc-texture-dots tc-reveal">
+            <!-- Ambient glow orbs -->
+            <div class="tc-glow-orb tc-glow-orb--blue" aria-hidden="true"></div>
+            <div class="tc-glow-orb tc-glow-orb--orange" aria-hidden="true"></div>
+
             <nav class="tc-hero__crumbs" aria-label="Breadcrumb">
                 <a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a><span>›</span>
                 <span class="tc-hero__crumbs-current">Admissions</span>
             </nav>
 
-            <h1 class="tc-hero__title">Admissions are open</h1>
+            <h1 class="tc-hero__title"><span class="tc-gradient-text tc-gradient-text--freeze">Admissions are open</span></h1>
             <p class="tc-hero__sub">Apply in minutes. Our team will confirm your seat over email &amp;
                 WhatsApp, and walk you through fees, batches and onboarding.</p>
 
@@ -79,30 +83,29 @@ $tc_faqs = array(
 
             <div class="tc-hero__stats">
                 <div class="tc-stat">
-                    <strong class="tc-stat__num">6 Jul 2026*</strong>
+                    <strong class="tc-stat__num" data-animate>6 Jul 2026*</strong>
                     <span class="tc-stat__label">next intake</span>
                 </div>
                 <div class="tc-stat tc-stat--divider">
-                    <strong class="tc-stat__num">24 hrs</strong>
+                    <strong class="tc-stat__num" data-animate>24 hrs</strong>
                     <span class="tc-stat__label">avg. response time</span>
                 </div>
                 <div class="tc-stat tc-stat--divider">
-                    <strong class="tc-stat__num">Limited</strong>
+                    <strong class="tc-stat__num" data-animate>Limited</strong>
                     <span class="tc-stat__label">seats per cohort</span>
                 </div>
             </div>
         </section>
 
         <!-- SECTION: How to apply -->
-        <section class="tc-section tc-steps-section">
+        <section class="tc-section tc-steps-section tc-reveal">
             <span class="tc-eyebrow">The Process</span>
             <h2 class="tc-section__title">How admissions work</h2>
-            <div class="tc-steps">
+            <div class="tc-timeline">
                 <?php foreach ( $tc_steps as $i => $s ) : ?>
-                <div class="tc-step">
-                    <div class="tc-step__node"><?php echo esc_html( $i + 1 ); ?></div>
-                    <span class="tc-step__icon" aria-hidden="true"><?php echo esc_html( $s['icon'] ); ?></span>
-                    <h3 class="tc-step__title"><?php echo esc_html( $s['title'] ); ?></h3>
+                <div class="tc-timeline__step tc-reveal" style="--delay: <?php echo $i * 80; ?>ms">
+                    <div class="tc-timeline__node"><?php echo esc_html( $i + 1 ); ?></div>
+                    <h3 class="tc-timeline__title"><?php echo esc_html( $s['title'] ); ?></h3>
                     <p class="tc-muted"><?php echo esc_html( $s['desc'] ); ?></p>
                 </div>
                 <?php endforeach; ?>
@@ -110,43 +113,44 @@ $tc_faqs = array(
         </section>
 
         <!-- SECTION: Eligibility -->
-        <section class="tc-section tc-eligibility-section">
+        <section class="tc-section tc-section--tint tc-eligibility-section tc-reveal">
             <span class="tc-eyebrow">Who can apply</span>
             <h2 class="tc-section__title">Eligibility</h2>
             <ul class="tc-checklist tc-eligibility-grid">
-                <?php foreach ( $tc_eligibility as $item ) : ?>
-                <li><?php echo wp_kses_post( $item ); ?></li>
+                <?php foreach ( $tc_eligibility as $i => $item ) : ?>
+                <li class="tc-reveal" style="--delay: <?php echo $i * 70; ?>ms"><?php echo wp_kses_post( $item ); ?></li>
                 <?php endforeach; ?>
             </ul>
         </section>
 
         <!-- SECTION: Dates & batches -->
-        <section class="tc-section tc-batches-section">
+        <section class="tc-section tc-batches-section tc-reveal">
             <span class="tc-eyebrow">Plan ahead</span>
             <h2 class="tc-section__title">Upcoming batches</h2>
             <p class="tc-muted tc-placeholder-note">*Dates shown are indicative — confirm final batch dates on the Fees &amp; Batches page.</p>
-            <div class="tc-batches">
-                <?php foreach ( $tc_batches as $b ) : ?>
-                <div class="tc-batch-row">
-                    <div class="tc-batch-row__main">
-                        <h3 class="tc-batch-row__name"><?php echo esc_html( $b['name'] ); ?></h3>
-                        <span class="tc-muted"><?php echo esc_html( $b['date'] ); ?> · <?php echo esc_html( $b['mode'] ); ?></span>
-                    </div>
-                    <span class="tc-seats-badge"><?php echo esc_html( $b['seats'] ); ?></span>
-                </div>
+            <div class="tc-batch-list">
+                <?php foreach ( $tc_batches as $i => $b ) : ?>
+                <a href="#tc-apply-form-anchor" class="tc-batch-item tc-reveal" style="--delay: <?php echo $i * 80; ?>ms">
+                    <span class="tc-batch-item__tag"><?php echo esc_html( $b['mode'] ); ?></span>
+                    <span class="tc-batch-item__body">
+                        <span class="tc-batch-item__title"><?php echo esc_html( $b['name'] ); ?></span>
+                        <span class="tc-batch-item__desc tc-muted"><?php echo esc_html( $b['date'] ); ?> · <?php echo esc_html( $b['seats'] ); ?></span>
+                    </span>
+                    <?php echo tc_icon( 'arrow-right', 18, 'tc-batch-item__arrow' ); ?>
+                </a>
                 <?php endforeach; ?>
             </div>
         </section>
 
         <!-- SECTION: Application form + trust panel -->
-        <section class="tc-section tc-apply-section" id="tc-apply-form-anchor">
+        <section class="tc-section tc-apply-section tc-reveal" id="tc-apply-form-anchor">
             <span class="tc-eyebrow">Apply</span>
             <h2 class="tc-section__title">Start your application</h2>
 
             <div class="row">
 
                 <!-- LEFT: the registration form -->
-                <div class="col-lg-7">
+                <div class="col-lg-7 tc-reveal">
                     <div class="tc-apply-form">
                         <?php
                         /**
@@ -168,7 +172,7 @@ $tc_faqs = array(
                 </div>
 
                 <!-- RIGHT: trust panel + gated brochure -->
-                <div class="col-lg-5">
+                <div class="col-lg-5 tc-reveal" style="--delay: 100ms">
                     <aside class="tc-apply-aside">
                         <h3>Why Visioner</h3>
                         <!-- CLAUDE CODE: 3–4 trust bullets (placement, mentors, projects). -->
@@ -192,12 +196,12 @@ $tc_faqs = array(
         </section>
 
         <!-- SECTION: FAQ -->
-        <section class="tc-section tc-faq-section">
+        <section class="tc-section tc-section--tint tc-faq-section tc-reveal">
             <span class="tc-eyebrow">Questions</span>
             <h2 class="tc-section__title">Frequently asked questions</h2>
             <div class="tc-faq">
-                <?php foreach ( $tc_faqs as $faq ) : ?>
-                <details class="tc-faq__item">
+                <?php foreach ( $tc_faqs as $i => $faq ) : ?>
+                <details class="tc-faq__item tc-reveal" style="--delay: <?php echo ( $i % 4 ) * 70; ?>ms" <?php echo $i === 0 ? 'open' : ''; ?>>
                     <summary class="tc-faq__q"><?php echo esc_html( $faq['q'] ); ?></summary>
                     <p class="tc-faq__a tc-muted"><?php echo wp_kses_post( $faq['a'] ); ?></p>
                 </details>

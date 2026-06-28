@@ -58,9 +58,9 @@ $tc_batches = array(
 );
 
 $tc_emi_plans = array(
-	array( 'tenure' => '3 Months',  'amount' => '₹ 21,667 / mo', 'note' => 'No-cost EMI on eligible cards' ),
-	array( 'tenure' => '6 Months',  'amount' => '₹ 10,834 / mo', 'note' => 'Standard processing fee applies' ),
-	array( 'tenure' => '12 Months', 'amount' => '₹ 5,417 / mo',  'note' => 'Subject to bank approval' ),
+	array( 'tenure' => '3 Months',  'amount' => '₹ 21,667 / mo', 'note' => 'No-cost EMI on eligible cards', 'popular' => false ),
+	array( 'tenure' => '6 Months',  'amount' => '₹ 10,834 / mo', 'note' => 'Standard processing fee applies', 'popular' => true ),
+	array( 'tenure' => '12 Months', 'amount' => '₹ 5,417 / mo',  'note' => 'Subject to bank approval', 'popular' => false ),
 );
 
 $tc_emi_icons = array(
@@ -82,7 +82,7 @@ $tc_faqs = array(
 	<div class="container">
 
 		<!-- SECTION: Hero -->
-		<section class="tc-hero tc-reveal">
+		<section class="tc-hero tc-texture-dots tc-reveal">
 			<!-- Ambient glow orbs -->
 			<div class="tc-glow-orb tc-glow-orb--blue" aria-hidden="true"></div>
 			<div class="tc-glow-orb tc-glow-orb--orange" aria-hidden="true"></div>
@@ -92,7 +92,7 @@ $tc_faqs = array(
 				<span class="tc-hero__crumbs-current">Fees &amp; Batches</span>
 			</nav>
 
-			<h1 class="tc-hero__title"><span class="tc-gradient-text">Transparent fees. No surprises.</span></h1>
+			<h1 class="tc-hero__title"><span class="tc-gradient-text tc-gradient-text--freeze">Transparent fees. No surprises.</span></h1>
 			<p class="tc-hero__sub">Every price below is final and inclusive of GST. Choose a plan, pick
 			a batch that fits your schedule, and pay securely online — in full or in EMIs.</p>
 
@@ -154,7 +154,7 @@ $tc_faqs = array(
 		</section>
 
 		<!-- SECTION: Batch schedule -->
-		<section class="tc-section tc-batches-section tc-reveal">
+		<section class="tc-section tc-section--tint tc-batches-section tc-reveal">
 			<span class="tc-eyebrow">Plan ahead</span>
 			<h2 class="tc-section__title">Batch Schedule &amp; Timings</h2>
 			<p class="tc-muted tc-placeholder-note">*Dates shown are indicative — confirm before publishing.</p>
@@ -179,7 +179,10 @@ $tc_faqs = array(
 				<div class="col-lg-7">
 					<div class="tc-emi-grid">
 						<?php foreach ( $tc_emi_plans as $i => $emi ) : ?>
-						<div class="tc-emi-card tc-reveal" style="--delay: <?php echo $i * 120; ?>ms">
+						<div class="tc-emi-card<?php echo $emi['popular'] ? ' tc-emi-card--popular' : ''; ?> tc-reveal" style="--delay: <?php echo $i * 120; ?>ms">
+							<?php if ( $emi['popular'] ) : ?>
+								<span class="tc-emi-card--popular__tag">Most Popular</span>
+							<?php endif; ?>
 							<div class="tc-emi-card__icon" aria-hidden="true">
 								<?php echo $tc_emi_icons[ $i ]; ?>
 							</div>
@@ -256,7 +259,7 @@ $tc_faqs = array(
 		</section>
 
 		<!-- SECTION: FAQ -->
-		<section class="tc-section tc-faq-section tc-reveal">
+		<section class="tc-section tc-section--tint tc-faq-section tc-reveal">
 			<span class="tc-eyebrow">Questions</span>
 			<h2 class="tc-section__title">Frequently asked questions</h2>
 			<div class="tc-faq">

@@ -62,7 +62,7 @@ if ( ! function_exists( 'tc_fmt_len' ) ) {
 
             <!-- RIGHT on desktop / TOP on mobile: sticky enrolment card (starts at hero top) -->
             <div class="col-lg-4 order-lg-2">
-                <aside class="tc-enrol-card">
+                <aside class="tc-enrol-card tc-reveal">
                     <div class="tc-enrol-card__preview">
                         <!-- CLAUDE CODE: swap href for the real preview video / thumbnail image. -->
                         <a href="#program-preview" class="tc-enrol-card__play" aria-label="Preview the program">
@@ -96,14 +96,18 @@ if ( ! function_exists( 'tc_fmt_len' ) ) {
             <div class="col-lg-8 order-lg-1">
 
                 <!-- Hero head -->
-                <section class="tc-hero">
+                <section class="tc-hero tc-texture-dots tc-reveal">
+                    <!-- Ambient glow orbs -->
+                    <div class="tc-glow-orb tc-glow-orb--blue" aria-hidden="true"></div>
+                    <div class="tc-glow-orb tc-glow-orb--orange" aria-hidden="true"></div>
+
                     <nav class="tc-hero__crumbs" aria-label="Breadcrumb">
                         <a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a><span>›</span>
                         <a href="<?php echo esc_url( tc_tpl_url( 'page-program.php', '/program-curriculum/' ) ); ?>">Programs</a><span>›</span>
                         <span class="tc-hero__crumbs-current">Full-Stack Developer</span>
                     </nav>
 
-                    <h1 class="tc-hero__title">Full-Stack Development Training Program</h1>
+                    <h1 class="tc-hero__title"><span class="tc-gradient-text tc-gradient-text--freeze">Full-Stack Development</span> Training Program</h1>
                     <p class="tc-hero__sub">Become a job-ready full-stack developer in 14 weeks — Angular 18
                         and .NET 8 through SQL Server, Cloud, GenAI and Agentic AI, built around real projects.</p>
 
@@ -122,23 +126,23 @@ if ( ! function_exists( 'tc_fmt_len' ) ) {
                     <!-- CLAUDE CODE: rating + learner numbers are PLACEHOLDERS — swap for real figures. -->
                     <div class="tc-hero__stats">
                         <div class="tc-stat">
-                            <strong class="tc-stat__num">4.8*</strong>
+                            <strong class="tc-stat__num" data-animate>4.8*</strong>
                             <span class="tc-stars" aria-hidden="true">★★★★★</span>
                             <span class="tc-stat__label">learner rating*</span>
                         </div>
                         <div class="tc-stat tc-stat--divider">
-                            <strong class="tc-stat__num">Angular + .NET</strong>
+                            <strong class="tc-stat__num" data-animate>Angular + .NET</strong>
                             <span class="tc-stat__label">+ Cloud &amp; AI</span>
                         </div>
                         <div class="tc-stat tc-stat--divider">
-                            <strong class="tc-stat__num">14</strong>
+                            <strong class="tc-stat__num" data-animate>14</strong>
                             <span class="tc-stat__label">weeks · project-first</span>
                         </div>
                     </div>
                 </section>
 
                 <!-- What you'll master -->
-                <section class="tc-section tc-program-intro">
+                <section class="tc-section tc-program-intro tc-reveal">
                     <span class="tc-eyebrow">The Programme</span>
                     <h2 class="tc-section__title">What you'll master</h2>
                     <p class="tc-lead">Visioner's Full-Stack track turns beginners and career-switchers into
@@ -149,35 +153,41 @@ if ( ! function_exists( 'tc_fmt_len' ) ) {
                         Every module is project-first, reviewed by working mentors and backed by our
                         placement &amp; TPO network.</p>
 
-                    <div class="tc-factstrip">
-                        <div class="tc-fact"><strong>Angular + .NET</strong><span>Modern full stack</span></div>
-                        <div class="tc-fact"><strong>Cloud &amp; AI</strong><span>AWS/Azure · GenAI</span></div>
-                        <div class="tc-fact"><strong>Beginner → Pro</strong><span>No prior code needed</span></div>
-                        <div class="tc-fact"><strong>Job-ready</strong><span>Portfolio + placement</span></div>
+                    <div class="tc-statband">
+                        <div class="tc-statband__item tc-reveal" style="--delay: 0ms">
+                            <span class="tc-statband__num">Angular + .NET</span><span class="tc-statband__label">Modern full stack</span>
+                        </div>
+                        <div class="tc-statband__item tc-reveal" style="--delay: 80ms">
+                            <span class="tc-statband__num">Cloud &amp; AI</span><span class="tc-statband__label">AWS/Azure · GenAI</span>
+                        </div>
+                        <div class="tc-statband__item tc-reveal" style="--delay: 160ms">
+                            <span class="tc-statband__num">Beginner → Pro</span><span class="tc-statband__label">No prior code needed</span>
+                        </div>
+                        <div class="tc-statband__item tc-reveal" style="--delay: 240ms">
+                            <span class="tc-statband__num">Job-ready</span><span class="tc-statband__label">Portfolio + placement</span>
+                        </div>
                     </div>
                 </section>
 
                 <!-- Program tracks (exit points) -->
-                <section class="tc-section tc-tracks">
+                <section class="tc-section tc-tracks tc-reveal">
                     <h2 class="tc-section__title">Choose your track</h2>
                     <p class="tc-muted tc-tracks__lead">Core is the 10-week spine — bolt on Cloud and AI, or
                         take the Complete Bundle. You can exit at any milestone.</p>
-                    <div class="row">
-                        <?php foreach ( $tc_tracks as $t ) : ?>
-                        <div class="col-md-6 col-lg-3">
-                            <div class="tc-feature<?php echo $t['flag'] ? ' tc-feature--flag' : ''; ?>">
-                                <?php if ( $t['flag'] ) : ?><span class="tc-feature__flag">Flagship</span><?php endif; ?>
-                                <span class="tc-track__weeks"><?php echo esc_html( $t['weeks'] ); ?></span>
-                                <h3><?php echo esc_html( $t['name'] ); ?></h3>
-                                <p class="tc-muted"><?php echo esc_html( $t['desc'] ); ?></p>
-                            </div>
+                    <div class="tc-bento">
+                        <?php foreach ( $tc_tracks as $i => $t ) : ?>
+                        <div class="tc-feature tc-reveal<?php echo $t['flag'] ? ' tc-feature--flag tc-bento__cell--lead' : ''; ?>" style="--delay: <?php echo $i * 80; ?>ms">
+                            <?php if ( $t['flag'] ) : ?><span class="tc-feature__flag">Flagship</span><?php endif; ?>
+                            <span class="tc-track__weeks"><?php echo esc_html( $t['weeks'] ); ?></span>
+                            <h3><?php echo esc_html( $t['name'] ); ?></h3>
+                            <p class="tc-muted"><?php echo esc_html( $t['desc'] ); ?></p>
                         </div>
                         <?php endforeach; ?>
                     </div>
                 </section>
 
                 <!-- Phase legend -->
-                <section class="tc-section tc-phases">
+                <section class="tc-section tc-phases tc-reveal">
                     <div class="tc-phase-legend">
                         <span class="tc-phase-tag tc-phase-tag--frontend">Core &middot; Weeks 1–10</span>
                         <span class="tc-phase-tag tc-phase-tag--backend">Cloud &middot; Weeks 11–12</span>
@@ -186,7 +196,7 @@ if ( ! function_exists( 'tc_fmt_len' ) ) {
                 </section>
 
                 <!-- Course content (Udemy-style accordion) -->
-                <section class="tc-section tc-curriculum">
+                <section class="tc-section tc-curriculum tc-reveal">
                     <div class="tc-acc__head">
                         <h2 class="tc-section__title tc-section__title--flush">Course content</h2>
                         <button type="button" class="tc-acc__toggle-all" data-tc-expand-all>Collapse all sections</button>
@@ -198,10 +208,10 @@ if ( ! function_exists( 'tc_fmt_len' ) ) {
                     </p>
 
                     <div class="tc-acc">
-                        <?php foreach ( $tc_modules as $m ) :
+                        <?php foreach ( $tc_modules as $i => $m ) :
                             $phase = strtolower( $m['phase'] );
                         ?>
-                        <details class="tc-acc__item tc-acc__item--<?php echo esc_attr( $phase ); ?>" open>
+                        <details class="tc-acc__item tc-acc__item--<?php echo esc_attr( $phase ); ?> tc-reveal" style="--delay: <?php echo ( $i % 4 ) * 70; ?>ms" open>
                             <summary class="tc-acc__summary-row">
                                 <span class="tc-acc__chevron" aria-hidden="true"><?php echo tc_icon( 'chevron-down', 20 ); ?></span>
                                 <span class="tc-acc__title">
@@ -225,7 +235,11 @@ if ( ! function_exists( 'tc_fmt_len' ) ) {
         </div>
 
         <!-- CTA (full width) -->
-        <section class="tc-section tc-cta-band text-center">
+        <section class="tc-section tc-cta-band text-center tc-reveal">
+            <!-- Ambient glow orbs -->
+            <div class="tc-glow-orb tc-glow-orb--blue" aria-hidden="true"></div>
+            <div class="tc-glow-orb tc-glow-orb--orange" aria-hidden="true"></div>
+
             <h2>Ready to become a full-stack developer?</h2>
             <p class="tc-cta-band__sub">Seats are limited each cohort. Apply now and our team will confirm
                 your batch over email &amp; WhatsApp.</p>

@@ -47,14 +47,14 @@ $tc_wa_tel = preg_replace( '/[^0-9+]/', '', $tc_org['wa'] );
 
             <!-- RIGHT on desktop / TOP on mobile: sticky enquiry card -->
             <div class="col-lg-4 order-lg-2">
-                <aside class="tc-side-card">
+                <aside class="tc-side-card tc-reveal">
                     <div class="tc-side-card__head">
                         <span class="tc-side-card__kicker">For Colleges &amp; TPOs</span>
                         <h3 class="tc-side-card__title">Partner with Visioner</h3>
                         <p class="tc-side-card__sub">Bulk fullstack training delivered on campus or online.</p>
                     </div>
                     <div class="tc-side-card__body">
-                        <a class="tc-btn tc-btn--accent tc-btn--block" href="#tpo-enquiry">Request a proposal</a>
+                        <a class="tc-btn tc-btn--accent tc-btn--block tc-btn--glow" href="#tpo-enquiry">Request a proposal</a>
                         <a class="tc-btn tc-btn--ghost tc-btn--block" href="tel:<?php echo esc_attr( $tc_tel ); ?>">Call the placements team</a>
 
                         <ul class="tc-side-card__contact">
@@ -72,14 +72,18 @@ $tc_wa_tel = preg_replace( '/[^0-9+]/', '', $tc_org['wa'] );
             <div class="col-lg-8 order-lg-1">
 
                 <!-- Hero head -->
-                <section class="tc-hero">
+                <section class="tc-hero tc-texture-dots tc-reveal">
+                    <!-- Ambient glow orbs -->
+                    <div class="tc-glow-orb tc-glow-orb--blue" aria-hidden="true"></div>
+                    <div class="tc-glow-orb tc-glow-orb--orange" aria-hidden="true"></div>
+
                     <nav class="tc-hero__crumbs" aria-label="Breadcrumb">
                         <a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a><span>›</span>
                         <span class="tc-hero__crumbs-current">For Colleges &amp; TPOs</span>
                     </nav>
 
                     <span class="tc-eyebrow">Visioner Training &middot; College &amp; Bulk</span>
-                    <h1 class="tc-hero__title">Train &amp; place your students with Visioner</h1>
+                    <h1 class="tc-hero__title">Train &amp; <span class="tc-gradient-text tc-gradient-text--freeze">place your students</span> with Visioner</h1>
                     <p class="tc-hero__sub">Industry-grade fullstack training for your campus — delivered
                         on-site or online at transparent bulk rates, with placement reporting and
                         zero revenue-share.</p>
@@ -89,53 +93,49 @@ $tc_wa_tel = preg_replace( '/[^0-9+]/', '', $tc_org['wa'] );
                     <!-- CLAUDE CODE: partnership stats are PLACEHOLDERS — swap for real figures. -->
                     <div class="tc-hero__stats">
                         <div class="tc-stat">
-                            <strong class="tc-stat__num">50+*</strong>
+                            <strong class="tc-stat__num" data-animate>50+*</strong>
                             <span class="tc-stat__label">campus cohorts run</span>
                         </div>
                         <div class="tc-stat tc-stat--divider">
-                            <strong class="tc-stat__num">12,000+*</strong>
+                            <strong class="tc-stat__num" data-animate>12,000+*</strong>
                             <span class="tc-stat__label">students trained</span>
                         </div>
                         <div class="tc-stat tc-stat--divider">
-                            <strong class="tc-stat__num">20–40+</strong>
+                            <strong class="tc-stat__num" data-animate>20–40+</strong>
                             <span class="tc-stat__label">batch sizes supported</span>
                         </div>
                     </div>
                 </section>
 
                 <!-- Value cards -->
-                <section class="tc-section tc-college-value">
+                <section class="tc-section tc-college-value tc-reveal">
                     <h2 class="tc-section__title">Why colleges choose us</h2>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="tc-feature">
-                                <span class="tc-feature__ic tc-feature__ic--blue">₹</span>
+                    <div class="tc-bento tc-bento--2col">
+                        <div class="tc-feature tc-bento__cell--lead tc-reveal" style="--delay: 0ms">
+                            <span class="tc-feature__ic tc-feature__ic--blue">₹</span>
+                            <div>
                                 <h3>Bulk &amp; transparent pricing</h3>
                                 <p class="tc-muted">Discounted per-student rates that drop further at 40+.
                                     Clean GST invoice — no hidden fees, no commissions.</p>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="tc-feature">
-                                <span class="tc-feature__ic tc-feature__ic--orange"><?php echo tc_icon( 'sliders', 24 ); ?></span>
-                                <h3>Flexible cohorts</h3>
-                                <p class="tc-muted">On-campus or fully online, weekday or weekend tracks,
-                                    scheduled around your academic calendar.</p>
-                            </div>
+                        <div class="tc-feature tc-reveal" style="--delay: 80ms">
+                            <span class="tc-feature__ic tc-feature__ic--orange"><?php echo tc_icon( 'sliders', 24 ); ?></span>
+                            <h3>Flexible cohorts</h3>
+                            <p class="tc-muted">On-campus or fully online, weekday or weekend tracks,
+                                scheduled around your academic calendar.</p>
                         </div>
-                        <div class="col-md-4">
-                            <div class="tc-feature">
-                                <span class="tc-feature__ic tc-feature__ic--blue"><?php echo tc_icon( 'chart', 24 ); ?></span>
-                                <h3>Placement reporting</h3>
-                                <p class="tc-muted">Attendance, assessment scores and a placement-ready
-                                    pipeline, reported back to your TPO cell.</p>
-                            </div>
+                        <div class="tc-feature tc-reveal" style="--delay: 160ms">
+                            <span class="tc-feature__ic tc-feature__ic--blue"><?php echo tc_icon( 'chart', 24 ); ?></span>
+                            <h3>Placement reporting</h3>
+                            <p class="tc-muted">Attendance, assessment scores and a placement-ready
+                                pipeline, reported back to your TPO cell.</p>
                         </div>
                     </div>
                 </section>
 
                 <!-- Bulk pricing table -->
-                <section class="tc-section tc-bulk">
+                <section class="tc-section tc-bulk tc-reveal">
                     <h2 class="tc-section__title">College &amp; bulk pricing</h2>
                     <p class="tc-muted tc-bulk__lead">Per-student fees. Rates fall as batch size grows —
                         all figures exclusive of 18% GST.</p>
@@ -171,10 +171,10 @@ $tc_wa_tel = preg_replace( '/[^0-9+]/', '', $tc_org['wa'] );
                 </section>
 
                 <!-- Engagement models -->
-                <section class="tc-section tc-models">
+                <section class="tc-section tc-models tc-reveal">
                     <h2 class="tc-section__title">Two ways to engage</h2>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6 tc-reveal" style="--delay: 0ms">
                             <div class="tc-model tc-model--a">
                                 <span class="tc-model__tag">Model A</span>
                                 <h3 class="tc-model__name">Student-paid</h3>
@@ -182,7 +182,7 @@ $tc_wa_tel = preg_replace( '/[^0-9+]/', '', $tc_org['wa'] );
                                     at the bulk rate. Zero cost to the institution.</p>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 tc-reveal" style="--delay: 80ms">
                             <div class="tc-model tc-model--b">
                                 <span class="tc-model__tag">Model B</span>
                                 <h3 class="tc-model__name">College-sponsored</h3>
@@ -197,7 +197,7 @@ $tc_wa_tel = preg_replace( '/[^0-9+]/', '', $tc_org['wa'] );
         </div>
 
         <!-- SECTION: TPO enquiry form (full width) -->
-        <section class="tc-section tc-tpo-enquiry" id="tpo-enquiry">
+        <section class="tc-section tc-tpo-enquiry tc-reveal" id="tpo-enquiry">
             <div class="tc-tpo-panel">
                 <div class="row align-items-center">
                     <div class="col-lg-5">
@@ -228,7 +228,7 @@ $tc_wa_tel = preg_replace( '/[^0-9+]/', '', $tc_org['wa'] );
         </section>
 
         <!-- SECTION: Contact / org info (full width) -->
-        <section class="tc-section tc-contact">
+        <section class="tc-section tc-section--tint tc-contact tc-reveal">
             <div class="tc-contact__grid">
                 <div class="tc-contact__col">
                     <h3 class="tc-contact__org"><?php echo esc_html( $tc_org['name'] ); ?></h3>
