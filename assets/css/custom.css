@@ -361,7 +361,6 @@
 .tc-cta-band__actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
 /* -----------------------------------------------------------
-<<<<<<< HEAD
    Admissions — how-to-apply steps
    ----------------------------------------------------------- */
 .tc-steps {
@@ -509,7 +508,8 @@
 }
 .tc-faq__item[open] .tc-faq__q::after { content: "−"; }
 .tc-faq__a { margin: 0 0 18px; font-size: 15px; line-height: 1.6; }
-=======
+
+/* -----------------------------------------------------------
    Fluent Forms on dark navy (Apply + TPO pages)
    ----------------------------------------------------------- */
 .tc-page .fluentform .ff-el-input--label label,
@@ -533,7 +533,97 @@
     font-weight: 700; color: #fff; box-shadow: 0 10px 26px rgba(47, 107, 255, .35);
 }
 .tc-page .fluentform .ff-btn-submit:hover { background: #1b54e6; }
->>>>>>> 13902e8fc0a3d435ef4769f55a3337404a4b6089
+
+/* -----------------------------------------------------------
+   Homepage / landing
+   ----------------------------------------------------------- */
+.tc-home__hero { margin-bottom: 72px; }
+.tc-home__hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin: 6px 0 4px; }
+
+/* Vertical gaps between wrapped grid rows (cards) */
+.tc-why .row, .tc-steps-sec .row, .tc-testimonials .row { row-gap: 24px; }
+
+/* Next-cohort highlight card */
+.tc-home__herocard {
+    background: var(--tc-navy-2); border: 1px solid var(--tc-border-strong);
+    border-radius: var(--tc-radius); padding: 28px; box-shadow: var(--tc-shadow);
+}
+.tc-home__herocard-title { margin: 14px 0 4px; font-size: 22px; }
+.tc-home__herocard-date { color: var(--tc-muted); margin: 0 0 18px; }
+.tc-home__herocard-date strong { color: #fff; }
+.tc-home__herocard-list { list-style: none; padding: 0; margin: 0 0 22px; }
+.tc-home__herocard-list li {
+    display: flex; align-items: center; gap: 12px; padding: 9px 0;
+    border-bottom: 1px solid var(--tc-border); font-size: 14px; color: var(--tc-text);
+}
+.tc-home__herocard-list li:last-child { border-bottom: 0; }
+.tc-home__herocard-list .tc-ico { color: var(--tc-blue); }
+.tc-home__herocard-note { margin: 12px 0 0; font-size: 12.5px; color: var(--tc-muted); text-align: center; }
+
+/* Trust strip */
+.tc-logos { text-align: center; }
+.tc-logos__label { color: var(--tc-muted); text-transform: uppercase; letter-spacing: .1em; font-size: 13px; font-weight: 700; margin-bottom: 20px; }
+.tc-logos__row { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+.tc-logos__chip {
+    padding: 12px 22px; border: 1px solid var(--tc-border); border-radius: 10px;
+    background: var(--tc-navy-2); color: var(--tc-muted); font-weight: 700; font-size: 14px;
+}
+
+/* Tech stack chips */
+.tc-stack { display: flex; flex-wrap: wrap; gap: 12px; }
+.tc-stack__chip {
+    padding: 11px 18px; border-radius: 999px; font-weight: 600; font-size: 15px;
+    background: var(--tc-navy-2); border: 1px solid var(--tc-border); color: var(--tc-text);
+    transition: border-color .2s ease, transform .2s ease;
+}
+.tc-stack__chip:hover { border-color: var(--tc-blue); transform: translateY(-2px); }
+
+/* How-it-works steps (homepage) */
+.tc-home__step {
+    height: 100%; padding: 26px; border-radius: var(--tc-radius);
+    background: var(--tc-navy-2); border: 1px solid var(--tc-border);
+}
+.tc-home__step-num {
+    display: inline-block; font-size: 30px; font-weight: 800; line-height: 1;
+    background: linear-gradient(120deg, var(--tc-blue), var(--tc-orange));
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.tc-home__step-title { font-size: 19px; margin: 12px 0 8px; }
+
+/* Pricing teaser + colleges callout panels */
+.tc-priceteaser__panel, .tc-callout__panel {
+    display: flex; align-items: center; justify-content: space-between; gap: 28px; flex-wrap: wrap;
+    background: linear-gradient(120deg, var(--tc-navy-2), #16265a);
+    border: 1px solid var(--tc-border-strong); border-radius: 20px;
+    padding: 40px; box-shadow: var(--tc-shadow);
+}
+.tc-priceteaser__panel .tc-section__title, .tc-callout__panel .tc-section__title { margin-top: 6px; }
+.tc-priceteaser__text, .tc-callout__panel > div { max-width: 640px; }
+.tc-priceteaser__cta { flex: 0 0 auto; }
+
+/* Testimonials */
+.tc-quote {
+    height: 100%; margin: 0; padding: 28px; border-radius: var(--tc-radius);
+    background: var(--tc-navy-2); border: 1px solid var(--tc-border);
+}
+.tc-quote__stars { color: var(--tc-orange); letter-spacing: 2px; margin-bottom: 14px; }
+.tc-quote__text { margin: 0 0 20px; font-size: 16px; line-height: 1.6; color: var(--tc-text); }
+.tc-quote__by { display: flex; align-items: center; gap: 14px; }
+.tc-quote__avatar {
+    flex: 0 0 auto; width: 44px; height: 44px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; font-weight: 800; color: #fff;
+    background: linear-gradient(135deg, var(--tc-blue), var(--tc-orange));
+}
+.tc-quote__by strong { display: block; color: #fff; font-size: 15px; }
+.tc-quote__by em { color: var(--tc-muted); font-style: normal; font-size: 13px; }
+
+@media (max-width: 991px) {
+    .tc-home__hero .col-lg-5 { margin-top: 32px; }
+    .tc-stack-sec .col-lg-7 { margin-top: 24px; }
+}
+@media (max-width: 767px) {
+    .tc-priceteaser__panel, .tc-callout__panel { padding: 28px 20px; }
+}
 
 /* -----------------------------------------------------------
    WhatsApp floating widget
@@ -576,17 +666,14 @@
     .tc-hero__stats { gap: 18px; }
     .tc-stat--divider { padding-left: 18px; }
     .tc-factstrip { grid-template-columns: 1fr 1fr; gap: 12px; }
-<<<<<<< HEAD
     .tc-steps { grid-template-columns: 1fr; }
     .tc-batch-row { padding: 18px; }
     .tc-emi-grid { grid-template-columns: 1fr; }
     .tc-payment-card { padding: 22px; }
     .tc-payment-card__head { flex-direction: column; }
-=======
 
     /* Accordion: stack meta under the title, tighten body indent */
     .tc-acc__summary-row { flex-wrap: wrap; padding: 16px; }
     .tc-acc__meta { flex-basis: 100%; padding-left: 34px; }
     .tc-acc__body { padding: 0 16px 18px 34px; }
->>>>>>> 13902e8fc0a3d435ef4769f55a3337404a4b6089
 }
