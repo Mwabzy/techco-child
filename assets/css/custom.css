@@ -228,6 +228,9 @@
 .tc-acc__day { font-size: 12px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--tc-orange); }
 .tc-acc__item--backend .tc-acc__day { color: #ffb277; }
 .tc-acc__item--career  .tc-acc__day { color: #cdd8f2; }
+.tc-acc__item--core  .tc-acc__day { color: #9cbcff; }
+.tc-acc__item--cloud .tc-acc__day { color: #ffb277; }
+.tc-acc__item--ai    .tc-acc__day { color: #c4b5fd; }
 .tc-acc__topic { font-size: 17px; font-weight: 700; color: #fff; }
 .tc-acc__meta { flex: 0 0 auto; font-size: 13px; color: var(--tc-muted); white-space: nowrap; }
 
@@ -238,6 +241,18 @@
     border-top: 1px solid var(--tc-border); color: var(--tc-text); font-size: 14px;
 }
 .tc-acc__lesson-ic { color: var(--tc-blue); display: inline-flex; line-height: 0; }
+.tc-acc__milestone { margin: 12px 0 0; font-size: 14px; color: var(--tc-text); }
+.tc-acc__milestone strong { color: var(--tc-orange); }
+
+/* Program tracks (exit points) */
+.tc-tracks__lead { margin-top: -10px; margin-bottom: 24px; }
+.tc-tracks .row { row-gap: 24px; }
+.tc-track__weeks { display: inline-block; font-size: 13px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--tc-orange); margin-bottom: 6px; }
+.tc-feature--flag { border-color: rgba(255, 122, 24, .45); box-shadow: inset 0 0 0 1px rgba(255, 122, 24, .25); }
+.tc-feature__flag {
+    display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase;
+    padding: 3px 9px; border-radius: 999px; background: var(--tc-orange); color: #1a1205; margin-bottom: 10px;
+}
 
 /* -----------------------------------------------------------
    Colleges page — sticky enquiry side card
