@@ -67,7 +67,7 @@ $tc_faqs = array(
         <!-- SECTION: Hero -->
         <section class="tc-hero">
             <nav class="tc-hero__crumbs" aria-label="Breadcrumb">
-                <a href="/">Home</a><span>›</span>
+                <a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a><span>›</span>
                 <span class="tc-hero__crumbs-current">Admissions</span>
             </nav>
 
@@ -139,7 +139,7 @@ $tc_faqs = array(
         </section>
 
         <!-- SECTION: Application form + trust panel -->
-        <section class="tc-section tc-apply-section">
+        <section class="tc-section tc-apply-section" id="tc-apply-form-anchor">
             <span class="tc-eyebrow">Apply</span>
             <h2 class="tc-section__title">Start your application</h2>
 
@@ -212,7 +212,7 @@ $tc_faqs = array(
                 within 24 hours.</p>
             <div class="tc-cta-band__actions">
                 <a class="tc-btn tc-btn--primary" href="#tc-apply-form-anchor">Apply Now</a>
-                <a class="tc-btn tc-btn--ghost" href="/fees-batches/">View Fees &amp; Batches</a>
+                <a class="tc-btn tc-btn--ghost" href="<?php echo esc_url( tc_tpl_url( 'page-fees.php', '/fees-batches/' ) ); ?>">View Fees &amp; Batches</a>
             </div>
         </section>
 

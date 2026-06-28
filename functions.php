@@ -140,5 +140,90 @@ add_action( 'wp_enqueue_scripts', function () {
     );
 }, 100 );
 
+// Inline SVG icon helper (tc_icon) used across the Visioner templates.
+require_once get_stylesheet_directory() . '/inc/icons.php';
+
 // Floating WhatsApp click-to-chat widget (hooks wp_footer itself).
 require_once get_stylesheet_directory() . '/inc/whatsapp-widget.php';
+
+/**
+ * ------------------------------------------------------------------
+ * Resolve the URL of a Visioner page by its assigned template file.
+ *
+ * Links use this so they always point at the right page no matter which
+ * slug you choose in wp-admin. If no published page uses the template yet,
+ * it falls back to a slug-based URL.
+ *
+ * Usage: echo esc_url( tc_tpl_url( 'page-apply.php', '/admissions-apply/' ) );
+ * ------------------------------------------------------------------
+ */
+function tc_tpl_url( $template, $fallback = '/' ) {
+	static $cache = array();
+	if ( isset( $cache[ $template ] ) ) {
+		return $cache[ $template ];
+	}
+
+	$ids = get_posts( array(
+		'post_type'        => 'page',
+		'post_status'      => 'publish',
+		'numberposts'      => 1,
+		'fields'           => 'ids',
+		'no_found_rows'    => true,
+		'meta_key'         => '_wp_page_template',
+		'meta_value'       => $template,
+		'suppress_filters' => false,
+	) );
+
+	$url = ! empty( $ids ) ? get_permalink( $ids[0] ) : home_url( $fallback );
+
+	$cache[ $template ] = $url;
+	return $url;
+}
+
+/**
+ * ------------------------------------------------------------------
+ * Hide the Techco site header on the Visioner page templates.
+ *
+ * Techco's header.php renders its header only when the page meta
+ * techco_common_meta['page_header_disable'] is not true. We inject that
+ * flag for our templates (preserving any other Techco settings), so the
+ * header is removed without editing the parent theme or each page by hand.
+ *
+ * To keep the header on a given template, remove it from $targets.
+ * To re-enable everywhere, delete this filter.
+ * ------------------------------------------------------------------
+ */
+add_filter( 'get_post_metadata', 'tc_disable_techco_header', 10, 4 );
+function tc_disable_techco_header( $value, $object_id, $meta_key, $single ) {
+	if ( 'techco_common_meta' !== $meta_key || is_admin() ) {
+		return $value;
+	}
+
+	static $busy = false;
+	if ( $busy ) {
+		return $value; // avoid recursion when we read the meta below
+	}
+
+	$targets = array(
+		'page-home.php',
+		'page-program.php',
+		'page-fees.php',
+		'page-apply.php',
+		'page-colleges.php',
+	);
+
+	$busy     = true;
+	$template = get_page_template_slug( $object_id );
+	$existing = get_post_meta( $object_id, 'techco_common_meta', true );
+	$busy     = false;
+
+	if ( ! in_array( $template, $targets, true ) ) {
+		return $value;
+	}
+
+	$meta = is_array( $existing ) ? $existing : array();
+	$meta['page_header_disable'] = true;
+
+	// get_post_metadata expects an array of values; core returns [0] for single.
+	return array( $meta );
+}
