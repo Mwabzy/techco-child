@@ -162,6 +162,9 @@ require_once get_stylesheet_directory() . '/inc/brand-icons.php';
 // Floating WhatsApp click-to-chat widget (hooks wp_footer itself).
 require_once get_stylesheet_directory() . '/inc/whatsapp-widget.php';
 
+// Fluent Forms → Google Sheets sync (config via wp-config.php constants).
+require_once get_stylesheet_directory() . '/inc/google-sheets-sync.php';
+
 /**
  * ------------------------------------------------------------------
  * Resolve the URL of a Visioner page by its assigned template file.

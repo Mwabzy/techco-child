@@ -1,0 +1,14 @@
+# Secrets / local config — never commit
+.env
+.env.*
+*.local
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Build / dependency output
+node_modules/
+vendor/
