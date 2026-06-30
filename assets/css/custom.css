@@ -1487,3 +1487,157 @@ html { scroll-behavior: smooth; }
     .tc-reveal, .tc-page { opacity: 1 !important; transform: none !important; }
     .tc-glow-orb { display: none !important; }
 }
+
+/* ==================================================================
+   Visioner sticky nav (inc/visioner-nav.php) — shown on Visioner
+   templates where the parent Techco header is hidden.
+   ================================================================== */
+.tc-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(11, 23, 54, .82);           /* --tc-navy, translucent */
+    backdrop-filter: saturate(140%) blur(10px);
+    -webkit-backdrop-filter: saturate(140%) blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, .06);
+    transition: background .25s ease, box-shadow .25s ease, padding .25s ease;
+}
+.tc-nav.is-scrolled {
+    background: rgba(10, 19, 44, .96);            /* --tc-navy-3 */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, .35);
+}
+.tc-nav__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    min-height: 64px;
+}
+
+/* Brand */
+.tc-nav__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-weight: 800;
+    letter-spacing: .2px;
+    color: #fff;
+}
+.tc-nav__brand-mark {
+    display: grid;
+    place-items: center;
+    width: 32px; height: 32px;
+    border-radius: 9px;
+    background: linear-gradient(135deg, var(--tc-blue, #2f6bff), #16265a);
+    color: #fff;
+    font-weight: 800;
+    box-shadow: 0 4px 14px rgba(47, 107, 255, .35);
+}
+.tc-nav__brand-text { font-size: 18px; }
+
+/* Links */
+.tc-nav__list {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0; padding: 0;
+    list-style: none;
+}
+.tc-nav__link {
+    display: inline-block;
+    padding: 9px 14px;
+    border-radius: 8px;
+    color: rgba(255, 255, 255, .82);
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    transition: color .18s ease, background .18s ease;
+}
+.tc-nav__link:hover { color: #fff; background: rgba(255, 255, 255, .07); }
+.tc-nav__link.is-active { color: #fff; }
+.tc-nav__link.is-active:not(.tc-nav__link--cta) {
+    box-shadow: inset 0 -2px 0 var(--tc-blue, #2f6bff);
+    border-radius: 8px 8px 0 0;
+}
+.tc-nav__link--cta {
+    margin-left: 6px;
+    color: #fff;
+    background: linear-gradient(135deg, var(--tc-blue, #2f6bff), #1e4fd6);
+    box-shadow: 0 6px 18px rgba(47, 107, 255, .4);
+}
+.tc-nav__link--cta:hover { filter: brightness(1.07); background: linear-gradient(135deg, var(--tc-blue, #2f6bff), #1e4fd6); }
+
+/* Mobile toggle (hidden on desktop) */
+.tc-nav__toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 42px; height: 42px;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, .14);
+    border-radius: 9px;
+    background: transparent;
+    cursor: pointer;
+}
+.tc-nav__toggle-bar {
+    display: block;
+    width: 20px; height: 2px;
+    margin: 0 auto;
+    background: #fff;
+    transition: transform .22s ease, opacity .22s ease;
+}
+
+@media (max-width: 991px) {
+    .tc-nav__toggle { display: flex; }
+    .tc-nav__menu {
+        position: absolute;
+        left: 0; right: 0; top: 100%;
+        background: var(--tc-navy-3, #0a132c);
+        border-bottom: 1px solid rgba(255, 255, 255, .08);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height .28s ease;
+    }
+    .tc-nav.is-open .tc-nav__menu { max-height: 80vh; }
+    .tc-nav__list {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 2px;
+        padding: 10px 16px 18px;
+    }
+    .tc-nav__link { padding: 12px 14px; }
+    .tc-nav__link--cta { margin: 8px 0 0; text-align: center; }
+    .tc-nav.is-open .tc-nav__toggle-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .tc-nav.is-open .tc-nav__toggle-bar:nth-child(2) { opacity: 0; }
+    .tc-nav.is-open .tc-nav__toggle-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+}
+
+/* ==================================================================
+   India: +91 prefix on Fluent Forms phone fields (india-localization.php)
+   ================================================================== */
+.tc-phone-wrap {
+    position: relative;
+    display: block;
+    width: 100%;
+}
+.tc-phone-prefix {
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    bottom: 1px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    color: var(--tc-navy, #0b1736);
+    font-weight: 700;
+    font-size: 15px;
+    pointer-events: none;
+    border-right: 1px solid rgba(0, 0, 0, .12);
+}
+.tc-phone-wrap input.ff-number-only {
+    padding-left: 58px !important;
+}
+

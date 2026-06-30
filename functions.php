@@ -165,6 +165,12 @@ require_once get_stylesheet_directory() . '/inc/whatsapp-widget.php';
 // Fluent Forms → Google Sheets sync (config via wp-config.php constants).
 require_once get_stylesheet_directory() . '/inc/google-sheets-sync.php';
 
+// Visioner sticky nav for templates that hide the parent header (hooks wp_body_open).
+require_once get_stylesheet_directory() . '/inc/visioner-nav.php';
+
+// India localization: +91 phone prefix, IST/date defaults, en-IN SEO signals.
+require_once get_stylesheet_directory() . '/inc/india-localization.php';
+
 /**
  * ------------------------------------------------------------------
  * Resolve the URL of a Visioner page by its assigned template file.
