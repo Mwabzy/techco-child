@@ -83,7 +83,7 @@ $tc_faqs = array(
 
             <div class="tc-hero__stats">
                 <div class="tc-stat">
-                    <strong class="tc-stat__num" data-animate>6 Jul 2026*</strong>
+                    <strong class="tc-stat__num" data-animate>6 Jul 2026</strong>
                     <span class="tc-stat__label">next intake</span>
                 </div>
                 <div class="tc-stat tc-stat--divider">
@@ -127,7 +127,7 @@ $tc_faqs = array(
         <section class="tc-section tc-batches-section tc-reveal">
             <span class="tc-eyebrow">Plan ahead</span>
             <h2 class="tc-section__title">Upcoming batches</h2>
-            <p class="tc-muted tc-placeholder-note">*Dates shown are indicative — confirm final batch dates on the Fees &amp; Batches page.</p>
+            <p class="tc-muted tc-placeholder-note">Dates shown are indicative — confirm final batch dates on the Fees &amp; Batches page.</p>
             <div class="tc-batch-list">
                 <?php foreach ( $tc_batches as $i => $b ) : ?>
                 <a href="#tc-apply-form-anchor" class="tc-batch-item tc-reveal" style="--delay: <?php echo $i * 80; ?>ms">

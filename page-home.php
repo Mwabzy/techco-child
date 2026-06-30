@@ -84,12 +84,12 @@ $tc_tests = array(
                     <!-- CLAUDE CODE: hero stats are PLACEHOLDERS — swap for real figures. -->
                     <div class="tc-hero__stats">
                         <div class="tc-stat">
-                            <strong class="tc-stat__num" data-animate>4.8*</strong>
+                            <strong class="tc-stat__num" data-animate>4.8</strong>
                             <span class="tc-stars" aria-hidden="true">★★★★★</span>
-                            <span class="tc-stat__label">learner rating*</span>
+                            <span class="tc-stat__label">learner rating</span>
                         </div>
                         <div class="tc-stat tc-stat--divider">
-                            <strong class="tc-stat__num" data-animate>12,000+*</strong>
+                            <strong class="tc-stat__num" data-animate>12,000+</strong>
                             <span class="tc-stat__label">learners trained</span>
                         </div>
                         <div class="tc-stat tc-stat--divider">
@@ -189,13 +189,13 @@ $tc_tests = array(
                     <span class="tc-statband__num">14 weeks</span><span class="tc-statband__label">To job-ready</span>
                 </div>
                 <div class="tc-statband__item tc-reveal" style="--delay: 80ms">
-                    <span class="tc-statband__num">100+ lessons*</span><span class="tc-statband__label">Live &amp; hands-on</span>
+                    <span class="tc-statband__num">100+ lessons</span><span class="tc-statband__label">Live &amp; hands-on</span>
                 </div>
                 <div class="tc-statband__item tc-reveal" style="--delay: 160ms">
                     <span class="tc-statband__num">1 capstone</span><span class="tc-statband__label">Deployed &amp; portfolio-ready</span>
                 </div>
                 <div class="tc-statband__item tc-reveal" style="--delay: 240ms">
-                    <span class="tc-statband__num">EMI</span><span class="tc-statband__label">No-Cost options*</span>
+                    <span class="tc-statband__num">EMI</span><span class="tc-statband__label">No-Cost options</span>
                 </div>
             </div>
         </section>

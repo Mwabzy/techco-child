@@ -157,7 +157,7 @@ $tc_faqs = array(
 		<section class="tc-section tc-section--tint tc-batches-section tc-reveal">
 			<span class="tc-eyebrow">Plan ahead</span>
 			<h2 class="tc-section__title">Batch Schedule &amp; Timings</h2>
-			<p class="tc-muted tc-placeholder-note">*Dates shown are indicative — confirm before publishing.</p>
+			<p class="tc-muted tc-placeholder-note">Dates shown are indicative — confirm before publishing.</p>
 			<div class="tc-batches">
 				<?php foreach ( $tc_batches as $i => $b ) : ?>
 				<div class="tc-batch-row tc-reveal" style="--delay: <?php echo $i * 100; ?>ms">

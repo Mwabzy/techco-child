@@ -73,9 +73,9 @@ if ( ! function_exists( 'tc_fmt_len' ) ) {
                     <div class="tc-enrol-card__body">
                         <!-- CLAUDE CODE: pricing is a PLACEHOLDER — final numbers live on Fees & Batches. -->
                         <div class="tc-enrol-card__price">
-                            <span class="tc-enrol-card__price-now">From ₹49,999 + GST*</span>
+                            <span class="tc-enrol-card__price-now">From ₹49,999 + GST</span>
                         </div>
-                        <p class="tc-enrol-card__price-note">*Core Program. Fees shown as Fees + GST (GST billed
+                        <p class="tc-enrol-card__price-note">Core Program. Fees shown as Fees + GST (GST billed
                             on the invoice). See Fees &amp; Batches for all tracks &amp; EMI.</p>
 
                         <a class="tc-btn tc-btn--primary tc-btn--block" href="<?php echo esc_url( tc_tpl_url( 'page-apply.php', '/admissions-apply/' ) ); ?>">Apply Now</a>
@@ -126,9 +126,9 @@ if ( ! function_exists( 'tc_fmt_len' ) ) {
                     <!-- CLAUDE CODE: rating + learner numbers are PLACEHOLDERS — swap for real figures. -->
                     <div class="tc-hero__stats">
                         <div class="tc-stat">
-                            <strong class="tc-stat__num" data-animate>4.8*</strong>
+                            <strong class="tc-stat__num" data-animate>4.8</strong>
                             <span class="tc-stars" aria-hidden="true">★★★★★</span>
-                            <span class="tc-stat__label">learner rating*</span>
+                            <span class="tc-stat__label">learner rating</span>
                         </div>
                         <div class="tc-stat tc-stat--divider">
                             <strong class="tc-stat__num" data-animate>Angular + .NET</strong>
@@ -204,7 +204,7 @@ if ( ! function_exists( 'tc_fmt_len' ) ) {
                     <p class="tc-acc__summary">
                         <?php echo count( $tc_modules ); ?> modules &middot;
                         <?php echo (int) $tc_total_lessons; ?> lessons &middot;
-                        <?php echo esc_html( tc_fmt_len( $tc_total_mins ) ); ?> total length<span class="tc-acc__summary-note"> (indicative*)</span>
+                        <?php echo esc_html( tc_fmt_len( $tc_total_mins ) ); ?> total length<span class="tc-acc__summary-note"> (indicative)</span>
                     </p>
 
                     <div class="tc-acc">

@@ -93,11 +93,11 @@ $tc_wa_tel = preg_replace( '/[^0-9+]/', '', $tc_org['wa'] );
                     <!-- CLAUDE CODE: partnership stats are PLACEHOLDERS — swap for real figures. -->
                     <div class="tc-hero__stats">
                         <div class="tc-stat">
-                            <strong class="tc-stat__num" data-animate>50+*</strong>
+                            <strong class="tc-stat__num" data-animate>50+</strong>
                             <span class="tc-stat__label">campus cohorts run</span>
                         </div>
                         <div class="tc-stat tc-stat--divider">
-                            <strong class="tc-stat__num" data-animate>12,000+*</strong>
+                            <strong class="tc-stat__num" data-animate>12,000+</strong>
                             <span class="tc-stat__label">students trained</span>
                         </div>
                         <div class="tc-stat tc-stat--divider">
