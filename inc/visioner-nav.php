@@ -50,8 +50,7 @@ function tc_render_visioner_nav() {
 		<div class="container tc-nav__inner">
 
 			<a class="tc-nav__brand" href="<?php echo esc_url( $home_url ); ?>">
-				<span class="tc-nav__brand-mark">V</span>
-				<span class="tc-nav__brand-text">Visioner</span>
+				<img class="tc-nav__brand-logo" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/visionone-logo.png' ); ?>" alt="VisionOne Access">
 			</a>
 
 			<button class="tc-nav__toggle" type="button" aria-expanded="false"

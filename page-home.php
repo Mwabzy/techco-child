@@ -25,18 +25,18 @@ $tc_why = array(
 );
 
 $tc_stack = array(
-    array('label' => 'HTML & CSS', 'key' => 'html-css', 'brand' => '#E34F26'),
-    array('label' => 'JavaScript', 'key' => 'javascript', 'brand' => '#F7DF1E'),
-    array('label' => 'React', 'key' => 'react', 'brand' => '#61DAFB'),
-    array('label' => 'Node.js', 'key' => 'nodejs', 'brand' => '#5FA04E'),
-    array('label' => 'Express', 'key' => 'express', 'brand' => '#303030'),
-    array('label' => 'MongoDB', 'key' => 'mongodb', 'brand' => '#47A248'),
-    array('label' => 'SQL', 'key' => 'sql', 'brand' => '#2f6bff'),
-    array('label' => 'Git & GitHub', 'key' => 'git-github', 'brand' => '#F05032'),
-    array('label' => 'Docker', 'key' => 'docker', 'brand' => '#2496ED'),
-    array('label' => 'REST APIs', 'key' => 'rest-api', 'brand' => '#2f6bff'),
-    array('label' => 'Auth & Security', 'key' => 'auth-security', 'brand' => '#ff7a18'),
-    array('label' => 'Deployment', 'key' => 'deployment', 'brand' => '#2f6bff'),
+    array('label' => 'HTML & CSS', 'key' => 'html-css', 'brand' => '#2496ED'),
+    array('label' => 'JavaScript', 'key' => 'javascript', 'brand' => '#1C75BC'),
+    array('label' => 'React', 'key' => 'react', 'brand' => '#5FC1F0'),
+    array('label' => 'Node.js', 'key' => 'nodejs', 'brand' => '#10173D'),
+    array('label' => 'Express', 'key' => 'express', 'brand' => '#0A0E2E'),
+    array('label' => 'MongoDB', 'key' => 'mongodb', 'brand' => '#2496ED'),
+    array('label' => 'SQL', 'key' => 'sql', 'brand' => '#1C75BC'),
+    array('label' => 'Git & GitHub', 'key' => 'git-github', 'brand' => '#5FC1F0'),
+    array('label' => 'Docker', 'key' => 'docker', 'brand' => '#10173D'),
+    array('label' => 'REST APIs', 'key' => 'rest-api', 'brand' => '#0A0E2E'),
+    array('label' => 'Auth & Security', 'key' => 'auth-security', 'brand' => '#2496ED'),
+    array('label' => 'Deployment', 'key' => 'deployment', 'brand' => '#1C75BC'),
 );
 
 $tc_steps = array(
@@ -244,47 +244,23 @@ $tc_tests = array(
 
         <!-- SECTION: Testimonials -->
         <section class="tc-section tc-section--tint tc-testimonials tc-reveal">
+            <span class="tc-eyebrow">Student stories</span>
             <h2 class="tc-section__title">What learners say</h2>
-            <div class="row">
+            <div class="tc-quotegrid">
                 <?php foreach ($tc_tests as $i => $t): ?>
-                    <?php if ($i === 0): ?>
-                        <div class="col-lg-7 tc-reveal" style="--delay: 0ms">
-                            <figure class="tc-quote tc-quote--featured">
-                                <div class="tc-quote__stars" aria-hidden="true">★★★★★</div>
-                                <blockquote class="tc-quote__text">&ldquo;<?php echo esc_html($t['quote']); ?>&rdquo;
-                                </blockquote>
-                                <figcaption class="tc-quote__by">
-                                    <span class="tc-quote__avatar"
-                                        aria-hidden="true"><?php echo esc_html(mb_substr($t['name'], 0, 1)); ?></span>
-                                    <span>
-                                        <strong><?php echo esc_html($t['name']); ?></strong>
-                                        <em><?php echo esc_html($t['role']); ?></em>
-                                    </span>
-                                </figcaption>
-                            </figure>
-                        </div>
-                        <div class="col-lg-5">
-                            <div class="row">
-                    <?php else: ?>
-                            <div class="col-12 tc-reveal" style="--delay: <?php echo $i * 100; ?>ms">
-                                <figure class="tc-quote">
-                                    <div class="tc-quote__stars" aria-hidden="true">★★★★★</div>
-                                    <blockquote class="tc-quote__text">&ldquo;<?php echo esc_html($t['quote']); ?>&rdquo;
-                                    </blockquote>
-                                    <figcaption class="tc-quote__by">
-                                        <span class="tc-quote__avatar"
-                                            aria-hidden="true"><?php echo esc_html(mb_substr($t['name'], 0, 1)); ?></span>
-                                        <span>
-                                            <strong><?php echo esc_html($t['name']); ?></strong>
-                                            <em><?php echo esc_html($t['role']); ?></em>
-                                        </span>
-                                    </figcaption>
-                                </figure>
-                            </div>
-                    <?php endif; ?>
+                    <figure class="tc-quote tc-reveal" style="--delay: <?php echo $i * 90; ?>ms">
+                        <div class="tc-quote__stars" aria-hidden="true">★★★★★</div>
+                        <blockquote class="tc-quote__text">&ldquo;<?php echo esc_html($t['quote']); ?>&rdquo;</blockquote>
+                        <figcaption class="tc-quote__by">
+                            <span class="tc-quote__avatar"
+                                aria-hidden="true"><?php echo esc_html(mb_substr($t['name'], 0, 1)); ?></span>
+                            <span>
+                                <strong><?php echo esc_html($t['name']); ?></strong>
+                                <em><?php echo esc_html($t['role']); ?></em>
+                            </span>
+                        </figcaption>
+                    </figure>
                 <?php endforeach; ?>
-                            </div>
-                        </div>
             </div>
             <p class="tc-placeholder-note">Placeholder testimonials — swap for real student quotes &amp; names.</p>
         </section>
