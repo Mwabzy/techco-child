@@ -12,15 +12,18 @@
  * @package Techco Child
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if (!defined('ABSPATH')) {
+	exit;
+}
 
-if ( ! function_exists( 'tc_brand_icon' ) ) {
+if (!function_exists('tc_brand_icon')) {
 	/**
 	 * @param string $key  Brand key (see $marks below).
 	 * @param int    $size Pixel width/height.
 	 * @return string Inline SVG markup (empty string if unknown key).
 	 */
-	function tc_brand_icon( $key, $size = 40 ) {
+	function tc_brand_icon($key, $size = 40)
+	{
 
 		$marks = array(
 
@@ -111,7 +114,7 @@ if ( ! function_exists( 'tc_brand_icon' ) ) {
 				. '</g>',
 		);
 
-		if ( empty( $marks[ $key ] ) ) {
+		if (empty($marks[$key])) {
 			return '';
 		}
 
@@ -120,7 +123,7 @@ if ( ! function_exists( 'tc_brand_icon' ) ) {
 		return sprintf(
 			'<svg class="tc-brandico" width="%1$d" height="%1$d" viewBox="0 0 24 24" aria-hidden="true" focusable="false">%2$s</svg>',
 			$size,
-			$marks[ $key ]
+			$marks[$key]
 		);
 	}
 }

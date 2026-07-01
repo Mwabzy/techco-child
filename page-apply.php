@@ -154,15 +154,22 @@ $tc_faqs = array(
                     <div class="tc-apply-form">
                         <?php
                         /**
-                         * CLAUDE CODE / KUWAYA:
-                         * 1. Build the form in Fluent Forms with these fields (from the deck):
-                         *    Full name · Email (.ff-validate-email) · Phone/WhatsApp (.ff-number-only) ·
-                         *    College/Company · Program & preferred batch · Timing track · Payment plan ·
-                         *    How did you hear about us? · Accept No-Refund policy (required checkbox).
-                         * 2. Integrations: Google Sheets (Fluent Forms → Integrations),
-                         *    confirmation Email (Settings → Notifications),
-                         *    WhatsApp (webhook → Cloud API / provider on submit).
-                         * 3. Replace the id below with the real form ID.
+                         * Fluent Form 1 ("Admissions Application") holds the full 32-field
+                         * spec (Personal & Contact, Course Interest, Profile, Skill & Goals,
+                         * Job Support, Payment, Technical Readiness, Follow-up, Consent &
+                         * Terms) split into two Containers — tc-ff-step1 / tc-ff-step2 — with
+                         * a Custom HTML "Continue" button between them. Step 2 is revealed by
+                         * theme JS (initApplyFormSteps() in assets/js/custom.js) once Step 1's
+                         * required fields validate; it's still one single-submission form, not
+                         * Fluent Forms' native multi-page feature. Job Support / Billing Name /
+                         * Internet Availability use Fluent Forms' native per-field Conditional
+                         * Logic. Edit the fields in wp-admin → Fluent Forms → Admissions
+                         * Application, not here.
+                         *
+                         * Integrations still to wire up manually in wp-admin: confirmation
+                         * email (Settings → Notifications), WhatsApp webhook, and — if Google
+                         * Sheets sync is enabled — the Sheet's column headers (new fields sync
+                         * automatically via inc/google-sheets-sync.php, keyed by field name).
                          */
                         if ( function_exists( 'do_shortcode' ) ) {
                             echo do_shortcode( '[fluentform id="1"]' );

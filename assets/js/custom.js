@@ -181,6 +181,64 @@
     }
 
     /* ---------------------------------------------------------
+       Admissions form: two-step reveal
+       Step 2 (.tc-ff-step2) stays visually collapsed until Step 1's
+       required fields validate, keeping this a single-submission
+       form (not Fluent Forms' native multi-page). Scoped to the
+       Apply page's form only — TPO form on page-colleges.php is
+       untouched.
+       --------------------------------------------------------- */
+    function initApplyFormSteps() {
+        var step1 = document.querySelector('.tc-apply-form .tc-ff-step1');
+        var step2 = document.querySelector('.tc-apply-form .tc-ff-step2');
+        var continueBtn = document.getElementById('tc-ff-continue');
+        if ( ! step1 || ! step2 || ! continueBtn ) { return; }
+
+        var form = step2.closest('form') || step2.closest('.fluentform');
+        var submitWrap = form ? form.querySelector('.ff_submit_btn_wrapper') : null;
+
+        // Only hide the submit button now that we've confirmed the full
+        // two-step structure is in place — never hidden unconditionally.
+        if ( submitWrap ) { submitWrap.classList.add('tc-ff-submit--hidden'); }
+
+        // Small "Step 1 of 2 / Step 2 of 2" progress indicator, inserted above the form.
+        var progress = document.createElement('div');
+        progress.className = 'tc-ff-progress';
+        progress.innerHTML =
+            '<span class="tc-ff-progress__step tc-ff-progress__step--active">' +
+                '<span class="tc-ff-progress__dot"></span>Step 1 of 2' +
+            '</span>' +
+            '<span class="tc-ff-progress__step">' +
+                '<span class="tc-ff-progress__dot"></span>Step 2 of 2' +
+            '</span>';
+        step1.parentNode.insertBefore(progress, step1);
+
+        var steps = progress.querySelectorAll('.tc-ff-progress__step');
+
+        continueBtn.addEventListener('click', function () {
+            var invalid = step1.querySelector(':invalid');
+            if ( invalid ) {
+                invalid.reportValidity();
+                return;
+            }
+
+            step2.classList.add('tc-ff-step2--visible');
+            if ( submitWrap ) {
+                submitWrap.classList.remove('tc-ff-submit--hidden');
+                submitWrap.classList.add('tc-ff-submit--visible');
+            }
+            (continueBtn.closest('.ff-el-group') || continueBtn).hidden = true;
+
+            if ( steps[0] ) { steps[0].classList.remove('tc-ff-progress__step--active'); }
+            if ( steps[1] ) { steps[1].classList.add('tc-ff-progress__step--active'); }
+
+            requestAnimationFrame(function () {
+                step2.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    }
+
+    /* ---------------------------------------------------------
        Page-load fade-in
        Adds .tc-loaded so the CSS opacity transition can run.
        --------------------------------------------------------- */
@@ -202,6 +260,7 @@
         initScrollReveal();
         initCardTilt();
         initStatAnimation();
+        initApplyFormSteps();
 
         // Fluent Forms fires this jQuery event on successful AJAX submit.
         if ( window.jQuery ) {
