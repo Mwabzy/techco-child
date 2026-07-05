@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Visioner — Admissions / Apply
+ * Template Name: visionONE — Admissions / Apply
  *
  * Premium admissions funnel: hero, how-to-apply steps, eligibility,
  * batches, application form + trust panel, FAQ, CTA.
@@ -181,7 +181,7 @@ $tc_faqs = array(
                 <!-- RIGHT: trust panel + gated brochure -->
                 <div class="col-lg-5 tc-reveal" style="--delay: 100ms">
                     <aside class="tc-apply-aside">
-                        <h3>Why Visioner</h3>
+                        <h3>Why visionONE</h3>
                         <!-- CLAUDE CODE: 3–4 trust bullets (placement, mentors, projects). -->
                         <ul class="tc-checklist">
                             <li>Industry-mentored, project-first</li>

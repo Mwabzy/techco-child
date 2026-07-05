@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Visioner — Program / Curriculum
+ * Template Name: visionONE — Program / Curriculum
  *
  * 14-week full-stack curriculum (Angular + .NET + SQL + Cloud + AI), with a
  * Udemy-style course hero + sticky enrol card and a collapsible "Course
@@ -114,7 +114,7 @@ if ( ! function_exists( 'tc_fmt_len' ) ) {
                     <span class="tc-badge tc-badge--bestseller">Flagship Track</span>
 
                     <p class="tc-hero__author">Mentored by
-                        <a href="<?php echo esc_url( tc_tpl_url( 'page-apply.php', '/admissions-apply/' ) ); ?>">Visioner industry mentors &amp; lead instructors</a>
+                        <a href="<?php echo esc_url( tc_tpl_url( 'page-apply.php', '/admissions-apply/' ) ); ?>">visionONE industry mentors &amp; lead instructors</a>
                     </p>
 
                     <div class="tc-hero__meta">
@@ -145,7 +145,7 @@ if ( ! function_exists( 'tc_fmt_len' ) ) {
                 <section class="tc-section tc-program-intro tc-reveal">
                     <span class="tc-eyebrow">The Programme</span>
                     <h2 class="tc-section__title">What you'll master</h2>
-                    <p class="tc-lead">Visioner's Full-Stack track turns beginners and career-switchers into
+                    <p class="tc-lead">visionONE's Full-Stack track turns beginners and career-switchers into
                         job-ready engineers in 10–14 weeks — no fluff, all build.</p>
                     <p class="tc-muted">You'll progress from an Angular 18 frontend to a .NET 8 + SQL Server
                         backend, ship a full-stack Mini-ERP and a portfolio capstone, then go further than

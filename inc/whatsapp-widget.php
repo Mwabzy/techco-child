@@ -17,7 +17,7 @@ if (!function_exists('techco_child_whatsapp_widget')) {
 
         // VisionOne WhatsApp line (intl format, digits only, no +).
         $number = apply_filters('techco_child_wa_number', '918143533535');
-        $message = apply_filters('techco_child_wa_message', 'Hi Visioner, I\'d like to know more about the Fullstack Training program.');
+        $message = apply_filters('techco_child_wa_message', 'Hi visionONE, I\'d like to know more about the Full Stack Training program.');
 
         if (empty($number)) {
             return;

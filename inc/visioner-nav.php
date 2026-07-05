@@ -49,8 +49,9 @@ function tc_render_visioner_nav() {
 	<header class="tc-nav" id="tc-nav">
 		<div class="container tc-nav__inner">
 
-			<a class="tc-nav__brand" href="<?php echo esc_url( $home_url ); ?>">
-				<img class="tc-nav__brand-logo" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/visionone-logo.png' ); ?>" alt="VisionOne Access">
+			<a class="tc-nav__brand" href="<?php echo esc_url( $home_url ); ?>" aria-label="visionONE — home">
+				<img class="tc-nav__brand-logo" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/logo.png' ); ?>" alt="" aria-hidden="true">
+				<span class="tc-nav__brand-text">vision<span class="tc-nav__brand-text-accent">ONE</span></span>
 			</a>
 
 			<button class="tc-nav__toggle" type="button" aria-expanded="false"

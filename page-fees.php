@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Visioner — Fees & Batches
+ * Template Name: visionONE — Fees & Batches
  *
  * Fee plans (incl. GST), batch schedule, EMI/no-refund policy, Razorpay slot.
  * NOTE: intentionally omits techco_child_page_banner() — the .tc-hero
@@ -17,38 +17,61 @@ get_header();
  * the real numbers from the Visioner deck (slides: Course Fees / Bulk
  * Pricing, Batch Schedule & Timings, Payment Plans & No-Refund Policy)
  * before launch. All amounts already read as GST-inclusive totals.
+ *
+ * One card per program track (mirrors the exit points on page-program.php's
+ * "Choose your track" section), each mentor-led and priced on its own.
  */
 $tc_plans = array(
 	array(
-		'name'       => 'Self-Paced',
-		'tagline'    => 'Learn on your own schedule, full course access.',
-		'total'      => '₹ 39,999',
-		'base'       => '₹ 33,898',
-		'gst'        => '₹ 6,101 GST (18%)',
-		'features'   => array( 'Full curriculum access', 'Project files & assignments', 'Community access', 'Certificate of completion' ),
+		'name'       => 'Core Program',
+		'weeks'      => '10 weeks',
+		'tagline'    => 'Angular, .NET, SQL Server and a Mini-ERP capstone.',
+		'total'      => '₹ 58,999',
+		'base'       => '₹ 49,999',
+		'gst'        => '₹ 9,000 GST (18%)',
+		'features'   => array( 'Angular 18 + .NET 8 Web API', 'SQL Server data layer', 'Auth, security & REST', 'Mini-ERP build + capstone', 'Placement & TPO support' ),
 		'cta'        => 'Enrol Now',
 		'recommended'=> false,
 	),
 	array(
-		'name'       => 'Mentor-Led Cohort',
-		'tagline'    => 'Live classes with mentors, the most popular path.',
-		'total'      => '₹ 64,999',
-		'base'       => '₹ 55,084',
-		'gst'        => '₹ 9,915 GST (18%)',
-		'features'   => array( 'Everything in Self-Paced', 'Live mentor-led sessions', 'Placement & TPO support', '1:1 mentor check-ins', 'Capstone project review' ),
+		'name'       => 'Core + Cloud',
+		'weeks'      => '12 weeks',
+		'tagline'    => 'Everything in Core, deployed live on AWS & Azure.',
+		'total'      => '₹ 68,999',
+		'base'       => '₹ 58,474',
+		'gst'        => '₹ 10,525 GST (18%)',
+		'features'   => array( 'Everything in Core Program', 'AWS & Azure fundamentals', 'CI/CD pipelines', 'Live cloud deployment', 'Placement & TPO support' ),
+		'cta'        => 'Enrol Now',
+		'recommended'=> false,
+	),
+	array(
+		'name'       => 'Core + GenAI & Agentic AI',
+		'weeks'      => '13 weeks',
+		'tagline'    => 'Core plus LLM APIs and agentic workflows.',
+		'total'      => '₹ 74,999',
+		'base'       => '₹ 63,558',
+		'gst'        => '₹ 11,441 GST (18%)',
+		'features'   => array( 'Everything in Core Program', 'LLM APIs & prompt engineering', 'Agentic AI features', 'Real-world AI project', 'Placement & TPO support' ),
+		'cta'        => 'Enrol Now',
+		'recommended'=> false,
+	),
+	array(
+		'name'       => 'Complete Bundle',
+		'weeks'      => '14 weeks',
+		'tagline'    => 'Full stack + Cloud + GenAI + Agentic AI — our flagship track.',
+		'total'      => '₹ 84,999',
+		'base'       => '₹ 72,034',
+		'gst'        => '₹ 12,965 GST (18%)',
+		'features'   => array( 'Everything in every track above', 'Cloud, GenAI & Agentic AI combined', 'Capstone + portfolio review', '1:1 mentor check-ins', 'Placement & TPO support' ),
 		'cta'        => 'Enrol Now',
 		'recommended'=> true,
 	),
-	array(
-		'name'       => 'Bulk / College Batch',
-		'tagline'    => 'For colleges enrolling a group of students.',
-		'total'      => 'Custom pricing',
-		'base'       => 'Volume discount applied',
-		'gst'        => 'GST invoice provided',
-		'features'   => array( 'Everything in Mentor-Led', 'Dedicated batch & timing', 'TPO progress dashboard', 'On-campus orientation' ),
-		'cta'        => 'Talk to Us',
-		'recommended'=> false,
-	),
+);
+
+$tc_bulk_plan = array(
+	'name'     => 'Bulk / College Batch',
+	'tagline'  => 'Custom pricing for colleges enrolling a group of students, on any track above.',
+	'features' => array( 'Volume discount applied', 'Dedicated batch & timing', 'TPO progress dashboard', 'On-campus orientation', 'GST invoice provided' ),
 );
 
 $tc_batches = array(
@@ -114,15 +137,18 @@ $tc_faqs = array(
 
 		<!-- SECTION: Fee plans -->
 		<section class="tc-section tc-fees tc-reveal">
-			<span class="tc-eyebrow">Choose a plan</span>
-			<h2 class="tc-section__title">Fee Plans</h2>
-			<div class="row">
+			<span class="tc-eyebrow">Choose your track</span>
+			<h2 class="tc-section__title">Fee Plans — Per Program</h2>
+			<p class="tc-muted tc-fees__lead">Core is the 10-week spine — bolt on Cloud and AI, or take the
+				Complete Bundle. Every price below is final, GST-inclusive and mentor-led.</p>
+			<div class="row tc-fees__grid">
 				<?php foreach ( $tc_plans as $i => $plan ) : ?>
-				<div class="col-lg-4 tc-reveal" style="--delay: <?php echo $i * 120; ?>ms">
+				<div class="col-lg-3 col-md-6 tc-reveal" style="--delay: <?php echo $i * 120; ?>ms">
 					<div class="tc-price-card <?php echo $plan['recommended'] ? 'tc-price-card--recommended' : ''; ?>" data-tilt>
 						<?php if ( $plan['recommended'] ) : ?>
 							<span class="tc-price-card__tag">Most Popular</span>
 						<?php endif; ?>
+						<span class="tc-price-card__weeks"><?php echo esc_html( $plan['weeks'] ); ?></span>
 						<div class="tc-price-card__header">
 							<h3 class="tc-price-card__name"><?php echo esc_html( $plan['name'] ); ?></h3>
 							<p class="tc-price-card__tagline tc-muted"><?php echo esc_html( $plan['tagline'] ); ?></p>
@@ -139,7 +165,7 @@ $tc_faqs = array(
 							<?php endforeach; ?>
 						</ul>
 						<a class="tc-btn <?php echo $plan['recommended'] ? 'tc-btn--primary' : 'tc-btn--outline'; ?> tc-btn--block"
-						   href="<?php echo esc_url( $plan['cta'] === 'Talk to Us' ? tc_tpl_url( 'page-colleges.php', '/for-colleges/' ) : tc_tpl_url( 'page-apply.php', '/admissions-apply/' ) ); ?>">
+						   href="<?php echo esc_url( tc_tpl_url( 'page-apply.php', '/admissions-apply/' ) ); ?>">
 							<?php echo esc_html( $plan['cta'] ); ?>
 						</a>
 					</div>
@@ -151,6 +177,20 @@ $tc_faqs = array(
 				<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
 				All prices shown include 18% GST. No convenience fees, ever.
 			</p>
+
+			<!-- Bulk / college pricing banner -->
+			<div class="tc-bulk-banner tc-reveal">
+				<div class="tc-bulk-banner__text">
+					<h3><?php echo esc_html( $tc_bulk_plan['name'] ); ?></h3>
+					<p class="tc-muted"><?php echo esc_html( $tc_bulk_plan['tagline'] ); ?></p>
+					<ul class="tc-bulk-banner__features">
+						<?php foreach ( $tc_bulk_plan['features'] as $feature ) : ?>
+							<li><?php echo esc_html( $feature ); ?></li>
+						<?php endforeach; ?>
+					</ul>
+				</div>
+				<a class="tc-btn tc-btn--outline tc-bulk-banner__cta" href="<?php echo esc_url( tc_tpl_url( 'page-colleges.php', '/for-colleges/' ) ); ?>">Talk to Us</a>
+			</div>
 		</section>
 
 		<!-- SECTION: Batch schedule -->

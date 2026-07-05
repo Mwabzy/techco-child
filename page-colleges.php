@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Visioner — For Colleges (TPO)
+ * Template Name: visionONE — For Colleges (TPO)
  *
  * B2B/TPO page: bulk pricing, engagement models + TPO enquiry form.
  * Udemy-style hero with a sticky enquiry card alongside the content.
@@ -50,7 +50,7 @@ $tc_wa_tel = preg_replace( '/[^0-9+]/', '', $tc_org['wa'] );
                 <aside class="tc-side-card tc-reveal">
                     <div class="tc-side-card__head">
                         <span class="tc-side-card__kicker">For Colleges &amp; TPOs</span>
-                        <h3 class="tc-side-card__title">Partner with Visioner</h3>
+                        <h3 class="tc-side-card__title">Partner with visionONE</h3>
                         <p class="tc-side-card__sub">Bulk fullstack training delivered on campus or online.</p>
                     </div>
                     <div class="tc-side-card__body">
@@ -82,8 +82,8 @@ $tc_wa_tel = preg_replace( '/[^0-9+]/', '', $tc_org['wa'] );
                         <span class="tc-hero__crumbs-current">For Colleges &amp; TPOs</span>
                     </nav>
 
-                    <span class="tc-eyebrow">Visioner Training &middot; College &amp; Bulk</span>
-                    <h1 class="tc-hero__title">Train &amp; <span class="tc-gradient-text tc-gradient-text--freeze">place your students</span> with Visioner</h1>
+                    <span class="tc-eyebrow">visionONE Training &middot; College &amp; Bulk</span>
+                    <h1 class="tc-hero__title">Train &amp; <span class="tc-gradient-text tc-gradient-text--freeze">place your students</span> with visionONE</h1>
                     <p class="tc-hero__sub">Industry-grade fullstack training for your campus — delivered
                         on-site or online at transparent bulk rates, with placement reporting and
                         zero revenue-share.</p>
@@ -178,7 +178,7 @@ $tc_wa_tel = preg_replace( '/[^0-9+]/', '', $tc_org['wa'] );
                             <div class="tc-model tc-model--a">
                                 <span class="tc-model__tag">Model A</span>
                                 <h3 class="tc-model__name">Student-paid</h3>
-                                <p class="tc-muted">College hosts the batch; students pay Visioner directly
+                                <p class="tc-muted">College hosts the batch; students pay visionONE directly
                                     at the bulk rate. Zero cost to the institution.</p>
                             </div>
                         </div>

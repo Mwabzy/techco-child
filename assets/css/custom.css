@@ -541,12 +541,41 @@
 .tc-price-card__features { margin-bottom: 26px; flex-grow: 1; }
 .tc-price-card__features li { font-size: 14px; padding: 8px 0 8px 26px; }
 
+.tc-fees__lead { max-width: 640px; margin: -8px 0 32px; }
+
+.tc-price-card__weeks {
+    display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--tc-blue); background: rgba(36, 150, 237, .08);
+    border-radius: 999px; padding: 4px 12px; margin-bottom: 14px;
+}
+
 .tc-gst-note {
     display: flex; align-items: center; gap: 10px; justify-content: center;
     margin: 28px 0 0; padding: 14px 20px; font-size: 14px; color: var(--tc-muted);
     background: rgba(15, 23, 42, .03); border: 1px solid var(--tc-border); border-radius: 999px;
 }
 .tc-gst-note svg { color: var(--tc-blue); flex-shrink: 0; }
+
+.tc-bulk-banner {
+    display: flex; align-items: center; justify-content: space-between; gap: 32px;
+    margin: 24px 0 0; padding: 28px 32px; background: var(--tc-surface);
+    border: 1px solid var(--tc-border); border-radius: var(--tc-radius);
+}
+.tc-bulk-banner__text h3 { font-size: 18px; margin: 0 0 6px; color: var(--tc-heading); }
+.tc-bulk-banner__text p { margin: 0 0 10px; }
+.tc-bulk-banner__features { display: flex; flex-wrap: wrap; gap: 8px 18px; list-style: none; margin: 0; padding: 0; }
+.tc-bulk-banner__features li {
+    font-size: 13px; color: var(--tc-muted); padding-left: 18px; position: relative;
+}
+.tc-bulk-banner__features li::before {
+    content: ''; position: absolute; left: 0; top: 7px; width: 6px; height: 6px;
+    border-radius: 50%; background: var(--tc-orange);
+}
+.tc-bulk-banner__cta { flex-shrink: 0; }
+@media (max-width: 767px) {
+    .tc-bulk-banner { flex-direction: column; align-items: flex-start; padding: 24px; }
+    .tc-bulk-banner__cta { width: 100%; text-align: center; }
+}
 
 /* -----------------------------------------------------------
    Fees — EMI grid + refund card
@@ -920,7 +949,7 @@
     .tc-enrol-card, .tc-side-card { position: static; max-width: 480px; }
     .tc-eligibility-grid { grid-template-columns: 1fr; }
     .tc-apply-section .col-lg-5 { margin-top: 32px; }
-    .tc-fees .col-lg-4 { margin-bottom: 24px; }
+    .tc-fees__grid [class^="col-"] { margin-bottom: 24px; }
     .tc-emi-section .col-lg-5 { margin-top: 24px; }
 }
 @media (max-width: 767px) {
@@ -1603,20 +1632,35 @@ html { scroll-behavior: smooth; }
     min-height: 64px;
 }
 
-/* Brand */
+/* Brand — the blue "V" mark (logo.png, transparent PNG) sits beside a white
+   "visionONE" wordmark rendered as text. The icon keeps its blue gradient and
+   reads cleanly on the dark navbar; the text carries the name at any size. */
 .tc-nav__brand {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     text-decoration: none;
-    font-weight: 800;
-    letter-spacing: .2px;
-    color: #fff;
 }
 .tc-nav__brand-logo {
     display: block;
-    height: 32px;
-    width: auto;
+    height: 24px !important;   /* beat parent theme's global `img { height:auto }` */
+    width: auto !important;
+    max-height: 24px;
+    flex: 0 0 auto;
+}
+.tc-nav__brand-text {
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 1;
+    letter-spacing: -.2px;
+    color: #fff;
+}
+.tc-nav__brand-text-accent {
+    background: linear-gradient(135deg, #3AA0FF, #1C75BC);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #2496ED;   /* fallback for browsers without background-clip:text */
 }
 
 /* Links */
@@ -1674,6 +1718,8 @@ html { scroll-behavior: smooth; }
 
 @media (max-width: 991px) {
     .tc-nav__toggle { display: flex; }
+    .tc-nav__brand-logo { height: 22px !important; max-height: 22px; }
+    .tc-nav__brand-text { font-size: 16px; }
     .tc-nav__menu {
         position: absolute;
         left: 0; right: 0; top: 100%;
