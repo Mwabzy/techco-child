@@ -56,63 +56,87 @@ $tc_tests = array(
 <div id="primary" class="content-area page-content-area tc-page tc-home pt-120 pb-120">
     <div class="container">
 
-        <!-- SECTION: Hero -->
-        <section class="tc-hero tc-home__hero">
+        <!-- SECTION: Hero (split — message left, visual right) -->
+        <section class="tc-hero tc-home__hero tc-home__hero--split">
             <div class="row align-items-center">
                 <div class="col-lg-7">
                     <span class="tc-eyebrow">VisionOne &middot; Fullstack Developer Training</span>
-                    <h1 class="tc-hero__title">Become a <span
-                            class="tc-gradient-text tc-gradient-text--freeze">job-ready fullstack
-                            developer</span> in 14 weeks</h1>
+                    <h1 class="tc-hero__title">Up Your <span
+                            class="tc-gradient-text tc-gradient-text--freeze">Skills</span> To Launch Your <span
+                            class="tc-gradient-text tc-gradient-text--freeze">Dev Career</span></h1>
                     <p class="tc-hero__sub">Learn modern web development by building real projects, mentored
-                        by working engineers — from fundamentals to a deployed MERN app, backed by placement support.
-                    </p>
+                        by working engineers — from fundamentals to a deployed MERN app in 14 weeks, backed by
+                        placement support.</p>
 
                     <div class="tc-home__hero-actions">
                         <a class="tc-btn tc-btn--primary" data-magnetic
-                            href="<?php echo esc_url(tc_tpl_url('page-apply.php', '/admissions-apply/')); ?>">Apply
-                            Now</a>
+                            href="<?php echo esc_url(tc_tpl_url('page-apply.php', '/admissions-apply/')); ?>">Get
+                            Started</a>
                         <a class="tc-btn tc-btn--ghost"
                             href="<?php echo esc_url(tc_tpl_url('page-program.php', '/program-curriculum/')); ?>">Explore
                             the curriculum</a>
                     </div>
 
-                    <!-- CLAUDE CODE: hero stats are PLACEHOLDERS — swap for real figures. -->
-                    <div class="tc-hero__stats">
-                        <div class="tc-stat">
-                            <strong class="tc-stat__num" data-animate>4.8</strong>
-                            <span class="tc-stars" aria-hidden="true">★★★★★</span>
-                            <span class="tc-stat__label">learner rating</span>
-                        </div>
-                        <div class="tc-stat tc-stat--divider">
+                    <!-- Feature trio (mirrors reference's icon row) -->
+                    <ul class="tc-herofeat">
+                        <li><span class="tc-herofeat__ic tc-herofeat__ic--blue"><?php echo tc_icon('sliders', 20); ?></span>Project-first learning</li>
+                        <li><span class="tc-herofeat__ic tc-herofeat__ic--orange"><?php echo tc_icon('award', 20); ?></span>Industry mentors</li>
+                        <li><span class="tc-herofeat__ic tc-herofeat__ic--blue"><?php echo tc_icon('chart', 20); ?></span>Placement support</li>
+                    </ul>
+
+                    <!-- Collaboration / trust row (mirrors reference's "250+ Collaboration" + logos) -->
+                    <div class="tc-herotrust">
+                        <div class="tc-herotrust__stat">
                             <strong class="tc-stat__num" data-animate>12,000+</strong>
-                            <span class="tc-stat__label">learners trained</span>
+                            <span class="tc-stat__label">Learners trained</span>
                         </div>
-                        <div class="tc-stat tc-stat--divider">
-                            <strong class="tc-stat__num" data-animate>14</strong>
-                            <span class="tc-stat__label">weeks</span>
+                        <div class="tc-herotrust__logos">
+                            <?php foreach (array('Partner Colleges', 'Hiring Partners', 'TPO Cells') as $tname): ?>
+                                <span class="tc-herotrust__chip"><?php echo tc_icon('award', 16); ?><?php echo esc_html($tname); ?></span>
+                            <?php endforeach; ?>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-lg-5">
-                    <!-- Next-cohort highlight card -->
-                    <aside class="tc-home__herocard" data-tilt>
-                        <span class="tc-home__herocard-title"><b>Admissions open</b></span>
-                        <h3 class="tc-home__herocard-title">Next cohort</h3>
-                        <!-- CLAUDE CODE: set the real upcoming batch date. -->
-                        <p class="tc-home__herocard-date">Starting <strong>July 6, 2026</strong></p>
-                        <ul class="tc-home__herocard-list">
-                            <li><?php echo tc_icon('calendar', 18); ?> 14 weeks · weekday &amp; weekend tracks</li>
-                            <li><?php echo tc_icon('globe', 18); ?> Online / hybrid · English &amp; Hindi</li>
-                            <li><?php echo tc_icon('award', 18); ?> Certificate + placement support</li>
-                            <li><?php echo tc_icon('receipt', 18); ?> EMI &amp; No-Cost EMI available</li>
-                        </ul>
-                        <a class="tc-btn tc-btn--accent tc-btn--block tc-btn--glow"
-                            href="<?php echo esc_url(tc_tpl_url('page-apply.php', '/admissions-apply/') . '#tc-apply-form-anchor'); ?>">Reserve
-                            your seat</a>
-                        <p class="tc-home__herocard-note">Seats are limited each cohort.</p>
-                    </aside>
+                    <!-- Visual: photo-in-disc + floating stat cards + concentric rings -->
+                    <div class="tc-herovis" data-tilt>
+                        <span class="tc-herovis__ring tc-herovis__ring--1" aria-hidden="true"></span>
+                        <span class="tc-herovis__ring tc-herovis__ring--2" aria-hidden="true"></span>
+
+                        <div class="tc-herovis__disc">
+                            <?php
+                            /* CLAUDE CODE: drop a cut-out student photo (transparent PNG, ~700px)
+                               at assets/images/hero-student.png and it replaces the monogram below. */
+                            $tc_hero_img = get_stylesheet_directory() . '/assets/images/hero-student.png';
+                            if (file_exists($tc_hero_img)):
+                                ?>
+                                <img class="tc-herovis__photo"
+                                    src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/images/hero-student.png'); ?>"
+                                    alt="A VisionOne fullstack student" loading="eager" decoding="async" />
+                            <?php else: ?>
+                                <span class="tc-herovis__mono" aria-hidden="true">&lt;/&gt;</span>
+                            <?php endif; ?>
+                        </div>
+
+                        <!-- Floating card: ring progress (top-right) -->
+                        <div class="tc-herofloat tc-herofloat--tr" style="--delay: 620ms">
+                            <span class="tc-herofloat__ring" style="--pct: 92"><b>4.8<i>★</i></b></span>
+                            <span class="tc-herofloat__meta"><strong>Rated</strong>by 12k+ learners</span>
+                        </div>
+
+                        <!-- Floating card: lessons (left) -->
+                        <div class="tc-herofloat tc-herofloat--l" style="--delay: 760ms">
+                            <span class="tc-herofloat__ic tc-herofloat__ic--blue"><?php echo tc_icon('play', 20); ?></span>
+                            <span class="tc-herofloat__meta"><strong>100+</strong>Live lessons</span>
+                        </div>
+
+                        <!-- Floating card: mentors (bottom-right) -->
+                        <div class="tc-herofloat tc-herofloat--br" style="--delay: 900ms">
+                            <span class="tc-herofloat__ic tc-herofloat__ic--orange"><?php echo tc_icon('award', 20); ?></span>
+                            <span class="tc-herofloat__meta"><strong>50+</strong>Industry mentors</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
