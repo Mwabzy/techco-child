@@ -191,9 +191,8 @@ $tc_faqs = array(
 
                         <div class="tc-brochure" data-state="locked">
                             <p class="tc-brochure__locked">📄 Submit the form to unlock the brochure download.</p>
-                            <!-- CLAUDE CODE / KUWAYA: upload the brochure to Media, put its URL in href. -->
-                            <a class="tc-btn tc-btn--primary tc-brochure__link" href="#BROCHURE_PDF_URL" download hidden>
-                                Download Brochure (PDF)
+                            <a class="tc-btn tc-btn--primary tc-brochure__link" href="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/files/Training_Brochure.pptx' ); ?>" download hidden>
+                                Download Brochure (PPTX)
                             </a>
                         </div>
                     </aside>

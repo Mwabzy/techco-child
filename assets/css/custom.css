@@ -22,10 +22,36 @@
     --tc-muted-on-dark: #AFC4E8;   /* sub-text inside dark bands */
     --tc-text: #3b3b3b;            /* body text on bg */
     --tc-heading: #101A3D;            /* headings on bg */
-    --tc-border: rgba(15, 23, 42, .08);
-    --tc-border-strong: rgba(15, 23, 42, .14);
-    --tc-radius: 14px;
-    --tc-shadow: 0 10px 40px rgba(15, 23, 42, .08);
+    --tc-border: rgba(15, 23, 42, .07);
+    --tc-border-strong: rgba(15, 23, 42, .13);
+
+    /* Radius scale — softer, consistent card language */
+    --tc-radius-sm: 10px;
+    --tc-radius: 16px;              /* default card radius (kept name; softened) */
+    --tc-radius-lg: 24px;
+
+    /* Elevation scale — layered, cool-tinted, low-opacity depth (not one flat drop).
+       --tc-shadow keeps its name so every existing usage softens automatically. */
+    --tc-shadow-sm: 0 1px 2px rgba(16, 23, 52, .04), 0 2px 8px rgba(16, 23, 52, .05);
+    --tc-shadow-md: 0 2px 6px rgba(16, 23, 52, .04), 0 14px 34px -10px rgba(16, 23, 52, .12);
+    --tc-shadow-lg: 0 6px 18px rgba(16, 23, 52, .06), 0 36px 70px -20px rgba(16, 23, 52, .20);
+    --tc-shadow: var(--tc-shadow-md);
+
+    /* Signature easing — one curve for the whole site's choreography */
+    --tc-ease: cubic-bezier(.22, 1, .36, 1);
+
+    /* Spacing scale — 8pt rhythm */
+    --tc-space-1: 4px;   --tc-space-2: 8px;   --tc-space-3: 12px;  --tc-space-4: 16px;
+    --tc-space-5: 24px;  --tc-space-6: 32px;  --tc-space-7: 48px;  --tc-space-8: 64px;
+    --tc-space-9: 80px;  --tc-space-10: 96px; --tc-space-11: 120px; --tc-space-12: 160px;
+
+    /* Fluid type scale — a proper modular ladder does the hierarchy work */
+    --tc-fs-display: clamp(40px, 6vw, 74px);
+    --tc-fs-h1: clamp(32px, 4.4vw, 54px);
+    --tc-fs-h2: clamp(26px, 3vw, 40px);
+    --tc-fs-h3: clamp(19px, 1.3vw, 22px);
+    --tc-fs-body: 17px;
+    --tc-fs-eyebrow: 13px;
 
     /* Neutral scale — cool light neutrals matching the navy/blue identity,
        plus tonal steps used for section banding. */
@@ -45,13 +71,28 @@
     background: var(--tc-bg-0);
     color: var(--tc-text);
     font-family: var(--tc-font);
+    font-size: var(--tc-fs-body);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-optical-sizing: auto;
+    font-feature-settings: "cv11", "ss01";
+    text-rendering: optimizeLegibility;
 }
 
 .tc-page h1, .tc-page h2, .tc-page h3, .tc-page h4 {
     color: var(--tc-heading);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
 }
 .tc-page a:not(.tc-btn) { color: var(--tc-blue); }
+
+/* Tabular, aligned figures wherever numbers carry meaning (stats, prices). */
+.tc-stat__num, .tc-statband__num, .tc-enrol-card__price-now,
+.tc-price-card__price-amount, .tc-emi-card__amount, .tc-pay-summary__row {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum", "cv11";
+}
 
 /* Parent `.container` is 1320px with only 15px gutters — too tight for our
    full-bleed sections on laptop widths. Give Visioner pages more breathing room. */
@@ -64,17 +105,18 @@
     .tc-page > .container { padding-left: 18px; padding-right: 18px; }
 }
 
-.tc-section { margin-bottom: 104px; }
+.tc-section { margin-bottom: clamp(80px, 9vw, 128px); }
 .tc-section:last-child { margin-bottom: 0; }
 .tc-section__title {
-    font-weight: 700; margin-bottom: 28px; position: relative;
-    padding-bottom: 16px; font-size: clamp(26px, 3vw, 38px);
-    letter-spacing: -0.025em; line-height: 1.15;
+    font-weight: 700; margin-bottom: 32px; position: relative;
+    padding-bottom: 18px; font-size: var(--tc-fs-h2);
+    letter-spacing: -0.035em; line-height: 1.12;
 }
+/* Single-accent hairline marker — restrained, replaces the two-tone gradient bar */
 .tc-section__title::after {
     content: ""; position: absolute; left: 0; bottom: 0;
-    width: 64px; height: 4px; border-radius: 4px;
-    background: linear-gradient(90deg, var(--tc-blue), var(--tc-orange));
+    width: 40px; height: 3px; border-radius: 3px;
+    background: var(--tc-blue);
 }
 .tc-muted { color: var(--tc-muted); }
 .tc-lead { font-size: 19px; line-height: 1.6; color: var(--tc-text); margin-bottom: 18px; }
@@ -87,7 +129,7 @@
     background: var(--tc-bg-1);
     margin-left: -28px;
     margin-right: -28px;
-    padding: 80px 28px;
+    padding: clamp(64px, 8vw, 104px) 28px;
     border-radius: 0;
 }
 .tc-section--dark {
@@ -95,7 +137,7 @@
     color: #fff;
     margin-left: -28px;
     margin-right: -28px;
-    padding: 80px 28px;
+    padding: clamp(64px, 8vw, 104px) 28px;
     border-radius: 0;
 }
 @media (max-width: 575px) {
@@ -118,10 +160,12 @@
     z-index: 0;
 }
 .tc-page .tc-texture-dots::before {
-    background-image: radial-gradient(circle, rgba(15,23,42,.06) 1px, transparent 1px);
+    background-image: radial-gradient(circle, rgba(15,23,42,.025) 1px, transparent 1px);
+    background-size: 30px 30px;
 }
 .tc-section--dark.tc-texture-dots::before {
-    background-image: radial-gradient(circle, rgba(255,255,255,.08) 1px, transparent 1px);
+    background-image: radial-gradient(circle, rgba(255,255,255,.05) 1px, transparent 1px);
+    background-size: 30px 30px;
 }
 
 /* Inline SVG icons (tc_icon) — inherit colour from their context */
@@ -130,20 +174,29 @@
 .tc-brandico { display: block; }
 .tc-placeholder-note { color: var(--tc-muted); font-style: italic; }
 .tc-eyebrow {
-    display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .14em;
-    text-transform: uppercase; color: var(--tc-orange); margin-bottom: 12px;
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: var(--tc-fs-eyebrow); font-weight: 700; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--tc-blue); margin-bottom: 14px;
 }
+/* A short lead-in rule gives the eyebrow an editorial, premium anchor. */
+.tc-eyebrow::before {
+    content: ""; width: 22px; height: 2px; border-radius: 2px;
+    background: currentColor; opacity: .55;
+}
+.tc-section--dark .tc-eyebrow { color: #7FC4FF; }
 
 /* -----------------------------------------------------------
    Buttons
    ----------------------------------------------------------- */
 .tc-btn {
-    display: inline-block; padding: 13px 30px; border-radius: 999px;
-    font-weight: 700; text-decoration: none; transition: .2s ease; cursor: pointer;
+    display: inline-block; padding: 14px 32px; border-radius: 999px;
+    font-weight: 700; text-decoration: none; cursor: pointer;
     border: 2px solid transparent; line-height: 1.2;
+    transition: transform .35s var(--tc-ease), background .25s var(--tc-ease),
+                box-shadow .35s var(--tc-ease), color .25s var(--tc-ease), border-color .25s var(--tc-ease);
 }
-.tc-btn.tc-btn--primary { background: var(--tc-blue); color: #fff; box-shadow: 0 4px 12px rgba(36, 150, 237, .25); }
-.tc-btn.tc-btn--primary:hover { background: #1C75BC; color: #fff; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(36, 150, 237, .3); }
+.tc-btn.tc-btn--primary { background: var(--tc-blue); color: #fff; box-shadow: 0 6px 18px -4px rgba(36, 150, 237, .45); }
+.tc-btn.tc-btn--primary:hover { background: #1C75BC; color: #fff; transform: translateY(-2px); box-shadow: 0 12px 28px -6px rgba(36, 150, 237, .55); }
 .tc-btn.tc-btn--accent { background: var(--tc-orange); color: #fff; box-shadow: 0 4px 12px rgba(95, 193, 240, .25); }
 .tc-btn.tc-btn--accent:hover { background: #2E9FD6; color: #fff; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(95, 193, 240, .3); }
 .tc-btn.tc-btn--outline { border-color: var(--tc-blue); color: var(--tc-blue); background: transparent; }
@@ -1034,13 +1087,17 @@
    ----------------------------------------------------------- */
 .tc-reveal {
     opacity: 0;
-    transform: translateY(32px);
-    transition: opacity .7s cubic-bezier(.22, 1, .36, 1),
-                transform .7s cubic-bezier(.22, 1, .36, 1);
+    transform: translateY(26px);
+    filter: blur(4px);
+    transition: opacity .8s var(--tc-ease),
+                transform .8s var(--tc-ease),
+                filter .8s var(--tc-ease);
+    will-change: opacity, transform;
 }
 .tc-reveal.tc-revealed {
     opacity: 1;
     transform: translateY(0);
+    filter: none;
 }
 /* Stagger children via custom property */
 .tc-reveal[style*="--delay"] {
@@ -1052,60 +1109,91 @@
    ----------------------------------------------------------- */
 .tc-gradient-text {
     background: linear-gradient(
-        90deg,
-        #fff 0%,
-        var(--tc-blue) 30%,
-        var(--tc-orange) 60%,
-        #fff 100%
+        100deg,
+        var(--tc-heading) 0%,
+        var(--tc-blue) 50%,
+        var(--tc-orange-ink) 100%
     );
-    background-size: 200% auto;
+    background-size: 220% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: tc-shimmer 6s linear infinite;
+    animation: tc-shimmer 8s linear infinite;
 }
 
-/* Homepage headline: sweep once, decelerate, hold a blue/orange blend */
+/* Homepage headline: a single luminous sweep that decelerates and holds —
+   the signature hero moment, then perfectly still. */
 @keyframes tc-shimmer-freeze {
-    0%   { background-position: -200% center; }
-    100% { background-position: 45% center; }
+    0%   { background-position: 160% center; }
+    100% { background-position: 40% center; }
 }
 .tc-gradient-text--freeze {
-    animation: tc-shimmer-freeze 3.4s cubic-bezier(.22, 1, .36, 1) 1 forwards;
+    animation: tc-shimmer-freeze 2.6s var(--tc-ease) 1 forwards;
 }
 
 /* -----------------------------------------------------------
-   Ambient glow orbs (decorative)
+   Ambient light — ONE still, soft cyan aurora per "moment".
+   Replaces the twin drifting orbs; kept as a class so legacy
+   markup degrades gracefully (now static + very subtle).
    ----------------------------------------------------------- */
 .tc-glow-orb {
     position: absolute;
     border-radius: 50%;
     pointer-events: none;
-    filter: blur(80px);
+    filter: blur(90px);
     z-index: 0;
-    animation: tc-glow-drift 12s ease-in-out infinite;
+    opacity: .5;
 }
-.tc-glow-orb--blue {
-    width: 400px; height: 400px;
-    background: rgba(36, 150, 237, .12);
-}
-.tc-glow-orb--orange {
-    width: 300px; height: 300px;
-    background: rgba(95, 193, 240, .08);
-}
-/* Hero orbs positioning */
+.tc-glow-orb--blue  { width: 420px; height: 420px; background: rgba(36, 150, 237, .10); }
+.tc-glow-orb--orange { width: 320px; height: 320px; background: rgba(95, 193, 240, .06); }
+
+/* Hero: a single fixed aurora bleeding in from the top-right — no divs needed. */
 .tc-hero { position: relative; overflow: visible; }
-.tc-hero .tc-glow-orb--blue  { top: -80px; left: -120px; }
-.tc-hero .tc-glow-orb--orange { top: 40px; right: -80px; animation-delay: -4s; }
-
-/* CTA orbs positioning */
+.tc-home__hero::before {
+    content: "";
+    position: absolute;
+    top: -140px; right: -120px;
+    width: 560px; height: 560px; max-width: 70vw;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 50%, rgba(36, 150, 237, .16), transparent 68%);
+    filter: blur(20px);
+    pointer-events: none;
+    z-index: 0;
+}
 .tc-cta-band { position: relative; overflow: hidden; }
-.tc-cta-band .tc-glow-orb--blue  { bottom: -60px; left: 10%; }
-.tc-cta-band .tc-glow-orb--orange { top: -40px; right: 15%; animation-delay: -6s; }
 
-/* Ensure content sits above orbs */
+/* Content sits above any ambient layer */
 .tc-hero > *:not(.tc-glow-orb),
 .tc-cta-band > *:not(.tc-glow-orb) { position: relative; z-index: 1; }
+
+/* ------------------------------------------------------------------
+   Signature hero entrance — a choreographed, staggered rise on load.
+   Keyed off .tc-loaded (JS adds it on DOMContentLoaded) so it runs
+   once, above the fold, without waiting for scroll.
+   ------------------------------------------------------------------ */
+@keyframes tc-hero-rise {
+    from { opacity: 0; transform: translateY(22px); filter: blur(6px); }
+    to   { opacity: 1; transform: none; filter: none; }
+}
+.tc-home__hero .col-lg-7 > *,
+.tc-home__hero .col-lg-5 > * {
+    opacity: 0;
+}
+.tc-page.tc-loaded .tc-home__hero .col-lg-7 > *,
+.tc-page.tc-loaded .tc-home__hero .col-lg-5 > * {
+    animation: tc-hero-rise .9s var(--tc-ease) both;
+}
+.tc-page.tc-loaded .tc-home__hero .col-lg-7 > *:nth-child(1) { animation-delay: .05s; }
+.tc-page.tc-loaded .tc-home__hero .col-lg-7 > *:nth-child(2) { animation-delay: .14s; }
+.tc-page.tc-loaded .tc-home__hero .col-lg-7 > *:nth-child(3) { animation-delay: .23s; }
+.tc-page.tc-loaded .tc-home__hero .col-lg-7 > *:nth-child(4) { animation-delay: .32s; }
+.tc-page.tc-loaded .tc-home__hero .col-lg-7 > *:nth-child(5) { animation-delay: .41s; }
+.tc-page.tc-loaded .tc-home__hero .col-lg-5 > * { animation-delay: .5s; }
+@media (prefers-reduced-motion: reduce) {
+    .tc-home__hero .col-lg-7 > *,
+    .tc-home__hero .col-lg-5 > * { opacity: 1 !important; animation: none !important; }
+    .tc-home__hero::before { display: none; }
+}
 
 /* -----------------------------------------------------------
    Premium pricing cards — glassmorphism + tilt
@@ -1339,21 +1427,18 @@
 }
 
 /* -----------------------------------------------------------
-   Premium CTA band — animated mesh gradient
+   CTA band — a calm, confident "dark moment" (no looping mesh/pulse).
+   One deep navy field with a single soft cyan aurora fixed in place.
    ----------------------------------------------------------- */
 .tc-cta-band {
     background:
-        linear-gradient(-45deg, #0A0E2E, #10173D, #1C75BC, #2496ED, #070B22);
-    background-size: 300% 300%;
-    animation: tc-mesh-shift 12s ease infinite;
-}
-
-/* Pulsing CTA button */
-.tc-cta-band .tc-btn--primary {
-    animation: tc-pulse-ring 2.5s ease-out infinite;
-}
-.tc-cta-band .tc-btn--primary:hover {
-    animation: none;
+        radial-gradient(120% 140% at 82% -10%, rgba(36, 150, 237, .22), transparent 55%),
+        radial-gradient(90% 120% at 8% 120%, rgba(28, 117, 188, .20), transparent 55%),
+        linear-gradient(135deg, #0A0E2E 0%, #10173D 55%, #070B22 100%);
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: var(--tc-radius-lg);
+    box-shadow: var(--tc-shadow-lg);
+    padding: clamp(48px, 6vw, 80px) clamp(24px, 4vw, 56px);
 }
 
 /* -----------------------------------------------------------
@@ -1768,5 +1853,467 @@ html { scroll-behavior: smooth; }
 }
 .tc-phone-wrap input.ff-number-only {
     padding-left: 58px !important;
+}
+
+/* ===========================================================
+   PAYMENT PAGE — page-payment.php
+   =========================================================== */
+
+/* Standalone no-refund card (after EMI section was removed) */
+.tc-refund-section { margin-bottom: 104px; }
+.tc-refund-card--standalone {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    background: var(--tc-surface);
+    border: 1.5px solid var(--tc-border);
+    border-left: 4px solid #e8a020;
+    border-radius: var(--tc-radius);
+    padding: 28px 32px;
+    box-shadow: var(--tc-shadow);
+}
+.tc-refund-card--standalone .tc-refund-card__icon {
+    flex-shrink: 0;
+    width: 44px; height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(232, 160, 32, .12);
+    border-radius: 50%;
+    color: #c87f10;
+}
+.tc-refund-card--standalone .tc-refund-card__body h3 {
+    margin: 0 0 8px;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--tc-heading);
+}
+.tc-refund-card--standalone .tc-refund-card__body p { margin: 0; font-size: 14px; }
+@media (max-width: 575px) {
+    .tc-refund-card--standalone { flex-direction: column; padding: 20px; }
+}
+
+/* Payment layout */
+.tc-pay-layout { gap: 0; }
+
+/* Plan selector — left column */
+.tc-plan-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.tc-plan-tab {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 100%;
+    background: var(--tc-surface);
+    border: 1.5px solid var(--tc-border);
+    border-radius: var(--tc-radius);
+    padding: 18px 20px;
+    cursor: pointer;
+    text-align: left;
+    position: relative;
+    transition: border-color .2s, box-shadow .2s, background .2s;
+}
+.tc-plan-tab:hover {
+    border-color: var(--tc-blue);
+    box-shadow: 0 4px 20px rgba(36,150,237,.10);
+}
+.tc-plan-tab--active {
+    border-color: var(--tc-blue);
+    background: var(--tc-blue-soft);
+    box-shadow: 0 4px 20px rgba(36,150,237,.12);
+}
+.tc-plan-tab__name { font-weight: 700; font-size: 15px; color: var(--tc-heading); }
+.tc-plan-tab__weeks { font-size: 12px; color: var(--tc-muted); }
+.tc-plan-tab__price {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--tc-blue);
+    margin-top: 4px;
+}
+.tc-plan-tab__price small {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--tc-muted);
+}
+.tc-plan-tab__arrow {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--tc-muted);
+    transition: color .2s, transform .2s;
+}
+.tc-plan-tab--active .tc-plan-tab__arrow { color: var(--tc-blue); transform: translateY(-50%) rotate(90deg); }
+
+/* Pay panels — right column */
+.tc-pay-panel { display: none; }
+.tc-pay-panel--active { display: block; padding-left: 32px; }
+
+/* Fee summary card */
+.tc-pay-summary {
+    background: var(--tc-surface);
+    border: 1.5px solid var(--tc-border);
+    border-radius: var(--tc-radius);
+    padding: 28px 32px;
+    box-shadow: var(--tc-shadow);
+    margin-bottom: 20px;
+}
+.tc-pay-summary__header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+.tc-pay-summary__header h3 { margin: 0; font-size: 20px; font-weight: 700; }
+.tc-pay-summary__weeks {
+    font-size: 13px;
+    color: var(--tc-muted);
+    background: var(--tc-bg-1);
+    padding: 2px 10px;
+    border-radius: 20px;
+}
+.tc-pay-summary__features { margin-bottom: 24px; }
+.tc-pay-summary__breakdown {
+    border-top: 1.5px solid var(--tc-border);
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.tc-pay-summary__row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    color: var(--tc-text);
+}
+.tc-pay-summary__row--total {
+    border-top: 1.5px solid var(--tc-border);
+    padding-top: 10px;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--tc-heading);
+}
+
+/* No-refund notice inside pay panel */
+.tc-pay-refund-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: rgba(232, 160, 32, .08);
+    border: 1px solid rgba(232, 160, 32, .25);
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 14px;
+    color: var(--tc-text);
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+.tc-pay-refund-notice svg { flex-shrink: 0; color: #c87f10; margin-top: 2px; }
+.tc-pay-refund-notice p  { margin: 0; }
+.tc-pay-refund-notice a  { color: var(--tc-blue); }
+
+/* Razorpay slot on pay page */
+.tc-razorpay-slot--pay-page {
+    background: var(--tc-surface);
+    border: 1.5px dashed var(--tc-border-strong);
+    border-radius: var(--tc-radius);
+    padding: 28px 32px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Trust badges row on pay page */
+.tc-trust-badges--pay { margin-top: 16px; }
+
+@media (max-width: 991px) {
+    .tc-pay-panel--active { padding-left: 0; padding-top: 24px; }
+}
+@media (max-width: 575px) {
+    .tc-pay-summary { padding: 20px; }
+    .tc-razorpay-slot--pay-page { padding: 20px; }
+}
+
+/* ===========================================================
+   STUDY MATERIALS PORTAL — page-resources.php
+   =========================================================== */
+
+/* Lock screen */
+.tc-locked-screen {
+    display: flex;
+    justify-content: center;
+    padding: 40px 0 80px;
+}
+.tc-lock-card {
+    max-width: 520px;
+    width: 100%;
+    text-align: center;
+    background: var(--tc-surface);
+    border: 1.5px solid var(--tc-border);
+    border-radius: calc(var(--tc-radius) + 4px);
+    padding: 52px 44px;
+    box-shadow: 0 16px 56px rgba(15, 23, 42, .10);
+}
+.tc-lock-card__icon {
+    width: 80px; height: 80px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--tc-blue-soft);
+    border-radius: 50%;
+    margin: 0 auto 24px;
+    color: var(--tc-blue);
+}
+.tc-lock-card__title {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--tc-heading);
+    margin-bottom: 12px;
+}
+.tc-lock-card__desc {
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 28px;
+}
+.tc-lock-card__login-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+.tc-lock-card__help {
+    font-size: 13px;
+    margin: 0;
+}
+.tc-lock-card__help a { color: var(--tc-blue); }
+@media (max-width: 575px) {
+    .tc-lock-card { padding: 36px 24px; }
+}
+
+/* Materials grid */
+.tc-mat-module { margin-bottom: 80px; }
+.tc-mat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* Material card */
+.tc-mat-card {
+    background: var(--tc-surface);
+    border: 1.5px solid var(--tc-border);
+    border-radius: var(--tc-radius);
+    padding: 24px;
+    box-shadow: var(--tc-shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    transition: border-color .2s, box-shadow .2s, transform .2s;
+}
+.tc-mat-card:hover {
+    border-color: var(--tc-blue);
+    box-shadow: 0 8px 32px rgba(36,150,237,.12);
+    transform: translateY(-3px);
+}
+.tc-mat-card__top { display: flex; flex-direction: column; gap: 8px; }
+.tc-mat-card__title { font-size: 16px; font-weight: 700; color: var(--tc-heading); margin: 0; }
+.tc-mat-card__desc  { font-size: 13px; margin: 0; line-height: 1.5; }
+.tc-mat-card__foot  { }
+.tc-mat-card__coming-soon {
+    font-size: 13px;
+    color: var(--tc-muted);
+    font-style: italic;
+}
+
+/* Small download button */
+.tc-btn--sm {
+    padding: 8px 18px;
+    font-size: 13px;
+    gap: 6px;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Material type badges */
+.tc-mat-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    width: fit-content;
+}
+.tc-mat-badge--pdf    { background: rgba(220, 60, 60, .12); color: #b53030; }
+.tc-mat-badge--zip    { background: rgba(120, 80, 220, .12); color: #6333c0; }
+.tc-mat-badge--video  { background: rgba(36, 150, 237, .12); color: var(--tc-blue); }
+.tc-mat-badge--slides { background: rgba(36, 180, 120, .12); color: #1a8a5a; }
+
+/* ═══════════════════════════════════════════════════════════════
+   HOME — FLAGSHIP REFINEMENTS (Phase C)
+   The homepage is the reference standard: bigger display type,
+   one glass "moment" card, cinematic dark bands, monochrome-until-
+   -hover tech tiles, and a deliberate banding rhythm.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Display-scale hero headline — the page's single loudest voice. */
+.tc-home__hero .tc-hero__title {
+    font-size: clamp(38px, 5.4vw, 68px);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    margin-bottom: 22px;
+}
+.tc-home__hero .tc-hero__sub {
+    font-size: clamp(17px, 1.4vw, 20px);
+    color: var(--tc-muted);
+    max-width: 560px;
+    line-height: 1.6;
+}
+.tc-home__hero-actions { margin-top: 30px; gap: 16px; }
+
+/* Hero stats — quieter labels, confident tabular figures, hairline rules. */
+.tc-home__hero .tc-hero__stats { margin-top: 40px; gap: 0; }
+.tc-home__hero .tc-stat { padding: 0 28px; }
+.tc-home__hero .tc-stat:first-child { padding-left: 0; }
+.tc-home__hero .tc-stat--divider { border-left: 1px solid var(--tc-border); }
+.tc-home__hero .tc-stat__num { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; }
+.tc-home__hero .tc-stat__label {
+    font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--tc-muted); margin-top: 6px;
+}
+
+/* Cohort card — the single glass + tilt + cursor-glow "moment". */
+.tc-home__herocard {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.82));
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--tc-border-strong);
+    border-radius: var(--tc-radius-lg);
+    box-shadow: var(--tc-shadow-lg);
+    transform-style: preserve-3d;
+    will-change: transform;
+    transition: transform .4s var(--tc-ease), box-shadow .4s var(--tc-ease);
+}
+.tc-home__herocard::after {
+    content: ""; position: absolute; inset: 0; border-radius: inherit;
+    opacity: 0; transition: opacity .4s ease; pointer-events: none; z-index: 0;
+    background: radial-gradient(340px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(36, 150, 237, .12), transparent 60%);
+}
+.tc-home__herocard:hover::after { opacity: 1; }
+.tc-home__herocard > * { position: relative; z-index: 1; }
+
+/* Tech tiles — monochrome at rest, the brand colour arrives only on hover/focus. */
+.tc-techtile__ic svg { filter: grayscale(1) opacity(.55); }
+
+/* Feature cards — softer, deeper lift on the shared easing. */
+.tc-feature {
+    border-radius: var(--tc-radius);
+    transition: transform .35s var(--tc-ease), border-color .25s var(--tc-ease), box-shadow .35s var(--tc-ease);
+}
+.tc-feature:hover { box-shadow: var(--tc-shadow-lg); border-color: var(--tc-border-strong); }
+
+/* Outcomes — a cinematic dark moment: larger figures, more air. */
+.tc-outcomes .tc-statband__num { font-size: clamp(34px, 4.4vw, 54px); font-weight: 800; }
+.tc-outcomes .tc-statband { gap: 32px; }
+
+/* CTA band — eyebrow reads bright on the deep navy field. */
+.tc-cta-band .tc-eyebrow { color: #7FC4FF; }
+.tc-cta-band h2 { font-size: var(--tc-fs-h1); letter-spacing: -0.035em; }
+
+/* Trust marquee — quieter, slower, fully monochrome. */
+.tc-marquee__track { animation-duration: 40s; gap: 72px; }
+.tc-marquee__item { font-size: 15px; opacity: .45; }
+
+@media (max-width: 575px) {
+    .tc-home__hero .tc-hero__stats { flex-wrap: wrap; }
+    .tc-home__hero .tc-stat { padding: 0 16px 0 0; }
+    .tc-home__hero .tc-stat--divider { border-left: 0; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   NAV REFINEMENTS (Phase D) — shared chrome polish
+   ═══════════════════════════════════════════════════════════════ */
+.tc-nav__brand-text { letter-spacing: -.01em; }
+.tc-nav__link { font-size: 14.5px; transition: color .2s var(--tc-ease), background .2s var(--tc-ease); }
+.tc-nav__link--cta {
+    box-shadow: 0 6px 18px -5px rgba(36, 150, 237, .55);
+    transition: transform .35s var(--tc-ease), filter .2s ease, box-shadow .35s var(--tc-ease);
+}
+.tc-nav__link--cta:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 26px -6px rgba(36, 150, 237, .65);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ELEVATED FOOTER (Phase D) — footer.php on Visioner templates
+   A restrained, minimal dark footer that closes the page with intent.
+   ═══════════════════════════════════════════════════════════════ */
+.tc-footer {
+    background:
+        radial-gradient(90% 140% at 85% -20%, rgba(36, 150, 237, .12), transparent 55%),
+        linear-gradient(180deg, var(--tc-navy-2), var(--tc-navy-3));
+    color: #CBD6EC;
+    border-top: 1px solid rgba(255, 255, 255, .06);
+}
+.tc-footer__inner {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1.3fr;
+    gap: 40px;
+    padding: clamp(48px, 6vw, 80px) 28px clamp(36px, 4vw, 56px);
+    max-width: 1240px;
+    margin: 0 auto;
+}
+.tc-footer__logo {
+    display: inline-flex; align-items: center; gap: 9px;
+    text-decoration: none; color: #fff;
+    font-weight: 700; font-size: 19px; letter-spacing: -.01em;
+    margin-bottom: 16px;
+}
+.tc-footer__logo img { height: 24px; width: auto; display: block; }
+.tc-footer__logo-accent {
+    background: linear-gradient(135deg, #3AA0FF, #1C75BC);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: #2496ED;
+}
+.tc-footer__tagline { margin: 0; max-width: 320px; font-size: 14.5px; line-height: 1.65; color: #9FB0CF; }
+
+.tc-footer__col { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.tc-footer__col-title {
+    font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    color: #6F82A8; margin-bottom: 4px;
+}
+.tc-footer__col a {
+    color: #CBD6EC; text-decoration: none; font-size: 15px; font-weight: 500;
+    position: relative; transition: color .2s var(--tc-ease);
+}
+.tc-footer__col a:hover { color: #fff; }
+.tc-footer__col a::after {
+    content: ""; position: absolute; left: 0; right: 100%; bottom: -3px;
+    height: 1px; background: var(--tc-blue); transition: right .25s var(--tc-ease);
+}
+.tc-footer__col a:hover::after { right: 0; }
+
+.tc-footer__cta { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.tc-footer__cta p { margin: 0 0 6px; font-size: 14px; color: #9FB0CF; }
+.tc-footer__cta .tc-btn { margin-top: 4px; }
+
+.tc-footer__bar { border-top: 1px solid rgba(255, 255, 255, .07); }
+.tc-footer__bar-inner {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    max-width: 1240px; margin: 0 auto; padding: 22px 28px;
+    font-size: 13px; color: #7F91B4;
+}
+.tc-footer__made { letter-spacing: .04em; }
+
+@media (max-width: 991px) {
+    .tc-footer__inner { grid-template-columns: 1fr 1fr; gap: 36px 32px; }
+    .tc-footer__brand { grid-column: 1 / -1; }
+}
+@media (max-width: 575px) {
+    .tc-footer__inner { grid-template-columns: 1fr; gap: 32px; }
+    .tc-footer__bar-inner { flex-direction: column; align-items: flex-start; gap: 6px; }
 }
 

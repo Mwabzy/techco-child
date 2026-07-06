@@ -239,6 +239,34 @@
     }
 
     /* ---------------------------------------------------------
+       Magnetic CTAs — the button drifts a few px toward the
+       cursor, then eases back on leave (CSS transition handles
+       the return). Desktop + motion-safe only. Opt-in via
+       [data-magnetic]; the inner label counter-shifts less so
+       the text stays legible.
+       --------------------------------------------------------- */
+    function initMagneticButtons() {
+        if ( 'ontouchstart' in window ) { return; }
+        if ( window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches ) { return; }
+
+        var els = document.querySelectorAll('[data-magnetic]');
+        if ( ! els.length ) { return; }
+
+        Array.prototype.forEach.call(els, function (el) {
+            var strength = 0.28;
+            el.addEventListener('mousemove', function (e) {
+                var r = el.getBoundingClientRect();
+                var mx = e.clientX - (r.left + r.width / 2);
+                var my = e.clientY - (r.top + r.height / 2);
+                el.style.transform = 'translate(' + (mx * strength).toFixed(1) + 'px,' + (my * strength).toFixed(1) + 'px)';
+            });
+            el.addEventListener('mouseleave', function () {
+                el.style.transform = '';
+            });
+        });
+    }
+
+    /* ---------------------------------------------------------
        Page-load fade-in
        Adds .tc-loaded so the CSS opacity transition can run.
        --------------------------------------------------------- */
@@ -261,6 +289,7 @@
         initCardTilt();
         initStatAnimation();
         initApplyFormSteps();
+        initMagneticButtons();
 
         // Fluent Forms fires this jQuery event on successful AJAX submit.
         if ( window.jQuery ) {

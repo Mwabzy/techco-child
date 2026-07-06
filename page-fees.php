@@ -2,7 +2,7 @@
 /**
  * Template Name: visionONE — Fees & Batches
  *
- * Fee plans (incl. GST), batch schedule, EMI/no-refund policy, Razorpay slot.
+ * Fee plans (+ GST), batch schedule, no-refund policy, Razorpay slot.
  * NOTE: intentionally omits techco_child_page_banner() — the .tc-hero
  * below provides its own breadcrumb + title, mirrors page-apply.php.
  * @package Techco Child
@@ -15,8 +15,8 @@ get_header();
 /**
  * CLAUDE CODE: Placeholder fees content — swap every figure/date below for
  * the real numbers from the Visioner deck (slides: Course Fees / Bulk
- * Pricing, Batch Schedule & Timings, Payment Plans & No-Refund Policy)
- * before launch. All amounts already read as GST-inclusive totals.
+ * Pricing, Batch Schedule & Timings, No-Refund Policy) before launch.
+ * Amounts shown are BASE prices (ex-GST). GST (18%) is added at checkout.
  *
  * One card per program track (mirrors the exit points on page-program.php's
  * "Choose your track" section), each mentor-led and priced on its own.
@@ -26,9 +26,7 @@ $tc_plans = array(
 		'name'       => 'Core Program',
 		'weeks'      => '10 weeks',
 		'tagline'    => 'Angular, .NET, SQL Server and a Mini-ERP capstone.',
-		'total'      => '₹ 58,999',
 		'base'       => '₹ 49,999',
-		'gst'        => '₹ 9,000 GST (18%)',
 		'features'   => array( 'Angular 18 + .NET 8 Web API', 'SQL Server data layer', 'Auth, security & REST', 'Mini-ERP build + capstone', 'Placement & TPO support' ),
 		'cta'        => 'Enrol Now',
 		'recommended'=> false,
@@ -37,9 +35,7 @@ $tc_plans = array(
 		'name'       => 'Core + Cloud',
 		'weeks'      => '12 weeks',
 		'tagline'    => 'Everything in Core, deployed live on AWS & Azure.',
-		'total'      => '₹ 68,999',
 		'base'       => '₹ 58,474',
-		'gst'        => '₹ 10,525 GST (18%)',
 		'features'   => array( 'Everything in Core Program', 'AWS & Azure fundamentals', 'CI/CD pipelines', 'Live cloud deployment', 'Placement & TPO support' ),
 		'cta'        => 'Enrol Now',
 		'recommended'=> false,
@@ -48,9 +44,7 @@ $tc_plans = array(
 		'name'       => 'Core + GenAI & Agentic AI',
 		'weeks'      => '13 weeks',
 		'tagline'    => 'Core plus LLM APIs and agentic workflows.',
-		'total'      => '₹ 74,999',
 		'base'       => '₹ 63,558',
-		'gst'        => '₹ 11,441 GST (18%)',
 		'features'   => array( 'Everything in Core Program', 'LLM APIs & prompt engineering', 'Agentic AI features', 'Real-world AI project', 'Placement & TPO support' ),
 		'cta'        => 'Enrol Now',
 		'recommended'=> false,
@@ -59,9 +53,7 @@ $tc_plans = array(
 		'name'       => 'Complete Bundle',
 		'weeks'      => '14 weeks',
 		'tagline'    => 'Full stack + Cloud + GenAI + Agentic AI — our flagship track.',
-		'total'      => '₹ 84,999',
 		'base'       => '₹ 72,034',
-		'gst'        => '₹ 12,965 GST (18%)',
 		'features'   => array( 'Everything in every track above', 'Cloud, GenAI & Agentic AI combined', 'Capstone + portfolio review', '1:1 mentor check-ins', 'Placement & TPO support' ),
 		'cta'        => 'Enrol Now',
 		'recommended'=> true,
@@ -80,21 +72,8 @@ $tc_batches = array(
 	array( 'name' => 'Cohort — November 2026',  'date' => 'Starts 2 Nov 2026',  'mode' => 'Weekday · Online',  'seats' => 'Open' ),
 );
 
-$tc_emi_plans = array(
-	array( 'tenure' => '3 Months',  'amount' => '₹ 21,667 / mo', 'note' => 'No-cost EMI on eligible cards', 'popular' => false ),
-	array( 'tenure' => '6 Months',  'amount' => '₹ 10,834 / mo', 'note' => 'Standard processing fee applies', 'popular' => true ),
-	array( 'tenure' => '12 Months', 'amount' => '₹ 5,417 / mo',  'note' => 'Subject to bank approval', 'popular' => false ),
-);
-
-$tc_emi_icons = array(
-	'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>',
-	'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg>',
-	'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>',
-);
-
 $tc_faqs = array(
-	array( 'q' => 'Are the prices shown inclusive of GST?',          'a' => 'Yes — every total shown above already includes 18% GST. The breakdown under each price is for your reference; there are no extra taxes or convenience fees at checkout.' ),
-	array( 'q' => 'Can I pay in EMIs?',                               'a' => 'Yes. EMI tenures of 3, 6 and 12 months are available, including no-cost EMI on select cards. Exact eligibility is shown by your bank at checkout.' ),
+	array( 'q' => 'Are the prices shown inclusive of GST?',          'a' => 'No — every price shown is the base amount (exclusive of GST). GST at 18% will be calculated and added at checkout. A GST-compliant invoice is generated automatically after payment and emailed to you.' ),
 	array( 'q' => 'What is the refund policy?',                      'a' => 'Our No-Refund policy applies once a seat is confirmed and payment is received — please review it carefully before paying. We\'re happy to answer questions on a counselling call first.' ),
 	array( 'q' => 'Will I get a GST invoice?',                        'a' => 'Yes, a GST-compliant invoice is generated automatically after payment and emailed to you — useful if your employer or college is reimbursing the fee.' ),
 	array( 'q' => 'Can I switch my batch after enrolling?',           'a' => 'Yes, one free batch switch is allowed up to 7 days before your cohort starts, subject to seat availability in the new batch.' ),
@@ -116,17 +95,17 @@ $tc_faqs = array(
 			</nav>
 
 			<h1 class="tc-hero__title"><span class="tc-gradient-text tc-gradient-text--freeze">Transparent fees. No surprises.</span></h1>
-			<p class="tc-hero__sub">Every price below is final and inclusive of GST. Choose a plan, pick
-			a batch that fits your schedule, and pay securely online — in full or in EMIs.</p>
+			<p class="tc-hero__sub">All prices are base amounts — GST (18%) is added at checkout. Choose a plan, pick
+			a batch that fits your schedule, and pay securely online.</p>
 
 			<div class="tc-hero__stats">
 				<div class="tc-stat">
-					<strong class="tc-stat__num" data-animate>18% GST</strong>
-					<span class="tc-stat__label">included in every price</span>
+					<strong class="tc-stat__num" data-animate>+ GST</strong>
+					<span class="tc-stat__label">18% added at checkout</span>
 				</div>
 				<div class="tc-stat tc-stat--divider">
-					<strong class="tc-stat__num" data-animate>3 / 6 / 12 mo</strong>
-					<span class="tc-stat__label">EMI tenures available</span>
+					<strong class="tc-stat__num" data-animate>GST Invoice</strong>
+					<span class="tc-stat__label">sent automatically after payment</span>
 				</div>
 				<div class="tc-stat tc-stat--divider">
 					<strong class="tc-stat__num" data-animate>Zero</strong>
@@ -140,7 +119,7 @@ $tc_faqs = array(
 			<span class="tc-eyebrow">Choose your track</span>
 			<h2 class="tc-section__title">Fee Plans — Per Program</h2>
 			<p class="tc-muted tc-fees__lead">Core is the 10-week spine — bolt on Cloud and AI, or take the
-				Complete Bundle. Every price below is final, GST-inclusive and mentor-led.</p>
+			Complete Bundle. All prices are base amounts (ex-GST). GST at 18% is added at checkout.</p>
 			<div class="row tc-fees__grid">
 				<?php foreach ( $tc_plans as $i => $plan ) : ?>
 				<div class="col-lg-3 col-md-6 tc-reveal" style="--delay: <?php echo $i * 120; ?>ms">
@@ -154,10 +133,10 @@ $tc_faqs = array(
 							<p class="tc-price-card__tagline tc-muted"><?php echo esc_html( $plan['tagline'] ); ?></p>
 						</div>
 						<div class="tc-price-card__price">
-							<span class="tc-price-card__price-amount"><?php echo esc_html( $plan['total'] ); ?></span>
+							<span class="tc-price-card__price-amount"><?php echo esc_html( $plan['base'] ); ?></span>
 						</div>
 						<p class="tc-price-card__price-breakdown tc-muted">
-							<?php echo esc_html( $plan['base'] ); ?> + <?php echo esc_html( $plan['gst'] ); ?>
+							+ GST (18%)
 						</p>
 						<ul class="tc-checklist tc-price-card__features">
 							<?php foreach ( $plan['features'] as $feature ) : ?>
@@ -165,7 +144,7 @@ $tc_faqs = array(
 							<?php endforeach; ?>
 						</ul>
 						<a class="tc-btn <?php echo $plan['recommended'] ? 'tc-btn--primary' : 'tc-btn--outline'; ?> tc-btn--block"
-						   href="<?php echo esc_url( tc_tpl_url( 'page-apply.php', '/admissions-apply/' ) ); ?>">
+						   href="<?php echo esc_url( tc_tpl_url( 'page-payment.php', '/pay/' ) ); ?>">
 							<?php echo esc_html( $plan['cta'] ); ?>
 						</a>
 					</div>
@@ -175,7 +154,7 @@ $tc_faqs = array(
 
 			<p class="tc-gst-note">
 				<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-				All prices shown include 18% GST. No convenience fees, ever.
+				All prices are base amounts (ex-GST). GST at 18% is added at checkout. No convenience fees, ever.
 			</p>
 
 			<!-- Bulk / college pricing banner -->
@@ -211,39 +190,18 @@ $tc_faqs = array(
 			</div>
 		</section>
 
-		<!-- SECTION: EMI plans + refund policy -->
-		<section class="tc-section tc-emi-section tc-reveal">
-			<span class="tc-eyebrow">Pay your way</span>
-			<h2 class="tc-section__title">EMI &amp; Payment Plans</h2>
-			<div class="row">
-				<div class="col-lg-7">
-					<div class="tc-emi-grid">
-						<?php foreach ( $tc_emi_plans as $i => $emi ) : ?>
-						<div class="tc-emi-card<?php echo $emi['popular'] ? ' tc-emi-card--popular' : ''; ?> tc-reveal" style="--delay: <?php echo $i * 120; ?>ms">
-							<?php if ( $emi['popular'] ) : ?>
-								<span class="tc-emi-card--popular__tag">Most Popular</span>
-							<?php endif; ?>
-							<div class="tc-emi-card__icon" aria-hidden="true">
-								<?php echo $tc_emi_icons[ $i ]; ?>
-							</div>
-							<strong class="tc-emi-card__tenure"><?php echo esc_html( $emi['tenure'] ); ?></strong>
-							<span class="tc-emi-card__amount"><?php echo esc_html( $emi['amount'] ); ?></span>
-							<span class="tc-emi-card__note tc-muted"><?php echo esc_html( $emi['note'] ); ?></span>
-						</div>
-						<?php endforeach; ?>
-					</div>
+		<!-- SECTION: No-Refund Policy -->
+		<section class="tc-section tc-refund-section tc-reveal">
+			<div class="tc-refund-card tc-refund-card--standalone tc-reveal">
+				<div class="tc-refund-card__icon" aria-hidden="true">
+					<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
 				</div>
-				<div class="col-lg-5">
-					<div class="tc-refund-card tc-reveal" style="--delay: 200ms">
-						<div class="tc-refund-card__icon" aria-hidden="true">
-							<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-						</div>
-						<h3>No-Refund Policy</h3>
-						<!-- CLAUDE CODE: replace with the exact policy wording from slide 7. -->
-						<p class="tc-muted">Once a seat is confirmed and payment is received, fees are
-						non-refundable. We strongly encourage a free counselling call before you
-						enrol so you're confident in the programme, batch and payment plan.</p>
-					</div>
+				<div class="tc-refund-card__body">
+					<h3>No-Refund Policy</h3>
+					<!-- CLAUDE CODE: replace with the exact policy wording from slide 7. -->
+					<p class="tc-muted">Once a seat is confirmed and payment is received, fees are
+					non-refundable. We strongly encourage a free counselling call before you
+					enrol so you're confident in the programme, batch and payment plan.</p>
 				</div>
 			</div>
 		</section>
@@ -257,7 +215,7 @@ $tc_faqs = array(
 					<svg class="tc-payment-card__icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
 					<div>
 						<h3>Secure payment via Razorpay</h3>
-						<p class="tc-muted">Cards, UPI, netbanking and EMI — all PCI-DSS compliant.</p>
+						<p class="tc-muted">Cards, UPI and netbanking — all PCI-DSS compliant.</p>
 					</div>
 				</div>
 
@@ -292,7 +250,7 @@ $tc_faqs = array(
 						<span class="tc-trust-badge__icon" aria-hidden="true">
 							<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg>
 						</span>
-						<span>EMI Ready</span>
+						<span>GST Invoice</span>
 					</div>
 				</div>
 			</div>

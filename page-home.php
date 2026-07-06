@@ -57,11 +57,7 @@ $tc_tests = array(
     <div class="container">
 
         <!-- SECTION: Hero -->
-        <section class="tc-hero tc-home__hero tc-texture-dots tc-reveal">
-            <!-- Ambient glow orbs -->
-            <div class="tc-glow-orb tc-glow-orb--blue" aria-hidden="true"></div>
-            <div class="tc-glow-orb tc-glow-orb--orange" aria-hidden="true"></div>
-
+        <section class="tc-hero tc-home__hero">
             <div class="row align-items-center">
                 <div class="col-lg-7">
                     <span class="tc-eyebrow">VisionOne &middot; Fullstack Developer Training</span>
@@ -73,7 +69,7 @@ $tc_tests = array(
                     </p>
 
                     <div class="tc-home__hero-actions">
-                        <a class="tc-btn tc-btn--primary"
+                        <a class="tc-btn tc-btn--primary" data-magnetic
                             href="<?php echo esc_url(tc_tpl_url('page-apply.php', '/admissions-apply/')); ?>">Apply
                             Now</a>
                         <a class="tc-btn tc-btn--ghost"
@@ -101,7 +97,7 @@ $tc_tests = array(
 
                 <div class="col-lg-5">
                     <!-- Next-cohort highlight card -->
-                    <aside class="tc-home__herocard">
+                    <aside class="tc-home__herocard" data-tilt>
                         <span class="tc-home__herocard-title"><b>Admissions open</b></span>
                         <h3 class="tc-home__herocard-title">Next cohort</h3>
                         <!-- CLAUDE CODE: set the real upcoming batch date. -->
@@ -243,7 +239,7 @@ $tc_tests = array(
         </section>
 
         <!-- SECTION: Testimonials -->
-        <section class="tc-section tc-section--tint tc-testimonials tc-reveal">
+        <section class="tc-section tc-testimonials tc-reveal">
             <span class="tc-eyebrow">Student stories</span>
             <h2 class="tc-section__title">What learners say</h2>
             <div class="tc-quotegrid">
@@ -267,15 +263,12 @@ $tc_tests = array(
 
         <!-- SECTION: Final CTA -->
         <section class="tc-section tc-cta-band text-center tc-reveal">
-            <!-- Ambient glow orbs -->
-            <div class="tc-glow-orb tc-glow-orb--blue" aria-hidden="true"></div>
-            <div class="tc-glow-orb tc-glow-orb--orange" aria-hidden="true"></div>
-
+            <span class="tc-eyebrow">Admissions open</span>
             <h2>Your developer career starts here</h2>
             <p class="tc-cta-band__sub">Join the next VisionOne cohort. Apply now and our team will confirm
                 your batch over email &amp; WhatsApp.</p>
             <div class="tc-cta-band__actions">
-                <a class="tc-btn tc-btn--primary"
+                <a class="tc-btn tc-btn--primary" data-magnetic
                     href="<?php echo esc_url(tc_tpl_url('page-apply.php', '/admissions-apply/')); ?>">Apply Now</a>
                 <a class="tc-btn tc-btn--ghost"
                     href="<?php echo esc_url(tc_tpl_url('page-program.php', '/program-curriculum/')); ?>">View the

@@ -235,6 +235,8 @@ function tc_disable_techco_header( $value, $object_id, $meta_key, $single ) {
 		'page-fees.php',
 		'page-apply.php',
 		'page-colleges.php',
+		'page-payment.php',
+		'page-resources.php',
 	);
 
 	$busy     = true;
