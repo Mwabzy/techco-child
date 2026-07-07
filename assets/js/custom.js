@@ -267,6 +267,102 @@
     }
 
     /* ---------------------------------------------------------
+       Share buttons ([data-share]) — native share sheet where
+       available, else copy the URL to the clipboard with feedback.
+       --------------------------------------------------------- */
+    function initShareButtons() {
+        var btns = document.querySelectorAll('[data-share]');
+        if ( ! btns.length ) { return; }
+
+        Array.prototype.forEach.call(btns, function (btn) {
+            btn.addEventListener('click', function () {
+                var data = { title: document.title, url: window.location.href };
+                if ( navigator.share ) {
+                    navigator.share(data).catch(function () {});
+                } else if ( navigator.clipboard ) {
+                    navigator.clipboard.writeText(data.url).then(function () {
+                        btn.classList.add('is-copied');
+                        setTimeout(function () { btn.classList.remove('is-copied'); }, 1600);
+                    }).catch(function () {});
+                }
+            });
+        });
+    }
+
+    /* ---------------------------------------------------------
+       Motion One enhancements (progressive — only if window.Motion
+       is present). Two signature effects the CSS reveal can't do:
+         • [data-parallax]  scroll-linked translate on decorative layers
+         • [data-motion-in] spring-stagger entrance for a container's
+           direct children (inline styles are cleared on finish so CSS
+           :hover transforms keep working).
+       Everything degrades to visible + the CSS `.tc-reveal` system when
+       Motion is missing or reduced-motion is requested.
+       --------------------------------------------------------- */
+    function initMotion() {
+        var M = window.Motion;
+        if ( ! M || typeof M.animate !== 'function' ) { return; }
+        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // Scroll-linked parallax on decorative layers. Explicit [data-parallax]
+        // opt-ins, plus every ambient .tc-glow-orb site-wide gains gentle depth.
+        if ( ! reduce && typeof M.scroll === 'function' ) {
+            var parallax = function (el, range) {
+                try {
+                    M.scroll(
+                        M.animate(
+                            el,
+                            { transform: [ 'translateY(-' + range + '%)', 'translateY(' + range + '%)' ] },
+                            { ease: 'linear' }
+                        ),
+                        { target: el, offset: [ 'start end', 'end start' ] }
+                    );
+                } catch ( e ) { /* never break the page over an effect */ }
+            };
+
+            Array.prototype.forEach.call(document.querySelectorAll('[data-parallax]'), function (el) {
+                parallax(el, parseFloat(el.getAttribute('data-parallax')) || 6);
+            });
+            // Ambient orbs on hero sections across templates — subtle, generous range.
+            Array.prototype.forEach.call(document.querySelectorAll('.tc-glow-orb:not([data-parallax])'), function (el) {
+                parallax(el, 16);
+            });
+        }
+
+        // Spring-stagger entrance for opted-in containers.
+        if ( ! reduce && typeof M.inView === 'function' ) {
+            var groups = document.querySelectorAll('[data-motion-in]');
+            Array.prototype.forEach.call(groups, function (group) {
+                var items = Array.prototype.slice.call(group.children);
+                if ( ! items.length ) { return; }
+
+                var clear = function () {
+                    Array.prototype.forEach.call(items, function (el) {
+                        el.style.opacity = '';
+                        el.style.transform = '';
+                    });
+                };
+
+                try {
+                    Array.prototype.forEach.call(items, function (el) { el.style.opacity = '0'; });
+                    M.inView(group, function () {
+                        var controls = M.animate(
+                            items,
+                            { opacity: [ 0, 1 ], y: [ 22, 0 ], scale: [ 0.96, 1 ] },
+                            { duration: 0.5, delay: M.stagger ? M.stagger(0.06) : 0, ease: [ 0.22, 1, 0.36, 1 ] }
+                        );
+                        if ( controls && controls.finished && controls.finished.then ) {
+                            controls.finished.then(clear).catch(clear);
+                        }
+                    }, { amount: 0.15 });
+                } catch ( e ) {
+                    clear(); // fall back to visible
+                }
+            });
+        }
+    }
+
+    /* ---------------------------------------------------------
        Page-load fade-in
        Adds .tc-loaded so the CSS opacity transition can run.
        --------------------------------------------------------- */
@@ -290,6 +386,8 @@
         initStatAnimation();
         initApplyFormSteps();
         initMagneticButtons();
+        initShareButtons();
+        initMotion();
 
         // Fluent Forms fires this jQuery event on successful AJAX submit.
         if ( window.jQuery ) {

@@ -144,10 +144,20 @@ add_action( 'wp_enqueue_scripts', function () {
         file_exists( $dir . '/assets/css/custom.css' ) ? filemtime( $dir . '/assets/css/custom.css' ) : '1.0.0'
     );
 
+    // Motion One (self-hosted UMD → window.Motion). Loaded before our JS so
+    // custom.js can progressively enhance with it when present.
+    wp_enqueue_script(
+        'motion-one',
+        $uri . '/assets/js/vendor/motion.min.js',
+        array(),
+        file_exists( $dir . '/assets/js/vendor/motion.min.js' ) ? filemtime( $dir . '/assets/js/vendor/motion.min.js' ) : '11.11.13',
+        true
+    );
+
     wp_enqueue_script(
         'techco-child-custom',
         $uri . '/assets/js/custom.js',
-        array(),
+        array( 'motion-one' ),
         file_exists( $dir . '/assets/js/custom.js' ) ? filemtime( $dir . '/assets/js/custom.js' ) : '1.0.0',
         true
     );
@@ -170,6 +180,9 @@ require_once get_stylesheet_directory() . '/inc/visioner-nav.php';
 
 // India localization: +91 phone prefix, IST/date defaults, en-IN SEO signals.
 require_once get_stylesheet_directory() . '/inc/india-localization.php';
+
+// VisionONE content images: Customizer photo uploaders (tc_opt_image helper).
+require_once get_stylesheet_directory() . '/inc/theme-options.php';
 
 /**
  * ------------------------------------------------------------------

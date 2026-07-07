@@ -58,88 +58,66 @@ if ( ! function_exists( 'tc_fmt_len' ) ) {
 <div id="primary" class="content-area page-content-area tc-page pt-120 pb-120">
     <div class="container">
 
-        <div class="row tc-program-body">
+        <!-- Full-width course banner (hero) -->
+        <nav class="tc-hero__crumbs tc-coursebanner__crumbs" aria-label="Breadcrumb">
+            <a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a><span>›</span>
+            <a href="<?php echo esc_url( tc_tpl_url( 'page-program.php', '/program-curriculum/' ) ); ?>">Programs</a><span>›</span>
+            <span class="tc-hero__crumbs-current">Full-Stack Developer</span>
+        </nav>
 
-            <!-- RIGHT on desktop / TOP on mobile: sticky enrolment card (starts at hero top) -->
-            <div class="col-lg-4 order-lg-2">
-                <aside class="tc-enrol-card tc-reveal">
-                    <div class="tc-enrol-card__preview">
-                        <!-- CLAUDE CODE: swap href for the real preview video / thumbnail image. -->
-                        <a href="#program-preview" class="tc-enrol-card__play" aria-label="Preview the program">
-                            <?php echo tc_icon( 'play', 24 ); ?>
+        <section class="tc-coursebanner tc-reveal">
+            <span class="tc-coursebanner__bg" data-parallax="10" aria-hidden="true"></span>
+            <div class="tc-coursebanner__inner" data-motion-in>
+                <h1 class="tc-coursebanner__title">The Full-Stack Development Masterclass</h1>
+                <p class="tc-coursebanner__desc">Become a job-ready full-stack developer in 14 weeks — from Angular 18
+                    and .NET 8 through SQL Server to Cloud, GenAI and Agentic AI. Learn by building real projects,
+                    reviewed by working mentors.</p>
+                <div class="tc-coursebanner__rating">
+                    <strong class="tc-stat__num" data-animate>4.8</strong>
+                    <span class="tc-coursebanner__stars" aria-hidden="true">★★★★★</span>
+                    <!-- CLAUDE CODE: rating + review count are PLACEHOLDERS — swap for real figures. -->
+                    <span class="tc-coursebanner__reviews">1,200+ learner reviews</span>
+                </div>
+                <div class="tc-coursebanner__actions">
+                    <a class="tc-btn tc-btn--light" data-magnetic
+                        href="<?php echo esc_url( tc_tpl_url( 'page-apply.php', '/admissions-apply/' ) ); ?>">Enroll this course</a>
+                    <div class="tc-coursebanner__tools">
+                        <a class="tc-coursebanner__tool" href="<?php echo esc_url( tc_tpl_url( 'page-resources.php', '/resources/' ) ); ?>"
+                            aria-label="Save &amp; download the brochure">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
                         </a>
-                        <span class="tc-enrol-card__preview-label">Preview the program</span>
+                        <button class="tc-coursebanner__tool" type="button" data-share aria-label="Share this program">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg>
+                        </button>
                     </div>
-                    <div class="tc-enrol-card__body">
-                        <!-- CLAUDE CODE: pricing is a PLACEHOLDER — final numbers live on Fees & Batches. -->
-                        <div class="tc-enrol-card__price">
-                            <span class="tc-enrol-card__price-now">From ₹49,999 + GST</span>
-                        </div>
-                        <p class="tc-enrol-card__price-note">Core Program. Fees shown as Fees + GST (GST billed
-                            on the invoice). See Fees &amp; Batches for all tracks &amp; EMI.</p>
-
-                        <a class="tc-btn tc-btn--primary tc-btn--block" href="<?php echo esc_url( tc_tpl_url( 'page-apply.php', '/admissions-apply/' ) ); ?>">Apply Now</a>
-                        <a class="tc-btn tc-btn--ghost tc-btn--block" href="<?php echo esc_url( tc_tpl_url( 'page-fees.php', '/fees-batches/' ) ); ?>">View Fees &amp; EMI</a>
-
-                        <ul class="tc-enrol-card__features">
-                            <li>10–14 weeks · classroom / online</li>
-                            <li>Angular 18 · .NET 8 · SQL Server</li>
-                            <li>Cloud, GenAI &amp; Agentic AI tracks</li>
-                            <li>Capstone project + portfolio</li>
-                            <li>Placement &amp; TPO support</li>
-                        </ul>
-                    </div>
-                </aside>
+                </div>
             </div>
+        </section>
 
-            <!-- LEFT: hero text + the long content the card sticks alongside -->
-            <div class="col-lg-8 order-lg-1">
+        <!-- Quick-facts strip -->
+        <div class="tc-coursefeatures" data-motion-in>
+            <div class="tc-coursefeature">
+                <span class="tc-coursefeature__ic tc-coursefeature__ic--blue"><?php echo tc_icon( 'sliders', 20 ); ?></span>
+                <div class="tc-coursefeature__meta"><strong>Learn by Doing</strong><span>Hands-on lessons built around real app projects.</span></div>
+            </div>
+            <div class="tc-coursefeature">
+                <span class="tc-coursefeature__ic tc-coursefeature__ic--violet"><?php echo tc_icon( 'chart', 20 ); ?></span>
+                <div class="tc-coursefeature__meta"><strong>End-to-End Curriculum</strong><span>Angular 18, .NET 8, SQL, Cloud &amp; GenAI.</span></div>
+            </div>
+            <div class="tc-coursefeature">
+                <span class="tc-coursefeature__ic tc-coursefeature__ic--amber"><?php echo tc_icon( 'globe', 20 ); ?></span>
+                <div class="tc-coursefeature__meta"><strong>Language</strong><span>English &amp; Hindi, taught in class.</span></div>
+            </div>
+            <div class="tc-coursefeature">
+                <span class="tc-coursefeature__ic tc-coursefeature__ic--green"><?php echo tc_icon( 'calendar', 20 ); ?></span>
+                <div class="tc-coursefeature__meta"><strong>Time to complete</strong><span>10–14 weeks with mentor-guided practice.</span></div>
+            </div>
+        </div>
 
-                <!-- Hero head -->
-                <section class="tc-hero tc-texture-dots tc-reveal">
-                    <!-- Ambient glow orbs -->
-                    <div class="tc-glow-orb tc-glow-orb--blue" aria-hidden="true"></div>
-                    <div class="tc-glow-orb tc-glow-orb--orange" aria-hidden="true"></div>
-
-                    <nav class="tc-hero__crumbs" aria-label="Breadcrumb">
-                        <a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a><span>›</span>
-                        <a href="<?php echo esc_url( tc_tpl_url( 'page-program.php', '/program-curriculum/' ) ); ?>">Programs</a><span>›</span>
-                        <span class="tc-hero__crumbs-current">Full-Stack Developer</span>
-                    </nav>
-
-                    <h1 class="tc-hero__title"><span class="tc-gradient-text tc-gradient-text--freeze">Full-Stack Development</span> Training Program</h1>
-                    <p class="tc-hero__sub">Become a job-ready full-stack developer in 14 weeks — Angular 18
-                        and .NET 8 through SQL Server, Cloud, GenAI and Agentic AI, built around real projects.</p>
-
-                    <span class="tc-badge tc-badge--bestseller">Flagship Track</span>
-
-                    <p class="tc-hero__author">Mentored by
-                        <a href="<?php echo esc_url( tc_tpl_url( 'page-apply.php', '/admissions-apply/' ) ); ?>">visionONE industry mentors &amp; lead instructors</a>
-                    </p>
-
-                    <div class="tc-hero__meta">
-                        <span class="tc-hero__meta-item"><?php echo tc_icon( 'calendar', 16 ); ?> Updated for <strong>2026</strong></span>
-                        <span class="tc-hero__meta-item"><?php echo tc_icon( 'globe', 16 ); ?> Classroom (Hyderabad) &amp; online</span>
-                        <span class="tc-hero__meta-item"><?php echo tc_icon( 'award', 16 ); ?> Certificate on completion</span>
-                    </div>
-
-                    <!-- CLAUDE CODE: rating + learner numbers are PLACEHOLDERS — swap for real figures. -->
-                    <div class="tc-hero__stats">
-                        <div class="tc-stat">
-                            <strong class="tc-stat__num" data-animate>4.8</strong>
-                            <span class="tc-stars" aria-hidden="true">★★★★★</span>
-                            <span class="tc-stat__label">learner rating</span>
-                        </div>
-                        <div class="tc-stat tc-stat--divider">
-                            <strong class="tc-stat__num" data-animate>Angular + .NET</strong>
-                            <span class="tc-stat__label">+ Cloud &amp; AI</span>
-                        </div>
-                        <div class="tc-stat tc-stat--divider">
-                            <strong class="tc-stat__num" data-animate>14</strong>
-                            <span class="tc-stat__label">weeks · project-first</span>
-                        </div>
-                    </div>
-                </section>
+        <div class="row tc-program-body">
+            <!-- Single, centred reading column (sticky enrol card removed —
+                 its context now lives in the course banner + facts strip above). -->
+            <div class="col-12 tc-program-content">
 
                 <!-- What you'll master -->
                 <section class="tc-section tc-program-intro tc-reveal">
@@ -243,6 +221,8 @@ if ( ! function_exists( 'tc_fmt_len' ) ) {
             <h2>Ready to become a full-stack developer?</h2>
             <p class="tc-cta-band__sub">Seats are limited each cohort. Apply now and our team will confirm
                 your batch over email &amp; WhatsApp.</p>
+            <!-- CLAUDE CODE: pricing is a PLACEHOLDER — final numbers live on Fees & Batches. -->
+            <p class="tc-cta-band__price">From <strong>₹49,999 + GST</strong> · No-Cost EMI available</p>
             <div class="tc-cta-band__actions">
                 <a class="tc-btn tc-btn--primary" href="<?php echo esc_url( tc_tpl_url( 'page-apply.php', '/admissions-apply/' ) ); ?>">Apply Now</a>
                 <a class="tc-btn tc-btn--ghost" href="<?php echo esc_url( tc_tpl_url( 'page-fees.php', '/fees-batches/' ) ); ?>">View Fees &amp; Batches</a>
