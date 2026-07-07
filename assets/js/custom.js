@@ -373,6 +373,10 @@
       return;
     }
 
+    // keyboard / active state helpers
+    var navSearchItems = [];
+    var navSearchActive = -1;
+
     function escapeHtml(value) {
       return String(value)
         .replace(/&/g, "&amp;")
@@ -396,16 +400,19 @@
 
       if (!items.length) {
         list.innerHTML =
-          '<button class="tc-nav__search-suggestion tc-nav__search-suggestion--empty" type="button">Explore the full curriculum</button>';
+          '<div class="tc-nav__search-suggestion tc-nav__search-suggestion--empty" role="none">No matching module found — try a different keyword or press Enter to search the full site.</div>';
         list.classList.add("is-open");
         list.hidden = false;
         input.setAttribute("aria-expanded", "true");
+        navSearchItems = [];
+        navSearchActive = -1;
+        input.removeAttribute("aria-activedescendant");
         return;
       }
 
-      var visible = items.slice(0, 6);
+      var visible = items.slice(0, 4);
       list.innerHTML = visible
-        .map(function (item) {
+        .map(function (item, index) {
           var href = (data.url || "") + "#" + item.id;
           var subtitle = [];
           if (item.phase) {
@@ -417,10 +424,20 @@
           if (item.milestone) {
             subtitle.push(item.milestone);
           }
+          var phaseClass = ((item.phase || "") + "")
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-");
           return (
             '<button class="tc-nav__search-suggestion" type="button" data-href="' +
             escapeHtml(href) +
+            '" role="option" id="tc-nav-search-suggestion-' +
+            index +
             '">' +
+            '<span class="tc-nav__search-suggestion-badge tc-nav__search-suggestion-badge--' +
+            escapeHtml(phaseClass) +
+            '" aria-hidden="true">' +
+            "" +
+            "</span>" +
             '<span class="tc-nav__search-suggestion-title">' +
             escapeHtml(item.topic || "") +
             "</span>" +
@@ -433,9 +450,14 @@
         })
         .join("");
 
+      navSearchItems = Array.prototype.slice.call(
+        list.querySelectorAll(".tc-nav__search-suggestion"),
+      );
+      navSearchActive = -1;
       list.classList.add("is-open");
       list.hidden = false;
       input.setAttribute("aria-expanded", "true");
+      input.removeAttribute("aria-activedescendant");
     }
 
     function hideSuggestions() {
@@ -456,6 +478,28 @@
     input.addEventListener("keydown", function (e) {
       if (e.key === "Escape") {
         hideSuggestions();
+        return;
+      }
+      if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+        if (!navSearchItems.length) {
+          return;
+        }
+        e.preventDefault();
+        var next = navSearchActive;
+        if (e.key === "ArrowDown") {
+          next = Math.min(navSearchItems.length - 1, navSearchActive + 1);
+        } else {
+          next = Math.max(0, navSearchActive - 1);
+        }
+        setActiveSuggestion(next);
+        return;
+      }
+      if (e.key === "Enter") {
+        // if an item is active, open it; otherwise allow form submit (site search)
+        if (navSearchActive >= 0 && navSearchItems[navSearchActive]) {
+          e.preventDefault();
+          navSearchItems[navSearchActive].click();
+        }
       }
     });
 
@@ -465,7 +509,7 @@
         return;
       }
       e.preventDefault();
-      var label = btn.querySelector(".tc-nav__search-suggestion-label");
+      var label = btn.querySelector(".tc-nav__search-suggestion-title");
       if (label) {
         input.value = label.textContent;
       }

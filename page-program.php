@@ -83,15 +83,6 @@ if ( ! function_exists( 'tc_fmt_len' ) ) {
                     <div class="tc-coursebanner__actions">
                         <a class="tc-btn tc-btn--light" data-magnetic
                             href="<?php echo esc_url( tc_tpl_url( 'page-apply.php', '/admissions-apply/' ) ); ?>">Enroll this course</a>
-                        <div class="tc-coursebanner__tools">
-                            <a class="tc-coursebanner__tool" href="<?php echo esc_url( tc_tpl_url( 'page-resources.php', '/resources/' ) ); ?>"
-                                aria-label="Save &amp; download the brochure">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
-                            </a>
-                            <button class="tc-coursebanner__tool" type="button" data-share aria-label="Share this program">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg>
-                            </button>
-                        </div>
                     </div>
                 </div>
 

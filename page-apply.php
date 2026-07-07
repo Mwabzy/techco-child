@@ -2,10 +2,10 @@
 /**
  * Template Name: visionONE — Admissions / Apply
  *
- * Premium admissions funnel: hero, how-to-apply steps, eligibility,
- * batches, application form + trust panel, FAQ, CTA.
- * NOTE: intentionally omits techco_child_page_banner() — the .tc-hero
- * below provides its own breadcrumb + title, mirrors page-program.php.
+ * Redesigned admissions funnel: gradient banner hero, value proposition,
+ * eligibility, batch selection, application form + trust panel, FAQ, CTA.
+ * NOTE: intentionally omits techco_child_page_banner() — the .tc-coursebanner
+ * below provides its own hero, consistent with program/fees/colleges pages.
  * @package Techco Child
  */
 
@@ -18,26 +18,6 @@ get_header();
  * final deck wording before launch.
  */
 
-/**
- * Minimal line-icon set (24x24, stroke = currentColor) — keeps the page
- * SVG-based instead of relying on emoji glyphs for visual consistency
- * across OS/browser fonts.
- */
-$tc_icons = array(
-	'apply'  => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>',
-	'call'   => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.69 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.33 1.85.56 2.81.69A2 2 0 0 1 22 16.92Z"/></svg>',
-	'offer'  => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1.1 2.7 2 6 2s6-.9 6-2v-5"/></svg>',
-	'rocket' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09Z"/><path d="M12 15l-3-3 4.5-9 5.5 1.5L20 9.5 11 12.5"/><path d="M15 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/></svg>',
-	'doc'    => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/></svg>',
-);
-
-$tc_steps = array(
-	array( 'icon' => 'apply',  'title' => 'Apply Online',      'desc' => 'Submit the form below with your details and preferred batch.' ),
-	array( 'icon' => 'call',   'title' => 'Counselling Call',  'desc' => 'Our team calls within 24h to discuss the track, fit and timing.' ),
-	array( 'icon' => 'offer',  'title' => 'Offer & Seat Lock',  'desc' => 'Get your offer letter and lock your seat with the first payment.' ),
-	array( 'icon' => 'rocket', 'title' => 'Onboarding',        'desc' => 'Join the orientation session and meet your mentors before Day 1.' ),
-);
-
 $tc_eligibility = array(
 	'Open to graduates, final-year students &amp; career-switchers',
 	'No prior coding experience required — we start from fundamentals',
@@ -46,187 +26,169 @@ $tc_eligibility = array(
 );
 
 $tc_batches = array(
-	array( 'name' => 'Cohort — July 2026',      'date' => 'Starts 6 Jul 2026',  'mode' => 'Online · Hybrid', 'seats' => 'Few seats left' ),
-	array( 'name' => 'Cohort — September 2026', 'date' => 'Starts 7 Sep 2026',  'mode' => 'Online',          'seats' => 'Open' ),
-	array( 'name' => 'Cohort — November 2026',  'date' => 'Starts 2 Nov 2026',  'mode' => 'Hybrid',          'seats' => 'Open' ),
+	array( 'name' => 'Cohort — July 2026',      'date' => 'Starts 6 Jul 2026',  'mode' => 'Online · Hybrid', 'seats' => 'Few seats left', 'badge' => 'urgent' ),
+	array( 'name' => 'Cohort — September 2026', 'date' => 'Starts 7 Sep 2026',  'mode' => 'Online',          'seats' => 'Open', 'badge' => '' ),
+	array( 'name' => 'Cohort — November 2026',  'date' => 'Starts 2 Nov 2026',  'mode' => 'Hybrid',          'seats' => 'Open', 'badge' => '' ),
 );
 
 $tc_faqs = array(
+	array( 'q' => 'Do I need prior coding experience to apply?', 'a' => 'No. The programme is designed for absolute beginners and ramps up from web fundamentals.' ),
 	array( 'q' => 'Is there a refund if I change my mind after enrolling?', 'a' => 'Our No-Refund policy applies once a seat is confirmed — please review it carefully before paying. We\'re happy to answer questions on a counselling call first.' ),
-	array( 'q' => 'Can I pay in EMIs?',                                     'a' => 'Yes — EMI-friendly plans are available. Exact EMI amounts are on the Fees &amp; Batches page.' ),
-	array( 'q' => 'Do I need prior coding experience to apply?',            'a' => 'No. The programme is designed for absolute beginners and ramps up from web fundamentals.' ),
-	array( 'q' => 'Will I get a certificate?',                              'a' => 'Yes, you receive a certificate of completion once you finish the capstone project.' ),
-	array( 'q' => 'Is placement support included?',                         'a' => 'Yes — every cohort includes placement &amp; TPO support as part of the programme.' ),
-	array( 'q' => 'What if my preferred batch is full?',                    'a' => 'We\'ll offer you the next available cohort and hold your application on file.' ),
+	array( 'q' => 'Can I pay in EMIs?', 'a' => 'Yes — EMI-friendly plans are available. Exact EMI amounts are on the Fees &amp; Batches page.' ),
+	array( 'q' => 'Will I get a certificate?', 'a' => 'Yes, you receive a certificate of completion once you finish the capstone project.' ),
+	array( 'q' => 'Is placement support included?', 'a' => 'Yes — every cohort includes placement &amp; TPO support as part of the programme.' ),
+	array( 'q' => 'What if my preferred batch is full?', 'a' => 'We\'ll offer you the next available cohort and hold your application on file.' ),
+);
+
+// Why apply now — value propositions.
+$tc_apply_why = array(
+	array( 'ic' => 'award', 'color' => 'blue', 'title' => 'Industry mentors', 'text' => 'Learn from working engineers. Live code reviews and 1:1 guidance every week.' ),
+	array( 'ic' => 'code', 'color' => 'violet', 'title' => 'Learn by building', 'text' => 'Ship features from day one. Real projects, reviewed live by working professionals.' ),
+	array( 'ic' => 'briefcase', 'color' => 'amber', 'title' => 'Placement support', 'text' => 'Mock interviews, resume polish, GitHub showcase and TPO pipeline — included.' ),
+	array( 'ic' => 'credit-card', 'color' => 'green', 'title' => 'Flexible fees', 'text' => 'Pay in EMIs. No-Cost EMI options on eligible cards. Transparent pricing.' ),
 );
 ?>
 
 <div id="primary" class="content-area page-content-area tc-page pt-120 pb-120">
-    <div class="container">
+	<div class="container">
 
-        <!-- SECTION: Hero -->
-        <section class="tc-hero tc-texture-dots tc-reveal">
-            <!-- Ambient glow orbs -->
-            <div class="tc-glow-orb tc-glow-orb--blue" aria-hidden="true"></div>
-            <div class="tc-glow-orb tc-glow-orb--orange" aria-hidden="true"></div>
+		<!-- SECTION: Gradient banner hero (consistent with program/fees/colleges) -->
+		<section class="tc-coursebanner tc-coursebanner--simple tc-reveal">
+			<span class="tc-coursebanner__bg" data-parallax="10" aria-hidden="true"></span>
+			<div class="tc-coursebanner__inner">
+				<div class="tc-coursebanner__content" data-motion-in>
+					<span class="tc-coursebanner__kicker">Admissions Open</span>
+					<h1 class="tc-coursebanner__title">Apply in minutes. Confirm in 24 hours.</h1>
+					<p class="tc-coursebanner__desc">Join a cohort of builders and learners. Our team will walk you through your best track, batch, and fees plan over a quick call.</p>
+					<div class="tc-coursebanner__stats">
+						<span class="tc-herostat"><strong>Next Intake</strong><span>6 Jul 2026</span></span>
+						<span class="tc-herostat"><strong>24 hrs</strong><span>average response</span></span>
+						<span class="tc-herostat"><strong>Limited</strong><span>seats per cohort</span></span>
+					</div>
+					<div class="tc-coursebanner__actions">
+						<a class="tc-btn tc-btn--light" data-magnetic href="#tc-apply-form-anchor">Start Application</a>
+						<a class="tc-btn tc-btn--ghost" href="<?php echo esc_url( tc_tpl_url( 'page-fees.php', '/fees-batches/' ) ); ?>">View Fees & Batches</a>
+					</div>
+				</div>
+			</div>
+		</section>
 
-            <nav class="tc-hero__crumbs" aria-label="Breadcrumb">
-                <a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a><span>›</span>
-                <span class="tc-hero__crumbs-current">Admissions</span>
-            </nav>
+		<!-- SECTION: Why apply now — value propositions (colored icon cards) -->
+		<section class="tc-section tc-apply-why tc-reveal">
+			<h2 class="tc-section__title" style="text-align: center; margin-bottom: 0;">Why join visionONE</h2>
+			<div class="tc-bento tc-bento--4col">
+				<?php foreach ( $tc_apply_why as $i => $card ) : ?>
+				<div class="tc-feature tc-reveal" style="--delay: <?php echo $i * 80; ?>ms">
+					<span class="tc-feature__ic tc-feature__ic--<?php echo esc_attr( $card['color'] ); ?>"><?php echo tc_icon( $card['ic'], 24 ); ?></span>
+					<h3><?php echo esc_html( $card['title'] ); ?></h3>
+					<p class="tc-muted"><?php echo esc_html( $card['text'] ); ?></p>
+				</div>
+				<?php endforeach; ?>
+			</div>
+		</section>
 
-            <h1 class="tc-hero__title"><span class="tc-gradient-text tc-gradient-text--freeze">Admissions are open</span></h1>
-            <p class="tc-hero__sub">Apply in minutes. Our team will confirm your seat over email &amp;
-                WhatsApp, and walk you through fees, batches and onboarding.</p>
+		<!-- SECTION: Batch selection (improved card grid) -->
+		<section class="tc-section tc-batches-section tc-reveal">
+			<span class="tc-eyebrow">Plan ahead</span>
+			<h2 class="tc-section__title">Choose your cohort</h2>
+			<p class="tc-muted" style="max-width: 640px;">Dates are indicative. Our team will confirm your exact batch and schedule during the counselling call.</p>
+			<div class="tc-batch-grid">
+				<?php foreach ( $tc_batches as $i => $b ) : ?>
+				<div class="tc-batch-card tc-reveal" style="--delay: <?php echo $i * 100; ?>ms">
+					<div class="tc-batch-card__head">
+						<h3 class="tc-batch-card__name"><?php echo esc_html( $b['name'] ); ?></h3>
+						<?php if ( $b['badge'] === 'urgent' ) : ?>
+							<span class="tc-batch-card__badge tc-batch-card__badge--urgent">Few seats left</span>
+						<?php else : ?>
+							<span class="tc-batch-card__badge">Open</span>
+						<?php endif; ?>
+					</div>
+					<div class="tc-batch-card__body">
+						<p class="tc-batch-card__detail"><strong><?php echo esc_html( $b['date'] ); ?></strong></p>
+						<p class="tc-batch-card__detail tc-muted"><?php echo esc_html( $b['mode'] ); ?></p>
+					</div>
+					<a href="#tc-apply-form-anchor" class="tc-batch-card__link">Select this cohort →</a>
+				</div>
+				<?php endforeach; ?>
+			</div>
+		</section>
 
-            <span class="tc-badge tc-badge--bestseller">Admissions Open</span>
+		<!-- SECTION: Application form + trust panel -->
+		<section class="tc-section tc-apply-section tc-reveal" id="tc-apply-form-anchor">
+			<div class="row">
 
-            <div class="tc-hero__stats">
-                <div class="tc-stat">
-                    <strong class="tc-stat__num" data-animate>6 Jul 2026</strong>
-                    <span class="tc-stat__label">next intake</span>
-                </div>
-                <div class="tc-stat tc-stat--divider">
-                    <strong class="tc-stat__num" data-animate>24 hrs</strong>
-                    <span class="tc-stat__label">avg. response time</span>
-                </div>
-                <div class="tc-stat tc-stat--divider">
-                    <strong class="tc-stat__num" data-animate>Limited</strong>
-                    <span class="tc-stat__label">seats per cohort</span>
-                </div>
-            </div>
-        </section>
+				<!-- LEFT: the registration form -->
+				<div class="col-lg-7 tc-reveal">
+					<span class="tc-eyebrow">Apply now</span>
+					<h2 class="tc-section__title">Let's get you started</h2>
+					<p class="tc-muted" style="margin-bottom: 28px;">Tell us about yourself. Our team will follow up within 24 hours to discuss the best track, timing and payment plan for you.</p>
+					<div class="tc-apply-form">
+						<?php
+						if ( function_exists( 'do_shortcode' ) ) {
+							echo do_shortcode( '[fluentform id="1"]' );
+						}
+						?>
+					</div>
+				</div>
 
-        <!-- SECTION: How to apply -->
-        <section class="tc-section tc-steps-section tc-reveal">
-            <span class="tc-eyebrow">The Process</span>
-            <h2 class="tc-section__title">How admissions work</h2>
-            <div class="tc-timeline">
-                <?php foreach ( $tc_steps as $i => $s ) : ?>
-                <div class="tc-timeline__step tc-reveal" style="--delay: <?php echo $i * 80; ?>ms">
-                    <div class="tc-timeline__node"><?php echo esc_html( $i + 1 ); ?></div>
-                    <h3 class="tc-timeline__title"><?php echo esc_html( $s['title'] ); ?></h3>
-                    <p class="tc-muted"><?php echo esc_html( $s['desc'] ); ?></p>
-                </div>
-                <?php endforeach; ?>
-            </div>
-        </section>
+				<!-- RIGHT: trust panel + benefits -->
+				<div class="col-lg-5 tc-reveal" style="--delay: 100ms">
+					<aside class="tc-apply-panel">
+						<h3 class="tc-apply-panel__title">What happens next</h3>
+						<div class="tc-apply-panel__item">
+							<span class="tc-apply-panel__num">1</span>
+							<p><strong>Your application is reviewed</strong><br><span class="tc-muted">Our team reads your profile and notes.</span></p>
+						</div>
+						<div class="tc-apply-panel__item">
+							<span class="tc-apply-panel__num">2</span>
+							<p><strong>Counselling call scheduled</strong><br><span class="tc-muted">We call within 24 hours to discuss fit.</span></p>
+						</div>
+						<div class="tc-apply-panel__item">
+							<span class="tc-apply-panel__num">3</span>
+							<p><strong>Offer & seat confirmation</strong><br><span class="tc-muted">Get your offer letter and lock your seat.</span></p>
+						</div>
 
-        <!-- SECTION: Eligibility -->
-        <section class="tc-section tc-section--tint tc-eligibility-section tc-reveal">
-            <span class="tc-eyebrow">Who can apply</span>
-            <h2 class="tc-section__title">Eligibility</h2>
-            <ul class="tc-checklist tc-eligibility-grid">
-                <?php foreach ( $tc_eligibility as $i => $item ) : ?>
-                <li class="tc-reveal" style="--delay: <?php echo $i * 70; ?>ms"><?php echo wp_kses_post( $item ); ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </section>
+						<hr class="tc-apply-panel__divider">
 
-        <!-- SECTION: Dates & batches -->
-        <section class="tc-section tc-batches-section tc-reveal">
-            <span class="tc-eyebrow">Plan ahead</span>
-            <h2 class="tc-section__title">Upcoming batches</h2>
-            <p class="tc-muted tc-placeholder-note">Dates shown are indicative — confirm final batch dates on the Fees &amp; Batches page.</p>
-            <div class="tc-batch-list">
-                <?php foreach ( $tc_batches as $i => $b ) : ?>
-                <a href="#tc-apply-form-anchor" class="tc-batch-item tc-reveal" style="--delay: <?php echo $i * 80; ?>ms">
-                    <span class="tc-batch-item__tag"><?php echo esc_html( $b['mode'] ); ?></span>
-                    <span class="tc-batch-item__body">
-                        <span class="tc-batch-item__title"><?php echo esc_html( $b['name'] ); ?></span>
-                        <span class="tc-batch-item__desc tc-muted"><?php echo esc_html( $b['date'] ); ?> · <?php echo esc_html( $b['seats'] ); ?></span>
-                    </span>
-                    <?php echo tc_icon( 'arrow-right', 18, 'tc-batch-item__arrow' ); ?>
-                </a>
-                <?php endforeach; ?>
-            </div>
-        </section>
+						<h4 class="tc-apply-panel__subhead">Download the brochure</h4>
+						<div class="tc-brochure" data-state="locked">
+							<p class="tc-brochure__locked">📄 Submit the form to unlock the download.</p>
+							<a class="tc-btn tc-btn--primary tc-btn--block tc-brochure__link" href="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/files/Training_Brochure.pptx' ); ?>" download hidden>
+								Download Brochure (PPTX)
+							</a>
+						</div>
+					</aside>
+				</div>
 
-        <!-- SECTION: Application form + trust panel -->
-        <section class="tc-section tc-apply-section tc-reveal" id="tc-apply-form-anchor">
-            <span class="tc-eyebrow">Apply</span>
-            <h2 class="tc-section__title">Start your application</h2>
+			</div>
+		</section>
 
-            <div class="row">
+		<!-- SECTION: FAQ -->
+		<section class="tc-section tc-section--tint tc-faq-section tc-reveal">
+			<span class="tc-eyebrow">Questions</span>
+			<h2 class="tc-section__title">Frequently asked questions</h2>
+			<div class="tc-faq">
+				<?php foreach ( $tc_faqs as $i => $faq ) : ?>
+				<details class="tc-faq__item tc-reveal" style="--delay: <?php echo ( $i % 4 ) * 70; ?>ms" <?php echo $i === 0 ? 'open' : ''; ?>>
+					<summary class="tc-faq__q"><?php echo esc_html( $faq['q'] ); ?></summary>
+					<p class="tc-faq__a tc-muted"><?php echo wp_kses_post( $faq['a'] ); ?></p>
+				</details>
+				<?php endforeach; ?>
+			</div>
+		</section>
 
-                <!-- LEFT: the registration form -->
-                <div class="col-lg-7 tc-reveal">
-                    <div class="tc-apply-form">
-                        <?php
-                        /**
-                         * Fluent Form 1 ("Admissions Application") holds the full 32-field
-                         * spec (Personal & Contact, Course Interest, Profile, Skill & Goals,
-                         * Job Support, Payment, Technical Readiness, Follow-up, Consent &
-                         * Terms) split into two Containers — tc-ff-step1 / tc-ff-step2 — with
-                         * a Custom HTML "Continue" button between them. Step 2 is revealed by
-                         * theme JS (initApplyFormSteps() in assets/js/custom.js) once Step 1's
-                         * required fields validate; it's still one single-submission form, not
-                         * Fluent Forms' native multi-page feature. Job Support / Billing Name /
-                         * Internet Availability use Fluent Forms' native per-field Conditional
-                         * Logic. Edit the fields in wp-admin → Fluent Forms → Admissions
-                         * Application, not here.
-                         *
-                         * Integrations still to wire up manually in wp-admin: confirmation
-                         * email (Settings → Notifications), WhatsApp webhook, and — if Google
-                         * Sheets sync is enabled — the Sheet's column headers (new fields sync
-                         * automatically via inc/google-sheets-sync.php, keyed by field name).
-                         */
-                        if ( function_exists( 'do_shortcode' ) ) {
-                            echo do_shortcode( '[fluentform id="1"]' );
-                        }
-                        ?>
-                    </div>
-                </div>
+		<!-- SECTION: Final CTA -->
+		<section class="tc-section tc-cta-band tc-reveal">
+			<div class="tc-glow-orb tc-glow-orb--blue" aria-hidden="true"></div>
+			<h2>Ready to start building?</h2>
+			<p class="tc-cta-band__sub">Seats fill up each cohort. Apply now and lock yours within 24 hours.</p>
+			<div class="tc-cta-band__actions">
+				<a class="tc-btn tc-btn--primary" data-magnetic href="#tc-apply-form-anchor">Apply Now</a>
+				<a class="tc-btn tc-btn--ghost" href="<?php echo esc_url( tc_tpl_url( 'page-program.php', '/program-curriculum/' ) ); ?>">View Curriculum</a>
+			</div>
+		</section>
 
-                <!-- RIGHT: trust panel + gated brochure -->
-                <div class="col-lg-5 tc-reveal" style="--delay: 100ms">
-                    <aside class="tc-apply-aside">
-                        <h3>Why visionONE</h3>
-                        <!-- CLAUDE CODE: 3–4 trust bullets (placement, mentors, projects). -->
-                        <ul class="tc-checklist">
-                            <li>Industry-mentored, project-first</li>
-                            <li>Placement &amp; TPO support</li>
-                            <li>EMI-friendly fees</li>
-                        </ul>
-
-                        <div class="tc-brochure" data-state="locked">
-                            <p class="tc-brochure__locked">📄 Submit the form to unlock the brochure download.</p>
-                            <a class="tc-btn tc-btn--primary tc-brochure__link" href="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/files/Training_Brochure.pptx' ); ?>" download hidden>
-                                Download Brochure (PPTX)
-                            </a>
-                        </div>
-                    </aside>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- SECTION: FAQ -->
-        <section class="tc-section tc-section--tint tc-faq-section tc-reveal">
-            <span class="tc-eyebrow">Questions</span>
-            <h2 class="tc-section__title">Frequently asked questions</h2>
-            <div class="tc-faq">
-                <?php foreach ( $tc_faqs as $i => $faq ) : ?>
-                <details class="tc-faq__item tc-reveal" style="--delay: <?php echo ( $i % 4 ) * 70; ?>ms" <?php echo $i === 0 ? 'open' : ''; ?>>
-                    <summary class="tc-faq__q"><?php echo esc_html( $faq['q'] ); ?></summary>
-                    <p class="tc-faq__a tc-muted"><?php echo wp_kses_post( $faq['a'] ); ?></p>
-                </details>
-                <?php endforeach; ?>
-            </div>
-        </section>
-
-        <!-- SECTION: CTA -->
-        <section class="tc-section tc-cta-band text-center">
-            <h2>Seats fill up fast each cohort</h2>
-            <p class="tc-cta-band__sub">Apply now and our team will confirm your batch over email &amp; WhatsApp
-                within 24 hours.</p>
-            <div class="tc-cta-band__actions">
-                <a class="tc-btn tc-btn--primary" href="#tc-apply-form-anchor">Apply Now</a>
-                <a class="tc-btn tc-btn--ghost" href="<?php echo esc_url( tc_tpl_url( 'page-fees.php', '/fees-batches/' ) ); ?>">View Fees &amp; Batches</a>
-            </div>
-        </section>
-
-    </div>
+	</div>
 </div>
 
 <?php get_footer();

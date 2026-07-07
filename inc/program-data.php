@@ -39,9 +39,12 @@ if ( ! function_exists( 'tc_program_search_index' ) ) {
 		$out = array();
 		foreach ( tc_program_modules() as $i => $m ) {
 			$out[] = array(
-				'id'    => 'tc-module-' . $i,
-				'topic' => $m['topic'],
-				'text'  => strtolower( trim( $m['topic'] . ' ' . $m['desc'] . ' ' . $m['phase'] . ' ' . $m['weeks'] . ' ' . $m['milestone'] ) ),
+				'id'        => 'tc-module-' . $i,
+				'topic'     => $m['topic'],
+				'phase'     => $m['phase'],
+				'weeks'     => $m['weeks'],
+				'milestone' => $m['milestone'],
+				'text'      => strtolower( trim( $m['topic'] . ' ' . $m['desc'] . ' ' . $m['phase'] . ' ' . $m['weeks'] . ' ' . $m['milestone'] ) ),
 			);
 		}
 		return $out;
