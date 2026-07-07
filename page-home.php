@@ -81,7 +81,7 @@ $tc_tests = array(
 
                     <div class="tc-home__hero-actions">
                         <a class="tc-btn tc-btn--primary" data-magnetic
-                            href="<?php echo esc_url(tc_tpl_url('page-apply.php', '/admissions-apply/')); ?>">Get
+                            href="<?php echo esc_url(tc_tpl_url('page-apply.php', '/admissions-apply/') . '#tc-apply-form-anchor'); ?>">Get
                             Started</a>
                         <a class="tc-btn tc-btn--ghost"
                             href="<?php echo esc_url(tc_tpl_url('page-program.php', '/program-curriculum/')); ?>">Explore
@@ -308,7 +308,6 @@ $tc_tests = array(
                             <span>Learners trained &amp; placed</span>
                         </div>
                     </div>
-                    <p class="tc-placeholder-note tc-placeholder-note--right">Add these photos in <strong>Customize → VisionONE Content</strong>.</p>
                 </div>
             </div>
         </section>
@@ -376,7 +375,7 @@ $tc_tests = array(
                 your batch over email &amp; WhatsApp.</p>
             <div class="tc-cta-band__actions">
                 <a class="tc-btn tc-btn--primary" data-magnetic
-                    href="<?php echo esc_url(tc_tpl_url('page-apply.php', '/admissions-apply/')); ?>">Apply Now</a>
+                    href="<?php echo esc_url(tc_tpl_url('page-apply.php', '/admissions-apply/') . '#tc-apply-form-anchor'); ?>">Apply Now</a>
                 <a class="tc-btn tc-btn--ghost"
                     href="<?php echo esc_url(tc_tpl_url('page-program.php', '/program-curriculum/')); ?>">View the
                     Program</a>

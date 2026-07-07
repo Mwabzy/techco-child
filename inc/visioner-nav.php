@@ -61,7 +61,7 @@ function tc_render_visioner_nav()
 	};
 
 	$home_url  = $tpl_url('page-home.php', '/');
-	$apply_url = $tpl_url('page-apply.php', '/apply/');
+	$apply_url = $tpl_url('page-apply.php', '/admissions-apply/') . '#tc-apply-form-anchor';
 	$prog_url  = $tpl_url('page-program.php', '/program-curriculum/');
 
 	// Course-content search index (query → curriculum module anchor).

@@ -308,7 +308,7 @@ $tc_bank_rows = array(
 				your plan and batch over email &amp; WhatsApp.</p>
 			<div class="tc-cta-band__actions">
 				<a class="tc-btn tc-btn--primary"
-					href="<?php echo esc_url(tc_tpl_url('page-apply.php', '/admissions-apply/')); ?>">Apply
+					href="<?php echo esc_url(tc_tpl_url('page-apply.php', '/admissions-apply/') . '#tc-apply-form-anchor'); ?>">Apply
 					First</a> <a class="tc-btn tc-btn--ghost"
 					href="<?php echo esc_url(tc_tpl_url('page-fees.php', '/fees-batches/')); ?>">View Fees &amp;
 					Batches</a>

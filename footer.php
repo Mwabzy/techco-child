@@ -64,7 +64,7 @@ $page_sticky_enabled = !$page_footer_sticky_disable && $global_footer_sticky;
 
                     <nav class="tc-footer__col" aria-label="Get started">
                         <span class="tc-footer__col-title">Get started</span>
-                        <a href="<?php echo esc_url(tc_tpl_url('page-apply.php', '/admissions-apply/')); ?>">Apply Now</a>
+                        <a href="<?php echo esc_url(tc_tpl_url('page-apply.php', '/admissions-apply/') . '#tc-apply-form-anchor'); ?>">Apply Now</a>
                         <a href="<?php echo esc_url(tc_tpl_url('page-resources.php', '/resources/')); ?>">Study Materials</a>
                     </nav>
 
@@ -72,7 +72,7 @@ $page_sticky_enabled = !$page_footer_sticky_disable && $global_footer_sticky;
                         <span class="tc-footer__col-title">Admissions open</span>
                         <p>Seats are limited each cohort.</p>
                         <a class="tc-btn tc-btn--primary" data-magnetic
-                            href="<?php echo esc_url(tc_tpl_url('page-apply.php', '/admissions-apply/')); ?>">Reserve your
+                            href="<?php echo esc_url(tc_tpl_url('page-apply.php', '/admissions-apply/') . '#tc-apply-form-anchor'); ?>">Reserve your
                             seat</a>
                     </div>
 

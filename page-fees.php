@@ -143,7 +143,7 @@ $tc_faqs = array(
 								<?php endforeach; ?>
 							</ul>
 							<a class="tc-btn <?php echo $plan['recommended'] ? 'tc-btn--primary' : 'tc-btn--outline'; ?> tc-btn--block"
-								href="<?php echo esc_url(tc_tpl_url('page-payment.php', '/pay/')); ?>">
+								href="<?php echo esc_url(tc_tpl_url('page-apply.php', '/admissions-apply/') . '#tc-apply-form-anchor'); ?>">
 								<?php echo esc_html($plan['cta']); ?>
 							</a>
 						</div>
@@ -307,7 +307,7 @@ $tc_faqs = array(
 				batch — then confirm everything over email &amp; WhatsApp within 24 hours.</p>
 			<div class="tc-cta-band__actions">
 				<a class="tc-btn tc-btn--primary"
-					href="<?php echo esc_url(tc_tpl_url('page-apply.php', '/admissions-apply/')); ?>">Apply Now</a>
+					href="<?php echo esc_url(tc_tpl_url('page-apply.php', '/admissions-apply/') . '#tc-apply-form-anchor'); ?>">Apply Now</a>
 				<a class="tc-btn tc-btn--ghost"
 					href="<?php echo esc_url(tc_tpl_url('page-program.php', '/program-curriculum/')); ?>">View
 					Curriculum</a>
