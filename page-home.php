@@ -250,7 +250,6 @@ $tc_tests = array(
                     </article>
                 <?php endforeach; ?>
             </div>
-            <p class="tc-placeholder-note">Add track images in <strong>Appearance → Customize → VisionONE Content</strong>.</p>
         </section>
 
         <!-- SECTION: Outcomes stats band -->
