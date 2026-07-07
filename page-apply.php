@@ -178,7 +178,7 @@ $tc_apply_why = array(
 		</section>
 
 		<!-- SECTION: Final CTA -->
-		<section class="tc-section tc-cta-band tc-reveal">
+		<section class="tc-section tc-cta-band text-center tc-reveal">
 			<div class="tc-glow-orb tc-glow-orb--blue" aria-hidden="true"></div>
 			<h2>Ready to start building?</h2>
 			<p class="tc-cta-band__sub">Seats fill up each cohort. Apply now and lock yours within 24 hours.</p>

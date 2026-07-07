@@ -50,10 +50,10 @@ $tc_stack = array(
 );
 
 $tc_steps = array(
-    array('n' => '01', 'ic' => 'chat', 'color' => 'blue', 'title' => 'Apply', 'text' => 'Submit the quick registration form and pick your preferred batch.'),
-    array('n' => '02', 'ic' => 'mail', 'color' => 'violet', 'title' => 'Get confirmed', 'text' => 'Our team confirms your seat over email &amp; WhatsApp and shares the joining kit.'),
-    array('n' => '03', 'ic' => 'sliders', 'color' => 'amber', 'title' => 'Learn &amp; build', 'text' => '14 weeks of live, project-first training with mentors and weekly reviews.'),
-    array('n' => '04', 'ic' => 'award', 'color' => 'green', 'title' => 'Get placed', 'text' => 'Graduate with a portfolio and step into interviews with placement support.'),
+    array('n' => '1', 'ic' => 'chat', 'color' => 'blue', 'title' => 'Apply', 'text' => 'Submit the quick registration form and pick your preferred batch.'),
+    array('n' => '2', 'ic' => 'mail', 'color' => 'violet', 'title' => 'Get confirmed', 'text' => 'Our team confirms your seat over email &amp; WhatsApp and shares the joining kit.'),
+    array('n' => '3', 'ic' => 'sliders', 'color' => 'amber', 'title' => 'Learn &amp; build', 'text' => '14 weeks of live, project-first training with mentors and weekly reviews.'),
+    array('n' => '4', 'ic' => 'award', 'color' => 'green', 'title' => 'Get placed', 'text' => 'Graduate with a portfolio and step into interviews with placement support.'),
 );
 
 // Reviews (image-3 people cards). 'img' = Customizer avatar key; 'color' tints the role line.
