@@ -410,10 +410,14 @@
         return;
       }
 
-      var visible = items.slice(0, 4);
+      var visible = items.slice(0, 6);
       list.innerHTML = visible
         .map(function (item, index) {
           var href = (data.url || "") + "#" + item.id;
+          // Extract short name from topic (first word or key term)
+          var topicText = item.topic || "";
+          var shortName = topicText.split(/[—–\s]/)[0].trim(); // Get first segment
+          if (!shortName || shortName.length < 3) { shortName = topicText.split(/\s+/)[0]; }
           var subtitle = [];
           if (item.phase) {
             subtitle.push(item.phase);
@@ -433,13 +437,8 @@
             '" role="option" id="tc-nav-search-suggestion-' +
             index +
             '">' +
-            '<span class="tc-nav__search-suggestion-badge tc-nav__search-suggestion-badge--' +
-            escapeHtml(phaseClass) +
-            '" aria-hidden="true">' +
-            "" +
-            "</span>" +
             '<span class="tc-nav__search-suggestion-title">' +
-            escapeHtml(item.topic || "") +
+            escapeHtml(shortName) +
             "</span>" +
             '<span class="tc-nav__search-suggestion-subtitle">' +
             escapeHtml(subtitle.join(" · ")) +

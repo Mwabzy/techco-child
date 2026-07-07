@@ -43,6 +43,7 @@ function tc_render_visioner_nav()
 		'Home' => array('page-home.php', '/'),
 		'Program' => array('page-program.php', '/program/'),
 		'Fees & Batches' => array('page-fees.php', '/fees-batches/'),
+		'Admissions' => array('page-apply.php', '/admissions-apply/'),
 		'For Colleges' => array('page-colleges.php', '/for-colleges/'),
 	);
 
@@ -50,6 +51,7 @@ function tc_render_visioner_nav()
 	$explore = array(
 		'Program' => array('page-program.php', '/program/'),
 		'Fees & Batches' => array('page-fees.php', '/fees-batches/'),
+		'Admissions' => array('page-apply.php', '/admissions-apply/'),
 		'For Colleges' => array('page-colleges.php', '/for-colleges/'),
 	);
 
