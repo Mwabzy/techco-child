@@ -86,15 +86,19 @@ function tc_render_visioner_nav()
 
 				<!-- Search pill with an Explore sections dropdown -->
 				<form class="tc-nav__search" role="search" method="get" action="<?php echo esc_url($home_url); ?>">
-					<span class="tc-nav__search-ic" aria-hidden="true">
-						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-							stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false">
-							<circle cx="11" cy="11" r="8" />
-							<line x1="21" y1="21" x2="16.65" y2="16.65" />
-						</svg>
-					</span>
-					<input class="tc-nav__search-input" type="search" name="s" placeholder="Want to learn?"
-						aria-label="Search the site">
+					<div class="tc-nav__search-field">
+						<span class="tc-nav__search-ic" aria-hidden="true">
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+								stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+								<circle cx="11" cy="11" r="8" />
+								<line x1="21" y1="21" x2="16.65" y2="16.65" />
+							</svg>
+						</span>
+						<input class="tc-nav__search-input" type="search" name="s" placeholder="Want to learn?"
+							aria-label="Search the site" autocomplete="off" aria-autocomplete="list"
+							aria-controls="tc-nav-search-suggestions" aria-expanded="false">
+						<div class="tc-nav__search-suggestions" id="tc-nav-search-suggestions" role="listbox" aria-label="Suggested topics" hidden></div>
+					</div>
 					<details class="tc-nav__explore">
 						<summary>Explore <?php echo tc_icon('chevron-down', 16); ?></summary>
 						<ul class="tc-nav__explore-menu">
