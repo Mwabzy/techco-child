@@ -85,33 +85,25 @@ $tc_faqs = array(
 <div id="primary" class="content-area page-content-area tc-page pt-120 pb-120">
 	<div class="container">
 
-		<!-- SECTION: Hero -->
-		<section class="tc-hero tc-texture-dots tc-reveal">
-			<!-- Ambient glow orbs -->
-			<div class="tc-glow-orb tc-glow-orb--blue" aria-hidden="true"></div>
-			<div class="tc-glow-orb tc-glow-orb--orange" aria-hidden="true"></div>
+		<!-- SECTION: Hero — gradient banner (consistent with the program page) -->
+		<nav class="tc-hero__crumbs tc-coursebanner__crumbs" aria-label="Breadcrumb">
+			<a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a><span>›</span>
+			<span class="tc-hero__crumbs-current">Fees &amp; Batches</span>
+		</nav>
 
-			<nav class="tc-hero__crumbs" aria-label="Breadcrumb">
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a><span>›</span>
-				<span class="tc-hero__crumbs-current">Fees &amp; Batches</span>
-			</nav>
-
-			<h1 class="tc-hero__title"><span class="tc-gradient-text tc-gradient-text--freeze">Transparent fees. No surprises.</span></h1>
-			<p class="tc-hero__sub">All prices are base amounts — GST (18%) is added at checkout. Choose a plan, pick
-			a batch that fits your schedule, and pay securely online.</p>
-
-			<div class="tc-hero__stats">
-				<div class="tc-stat">
-					<strong class="tc-stat__num" data-animate>+ GST</strong>
-					<span class="tc-stat__label">18% added at checkout</span>
-				</div>
-				<div class="tc-stat tc-stat--divider">
-					<strong class="tc-stat__num" data-animate>GST Invoice</strong>
-					<span class="tc-stat__label">sent automatically after payment</span>
-				</div>
-				<div class="tc-stat tc-stat--divider">
-					<strong class="tc-stat__num" data-animate>Zero</strong>
-					<span class="tc-stat__label">hidden or convenience fees</span>
+		<section class="tc-coursebanner tc-coursebanner--simple tc-reveal">
+			<span class="tc-coursebanner__bg" data-parallax="10" aria-hidden="true"></span>
+			<div class="tc-coursebanner__inner">
+				<div class="tc-coursebanner__content" data-motion-in>
+					<span class="tc-coursebanner__kicker">Fees &amp; Batches</span>
+					<h1 class="tc-coursebanner__title">Transparent fees. No surprises.</h1>
+					<p class="tc-coursebanner__desc">All prices are base amounts — GST (18%) is added at checkout.
+						Choose a plan, pick a batch that fits your schedule, and pay securely online.</p>
+					<div class="tc-coursebanner__stats">
+						<span class="tc-herostat"><strong>+ GST</strong><span>18% added at checkout</span></span>
+						<span class="tc-herostat"><strong>GST Invoice</strong><span>sent automatically</span></span>
+						<span class="tc-herostat"><strong>Zero</strong><span>hidden or convenience fees</span></span>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -122,10 +114,13 @@ $tc_faqs = array(
 			<h2 class="tc-section__title">Fee Plans — Per Program</h2>
 			<p class="tc-muted tc-fees__lead">Core is the 10-week spine — bolt on Cloud and AI, or take the
 			Complete Bundle. All prices are base amounts (ex-GST). GST at 18% is added at checkout.</p>
+			<?php // Per-track colour accent (blue / violet / amber / green). ?>
+			<?php $tc_plan_accents = array( '#2496ED', '#6D4AE0', '#C77700', '#0E9F6E' ); ?>
 			<div class="row tc-fees__grid">
 				<?php foreach ( $tc_plans as $i => $plan ) : ?>
 				<div class="col-lg-3 col-md-6 tc-reveal" style="--delay: <?php echo $i * 120; ?>ms">
-					<div class="tc-price-card <?php echo $plan['recommended'] ? 'tc-price-card--recommended' : ''; ?>" data-tilt>
+					<div class="tc-price-card <?php echo $plan['recommended'] ? 'tc-price-card--recommended' : ''; ?>" data-tilt
+						style="--accent: <?php echo esc_attr( $tc_plan_accents[ $i % 4 ] ); ?>;">
 						<?php if ( $plan['recommended'] ) : ?>
 							<span class="tc-price-card__tag">Most Popular</span>
 						<?php endif; ?>
