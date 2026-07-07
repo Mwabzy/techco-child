@@ -76,6 +76,50 @@
 }
 
 /* -----------------------------------------------------------
+   Preloader — full-page splash screen overlay (parent theme)
+   Restyled to use the site's actual logo and brand palette
+   ----------------------------------------------------------- */
+@keyframes tc-preloader-fade-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.preloader {
+  background-color: var(--tc-navy);
+}
+
+.preloader .loader-line {
+  background-image: linear-gradient(to bottom, var(--tc-blue), rgba(36, 150, 237, 0));
+}
+
+.preloader .loader-line:before {
+  background-color: var(--tc-navy);
+}
+
+.preloader .loader-logo {
+  /* Pin to the 160px ring box (its positioned parent) and drop the parent
+     theme's fragile height:100vh + translateY(-50%) centering trick, so the
+     logo sits dead-center inside the spinner ring on any viewport. */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: auto;
+  transform: none;
+  background-image: url("../images/logo.png");
+  background-size: 96px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  animation: tc-preloader-fade-in 500ms var(--tc-ease) both;
+}
+
+/* -----------------------------------------------------------
    Page base — refined warm-neutral backdrop for the whole content area.
    `.tc-page` is added to #primary in each Visioner template.
    ----------------------------------------------------------- */
@@ -1670,6 +1714,72 @@
   padding: 28px;
   text-align: center;
   background: rgba(15, 23, 42, 0.03);
+}
+
+/* -----------------------------------------------------------
+   Bank transfer card — account details list + copy buttons
+   ----------------------------------------------------------- */
+.tc-bank-card__details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-top: 1.5px solid var(--tc-border);
+  padding-top: 16px;
+  margin-bottom: 20px;
+}
+.tc-bank-card__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 15px;
+  flex-wrap: wrap;
+}
+.tc-bank-card__label {
+  color: var(--tc-muted);
+  font-size: 13px;
+}
+.tc-bank-card__value {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  color: var(--tc-heading);
+  text-align: right;
+}
+.tc-bank-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 1px solid var(--tc-border-strong);
+  border-radius: 6px;
+  background: var(--tc-surface);
+  color: var(--tc-muted);
+  cursor: pointer;
+  transition:
+    color 0.2s,
+    border-color 0.2s,
+    background 0.2s;
+}
+.tc-bank-copy-btn:hover {
+  color: var(--tc-blue);
+  border-color: var(--tc-blue);
+}
+.tc-bank-copy-btn__icon-check {
+  display: none;
+}
+.tc-bank-copy-btn.is-copied {
+  color: #1ba672;
+  border-color: #1ba672;
+}
+.tc-bank-copy-btn.is-copied .tc-bank-copy-btn__icon-copy {
+  display: none;
+}
+.tc-bank-copy-btn.is-copied .tc-bank-copy-btn__icon-check {
+  display: inline-flex;
 }
 
 /* -----------------------------------------------------------
@@ -3339,7 +3449,7 @@ html {
   min-height: 68px;
 }
 
-/* Brand — blue "V" mark + navy "visionONE" wordmark on the light bar. */
+/* Brand — blue "V" mark + navy "VisionONE" wordmark on the light bar. */
 .tc-nav__brand {
   display: inline-flex;
   align-items: center;
@@ -4002,6 +4112,121 @@ html {
 }
 .tc-pay-refund-notice a {
   color: var(--tc-blue);
+}
+
+/* Draft-review callout — reuses .tc-pay-refund-notice's box style
+   under a name that isn't tied to the payment page (Terms page etc.) */
+.tc-legal-notice {
+  margin-bottom: 32px;
+}
+
+/* Long-form legal / policy prose (Terms and Conditions page) */
+.tc-legal h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--tc-heading);
+  margin: 40px 0 12px;
+}
+.tc-legal h2:first-of-type {
+  margin-top: 8px;
+}
+.tc-legal p {
+  color: var(--tc-text);
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 0 0 16px;
+}
+.tc-legal a {
+  color: var(--tc-blue);
+}
+
+/* -----------------------------------------------------------
+   Read-in-place modal (Terms and Conditions, triggered from the
+   Apply form checkbox and the Payment page's No-Refund notice).
+   Generic/id-driven — see initTcModals() in custom.js.
+   ----------------------------------------------------------- */
+.tc-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+}
+.tc-modal--open {
+  display: block;
+}
+.tc-modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 14, 46, 0.55);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.tc-modal--open .tc-modal__overlay {
+  opacity: 1;
+}
+.tc-modal__dialog {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(720px, calc(100vw - 32px));
+  max-height: min(80vh, 760px);
+  margin: max(4vh, 24px) auto 0;
+  background: #fff;
+  border-radius: var(--tc-radius-lg);
+  box-shadow: 0 24px 60px rgba(10, 14, 46, 0.28);
+  opacity: 0;
+  transform: translateY(16px) scale(0.98);
+  transition:
+    opacity 0.22s ease,
+    transform 0.22s ease;
+}
+.tc-modal--open .tc-modal__dialog {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.tc-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--tc-border);
+  flex-shrink: 0;
+}
+.tc-modal__title {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--tc-heading);
+}
+.tc-modal__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--tc-border-strong);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--tc-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.tc-modal__close:hover {
+  color: var(--tc-text);
+  border-color: var(--tc-blue);
+}
+.tc-modal__body {
+  padding: 24px;
+  overflow-y: auto;
+}
+.tc-modal__body .tc-legal h2:first-of-type {
+  margin-top: 0;
+}
+body.tc-modal-lock {
+  overflow: hidden;
 }
 
 /* Razorpay slot on pay page */

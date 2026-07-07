@@ -182,6 +182,9 @@ require_once get_stylesheet_directory() . '/inc/gsheet-http.php';
 // Fluent Forms → Google Sheets sync (config via wp-config.php constants).
 require_once get_stylesheet_directory() . '/inc/google-sheets-sync.php';
 
+// Terms and Conditions — shared content + in-page modal (Apply + Payment pages).
+require_once get_stylesheet_directory() . '/inc/legal-content.php';
+
 // Visioner sticky nav for templates that hide the parent header (hooks wp_body_open).
 require_once get_stylesheet_directory() . '/inc/visioner-nav.php';
 

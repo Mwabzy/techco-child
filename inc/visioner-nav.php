@@ -31,6 +31,7 @@ function tc_render_visioner_nav()
 		'page-fees.php',
 		'page-apply.php',
 		'page-colleges.php',
+		'page-payment.php',
 	);
 
 	$current = is_page() ? (string) get_page_template_slug(get_queried_object_id()) : '';
@@ -71,7 +72,7 @@ function tc_render_visioner_nav()
 
 	// Reuse the site's WhatsApp line (same filters as the floating widget) for "Talk to us".
 	$wa_number = apply_filters('techco_child_wa_number', '918143533535');
-	$wa_msg    = apply_filters('techco_child_wa_message', 'Hi visionONE, I\'d like to know more about the Full Stack Training program.');
+	$wa_msg    = apply_filters('techco_child_wa_message', 'Hi VisionONE, I\'d like to know more about the Full Stack Training program.');
 	$talk_url  = $wa_number ? 'https://wa.me/' . rawurlencode($wa_number) . '?text=' . rawurlencode($wa_msg) : $apply_url;
 	?>
 	<header class="tc-nav" id="tc-nav">
@@ -81,7 +82,7 @@ function tc_render_visioner_nav()
 				<img class="tc-nav__brand-logo"
 					src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/images/logo.png'); ?>" alt=""
 					aria-hidden="true">
-				<span class="tc-nav__brand-text">vision<span class="tc-nav__brand-text-accent">ONE</span></span>
+				<span class="tc-nav__brand-text">Vision<span class="tc-nav__brand-text-accent">ONE</span></span>
 			</a>
 
 			<div class="tc-nav__collapse" id="tc-nav-menu">

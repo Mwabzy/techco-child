@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: visionONE — Study Materials
+ * Template Name: VisionONE — Study Materials
  *
  * Gated portal for enrolled students. Logged-in users see the downloadable
  * study materials grid. Logged-out visitors see a login wall.
@@ -111,7 +111,7 @@ $tc_type_mod = array(
 				<h1 class="tc-hero__title">
 					<span class="tc-gradient-text tc-gradient-text--freeze">Study Materials</span>
 				</h1>
-				<p class="tc-hero__sub">Course materials are available exclusively for enrolled students. Log in with your visionONE account to access your downloads.</p>
+				<p class="tc-hero__sub">Course materials are available exclusively for enrolled students. Log in with your VisionONE account to access your downloads.</p>
 			<?php endif; ?>
 		</section>
 
@@ -157,7 +157,7 @@ $tc_type_mod = array(
 						<svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
 					</div>
 					<h2 class="tc-lock-card__title">Enrolled students only</h2>
-					<p class="tc-lock-card__desc tc-muted">Study materials are available exclusively to visionONE students. Log in with the credentials sent to you after enrolment.</p>
+					<p class="tc-lock-card__desc tc-muted">Study materials are available exclusively to VisionONE students. Log in with the credentials sent to you after enrolment.</p>
 					<a class="tc-btn tc-btn--primary tc-lock-card__login-btn" href="<?php echo esc_url( $tc_login_url ); ?>">
 						<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
 						Log In to Your Account

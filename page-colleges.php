@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: visionONE — For Colleges (TPO)
+ * Template Name: VisionONE — For Colleges (TPO)
  *
  * B2B/TPO page: bulk pricing, engagement models + TPO enquiry form.
  * Udemy-style hero with a sticky enquiry card alongside the content.
@@ -53,8 +53,8 @@ $tc_wa_tel = preg_replace( '/[^0-9+]/', '', $tc_org['wa'] );
             <span class="tc-coursebanner__bg" data-parallax="10" aria-hidden="true"></span>
             <div class="tc-coursebanner__inner">
                 <div class="tc-coursebanner__content" data-motion-in>
-                    <span class="tc-coursebanner__kicker">visionONE Training · College &amp; Bulk</span>
-                    <h1 class="tc-coursebanner__title">Train &amp; place your students with visionONE</h1>
+                    <span class="tc-coursebanner__kicker">VisionONE Training · College &amp; Bulk</span>
+                    <h1 class="tc-coursebanner__title">Train &amp; place your students with VisionONE</h1>
                     <p class="tc-coursebanner__desc">Industry-grade fullstack training for your campus — delivered
                         on-site or online at transparent bulk rates, with placement reporting and zero revenue-share.</p>
                     <div class="tc-coursebanner__stats">
@@ -148,7 +148,7 @@ $tc_wa_tel = preg_replace( '/[^0-9+]/', '', $tc_org['wa'] );
                             <div class="tc-model tc-model--a">
                                 <span class="tc-model__tag">Model A</span>
                                 <h3 class="tc-model__name">Student-paid</h3>
-                                <p class="tc-muted">College hosts the batch; students pay visionONE directly
+                                <p class="tc-muted">College hosts the batch; students pay VisionONE directly
                                     at the bulk rate. Zero cost to the institution.</p>
                             </div>
                         </div>

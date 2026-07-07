@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: visionONE — CRM
+ * Template Name: VisionONE — CRM
  *
  * Private, admins-only applications CRM. Reads/writes applicant records that
  * live in the Google Sheet (via the Apps Script Web App, see inc/crm/).
@@ -32,7 +32,7 @@ get_header();
 	<!-- Top bar -->
 	<header class="tc-crm__topbar">
 		<div class="tc-crm__brand">
-			<span class="tc-crm__brand-mark">vision<span class="tc-crm__brand-accent">ONE</span></span>
+			<span class="tc-crm__brand-mark">Vision<span class="tc-crm__brand-accent">ONE</span></span>
 			<span class="tc-crm__brand-sep">/</span>
 			<span class="tc-crm__brand-name">Applications CRM</span>
 		</div>
@@ -44,6 +44,7 @@ get_header();
 		</nav>
 
 		<div class="tc-crm__topbar-actions">
+			<span class="tc-crm__avatar" aria-hidden="true"><?php echo esc_html( tc_crm_initials( $tc_crm_boot['user'] ) ); ?></span>
 			<span class="tc-crm__user"><?php echo esc_html( $tc_crm_boot['user'] ); ?></span>
 			<button class="tc-crm__btn tc-crm__btn--ghost" type="button" data-action="refresh">
 				<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0115-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 01-15 6.7L3 16"/></svg>

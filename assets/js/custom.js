@@ -357,6 +357,31 @@
   }
 
   /* ---------------------------------------------------------
+       Copy buttons ([data-copy]) — copy bank/account details to the
+       clipboard with brief visual feedback (Payments page).
+       --------------------------------------------------------- */
+  function initCopyButtons() {
+    var btns = document.querySelectorAll("[data-copy]");
+    if (!btns.length || !navigator.clipboard) {
+      return;
+    }
+
+    Array.prototype.forEach.call(btns, function (btn) {
+      btn.addEventListener("click", function () {
+        navigator.clipboard
+          .writeText(btn.dataset.copy)
+          .then(function () {
+            btn.classList.add("is-copied");
+            setTimeout(function () {
+              btn.classList.remove("is-copied");
+            }, 1600);
+          })
+          .catch(function () {});
+      });
+    });
+  }
+
+  /* ---------------------------------------------------------
        Nav search suggestions — surface curriculum topics when the
        input is focused/clicked so users can jump to course content
        directly without typing a full query.
@@ -741,6 +766,68 @@
   }
 
   /* ---------------------------------------------------------
+       Read-in-place modals (Terms and Conditions etc.)
+       Generic/id-driven: any [data-tc-modal-open="X"] trigger opens
+       #tc-modal-X. Close via [data-tc-modal-close], overlay click,
+       or Escape. See tc_render_terms_modal() in inc/legal-content.php.
+       --------------------------------------------------------- */
+  function initTcModals() {
+    var openModal = null;
+    var lastTrigger = null;
+
+    function open(modal, trigger) {
+      openModal = modal;
+      lastTrigger = trigger || null;
+      modal.classList.add("tc-modal--open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("tc-modal-lock");
+      var closeBtn = modal.querySelector(".tc-modal__close");
+      if (closeBtn) {
+        closeBtn.focus();
+      }
+    }
+
+    function close() {
+      if (!openModal) {
+        return;
+      }
+      openModal.classList.remove("tc-modal--open");
+      openModal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("tc-modal-lock");
+      if (lastTrigger && typeof lastTrigger.focus === "function") {
+        lastTrigger.focus();
+      }
+      openModal = null;
+      lastTrigger = null;
+    }
+
+    document.addEventListener("click", function (e) {
+      var trigger = e.target.closest("[data-tc-modal-open]");
+      if (trigger) {
+        var modal = document.getElementById(
+          "tc-modal-" + trigger.getAttribute("data-tc-modal-open"),
+        );
+        if (modal) {
+          e.preventDefault();
+          open(modal, trigger);
+        }
+        return;
+      }
+
+      if (e.target.closest("[data-tc-modal-close]")) {
+        e.preventDefault();
+        close();
+      }
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && openModal) {
+        close();
+      }
+    });
+  }
+
+  /* ---------------------------------------------------------
        Bootstrap on DOMContentLoaded
        --------------------------------------------------------- */
   document.addEventListener("DOMContentLoaded", function () {
@@ -752,10 +839,12 @@
     initApplyFormSteps();
     initMagneticButtons();
     initShareButtons();
+    initCopyButtons();
     initNavSearchSuggestions();
     initNavSearch();
     initCurriculumJump();
     initMotion();
+    initTcModals();
 
     // Fluent Forms fires this jQuery event on successful AJAX submit.
     if (window.jQuery) {

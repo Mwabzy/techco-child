@@ -1,5 +1,5 @@
 /**
- * visionONE — Applications CRM (front-end, admins-only)
+ * VisionONE — Applications CRM (front-end, admins-only)
  * Vanilla JS, no external dependencies — charts are hand-rolled inline SVG.
  * Data arrives server-rendered via window.tcCrmData (see page-crm.php);
  * all writes go through admin-ajax (tc_crm_update / tc_crm_refresh) with a
@@ -498,7 +498,7 @@
 		var url = URL.createObjectURL(blob);
 		var a = document.createElement('a');
 		a.href = url;
-		a.download = 'visionone-crm-report-' + new Date().toISOString().slice(0, 10) + '.csv';
+		a.download = 'VisionONE-crm-report-' + new Date().toISOString().slice(0, 10) + '.csv';
 		document.body.appendChild(a);
 		a.click();
 		a.remove();

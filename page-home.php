@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: visionONE — Home / Landing
+ * Template Name: VisionONE — Home / Landing
  *
  * Marketing landing page that ties the Visioner site together. Reuses the
  * shared Visioner components (hero, feature cards, stats, CTA band) plus a few

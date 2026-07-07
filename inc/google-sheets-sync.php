@@ -20,6 +20,100 @@
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /**
+ * Send Apply-form (id 1) submitters straight to the fee payment page instead
+ * of the default "thank you" inline message.
+ */
+add_filter( 'fluentform/form_submission_confirmation', 'tc_apply_form_redirect_to_payment', 20, 3 );
+
+function tc_apply_form_redirect_to_payment( $confirmation, $form_data, $form ) {
+	if ( ! isset( $form->id ) || 1 !== (int) $form->id ) {
+		return $confirmation;
+	}
+
+	$confirmation['redirectTo'] = 'customUrl';
+	$confirmation['customUrl']  = tc_tpl_url( 'page-payment.php', '/pay/' );
+
+	return $confirmation;
+}
+
+/**
+ * Point the Apply form's "accept_terms" checkbox label ("I accept the Terms
+ * & Conditions and Disclaimer") at the in-page Terms modal (rendered once
+ * via tc_render_terms_modal() in page-apply.php) instead of navigating
+ * away. This is a plain checkbox field (Checkable component), not
+ * FluentForm's built-in "Terms and Conditions" field type — its option
+ * label has no link by default, so we wrap the "Terms & Conditions" phrase
+ * in an anchor at render time.
+ */
+add_filter( 'fluentform/rendering_field_data_input_checkbox', 'tc_apply_form_link_terms_field', 20, 2 );
+
+function tc_apply_form_link_terms_field( $data, $form ) {
+	if ( ! isset( $form->id ) || 1 !== (int) $form->id ) {
+		return $data;
+	}
+
+	if ( 'accept_terms' !== ( $data['attributes']['name'] ?? '' ) ) {
+		return $data;
+	}
+
+	$pattern = '/Terms\s*(?:&amp;|&|and)\s*Conditions/i';
+	$replace = '<a href="#tc-modal-terms" data-tc-modal-open="terms">$0</a>';
+
+	// Single checkboxes are usually stored as settings.advanced_options
+	// (list of ['label' => ..., 'value' => ...]); fall back to the plain
+	// options (value => label) map used for simpler checkbox groups.
+	if ( ! empty( $data['settings']['advanced_options'] ) && is_array( $data['settings']['advanced_options'] ) ) {
+		foreach ( $data['settings']['advanced_options'] as $i => $option ) {
+			if ( isset( $option['label'] ) && is_string( $option['label'] ) && false === stripos( $option['label'], '<a ' ) ) {
+				$data['settings']['advanced_options'][ $i ]['label'] = preg_replace( $pattern, $replace, $option['label'], 1 );
+			}
+		}
+	} elseif ( ! empty( $data['options'] ) && is_array( $data['options'] ) ) {
+		foreach ( $data['options'] as $value => $label ) {
+			if ( is_string( $label ) && false === stripos( $label, '<a ' ) ) {
+				$data['options'][ $value ] = preg_replace( $pattern, $replace, $label, 1 );
+			}
+		}
+	}
+
+	return $data;
+}
+
+/**
+ * Checkable::compile() builds this checkbox's aria-label from the same
+ * (now HTML-containing) label text via esc_attr() only — it never strips
+ * tags the way FluentForm's native "Terms and Conditions" field does. Left
+ * alone, the anchor markup we just injected would be read out literally by
+ * screen readers. Clean the aria-label back down to plain text here.
+ *
+ * Note: we can't scope this via the $data param — Checkable::compile()
+ * has a bug where it reassigns $data to the (unfiltered) $html string just
+ * before calling printContent(), so $data received here is actually a
+ * copy of $html, not the field's data array. Detect the field from the
+ * HTML itself instead.
+ */
+add_filter( 'fluentform/rendering_field_html_input_checkbox', 'tc_apply_form_fix_terms_aria_label', 20, 3 );
+
+function tc_apply_form_fix_terms_aria_label( $html, $data, $form ) {
+	if ( ! isset( $form->id ) || 1 !== (int) $form->id ) {
+		return $html;
+	}
+
+	if ( false === strpos( $html, 'name="accept_terms[]"' ) ) {
+		return $html;
+	}
+
+	return preg_replace_callback(
+		'/aria-label=([\'"])(.*?)\1/i',
+		function ( $m ) {
+			$plain = wp_strip_all_tags( html_entity_decode( $m[2], ENT_QUOTES ) );
+			return 'aria-label=' . $m[1] . esc_attr( $plain ) . $m[1];
+		},
+		$html
+	);
+}
+
+/**
  * Fluent Forms fires this after an entry is stored.
  * Signature: do_action( 'fluentform/submission_inserted', $entryId, $formData, $form ).
  */

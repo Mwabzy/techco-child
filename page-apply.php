@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: visionONE — Admissions / Apply
+ * Template Name: VisionONE — Admissions / Apply
  *
  * Redesigned admissions funnel: gradient banner hero, value proposition,
  * eligibility, batch selection, application form + trust panel, FAQ, CTA.
@@ -75,7 +75,7 @@ $tc_apply_why = array(
 
 		<!-- SECTION: Why apply now — value propositions (colored icon cards) -->
 		<section class="tc-section tc-apply-why tc-reveal">
-			<h2 class="tc-section__title" style="text-align: center; margin-bottom: 0;">Why join visionONE</h2>
+			<h2 class="tc-section__title" style="text-align: center; margin-bottom: 0;">Why join VisionONE</h2>
 			<div class="tc-bento tc-bento--4col">
 				<?php foreach ( $tc_apply_why as $i => $card ) : ?>
 				<div class="tc-feature tc-reveal" style="--delay: <?php echo $i * 80; ?>ms">
@@ -190,5 +190,7 @@ $tc_apply_why = array(
 
 	</div>
 </div>
+
+<?php tc_render_terms_modal(); ?>
 
 <?php get_footer();

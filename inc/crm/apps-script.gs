@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * visionONE — Applications CRM · Google Apps Script Web App
+ * VisionONE — Applications CRM · Google Apps Script Web App
  * ============================================================================
  * This is the Google Sheet's server-side API. It backs BOTH:
  *   1. The existing Fluent Forms → Sheet sync (inc/google-sheets-sync.php),

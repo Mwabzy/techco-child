@@ -1,7 +1,7 @@
 <?php
 /**
  * ------------------------------------------------------------------
- * visionONE CRM — Google Sheets data-access layer.
+ * VisionONE CRM — Google Sheets data-access layer.
  * ------------------------------------------------------------------
  * Reads applicants from, and writes CRM meta back to, the Google Sheet
  * via the Apps Script Web App (see inc/crm/apps-script.gs). Reuses the
@@ -231,7 +231,6 @@ class TC_CRM_Sheets {
 				'label'  => 'Follow-up',
 				'fields' => array(
 					array( 'key' => 'hear_about_us', 'label' => 'How Did You Hear About Us?' ),
-					array( 'key' => 'referral_name', 'label' => 'Referral Name / Code' ),
 				),
 			),
 		);

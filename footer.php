@@ -26,14 +26,19 @@ $page_sticky_enabled = !$page_footer_sticky_disable && $global_footer_sticky;
 ?>
 </div>
 <footer class="xb-footer <?php if ($page_sticky_enabled) { ?>sticky<?php } ?>">
-    <?php if ($page_footer_disable != true) :
+    <?php if ($page_footer_disable != true):
         // Elevated footer for the Visioner templates; classic copyright elsewhere.
         $tc_footer_templates = array(
-            'page-home.php', 'page-program.php', 'page-fees.php',
-            'page-apply.php', 'page-colleges.php', 'page-payment.php', 'page-resources.php',
+            'page-home.php',
+            'page-program.php',
+            'page-fees.php',
+            'page-apply.php',
+            'page-colleges.php',
+            'page-payment.php',
+            'page-resources.php',
         );
         $tc_footer_tpl = is_page() ? (string) get_page_template_slug(get_the_ID()) : '';
-        if (function_exists('tc_tpl_url') && in_array($tc_footer_tpl, $tc_footer_templates, true)) :
+        if (function_exists('tc_tpl_url') && in_array($tc_footer_tpl, $tc_footer_templates, true)):
             $tc_home_url = tc_tpl_url('page-home.php', '/');
             $tc_year = date('Y');
             ?>
@@ -41,11 +46,13 @@ $page_sticky_enabled = !$page_footer_sticky_disable && $global_footer_sticky;
                 <div class="container tc-footer__inner">
 
                     <div class="tc-footer__brand">
-                        <a class="tc-footer__logo" href="<?php echo esc_url($tc_home_url); ?>" aria-label="visionONE — home">
-                            <img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/images/logo.png'); ?>" alt="" aria-hidden="true">
-                            <span>vision<span class="tc-footer__logo-accent">ONE</span></span>
+                        <a class="tc-footer__logo" href="<?php echo esc_url($tc_home_url); ?>" aria-label="VisionONE — home">
+                            <img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/images/logo.png'); ?>" alt=""
+                                aria-hidden="true">
+                            <span>Vision<span class="tc-footer__logo-accent">ONE</span></span>
                         </a>
-                        <p class="tc-footer__tagline">Job-ready fullstack developer training in 14 weeks — project-first, mentor-led, backed by placement support.</p>
+                        <p class="tc-footer__tagline">Job-ready fullstack developer training in 14 weeks — project-first,
+                            mentor-led, backed by placement support.</p>
                     </div>
 
                     <nav class="tc-footer__col" aria-label="Explore">
@@ -65,24 +72,25 @@ $page_sticky_enabled = !$page_footer_sticky_disable && $global_footer_sticky;
                         <span class="tc-footer__col-title">Admissions open</span>
                         <p>Seats are limited each cohort.</p>
                         <a class="tc-btn tc-btn--primary" data-magnetic
-                            href="<?php echo esc_url(tc_tpl_url('page-apply.php', '/admissions-apply/')); ?>">Reserve your seat</a>
+                            href="<?php echo esc_url(tc_tpl_url('page-apply.php', '/admissions-apply/')); ?>">Reserve your
+                            seat</a>
                     </div>
 
                 </div>
                 <div class="tc-footer__bar">
                     <div class="container tc-footer__bar-inner">
-                        <span><?php echo esc_html('© visionONE ' . $tc_year . ' · All Rights Reserved'); ?></span>
+                        <span><?php echo esc_html('© VisionONE ' . $tc_year . ' · All Rights Reserved'); ?></span>
                         <span class="tc-footer__made">Built in India</span>
                     </div>
                 </div>
             </footer>
-        <?php else :
+        <?php else:
             echo '<footer class="site-footer default-footer">';
             echo '<div class="footer__copyright">';
             echo '<div class="container">';
             echo '<div class="footer__copyright-inner ul_li_center">';
             echo '<div class="footer__copyright-text mt-15 mb-15">';
-            echo esc_html('© visionONE ' . date('Y') . ' | All Rights Reserved');
+            echo esc_html('© VisionONE ' . date('Y') . ' | All Rights Reserved');
             echo '</div>';
             echo '</div>';
             echo '</div>';
@@ -98,4 +106,5 @@ $page_sticky_enabled = !$page_footer_sticky_disable && $global_footer_sticky;
 <?php wp_footer(); ?>
 
 </body>
+
 </html>

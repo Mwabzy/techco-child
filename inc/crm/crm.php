@@ -1,7 +1,7 @@
 <?php
 /**
  * ------------------------------------------------------------------
- * visionONE — Applications CRM · bootstrap
+ * VisionONE — Applications CRM · bootstrap
  * ------------------------------------------------------------------
  * Wires up the front-end CRM (page-crm.php):
  *   - loads the Sheets data-access layer
@@ -75,6 +75,21 @@ function tc_crm_boot_data( $force = false ) {
 		'currency' => '₹',
 		'user'     => wp_get_current_user()->display_name,
 	);
+}
+
+/**
+ * First + last initials from a display name, for the topbar avatar badge.
+ */
+function tc_crm_initials( $name ) {
+	$parts = array_filter( preg_split( '/\s+/', trim( $name ) ) );
+	if ( empty( $parts ) ) {
+		return '';
+	}
+	$initials = mb_substr( reset( $parts ), 0, 1 );
+	if ( count( $parts ) > 1 ) {
+		$initials .= mb_substr( end( $parts ), 0, 1 );
+	}
+	return mb_strtoupper( $initials );
 }
 
 /* ----------------------------- AJAX: update ----------------------------- */

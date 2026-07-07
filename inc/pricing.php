@@ -1,7 +1,7 @@
 <?php
 /**
  * ------------------------------------------------------------------
- * visionONE — Program pricing (single source of truth)
+ * VisionONE — Program pricing (single source of truth)
  * ------------------------------------------------------------------
  * Base prices + GST rate for the 4 program tracks. Consumed by:
  *   - page-fees.php    (fee plan cards)
