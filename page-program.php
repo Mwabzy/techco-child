@@ -20,16 +20,7 @@ get_header();
  * indicative placeholders (the deck lists modules + milestones, not lecture
  * counts) feeding the accordion meta + totals — swap when finalised.
  */
-$tc_modules = array(
-	array( 'phase' => 'Core',  'weeks' => 'Weeks 1–2',   'topic' => 'Frontend — Angular 18',        'milestone' => 'Responsive UI', 'lessons' => 12, 'mins' => 600, 'desc' => 'TypeScript, RxJS, components, routing and responsive, mobile-first UI.' ),
-	array( 'phase' => 'Core',  'weeks' => 'Weeks 3–4',   'topic' => 'Backend — .NET 8 Web API',      'milestone' => 'REST API',      'lessons' => 11, 'mins' => 560, 'desc' => 'C#, Entity Framework Core and building structured RESTful services.' ),
-	array( 'phase' => 'Core',  'weeks' => 'Weeks 5–6',   'topic' => 'SQL Server',                    'milestone' => 'Data layer',    'lessons' => 9,  'mins' => 470, 'desc' => 'Schema design, queries, stored procedures and data integration.' ),
-	array( 'phase' => 'Core',  'weeks' => 'Weeks 7–8',   'topic' => 'Auth, Security & Mini-ERP',     'milestone' => 'Working app',   'lessons' => 10, 'mins' => 520, 'desc' => 'Authentication, security and a full-stack Mini-ERP (Angular + .NET + SQL).' ),
-	array( 'phase' => 'Core',  'weeks' => 'Weeks 9–10',  'topic' => 'Capstone + Git/DevOps',         'milestone' => 'Capstone',      'lessons' => 8,  'mins' => 480, 'desc' => 'Build & ship a capstone with Git and DevOps fundamentals. Core Program ends here (10 weeks).' ),
-	array( 'phase' => 'Cloud', 'weeks' => 'Weeks 11–12', 'topic' => 'Cloud — AWS & Azure',           'milestone' => 'Live on cloud', 'lessons' => 8,  'mins' => 430, 'desc' => 'Cloud fundamentals, CI/CD and deploying your capstone live (12 weeks).' ),
-	array( 'phase' => 'AI',    'weeks' => 'Week 13',     'topic' => 'GenAI',                         'milestone' => 'AI feature',    'lessons' => 5,  'mins' => 300, 'desc' => 'LLM APIs, prompt engineering and building real AI features (13 weeks).' ),
-	array( 'phase' => 'AI',    'weeks' => 'Week 14',     'topic' => 'Agentic AI',                    'milestone' => 'AI agent',      'lessons' => 5,  'mins' => 300, 'desc' => 'Agents, tools and autonomous automation workflows. Complete Bundle ends here (14 weeks).' ),
-);
+$tc_modules = tc_program_modules();
 
 // Program tracks (exit points) — from the deck's "Program Options".
 $tc_tracks = array(
@@ -212,7 +203,7 @@ if ( ! function_exists( 'tc_fmt_len' ) ) {
                         <?php foreach ( $tc_modules as $i => $m ) :
                             $phase = strtolower( $m['phase'] );
                         ?>
-                        <details class="tc-acc__item tc-acc__item--<?php echo esc_attr( $phase ); ?> tc-reveal" style="--delay: <?php echo ( $i % 4 ) * 70; ?>ms" open>
+                        <details id="tc-module-<?php echo (int) $i; ?>" class="tc-acc__item tc-acc__item--<?php echo esc_attr( $phase ); ?> tc-reveal" style="--delay: <?php echo ( $i % 4 ) * 70; ?>ms" open>
                             <summary class="tc-acc__summary-row">
                                 <span class="tc-acc__chevron" aria-hidden="true"><?php echo tc_icon( 'chevron-down', 20 ); ?></span>
                                 <span class="tc-acc__title">

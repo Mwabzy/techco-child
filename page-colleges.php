@@ -43,69 +43,39 @@ $tc_wa_tel = preg_replace( '/[^0-9+]/', '', $tc_org['wa'] );
 <div id="primary" class="content-area page-content-area tc-page pt-120 pb-120">
     <div class="container">
 
-        <div class="row tc-program-body">
+        <!-- Full-width gradient banner hero (consistent with the program page) -->
+        <nav class="tc-hero__crumbs tc-coursebanner__crumbs" aria-label="Breadcrumb">
+            <a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a><span>›</span>
+            <span class="tc-hero__crumbs-current">For Colleges &amp; TPOs</span>
+        </nav>
 
-            <!-- RIGHT on desktop / TOP on mobile: sticky enquiry card -->
-            <div class="col-lg-4 order-lg-2">
-                <aside class="tc-side-card tc-reveal">
-                    <div class="tc-side-card__head">
-                        <span class="tc-side-card__kicker">For Colleges &amp; TPOs</span>
-                        <h3 class="tc-side-card__title">Partner with visionONE</h3>
-                        <p class="tc-side-card__sub">Bulk fullstack training delivered on campus or online.</p>
+        <section class="tc-coursebanner tc-coursebanner--simple tc-reveal">
+            <span class="tc-coursebanner__bg" data-parallax="10" aria-hidden="true"></span>
+            <div class="tc-coursebanner__inner">
+                <div class="tc-coursebanner__content" data-motion-in>
+                    <span class="tc-coursebanner__kicker">visionONE Training · College &amp; Bulk</span>
+                    <h1 class="tc-coursebanner__title">Train &amp; place your students with visionONE</h1>
+                    <p class="tc-coursebanner__desc">Industry-grade fullstack training for your campus — delivered
+                        on-site or online at transparent bulk rates, with placement reporting and zero revenue-share.</p>
+                    <div class="tc-coursebanner__stats">
+                        <span class="tc-herostat"><strong>50+</strong><span>campus cohorts run</span></span>
+                        <span class="tc-herostat"><strong>12,000+</strong><span>students trained</span></span>
+                        <span class="tc-herostat"><strong>20–40+</strong><span>batch sizes supported</span></span>
+                        <span class="tc-herostat"><strong>0%</strong><span>revenue-share</span></span>
                     </div>
-                    <div class="tc-side-card__body">
-                        <a class="tc-btn tc-btn--accent tc-btn--block tc-btn--glow" href="#tpo-enquiry">Request a proposal</a>
-                        <a class="tc-btn tc-btn--ghost tc-btn--block" href="tel:<?php echo esc_attr( $tc_tel ); ?>">Call the placements team</a>
-
-                        <ul class="tc-side-card__contact">
-                            <li><span class="tc-side-card__ic"><?php echo tc_icon( 'mail', 18 ); ?></span><a href="mailto:<?php echo esc_attr( $tc_org['email'] ); ?>"><?php echo esc_html( $tc_org['email'] ); ?></a></li>
-                            <li><span class="tc-side-card__ic"><?php echo tc_icon( 'phone', 18 ); ?></span><a href="tel:<?php echo esc_attr( $tc_tel ); ?>"><?php echo esc_html( $tc_org['phone'] ); ?></a></li>
-                            <li><span class="tc-side-card__ic"><?php echo tc_icon( 'chat', 18 ); ?></span><a href="https://wa.me/<?php echo esc_attr( ltrim( $tc_wa_tel, '+' ) ); ?>" target="_blank" rel="noopener">WhatsApp <?php echo esc_html( $tc_org['wa'] ); ?></a></li>
-                            <li><span class="tc-side-card__ic"><?php echo tc_icon( 'receipt', 18 ); ?></span>GSTIN <?php echo esc_html( $tc_org['gstin'] ); ?></li>
-                        </ul>
-                        <p class="tc-side-card__note">No commission. No revenue-share. GST invoice provided.</p>
+                    <div class="tc-coursebanner__actions">
+                        <a class="tc-btn tc-btn--light" data-magnetic href="#tpo-enquiry">Request a proposal</a>
+                        <a class="tc-btn tc-btn--ghost" href="tel:<?php echo esc_attr( $tc_tel ); ?>">Call the placements team</a>
                     </div>
-                </aside>
+                </div>
             </div>
+        </section>
 
-            <!-- LEFT: hero + the content the card sticks alongside -->
-            <div class="col-lg-8 order-lg-1">
-
-                <!-- Hero head -->
-                <section class="tc-hero tc-texture-dots tc-reveal">
-                    <!-- Ambient glow orbs -->
-                    <div class="tc-glow-orb tc-glow-orb--blue" aria-hidden="true"></div>
-                    <div class="tc-glow-orb tc-glow-orb--orange" aria-hidden="true"></div>
-
-                    <nav class="tc-hero__crumbs" aria-label="Breadcrumb">
-                        <a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a><span>›</span>
-                        <span class="tc-hero__crumbs-current">For Colleges &amp; TPOs</span>
-                    </nav>
-
-                    <span class="tc-eyebrow">visionONE Training &middot; College &amp; Bulk</span>
-                    <h1 class="tc-hero__title">Train &amp; <span class="tc-gradient-text tc-gradient-text--freeze">place your students</span> with visionONE</h1>
-                    <p class="tc-hero__sub">Industry-grade fullstack training for your campus — delivered
-                        on-site or online at transparent bulk rates, with placement reporting and
-                        zero revenue-share.</p>
-
-                    <span class="tc-badge tc-badge--bestseller">No revenue-share</span>
-
-                    <!-- CLAUDE CODE: partnership stats are PLACEHOLDERS — swap for real figures. -->
-                    <div class="tc-hero__stats">
-                        <div class="tc-stat">
-                            <strong class="tc-stat__num" data-animate>50+</strong>
-                            <span class="tc-stat__label">campus cohorts run</span>
-                        </div>
-                        <div class="tc-stat tc-stat--divider">
-                            <strong class="tc-stat__num" data-animate>12,000+</strong>
-                            <span class="tc-stat__label">students trained</span>
-                        </div>
-                        <div class="tc-stat tc-stat--divider">
-                            <strong class="tc-stat__num" data-animate>20–40+</strong>
-                            <span class="tc-stat__label">batch sizes supported</span>
-                        </div>
-                    </div>
-                </section>
+        <div class="row tc-program-body">
+            <!-- Single centred reading column (sticky panel removed — its CTAs
+                 now live in the banner; contact details are in the footer contact
+                 section and the TPO enquiry form below). -->
+            <div class="col-12 tc-program-content">
 
                 <!-- Value cards -->
                 <section class="tc-section tc-college-value tc-reveal">
@@ -120,13 +90,13 @@ $tc_wa_tel = preg_replace( '/[^0-9+]/', '', $tc_org['wa'] );
                             </div>
                         </div>
                         <div class="tc-feature tc-reveal" style="--delay: 80ms">
-                            <span class="tc-feature__ic tc-feature__ic--orange"><?php echo tc_icon( 'sliders', 24 ); ?></span>
+                            <span class="tc-feature__ic tc-feature__ic--violet"><?php echo tc_icon( 'sliders', 24 ); ?></span>
                             <h3>Flexible cohorts</h3>
                             <p class="tc-muted">On-campus or fully online, weekday or weekend tracks,
                                 scheduled around your academic calendar.</p>
                         </div>
                         <div class="tc-feature tc-reveal" style="--delay: 160ms">
-                            <span class="tc-feature__ic tc-feature__ic--blue"><?php echo tc_icon( 'chart', 24 ); ?></span>
+                            <span class="tc-feature__ic tc-feature__ic--amber"><?php echo tc_icon( 'chart', 24 ); ?></span>
                             <h3>Placement reporting</h3>
                             <p class="tc-muted">Attendance, assessment scores and a placement-ready
                                 pipeline, reported back to your TPO cell.</p>

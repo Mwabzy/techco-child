@@ -436,6 +436,10 @@
 }
 .tc-feature__ic--blue { background: var(--tc-blue-soft); color: var(--tc-blue); }
 .tc-feature__ic--orange { background: var(--tc-orange-soft); color: var(--tc-orange-ink); }
+.tc-feature__ic--violet { background: rgba(124, 92, 255, .14); color: #6D4AE0; }
+.tc-feature__ic--amber { background: rgba(245, 158, 11, .16); color: #C77700; }
+.tc-feature__ic--green { background: rgba(16, 185, 129, .15); color: #0E9F6E; }
+.tc-feature__ic--pink { background: rgba(236, 72, 153, .14); color: #DB2777; }
 .tc-feature h3 { font-size: 19px; margin: 0 0 8px; }
 
 /* -----------------------------------------------------------
@@ -2800,7 +2804,7 @@ html { scroll-behavior: smooth; }
     border-radius: var(--tc-radius-lg);
     padding: clamp(28px, 5vw, 56px);
     color: #fff;
-    background: linear-gradient(135deg, #2F6BE6 0%, #2246B8 55%, var(--tc-navy) 130%);
+    background: linear-gradient(135deg, var(--tc-blue) 0%, #1C75BC 55%, var(--tc-navy) 130%);
     box-shadow: var(--tc-shadow-lg);
 }
 /* Blueprint wireframe layer — drifts on scroll via [data-parallax]. */
@@ -2869,7 +2873,7 @@ html { scroll-behavior: smooth; }
 .tc-illo__card { border-radius: 14px; box-shadow: 0 16px 34px rgba(7, 11, 34, .38); }
 .tc-illo__card--react {
     right: 4%; top: 4%; width: 74px; height: 74px; display: grid; place-items: center;
-    background: linear-gradient(150deg, #2F6BE6, #0A0E2E); border: 1px solid rgba(255, 255, 255, .18);
+    background: linear-gradient(150deg, var(--tc-blue), var(--tc-navy)); border: 1px solid rgba(255, 255, 255, .18);
     animation: tc-illo-float 6s var(--tc-ease) infinite; animation-delay: -1.5s;
 }
 .tc-illo__card--review {
@@ -2964,4 +2968,68 @@ html { scroll-behavior: smooth; }
 }
 .tc-cta-band__price { margin: 4px 0 22px; font-size: 15px; color: var(--tc-muted-on-dark); }
 .tc-cta-band__price strong { color: #fff; }
+
+/* ═══════════════════════════════════════════════════════════════
+   SHARED BANNER HERO (--simple) + hero stat chips
+   Reused on Fees & Batches and For Colleges so every hero matches the
+   program banner. Single-column, left-aligned, with translucent chips.
+   ═══════════════════════════════════════════════════════════════ */
+.tc-coursebanner--simple .tc-coursebanner__inner { display: block; }
+.tc-coursebanner--simple .tc-coursebanner__content { max-width: 760px; }
+.tc-coursebanner--simple .tc-coursebanner__desc { max-width: 620px; }
+
+.tc-coursebanner__stats { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+/* Space the action row away from the chips on the simple banner. */
+.tc-coursebanner--simple .tc-coursebanner__actions { margin-top: 28px; }
+.tc-herostat {
+    display: inline-flex; flex-direction: column; gap: 2px;
+    padding: 10px 16px; border-radius: 14px;
+    background: rgba(255, 255, 255, .10); border: 1px solid rgba(255, 255, 255, .18);
+}
+.tc-herostat strong { color: #fff; font-size: 16px; font-weight: 800; letter-spacing: -.01em; }
+.tc-herostat span { color: rgba(255, 255, 255, .78); font-size: 12px; }
+
+/* Secondary (ghost) button reads on the dark banner gradient */
+.tc-coursebanner .tc-btn.tc-btn--ghost {
+    color: #fff; border-color: rgba(255, 255, 255, .3); background: rgba(255, 255, 255, .08);
+}
+.tc-coursebanner .tc-btn.tc-btn--ghost:hover { background: rgba(255, 255, 255, .16); color: #fff; }
+
+/* Breathing room above the first content section on the Colleges page
+   (it sits directly under the banner). */
+.tc-college-value { padding-top: clamp(28px, 5vw, 56px); }
+
+/* Nav-search deep-link highlight on the matched curriculum module */
+.tc-acc__item--found { animation: tc-module-found 2.6s var(--tc-ease); border-radius: var(--tc-radius); }
+@keyframes tc-module-found {
+    0%   { box-shadow: 0 0 0 0 rgba(36, 150, 237, 0); background: rgba(36, 150, 237, .12); }
+    12%  { box-shadow: 0 0 0 3px rgba(36, 150, 237, .55); background: rgba(36, 150, 237, .12); }
+    100% { box-shadow: 0 0 0 0 rgba(36, 150, 237, 0); background: transparent; }
+}
+@media (prefers-reduced-motion: reduce) { .tc-acc__item--found { animation: none; } }
+
+/* Per-track colour accent on fee cards (--accent set inline per plan).
+   The recommended card keeps its animated gradient border. */
+.tc-price-card:not(.tc-price-card--recommended)::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; z-index: 2;
+    border-radius: var(--tc-radius) var(--tc-radius) 0 0;
+    background: var(--accent, var(--tc-blue));
+}
+.tc-price-card__weeks {
+    color: var(--accent, var(--tc-blue));
+    background: color-mix(in srgb, var(--accent, var(--tc-blue)) 12%, transparent);
+}
+.tc-price-card:not(.tc-price-card--recommended) .tc-btn.tc-btn--outline {
+    border-color: var(--accent, var(--tc-blue)); color: var(--accent, var(--tc-blue));
+}
+.tc-price-card:not(.tc-price-card--recommended) .tc-btn.tc-btn--outline:hover {
+    background: var(--accent, var(--tc-blue)); color: #fff;
+}
+
+/* Engagement models — give Model B its own violet accent for variety */
+.tc-model--b::before { background: #6D4AE0; }
+.tc-model--b .tc-model__tag { color: #6D4AE0; }
+
+/* Refund card icon reads as a caution (amber), payment head stays blue */
+.tc-refund-card__icon { color: #C77700; background: rgba(245, 158, 11, .12); }
 

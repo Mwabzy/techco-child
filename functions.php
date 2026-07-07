@@ -184,6 +184,9 @@ require_once get_stylesheet_directory() . '/inc/india-localization.php';
 // VisionONE content images: Customizer photo uploaders (tc_opt_image helper).
 require_once get_stylesheet_directory() . '/inc/theme-options.php';
 
+// Shared program curriculum data (tc_program_modules / tc_program_search_index).
+require_once get_stylesheet_directory() . '/inc/program-data.php';
+
 /**
  * ------------------------------------------------------------------
  * Resolve the URL of a Visioner page by its assigned template file.

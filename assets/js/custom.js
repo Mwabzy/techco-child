@@ -290,6 +290,77 @@
     }
 
     /* ---------------------------------------------------------
+       Nav search → jump to curriculum. Matches the query against the
+       course-content index (window.TC_SEARCH) and, on a hit, redirects to
+       the matching module in the Program page's accordion. Falls back to
+       the native WordPress search (?s=) when nothing relevant matches.
+       --------------------------------------------------------- */
+    function initNavSearch() {
+        var form = document.querySelector('.tc-nav__search');
+        if ( ! form ) { return; }
+
+        form.addEventListener('submit', function (e) {
+            var data = window.TC_SEARCH;
+            if ( ! data || ! data.items || ! data.items.length ) { return; } // let WP search run
+
+            var input = form.querySelector('.tc-nav__search-input');
+            var q = ( input && input.value || '' ).trim().toLowerCase();
+            if ( ! q ) { return; }
+
+            // Tokenise, keeping tech punctuation (.net, c#, c++).
+            var tokens = q.split(/[^a-z0-9.+#]+/).filter(Boolean);
+            var best = null, bestScore = 0;
+
+            data.items.forEach(function (item) {
+                var hay = item.text;
+                var score = 0;
+                if ( hay.indexOf(q) !== -1 ) { score += 5; }                     // whole phrase
+                if ( item.topic.toLowerCase().indexOf(q) !== -1 ) { score += 3; } // topic phrase
+                tokens.forEach(function (t) { if ( hay.indexOf(t) !== -1 ) { score += 1; } });
+                if ( score > bestScore ) { bestScore = score; best = item; }
+            });
+
+            if ( best && bestScore > 0 ) {
+                e.preventDefault();
+                window.location.href = data.url + '#' + best.id;
+            }
+            // else: allow the native form submit (WordPress site search)
+        });
+    }
+
+    /* ---------------------------------------------------------
+       Curriculum deep-link. When the URL carries a #tc-module-N hash
+       (from nav search or a shared link), open that accordion item,
+       scroll it under the sticky nav, and pulse it briefly.
+       --------------------------------------------------------- */
+    function initCurriculumJump() {
+        function reveal() {
+            var hash = window.location.hash;
+            if ( hash.indexOf('#tc-module-') !== 0 ) { return; }
+            var el = document.getElementById(hash.slice(1));
+            if ( ! el ) { return; }
+
+            if ( el.tagName === 'DETAILS' ) { el.open = true; }
+
+            var nav = document.getElementById('tc-nav');
+            var offset = ( nav ? nav.offsetHeight : 0 ) + 18;
+            var y = el.getBoundingClientRect().top + window.pageYOffset - offset;
+            var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+
+            el.classList.remove('tc-acc__item--found');
+            void el.offsetWidth; // restart the animation if re-triggered
+            el.classList.add('tc-acc__item--found');
+            window.setTimeout(function () { el.classList.remove('tc-acc__item--found'); }, 2600);
+        }
+
+        if ( window.location.hash.indexOf('#tc-module-') === 0 ) {
+            window.setTimeout(reveal, 140); // let layout settle
+        }
+        window.addEventListener('hashchange', reveal);
+    }
+
+    /* ---------------------------------------------------------
        Motion One enhancements (progressive — only if window.Motion
        is present). Two signature effects the CSS reveal can't do:
          • [data-parallax]  scroll-linked translate on decorative layers
@@ -387,6 +458,8 @@
         initApplyFormSteps();
         initMagneticButtons();
         initShareButtons();
+        initNavSearch();
+        initCurriculumJump();
         initMotion();
 
         // Fluent Forms fires this jQuery event on successful AJAX submit.
