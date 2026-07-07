@@ -52,16 +52,7 @@ function tc_gsheet_sync_submission( $entry_id, $form_data, $form ) {
 		'fields'       => $fields,
 	);
 
-	$response = wp_remote_post(
-		GSHEET_WEBAPP_URL,
-		array(
-			'timeout'     => 15,
-			'redirection' => 5,           // Apps Script /exec issues a 302 to its CDN
-			'blocking'    => true,        // wait so we can log failures (admissions volume is low)
-			'headers'     => array( 'Content-Type' => 'application/json' ),
-			'body'        => wp_json_encode( $payload ),
-		)
-	);
+	$response = tc_gsheet_post_json( GSHEET_WEBAPP_URL, $payload, 15 );
 
 	// Log failures so they show up in debug.log without breaking the user's submission.
 	if ( is_wp_error( $response ) ) {

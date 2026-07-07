@@ -14,54 +14,44 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 get_header();
 
 /**
- * Program tracks — base prices (ex-GST).
+ * Program tracks — base prices (ex-GST) sourced from inc/pricing.php, the
+ * single source of truth shared with page-fees.php and the CRM. Only the
+ * presentation-only fields (features/razorpay_snippet) live here.
  * CLAUDE CODE / KUWAYA: confirm figures match the actual Razorpay payment
  * links / buttons you configure in the Razorpay Dashboard. Each Razorpay
  * Payment Button should be generated per-plan and pasted into the
  * corresponding $tc_pay_plans entry's 'razorpay_snippet' key below.
  */
-$tc_pay_plans = array(
-	array(
-		'id'               => 'core',
-		'name'             => 'Core Program',
-		'weeks'            => '10 weeks',
-		'base'             => '₹ 49,999',
-		'base_raw'         => 49999,
-		'gst_rate'         => 18,
+$tc_pay_plan_extras = array(
+	'core'       => array(
 		'features'         => array( 'Angular 18 + .NET 8 Web API', 'SQL Server data layer', 'Mini-ERP capstone', 'Placement & TPO support' ),
 		'razorpay_snippet' => '',  // CLAUDE CODE / KUWAYA: paste Razorpay Payment Button <form>…<script> here
 	),
-	array(
-		'id'               => 'core-cloud',
-		'name'             => 'Core + Cloud',
-		'weeks'            => '12 weeks',
-		'base'             => '₹ 58,474',
-		'base_raw'         => 58474,
-		'gst_rate'         => 18,
+	'core-cloud' => array(
 		'features'         => array( 'Everything in Core Program', 'AWS & Azure fundamentals', 'CI/CD & live cloud deployment', 'Placement & TPO support' ),
 		'razorpay_snippet' => '',  // CLAUDE CODE / KUWAYA: paste Razorpay Payment Button here
 	),
-	array(
-		'id'               => 'core-genai',
-		'name'             => 'Core + GenAI & Agentic AI',
-		'weeks'            => '13 weeks',
-		'base'             => '₹ 63,558',
-		'base_raw'         => 63558,
-		'gst_rate'         => 18,
+	'core-genai' => array(
 		'features'         => array( 'Everything in Core Program', 'LLM APIs & prompt engineering', 'Agentic AI features', 'Placement & TPO support' ),
 		'razorpay_snippet' => '',  // CLAUDE CODE / KUWAYA: paste Razorpay Payment Button here
 	),
-	array(
-		'id'               => 'bundle',
-		'name'             => 'Complete Bundle',
-		'weeks'            => '14 weeks',
-		'base'             => '₹ 72,034',
-		'base_raw'         => 72034,
-		'gst_rate'         => 18,
+	'bundle'     => array(
 		'features'         => array( 'All tracks combined', 'Cloud, GenAI & Agentic AI', 'Capstone + portfolio review', '1:1 mentor check-ins', 'Placement & TPO support' ),
 		'razorpay_snippet' => '',  // CLAUDE CODE / KUWAYA: paste Razorpay Payment Button here
 	),
 );
+
+$tc_pay_plans = array_map( function ( $plan ) use ( $tc_pay_plan_extras ) {
+	$extra = $tc_pay_plan_extras[ $plan['id'] ] ?? array();
+	return array_merge( array(
+		'id'       => $plan['id'],
+		'name'     => $plan['name'],
+		'weeks'    => $plan['weeks'],
+		'base'     => '₹ ' . number_format( $plan['base'] ),
+		'base_raw' => $plan['base'],
+		'gst_rate' => $plan['gst_rate'],
+	), $extra );
+}, tc_program_pricing() );
 
 $tc_pay_faqs = array(
 	array( 'q' => 'Is GST included in the price?',      'a' => 'No — all prices shown are base amounts (ex-GST). GST at 18% is added at checkout. You will see the full breakdown before you pay.' ),

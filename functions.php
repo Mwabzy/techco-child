@@ -162,6 +162,13 @@ require_once get_stylesheet_directory() . '/inc/brand-icons.php';
 // Floating WhatsApp click-to-chat widget (hooks wp_footer itself).
 require_once get_stylesheet_directory() . '/inc/whatsapp-widget.php';
 
+// Program pricing — single source of truth (Fees page, Payment page, CRM).
+require_once get_stylesheet_directory() . '/inc/pricing.php';
+
+// Redirect-safe POST helper for the Google Apps Script Web App (shared by
+// the sync below and the CRM's write path).
+require_once get_stylesheet_directory() . '/inc/gsheet-http.php';
+
 // Fluent Forms → Google Sheets sync (config via wp-config.php constants).
 require_once get_stylesheet_directory() . '/inc/google-sheets-sync.php';
 
@@ -170,6 +177,9 @@ require_once get_stylesheet_directory() . '/inc/visioner-nav.php';
 
 // India localization: +91 phone prefix, IST/date defaults, en-IN SEO signals.
 require_once get_stylesheet_directory() . '/inc/india-localization.php';
+
+// Applications CRM (front-end, admins-only) — reads/writes the Google Sheet.
+require_once get_stylesheet_directory() . '/inc/crm/crm.php';
 
 /**
  * ------------------------------------------------------------------
@@ -237,6 +247,7 @@ function tc_disable_techco_header( $value, $object_id, $meta_key, $single ) {
 		'page-colleges.php',
 		'page-payment.php',
 		'page-resources.php',
+		'page-crm.php',
 	);
 
 	$busy     = true;
@@ -250,6 +261,11 @@ function tc_disable_techco_header( $value, $object_id, $meta_key, $single ) {
 
 	$meta = is_array( $existing ) ? $existing : array();
 	$meta['page_header_disable'] = true;
+
+	// The CRM is a private dashboard — no marketing footer either.
+	if ( 'page-crm.php' === $template ) {
+		$meta['page_footer_disable'] = true;
+	}
 
 	// get_post_metadata expects an array of values; core returns [0] for single.
 	return array( $meta );

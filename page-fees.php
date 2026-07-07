@@ -21,44 +21,46 @@ get_header();
  * One card per program track (mirrors the exit points on page-program.php's
  * "Choose your track" section), each mentor-led and priced on its own.
  */
-$tc_plans = array(
-	array(
-		'name'       => 'Core Program',
-		'weeks'      => '10 weeks',
-		'tagline'    => 'Angular, .NET, SQL Server and a Mini-ERP capstone.',
-		'base'       => '₹ 49,999',
-		'features'   => array( 'Angular 18 + .NET 8 Web API', 'SQL Server data layer', 'Auth, security & REST', 'Mini-ERP build + capstone', 'Placement & TPO support' ),
-		'cta'        => 'Enrol Now',
-		'recommended'=> false,
+/**
+ * Pricing (name/weeks/base) is sourced from inc/pricing.php — the single
+ * source of truth shared with page-payment.php and the CRM. Only the
+ * presentation-only fields (tagline/features/cta/recommended) live here.
+ */
+$tc_plan_extras = array(
+	'core'       => array(
+		'tagline'     => 'Angular, .NET, SQL Server and a Mini-ERP capstone.',
+		'features'    => array( 'Angular 18 + .NET 8 Web API', 'SQL Server data layer', 'Auth, security & REST', 'Mini-ERP build + capstone', 'Placement & TPO support' ),
+		'cta'         => 'Enrol Now',
+		'recommended' => false,
 	),
-	array(
-		'name'       => 'Core + Cloud',
-		'weeks'      => '12 weeks',
-		'tagline'    => 'Everything in Core, deployed live on AWS & Azure.',
-		'base'       => '₹ 58,474',
-		'features'   => array( 'Everything in Core Program', 'AWS & Azure fundamentals', 'CI/CD pipelines', 'Live cloud deployment', 'Placement & TPO support' ),
-		'cta'        => 'Enrol Now',
-		'recommended'=> false,
+	'core-cloud' => array(
+		'tagline'     => 'Everything in Core, deployed live on AWS & Azure.',
+		'features'    => array( 'Everything in Core Program', 'AWS & Azure fundamentals', 'CI/CD pipelines', 'Live cloud deployment', 'Placement & TPO support' ),
+		'cta'         => 'Enrol Now',
+		'recommended' => false,
 	),
-	array(
-		'name'       => 'Core + GenAI & Agentic AI',
-		'weeks'      => '13 weeks',
-		'tagline'    => 'Core plus LLM APIs and agentic workflows.',
-		'base'       => '₹ 63,558',
-		'features'   => array( 'Everything in Core Program', 'LLM APIs & prompt engineering', 'Agentic AI features', 'Real-world AI project', 'Placement & TPO support' ),
-		'cta'        => 'Enrol Now',
-		'recommended'=> false,
+	'core-genai' => array(
+		'tagline'     => 'Core plus LLM APIs and agentic workflows.',
+		'features'    => array( 'Everything in Core Program', 'LLM APIs & prompt engineering', 'Agentic AI features', 'Real-world AI project', 'Placement & TPO support' ),
+		'cta'         => 'Enrol Now',
+		'recommended' => false,
 	),
-	array(
-		'name'       => 'Complete Bundle',
-		'weeks'      => '14 weeks',
-		'tagline'    => 'Full stack + Cloud + GenAI + Agentic AI — our flagship track.',
-		'base'       => '₹ 72,034',
-		'features'   => array( 'Everything in every track above', 'Cloud, GenAI & Agentic AI combined', 'Capstone + portfolio review', '1:1 mentor check-ins', 'Placement & TPO support' ),
-		'cta'        => 'Enrol Now',
-		'recommended'=> true,
+	'bundle'     => array(
+		'tagline'     => 'Full stack + Cloud + GenAI + Agentic AI — our flagship track.',
+		'features'    => array( 'Everything in every track above', 'Cloud, GenAI & Agentic AI combined', 'Capstone + portfolio review', '1:1 mentor check-ins', 'Placement & TPO support' ),
+		'cta'         => 'Enrol Now',
+		'recommended' => true,
 	),
 );
+
+$tc_plans = array_map( function ( $plan ) use ( $tc_plan_extras ) {
+	$extra = $tc_plan_extras[ $plan['id'] ] ?? array();
+	return array_merge( array(
+		'name'  => $plan['name'],
+		'weeks' => $plan['weeks'],
+		'base'  => '₹ ' . number_format( $plan['base'] ),
+	), $extra );
+}, tc_program_pricing() );
 
 $tc_bulk_plan = array(
 	'name'     => 'Bulk / College Batch',
