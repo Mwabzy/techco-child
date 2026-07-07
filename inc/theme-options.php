@@ -33,6 +33,8 @@ function tc_content_image_fields() {
 		'tc_track_img_1'    => __( 'Track 1 — card image', 'techco-child' ),
 		'tc_track_img_2'    => __( 'Track 2 — card image', 'techco-child' ),
 		'tc_track_img_3'    => __( 'Track 3 — card image', 'techco-child' ),
+		// Program hero — right-side illustration (SVG/PNG). Overrides the built-in placeholder art.
+		'tc_program_hero_img' => __( 'Program hero — illustration (right side)', 'techco-child' ),
 	);
 }
 

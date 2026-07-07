@@ -67,30 +67,68 @@ if ( ! function_exists( 'tc_fmt_len' ) ) {
 
         <section class="tc-coursebanner tc-reveal">
             <span class="tc-coursebanner__bg" data-parallax="10" aria-hidden="true"></span>
-            <div class="tc-coursebanner__inner" data-motion-in>
-                <h1 class="tc-coursebanner__title">The Full-Stack Development Masterclass</h1>
-                <p class="tc-coursebanner__desc">Become a job-ready full-stack developer in 14 weeks — from Angular 18
-                    and .NET 8 through SQL Server to Cloud, GenAI and Agentic AI. Learn by building real projects,
-                    reviewed by working mentors.</p>
-                <div class="tc-coursebanner__rating">
-                    <strong class="tc-stat__num" data-animate>4.8</strong>
-                    <span class="tc-coursebanner__stars" aria-hidden="true">★★★★★</span>
-                    <!-- CLAUDE CODE: rating + review count are PLACEHOLDERS — swap for real figures. -->
-                    <span class="tc-coursebanner__reviews">1,200+ learner reviews</span>
-                </div>
-                <div class="tc-coursebanner__actions">
-                    <a class="tc-btn tc-btn--light" data-magnetic
-                        href="<?php echo esc_url( tc_tpl_url( 'page-apply.php', '/admissions-apply/' ) ); ?>">Enroll this course</a>
-                    <div class="tc-coursebanner__tools">
-                        <a class="tc-coursebanner__tool" href="<?php echo esc_url( tc_tpl_url( 'page-resources.php', '/resources/' ) ); ?>"
-                            aria-label="Save &amp; download the brochure">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
-                        </a>
-                        <button class="tc-coursebanner__tool" type="button" data-share aria-label="Share this program">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg>
-                        </button>
+            <div class="tc-coursebanner__inner">
+
+                <div class="tc-coursebanner__content" data-motion-in>
+                    <h1 class="tc-coursebanner__title">The Full-Stack Development Masterclass</h1>
+                    <p class="tc-coursebanner__kicker">Live classroom program</p>
+                    <div class="tc-coursebanner__rating">
+                        <strong class="tc-stat__num" data-animate>4.8</strong>
+                        <span class="tc-coursebanner__stars" aria-hidden="true">★★★★★</span>
+                        <!-- CLAUDE CODE: rating + review count are PLACEHOLDERS — swap for real figures. -->
+                        <span class="tc-coursebanner__reviews">1,200+ learner reviews</span>
+                    </div>
+                    <p class="tc-coursebanner__desc">Become a job-ready full-stack developer in 14 weeks — from Angular 18
+                        and .NET 8 through SQL Server to Cloud, GenAI and Agentic AI. Learn by building real projects,
+                        reviewed by working mentors.</p>
+
+                    <div class="tc-coursebanner__skills">
+                        <?php foreach ( array( 'Angular 18', '.NET 8', 'SQL Server', 'Cloud', 'GenAI', 'REST APIs' ) as $skill ) : ?>
+                            <span class="tc-coursebanner__skill"><?php echo esc_html( $skill ); ?></span>
+                        <?php endforeach; ?>
+                        <span class="tc-coursebanner__skill tc-coursebanner__skill--more">+ Agentic AI &amp; more</span>
+                    </div>
+
+                    <div class="tc-coursebanner__actions">
+                        <a class="tc-btn tc-btn--light" data-magnetic
+                            href="<?php echo esc_url( tc_tpl_url( 'page-apply.php', '/admissions-apply/' ) ); ?>">Enroll this course</a>
+                        <div class="tc-coursebanner__tools">
+                            <a class="tc-coursebanner__tool" href="<?php echo esc_url( tc_tpl_url( 'page-resources.php', '/resources/' ) ); ?>"
+                                aria-label="Save &amp; download the brochure">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                            </a>
+                            <button class="tc-coursebanner__tool" type="button" data-share aria-label="Share this program">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg>
+                            </button>
+                        </div>
                     </div>
                 </div>
+
+                <?php $tc_hero_illo = function_exists( 'tc_opt_image' ) ? tc_opt_image( 'tc_program_hero_img' ) : ''; ?>
+                <div class="tc-coursebanner__art" aria-hidden="true">
+                    <?php if ( $tc_hero_illo ) : ?>
+                        <img class="tc-coursebanner__art-img" src="<?php echo esc_url( $tc_hero_illo ); ?>" alt="" loading="lazy" decoding="async">
+                    <?php else : ?>
+                        <!-- CLAUDE CODE: built-in placeholder illustration. Upload one at
+                             Appearance → Customize → VisionONE Content → "Program hero — illustration". -->
+                        <div class="tc-illo">
+                            <div class="tc-illo__glow"></div>
+                            <div class="tc-illo__panel">
+                                <span class="tc-illo__dots"><i></i><i></i><i></i></span>
+                                <span class="tc-illo__code"><b style="width:70%"></b><b style="width:45%"></b><b style="width:85%"></b><b style="width:55%"></b><b style="width:35%"></b></span>
+                            </div>
+                            <div class="tc-illo__card tc-illo__card--react"><?php echo tc_brand_icon( 'react', 34 ); ?></div>
+                            <div class="tc-illo__card tc-illo__card--review">
+                                <span class="tc-illo__avatar"></span>
+                                <span class="tc-illo__stars">★★★★★</span>
+                            </div>
+                            <span class="tc-illo__chip tc-illo__chip--code">&lt;/&gt;</span>
+                            <span class="tc-illo__chip tc-illo__chip--brace">{ }</span>
+                            <span class="tc-illo__chip tc-illo__chip--db"><?php echo tc_brand_icon( 'mongodb', 22 ); ?></span>
+                        </div>
+                    <?php endif; ?>
+                </div>
+
             </div>
         </section>
 
@@ -147,22 +185,7 @@ if ( ! function_exists( 'tc_fmt_len' ) ) {
                     </div>
                 </section>
 
-                <!-- Program tracks (exit points) -->
-                <section class="tc-section tc-tracks tc-reveal">
-                    <h2 class="tc-section__title">Choose your track</h2>
-                    <p class="tc-muted tc-tracks__lead">Core is the 10-week spine — bolt on Cloud and AI, or
-                        take the Complete Bundle. You can exit at any milestone.</p>
-                    <div class="tc-bento">
-                        <?php foreach ( $tc_tracks as $i => $t ) : ?>
-                        <div class="tc-feature tc-reveal<?php echo $t['flag'] ? ' tc-feature--flag tc-bento__cell--lead' : ''; ?>" style="--delay: <?php echo $i * 80; ?>ms">
-                            <?php if ( $t['flag'] ) : ?><span class="tc-feature__flag">Flagship</span><?php endif; ?>
-                            <span class="tc-track__weeks"><?php echo esc_html( $t['weeks'] ); ?></span>
-                            <h3><?php echo esc_html( $t['name'] ); ?></h3>
-                            <p class="tc-muted"><?php echo esc_html( $t['desc'] ); ?></p>
-                        </div>
-                        <?php endforeach; ?>
-                    </div>
-                </section>
+                <!-- "Choose your track" section removed. -->
 
                 <!-- Phase legend -->
                 <section class="tc-section tc-phases tc-reveal">
