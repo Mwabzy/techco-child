@@ -45,7 +45,7 @@ function tc_register_content_images( $wp_customize ) {
 		'tc_content_images',
 		array(
 			'title'       => __( 'VisionONE Content', 'techco-child' ),
-			'description' => __( 'Upload the photos used on the home page. Leave any blank to keep the built-in placeholder.', 'techco-child' ),
+			'description' => __( 'Upload the photos used on the home page.', 'techco-child' ),
 			'priority'    => 30,
 		)
 	);
