@@ -261,6 +261,20 @@
 .tc-section--brand > p {
   color: rgba(255, 255, 255, 0.88);
 }
+/* The Stack section wraps its heading/eyebrow/copy one level deeper in
+   .tc-stackcloud__head, so the direct-child rules above don't reach them. */
+.tc-section--brand .tc-stackcloud__head .tc-section__title {
+  color: #fff;
+}
+.tc-section--brand .tc-stackcloud__head .tc-section__title::after {
+  background: rgba(255, 255, 255, 0.9);
+}
+.tc-section--brand .tc-stackcloud__head .tc-eyebrow {
+  color: #fff;
+}
+.tc-section--brand .tc-stackcloud__head .tc-muted {
+  color: rgba(255, 255, 255, 0.88);
+}
 .tc-section--brand .tc-btn--outline {
   border-color: #fff;
   color: #fff;

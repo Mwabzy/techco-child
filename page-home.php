@@ -253,7 +253,7 @@ $tc_tests = array(
         </section>
 
         <!-- SECTION: Outcomes stats band -->
-        <section class="tc-section tc-section--dark tc-texture-dots tc-outcomes tc-reveal">
+        <section class="tc-section tc-section--brand tc-texture-dots tc-outcomes tc-reveal">
             <div class="tc-statband">
                 <div class="tc-statband__item tc-reveal" style="--delay: 0ms">
                     <span class="tc-statband__num">14 weeks</span><span class="tc-statband__label">To job-ready</span>
