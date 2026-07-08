@@ -6,13 +6,13 @@ Work **only** inside `techco-child/`. Never edit the parent `techco/` theme.
 ## Source of truth
 The page content comes from the Visioner deck (Program/Curriculum, Fees & Batches,
 Admissions, For Colleges/TPO, registration fields). Fill every `CLAUDE CODE:` marker
-with real content from those slides. Keep Indian context: ₹, 18% GST, Razorpay, EMI.
+with real content from those slides. Keep Indian context: ₹, 18% GST, EMI.
 
 ## File map
 | File | Purpose |
 |---|---|
 | `page-program.php` | Template "Visioner — Program / Curriculum". 14-week ladder. |
-| `page-fees.php` | Template "Visioner — Fees & Batches". Pricing (incl. GST), batch table, Razorpay button, EMI. |
+| `page-fees.php` | Template "Visioner — Fees & Batches". Pricing (incl. GST), EMI. |
 | `page-apply.php` | Template "Visioner — Admissions / Apply". Fluent Form + gated brochure. |
 | `page-colleges.php` | Template "Visioner — For Colleges (TPO)". Value cards + TPO enquiry form. |
 | `inc/page-banner.php` | `techco_child_page_banner($title,$subtitle)` — native Techco title bar. |
@@ -39,10 +39,6 @@ Build TWO forms in **wp-admin → Fluent Forms**:
 2. **TPO enquiry** (Colleges page): College name · TPO contact · Email · Phone · No. of students · Message.
 Then put each real form ID into the `[fluentform id="X"]` shortcodes in `page-apply.php` / `page-colleges.php`.
 
-## Razorpay
-`page-fees.php` has a `.tc-razorpay-slot`. Paste the Razorpay **Payment Button** snippet
-(Dashboard → Payment Button → Generate). It's hosted — no server code. Keep the LIVE key on live only.
-
 ## Brochure
 Upload the PDF to Media, drop its URL into the `.tc-brochure__link` href in `page-apply.php`.
 It stays hidden until the form submits successfully (handled by custom.js).
@@ -51,11 +47,10 @@ It stays hidden until the form submits successfully (handled by custom.js).
 Remember the split — files deploy by upload, DB-stored config does not:
 1. **Files** → cPanel File Manager → `public_html/wp-content/themes/techco-child/` → upload changed files (or zip + extract).
 2. **Forms** → Fluent Forms → export form JSON locally → import on live (don't expect it via file upload).
-3. **Razorpay** → swap test key for live key on the live button.
-4. **Pages** → live wp-admin → Pages → Add New → Page Attributes → Template → pick each
+3. **Pages** → live wp-admin → Pages → Add New → Page Attributes → Template → pick each
    "Visioner — …" template → Publish. Match slugs used in internal links
    (e.g. `/admissions-apply/`).
-5. **Permalinks** → Settings → Permalinks → Save (flush) so new pages don't 404.
+4. **Permalinks** → Settings → Permalinks → Save (flush) so new pages don't 404.
 
 ## Local test checklist
 - [ ] Techco Child active, Techco Core active.

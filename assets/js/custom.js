@@ -219,69 +219,135 @@
   }
 
   /* ---------------------------------------------------------
-       Admissions form: two-step reveal
-       Step 2 (.tc-ff-step2) stays visually collapsed until Step 1's
-       required fields validate, keeping this a single-submission
-       form (not Fluent Forms' native multi-page). Scoped to the
-       Apply page's form only — TPO form on page-colleges.php is
-       untouched.
+       Admissions form: multi-step wizard
+       Each section of the form is a container tagged .tc-ff-step; we
+       page through them one at a time (Back / Next) with a progress
+       bar, keeping it a single-submission form (not Fluent Forms'
+       native multi-page, which is a Pro feature). Scoped to the Apply
+       page's form only — TPO form on page-colleges.php is untouched.
        --------------------------------------------------------- */
   function initApplyFormSteps() {
-    var step1 = document.querySelector(".tc-apply-form .tc-ff-step1");
-    var step2 = document.querySelector(".tc-apply-form .tc-ff-step2");
-    var continueBtn = document.getElementById("tc-ff-continue");
-    if (!step1 || !step2 || !continueBtn) {
+    var wrap = document.querySelector(".tc-apply-form");
+    if (!wrap) {
       return;
     }
 
-    var form = step2.closest("form") || step2.closest(".fluentform");
-    var submitWrap = form ? form.querySelector(".ff_submit_btn_wrapper") : null;
-
-    // Only hide the submit button now that we've confirmed the full
-    // two-step structure is in place — never hidden unconditionally.
-    if (submitWrap) {
-      submitWrap.classList.add("tc-ff-submit--hidden");
+    var steps = Array.prototype.slice.call(
+      wrap.querySelectorAll(".tc-ff-step"),
+    );
+    if (steps.length < 2) {
+      return;
     }
 
-    // Small "Step 1 of 2 / Step 2 of 2" progress indicator, inserted above the form.
+    var form = steps[0].closest("form") || wrap.querySelector("form");
+    if (!form) {
+      return;
+    }
+    var submitWrap = form.querySelector(".ff_submit_btn_wrapper");
+
+    // Scope all step-hiding CSS to this class so nothing is hidden
+    // unconditionally — if this JS never runs, the form shows in full.
+    form.classList.add("tc-ff-stepped");
+
+    var current = 0;
+
+    // Progress indicator: "Step X of N" + a fill bar.
     var progress = document.createElement("div");
     progress.className = "tc-ff-progress";
-    progress.innerHTML =
-      '<span class="tc-ff-progress__step tc-ff-progress__step--active">' +
-      '<span class="tc-ff-progress__dot"></span>Step 1 of 2' +
-      "</span>" +
-      '<span class="tc-ff-progress__step">' +
-      '<span class="tc-ff-progress__dot"></span>Step 2 of 2' +
-      "</span>";
-    step1.parentNode.insertBefore(progress, step1);
+    var progressLabel = document.createElement("span");
+    progressLabel.className = "tc-ff-progress__label";
+    var barTrack = document.createElement("span");
+    barTrack.className = "tc-ff-progress__bar";
+    var fill = document.createElement("span");
+    fill.className = "tc-ff-progress__fill";
+    barTrack.appendChild(fill);
+    progress.appendChild(progressLabel);
+    progress.appendChild(barTrack);
+    steps[0].parentNode.insertBefore(progress, steps[0]);
 
-    var steps = progress.querySelectorAll(".tc-ff-progress__step");
+    // Back / Next controls, placed just before the real submit button.
+    var nav = document.createElement("div");
+    nav.className = "tc-ff-nav";
+    var backBtn = document.createElement("button");
+    backBtn.type = "button";
+    backBtn.className = "tc-btn tc-btn--ghost tc-ff-nav__back";
+    backBtn.textContent = "← Back";
+    var nextBtn = document.createElement("button");
+    nextBtn.type = "button";
+    nextBtn.className = "tc-btn tc-btn--primary tc-ff-nav__next";
+    nextBtn.textContent = "Next →";
+    nav.appendChild(backBtn);
+    nav.appendChild(nextBtn);
+    if (submitWrap) {
+      submitWrap.parentNode.insertBefore(nav, submitWrap);
+    } else {
+      form.appendChild(nav);
+    }
 
-    continueBtn.addEventListener("click", function () {
-      var invalid = step1.querySelector(":invalid");
+    function render() {
+      var last = current === steps.length - 1;
+      steps.forEach(function (s, i) {
+        s.classList.toggle("tc-ff-step--active", i === current);
+      });
+      backBtn.hidden = current === 0;
+      nextBtn.hidden = last;
+      if (submitWrap) {
+        submitWrap.classList.toggle("tc-ff-submit--shown", last);
+      }
+      progressLabel.textContent =
+        "Step " + (current + 1) + " of " + steps.length;
+      fill.style.width = ((current + 1) / steps.length) * 100 + "%";
+    }
+
+    // Some steps hold only conditionally-shown fields (e.g. "Job Support"
+    // only applies if an earlier answer was "Job" or "Career Switch").
+    // Fluent Forms marks a hidden field's wrapper with .ff_excluded — if
+    // every field in a step is excluded, the step has nothing to show, so
+    // skip straight past it instead of landing on a blank page.
+    function isStepBlank(step) {
+      var fields = step.querySelectorAll(".ff-el-group, .ff-el-section-break");
+      if (!fields.length) {
+        return false;
+      }
+      for (var i = 0; i < fields.length; i++) {
+        if (!fields[i].classList.contains("ff_excluded")) {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    function goTo(index, direction) {
+      direction = direction || (index >= current ? 1 : -1);
+      var next = Math.max(0, Math.min(steps.length - 1, index));
+      while (
+        isStepBlank(steps[next]) &&
+        next + direction >= 0 &&
+        next + direction <= steps.length - 1
+      ) {
+        next += direction;
+      }
+      current = next;
+      render();
+      requestAnimationFrame(function () {
+        progress.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
+
+    nextBtn.addEventListener("click", function () {
+      // Only advance if the current step's required fields are valid.
+      var invalid = steps[current].querySelector(":invalid");
       if (invalid) {
         invalid.reportValidity();
         return;
       }
-
-      step2.classList.add("tc-ff-step2--visible");
-      if (submitWrap) {
-        submitWrap.classList.remove("tc-ff-submit--hidden");
-        submitWrap.classList.add("tc-ff-submit--visible");
-      }
-      (continueBtn.closest(".ff-el-group") || continueBtn).hidden = true;
-
-      if (steps[0]) {
-        steps[0].classList.remove("tc-ff-progress__step--active");
-      }
-      if (steps[1]) {
-        steps[1].classList.add("tc-ff-progress__step--active");
-      }
-
-      requestAnimationFrame(function () {
-        step2.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
+      goTo(current + 1, 1);
     });
+    backBtn.addEventListener("click", function () {
+      goTo(current - 1, -1);
+    });
+
+    render();
   }
 
   /* ---------------------------------------------------------

@@ -3,7 +3,7 @@
  * Template Name: VisionONE — Payment
  *
  * Dedicated payment page: program selector, live fee summary (base + GST),
- * Razorpay payment button slot, trust badges and no-refund notice.
+ * trust badges and no-refund notice.
  * NOTE: intentionally omits techco_child_page_banner() — the .tc-hero
  * below provides its own breadcrumb + title, mirrors other Visioner pages.
  * @package Techco Child
@@ -18,28 +18,20 @@ get_header();
 /**
  * Program tracks — base prices (ex-GST) sourced from inc/pricing.php, the
  * single source of truth shared with page-fees.php and the CRM. Only the
- * presentation-only fields (features/razorpay_snippet) live here.
- * CLAUDE CODE / KUWAYA: confirm figures match the actual Razorpay payment
- * links / buttons you configure in the Razorpay Dashboard. Each Razorpay
- * Payment Button should be generated per-plan and pasted into the
- * corresponding $tc_pay_plans entry's 'razorpay_snippet' key below.
+ * presentation-only fields (features) live here.
  */
 $tc_pay_plan_extras = array(
 	'core' => array(
 		'features' => array('Angular 18 + .NET 8 Web API', 'SQL Server data layer', 'Mini-ERP capstone', 'Placement & TPO support'),
-		'razorpay_snippet' => '',  // CLAUDE CODE / KUWAYA: paste Razorpay Payment Button <form>…<script> here
 	),
 	'core-cloud' => array(
 		'features' => array('Everything in Core Program', 'AWS & Azure fundamentals', 'CI/CD & live cloud deployment', 'Placement & TPO support'),
-		'razorpay_snippet' => '',  // CLAUDE CODE / KUWAYA: paste Razorpay Payment Button here
 	),
 	'core-genai' => array(
 		'features' => array('Everything in Core Program', 'LLM APIs & prompt engineering', 'Agentic AI features', 'Placement & TPO support'),
-		'razorpay_snippet' => '',  // CLAUDE CODE / KUWAYA: paste Razorpay Payment Button here
 	),
 	'bundle' => array(
 		'features' => array('All tracks combined', 'Cloud, GenAI & Agentic AI', 'Capstone + portfolio review', '1:1 mentor check-ins', 'Placement & TPO support'),
-		'razorpay_snippet' => '',  // CLAUDE CODE / KUWAYA: paste Razorpay Payment Button here
 	),
 );
 
@@ -59,7 +51,7 @@ $tc_pay_faqs = array(
 	array('q' => 'Is GST included in the price?', 'a' => 'No — all prices shown are base amounts (ex-GST). GST at 18% is added at checkout. You will see the full breakdown before you pay.'),
 	array('q' => 'Will I receive a GST invoice?', 'a' => 'Yes — a GST-compliant tax invoice is automatically emailed to you after successful payment, useful for employer or college reimbursement.'),
 	array('q' => 'What is the refund policy?', 'a' => 'Our No-Refund policy applies once a seat is confirmed and payment is received. Please review it carefully before paying. We\'re happy to answer questions on a counselling call first.'),
-	array('q' => 'Which payment methods are accepted?', 'a' => 'All major debit/credit cards, UPI (PhonePe, GPay, Paytm), internet banking through Razorpay, or a direct bank transfer (NEFT/RTGS/IMPS) are accepted.'),
+	array('q' => 'Which payment methods are accepted?', 'a' => 'All major debit/credit cards, UPI (PhonePe, GPay, Paytm), internet banking, or a direct bank transfer (NEFT/RTGS/IMPS) are accepted.'),
 );
 
 /**
@@ -97,13 +89,13 @@ $tc_bank_rows = array(
 
 			<h1 class="tc-hero__title"><span class="tc-gradient-text tc-gradient-text--freeze">Pay your fees
 					securely.</span></h1>
-			<p class="tc-hero__sub">Select your programme below, review the fee summary, and complete your payment via
-				Razorpay. All prices are base amounts — GST (18%) is added at checkout.</p>
+			<p class="tc-hero__sub">Select your programme below, review the fee summary, and complete your payment
+				securely. All prices are base amounts — GST (18%) is added at checkout.</p>
 
 			<div class="tc-hero__stats">
 				<div class="tc-stat">
-					<strong class="tc-stat__num" data-animate>Razorpay</strong>
-					<span class="tc-stat__label">India's trusted gateway</span>
+					<strong class="tc-stat__num" data-animate>Secure</strong>
+					<span class="tc-stat__label">trusted payment gateway</span>
 				</div>
 				<div class="tc-stat tc-stat--divider">
 					<strong class="tc-stat__num" data-animate>PCI-DSS</strong>
@@ -148,7 +140,7 @@ $tc_bank_rows = array(
 					</div>
 				</div>
 
-				<!-- RIGHT: Fee summary + Razorpay slot -->
+				<!-- RIGHT: Fee summary -->
 				<div class="col-lg-7 tc-reveal" style="--delay: 120ms">
 
 					<?php foreach ($tc_pay_plans as $i => $plan): ?>
@@ -212,8 +204,6 @@ $tc_bank_rows = array(
 										&amp; Batches page</a> before proceeding. Read our <a href="#tc-modal-terms"
 										data-tc-modal-open="terms">Terms and Conditions</a>.</p>
 							</div>
-
-							<!-- Razorpay Payment Button slot -->
 
 						</div>
 					<?php endforeach; ?>

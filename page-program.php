@@ -140,7 +140,7 @@ if ( ! function_exists( 'tc_fmt_len' ) ) {
             <div class="col-12 tc-program-content">
 
                 <!-- What you'll master -->
-                <section class="tc-section tc-program-intro tc-reveal">
+                <section class="tc-section tc-program-intro tc-reveal tc-section--brand">
                     <span class="tc-eyebrow">The Programme</span>
                     <h2 class="tc-section__title">What you'll master</h2>
                     <p class="tc-lead">VisionONE's Full-Stack track turns beginners and career-switchers into
@@ -179,7 +179,7 @@ if ( ! function_exists( 'tc_fmt_len' ) ) {
                 </section>
 
                 <!-- Course content (Udemy-style accordion) -->
-                <section class="tc-section tc-curriculum tc-reveal">
+                <section class="tc-section tc-curriculum tc-reveal tc-section--tint">
                     <div class="tc-acc__head">
                         <h2 class="tc-section__title tc-section__title--flush">Course content</h2>
                         <button type="button" class="tc-acc__toggle-all" data-tc-expand-all>Collapse all sections</button>

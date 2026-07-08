@@ -37,27 +37,38 @@ function tc_apply_form_redirect_to_payment( $confirmation, $form_data, $form ) {
 }
 
 /**
- * Point the Apply form's "accept_terms" checkbox label ("I accept the Terms
- * & Conditions and Disclaimer") at the in-page Terms modal (rendered once
- * via tc_render_terms_modal() in page-apply.php) instead of navigating
- * away. This is a plain checkbox field (Checkable component), not
- * FluentForm's built-in "Terms and Conditions" field type — its option
- * label has no link by default, so we wrap the "Terms & Conditions" phrase
- * in an anchor at render time.
+ * Map of Apply-form (id 1) consent checkbox field names → the phrase in
+ * their label to turn into an in-page modal trigger. Each modal is rendered
+ * once on page-apply.php (tc_render_terms_modal / tc_render_privacy_modal /
+ * tc_render_consent_modal) and opened via data-tc-modal-open (see
+ * initTcModals() in assets/js/custom.js). These are plain checkbox fields
+ * (Checkable component), so their labels carry no link by default — we wrap
+ * the relevant phrase in an anchor at render time.
  */
-add_filter( 'fluentform/rendering_field_data_input_checkbox', 'tc_apply_form_link_terms_field', 20, 2 );
+function tc_apply_form_policy_links() {
+	return array(
+		'accept_terms'    => array( 'pattern' => '/Terms\s*(?:&amp;|&|and)\s*Conditions/i', 'modal' => 'terms' ),
+		'privacy_consent' => array( 'pattern' => '/Privacy\s*Policy/i',                     'modal' => 'privacy' ),
+		'consent_contact' => array( 'pattern' => '/consent/i',                              'modal' => 'consent' ),
+	);
+}
 
-function tc_apply_form_link_terms_field( $data, $form ) {
+add_filter( 'fluentform/rendering_field_data_input_checkbox', 'tc_apply_form_link_policy_field', 20, 2 );
+
+function tc_apply_form_link_policy_field( $data, $form ) {
 	if ( ! isset( $form->id ) || 1 !== (int) $form->id ) {
 		return $data;
 	}
 
-	if ( 'accept_terms' !== ( $data['attributes']['name'] ?? '' ) ) {
+	$name  = $data['attributes']['name'] ?? '';
+	$links = tc_apply_form_policy_links();
+	if ( ! isset( $links[ $name ] ) ) {
 		return $data;
 	}
 
-	$pattern = '/Terms\s*(?:&amp;|&|and)\s*Conditions/i';
-	$replace = '<a href="#tc-modal-terms" data-tc-modal-open="terms">$0</a>';
+	$pattern = $links[ $name ]['pattern'];
+	$modal   = $links[ $name ]['modal'];
+	$replace = '<a href="#tc-modal-' . $modal . '" data-tc-modal-open="' . $modal . '">$0</a>';
 
 	// Single checkboxes are usually stored as settings.advanced_options
 	// (list of ['label' => ..., 'value' => ...]); fall back to the plain
@@ -80,7 +91,7 @@ function tc_apply_form_link_terms_field( $data, $form ) {
 }
 
 /**
- * Checkable::compile() builds this checkbox's aria-label from the same
+ * Checkable::compile() builds each checkbox's aria-label from the same
  * (now HTML-containing) label text via esc_attr() only — it never strips
  * tags the way FluentForm's native "Terms and Conditions" field does. Left
  * alone, the anchor markup we just injected would be read out literally by
@@ -92,14 +103,15 @@ function tc_apply_form_link_terms_field( $data, $form ) {
  * copy of $html, not the field's data array. Detect the field from the
  * HTML itself instead.
  */
-add_filter( 'fluentform/rendering_field_html_input_checkbox', 'tc_apply_form_fix_terms_aria_label', 20, 3 );
+add_filter( 'fluentform/rendering_field_html_input_checkbox', 'tc_apply_form_fix_policy_aria_label', 20, 3 );
 
-function tc_apply_form_fix_terms_aria_label( $html, $data, $form ) {
+function tc_apply_form_fix_policy_aria_label( $html, $data, $form ) {
 	if ( ! isset( $form->id ) || 1 !== (int) $form->id ) {
 		return $html;
 	}
 
-	if ( false === strpos( $html, 'name="accept_terms[]"' ) ) {
+	// Only touch checkboxes we actually linked (they carry our modal anchor).
+	if ( false === strpos( $html, 'data-tc-modal-open=' ) ) {
 		return $html;
 	}
 

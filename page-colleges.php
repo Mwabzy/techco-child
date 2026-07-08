@@ -78,7 +78,7 @@ $tc_wa_tel = preg_replace( '/[^0-9+]/', '', $tc_org['wa'] );
             <div class="col-12 tc-program-content">
 
                 <!-- Value cards -->
-                <section class="tc-section tc-college-value tc-reveal">
+                <section class="tc-section tc-college-value tc-reveal tc-section--tint">
                     <h2 class="tc-section__title">Why colleges choose us</h2>
                     <div class="tc-bento tc-bento--2col">
                         <div class="tc-feature tc-bento__cell--lead tc-reveal" style="--delay: 0ms">
@@ -141,7 +141,7 @@ $tc_wa_tel = preg_replace( '/[^0-9+]/', '', $tc_org['wa'] );
                 </section>
 
                 <!-- Engagement models -->
-                <section class="tc-section tc-models tc-reveal">
+                <section class="tc-section tc-models tc-reveal tc-section--brand">
                     <h2 class="tc-section__title">Two ways to engage</h2>
                     <div class="row">
                         <div class="col-md-6 tc-reveal" style="--delay: 0ms">

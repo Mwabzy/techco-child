@@ -170,7 +170,7 @@ $tc_tests = array(
         </section>
 
         <!-- SECTION: Why VisionOne — service cards -->
-        <section class="tc-section tc-services tc-reveal">
+        <section class="tc-section tc-services tc-reveal tc-section--tint">
             <div class="tc-services__head">
                 <span class="tc-eyebrow">Why VisionOne</span>
                 <h2 class="tc-section__title">A hands-on, classroom-first way to go from beginner to hired</h2>
@@ -192,7 +192,7 @@ $tc_tests = array(
         </section>
 
         <!-- SECTION: The Stack — scattered brand-icon cloud -->
-        <section class="tc-section tc-stackcloud tc-reveal">
+        <section class="tc-section tc-stackcloud tc-reveal tc-section--brand">
             <div class="tc-stackcloud__head">
                 <span class="tc-eyebrow">The Stack</span>
                 <h2 class="tc-section__title">Tools &amp; technologies you'll master in class</h2>
@@ -319,7 +319,7 @@ $tc_tests = array(
                     <span class="tc-eyebrow">Fees &amp; EMI</span>
                     <h2 class="tc-section__title tc-section__title--flush">Transparent pricing, EMI-friendly</h2>
                     <p class="tc-muted">Clear fees inclusive of 18% GST, with No-Cost EMI on eligible cards and
-                        secure online payment via Razorpay.</p>
+                        secure online payment.</p>
                     <div>
                         <a class="tc-btn tc-btn--primary"
                             href="<?php echo esc_url(tc_tpl_url('page-fees.php', '/fees-batches/')); ?>">View Fees &amp;

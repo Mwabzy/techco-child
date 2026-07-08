@@ -2,7 +2,7 @@
 /**
  * Template Name: visionONE — Fees & Batches
  *
- * Fee plans (+ GST), batch schedule, no-refund policy, Razorpay slot.
+ * Fee plans (+ GST), no-refund policy, online payment card.
  * NOTE: intentionally omits techco_child_page_banner() — the .tc-hero
  * below provides its own breadcrumb + title, mirrors page-apply.php.
  * @package Techco Child
@@ -70,12 +70,6 @@ $tc_bulk_plan = array(
 	'features' => array('Volume discount applied', 'Dedicated batch & timing', 'TPO progress dashboard', 'On-campus orientation', 'GST invoice provided'),
 );
 
-$tc_batches = array(
-	array('name' => 'Cohort — July 2026', 'date' => 'Starts 6 Jul 2026', 'mode' => 'Weekday · Online', 'seats' => 'Few seats left'),
-	array('name' => 'Cohort — September 2026', 'date' => 'Starts 7 Sep 2026', 'mode' => 'Weekend · Hybrid', 'seats' => 'Open'),
-	array('name' => 'Cohort — November 2026', 'date' => 'Starts 2 Nov 2026', 'mode' => 'Weekday · Online', 'seats' => 'Open'),
-);
-
 $tc_faqs = array(
 	array('q' => 'Are the prices shown inclusive of GST?', 'a' => 'No — every price shown is the base amount (exclusive of GST). GST at 18% will be calculated and added at checkout. A GST-compliant invoice is generated automatically after payment and emailed to you.'),
 	array('q' => 'What is the refund policy?', 'a' => 'Our No-Refund policy applies once a seat is confirmed and payment is received — please review it carefully before paying. We\'re happy to answer questions on a counselling call first.'),
@@ -111,7 +105,7 @@ $tc_faqs = array(
 		</section>
 
 		<!-- SECTION: Fee plans -->
-		<section class="tc-section tc-fees tc-reveal">
+		<section class="tc-section tc-fees tc-reveal tc-section--tint">
 			<span class="tc-eyebrow">Choose your track</span>
 			<h2 class="tc-section__title">Fee Plans — Per Program</h2>
 			<p class="tc-muted tc-fees__lead">Core is the 10-week spine — bolt on Cloud and AI, or take the
@@ -175,26 +169,6 @@ $tc_faqs = array(
 			</div>
 		</section>
 
-		<!-- SECTION: Batch schedule -->
-		<section class="tc-section tc-section--tint tc-batches-section tc-reveal">
-			<span class="tc-eyebrow">Plan ahead</span>
-			<h2 class="tc-section__title">Batch Schedule &amp; Timings</h2>
-			<p class="tc-muted tc-placeholder-note">Dates shown are indicative — confirm before publishing.</p>
-			<div class="tc-batches">
-				<?php foreach ($tc_batches as $i => $b): ?>
-					<div class="tc-batch-row tc-reveal" style="--delay: <?php echo $i * 100; ?>ms">
-						<div class="tc-batch-row__main">
-							<h3 class="tc-batch-row__name"><?php echo esc_html($b['name']); ?></h3>
-							<span class="tc-muted"><?php echo esc_html($b['date']); ?> ·
-								<?php echo esc_html($b['mode']); ?></span>
-						</div>
-						<span
-							class="tc-seats-badge<?php echo ($b['seats'] === 'Few seats left') ? ' tc-seats-badge--urgent' : ''; ?>"><?php echo esc_html($b['seats']); ?></span>
-					</div>
-				<?php endforeach; ?>
-			</div>
-		</section>
-
 		<!-- SECTION: No-Refund Policy -->
 		<section class="tc-section tc-refund-section tc-reveal">
 			<div class="tc-refund-card tc-refund-card--standalone tc-reveal">
@@ -216,67 +190,7 @@ $tc_faqs = array(
 			</div>
 		</section>
 
-		<!-- SECTION: Pay online -->
-		<section class="tc-section tc-payment tc-reveal">
-			<span class="tc-eyebrow">Checkout</span>
-			<h2 class="tc-section__title">Pay Online</h2>
-			<div class="tc-payment-card">
-				<div class="tc-payment-card__head">
-					<svg class="tc-payment-card__icon" viewBox="0 0 24 24" width="22" height="22" fill="none"
-						stroke="currentColor" stroke-width="2" aria-hidden="true">
-						<path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z" />
-						<path d="M9 12l2 2 4-4" />
-					</svg>
-					<div>
-						<h3>Secure payment via Razorpay</h3>
-						<p class="tc-muted">Cards, UPI and netbanking — all PCI-DSS compliant.</p>
-					</div>
-				</div>
 
-				<!-- Trust badges -->
-				<div class="tc-trust-badges">
-					<div class="tc-trust-badge">
-						<span class="tc-trust-badge__icon" aria-hidden="true">
-							<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
-								stroke-width="1.8">
-								<path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z" />
-							</svg>
-						</span>
-						<span>Secure</span>
-					</div>
-					<div class="tc-trust-badge">
-						<span class="tc-trust-badge__icon" aria-hidden="true">
-							<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
-								stroke-width="1.8">
-								<rect x="3" y="11" width="18" height="11" rx="2" />
-								<path d="M7 11V7a5 5 0 0110 0v4" />
-							</svg>
-						</span>
-						<span>Encrypted</span>
-					</div>
-					<div class="tc-trust-badge">
-						<span class="tc-trust-badge__icon" aria-hidden="true">
-							<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
-								stroke-width="1.8">
-								<path d="M9 12l2 2 4-4" />
-								<circle cx="12" cy="12" r="10" />
-							</svg>
-						</span>
-						<span>PCI-DSS</span>
-					</div>
-					<div class="tc-trust-badge">
-						<span class="tc-trust-badge__icon" aria-hidden="true">
-							<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
-								stroke-width="1.8">
-								<rect x="1" y="4" width="22" height="16" rx="2" />
-								<path d="M1 10h22" />
-							</svg>
-						</span>
-						<span>GST Invoice</span>
-					</div>
-				</div>
-			</div>
-		</section>
 
 		<!-- SECTION: FAQ -->
 		<section class="tc-section tc-section--tint tc-faq-section tc-reveal">
@@ -307,7 +221,8 @@ $tc_faqs = array(
 				batch — then confirm everything over email &amp; WhatsApp within 24 hours.</p>
 			<div class="tc-cta-band__actions">
 				<a class="tc-btn tc-btn--primary"
-					href="<?php echo esc_url(tc_tpl_url('page-apply.php', '/admissions-apply/') . '#tc-apply-form-anchor'); ?>">Apply Now</a>
+					href="<?php echo esc_url(tc_tpl_url('page-apply.php', '/admissions-apply/') . '#tc-apply-form-anchor'); ?>">Apply
+					Now</a>
 				<a class="tc-btn tc-btn--ghost"
 					href="<?php echo esc_url(tc_tpl_url('page-program.php', '/program-curriculum/')); ?>">View
 					Curriculum</a>

@@ -126,6 +126,10 @@
 .tc-page {
   background: var(--tc-bg-0);
   color: var(--tc-text);
+  /* Trim the scrollbar-width overspill from full-viewport bleed bands so they
+     reach the screen edges without adding a horizontal scrollbar. `clip`
+     (not `hidden`) avoids creating a scroll container that would break sticky. */
+  overflow-x: clip;
   font-family: var(--tc-font);
   font-size: var(--tc-fs-body);
   line-height: 1.65;
@@ -215,10 +219,55 @@
    ----------------------------------------------------------- */
 .tc-section--tint {
   background: var(--tc-bg-1);
-  margin-left: -28px;
-  margin-right: -28px;
-  padding: clamp(64px, 8vw, 104px) 28px;
+}
+.tc-section--dark {
+  background: var(--tc-bg-dark); /* navy */
+  color: #fff;
+}
+/* Blue brand band — same full-bleed geometry as --tint / --dark */
+.tc-section--brand {
+  background: var(--tc-blue);
+  color: #fff;
+}
+/* Full-viewport bleed — bands run from the far left to the far right edge of
+   the screen, while their inner content stays aligned to the container. The
+   negative margin breaks out to the viewport; the matching horizontal padding
+   pulls content back to the container edge. Works at every width: on screens
+   below the 1240px container the calc resolves to the container's own gutter. */
+.tc-section--tint,
+.tc-section--dark,
+.tc-section--brand {
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding: clamp(64px, 8vw, 104px) calc(50vw - 50%);
   border-radius: 0;
+}
+
+/* On-band legibility — keep the section's own heading, eyebrow, body and the
+   title hairline readable on the blue field; invert the Stack's outline CTA
+   so it shows. Scoped to direct children only so white cards nested inside a
+   blue band (e.g. .tc-feature) keep their own dark title/body text. */
+.tc-section--brand > :is(h2, h3, .tc-section__title) {
+  color: #fff;
+}
+.tc-section--brand > .tc-section__title::after {
+  background: rgba(255, 255, 255, 0.9);
+}
+.tc-section--brand > .tc-eyebrow {
+  color: #fff;
+}
+.tc-section--brand > .tc-lead,
+.tc-section--brand > .tc-muted,
+.tc-section--brand > p {
+  color: rgba(255, 255, 255, 0.88);
+}
+.tc-section--brand .tc-btn--outline {
+  border-color: #fff;
+  color: #fff;
+}
+.tc-section--brand .tc-btn--outline:hover {
+  background: #fff;
+  color: var(--tc-blue);
 }
 .tc-nav__search-suggestion-title {
   display: block;
@@ -264,6 +313,9 @@
   background: transparent;
   color: var(--tc-muted);
 }
+.tc-texture-dots {
+  background-image: radial-gradient(
+    circle,
     rgba(255, 255, 255, 0.05) 1px,
     transparent 1px
   );
@@ -1677,7 +1729,7 @@
 }
 
 /* -----------------------------------------------------------
-   Fees — payment card (Razorpay slot wrapper)
+   Fees — payment card
    ----------------------------------------------------------- */
 .tc-payment-card {
   background: var(--tc-surface);
@@ -1708,14 +1760,6 @@
   margin: 0;
   font-size: 14px;
 }
-.tc-razorpay-slot {
-  border: 1px dashed var(--tc-border-strong);
-  border-radius: var(--tc-radius);
-  padding: 28px;
-  text-align: center;
-  background: rgba(15, 23, 42, 0.03);
-}
-
 /* -----------------------------------------------------------
    Bank transfer card — account details list + copy buttons
    ----------------------------------------------------------- */
@@ -1903,92 +1947,86 @@
 }
 
 /* -----------------------------------------------------------
-   Admissions — two-step form reveal (Apply page only)
-   Step 2 (.tc-ff-step2) stays visually collapsed until Step 1's
-   required fields validate; see initApplyFormSteps() in custom.js.
+   Admissions — multi-step form wizard (Apply page only)
+   Each section is a .tc-ff-step container; only the active one
+   shows. All hiding is scoped to form.tc-ff-stepped, which
+   initApplyFormSteps() adds only after confirming the steps
+   exist — so the form still renders in full if the JS never runs.
    ----------------------------------------------------------- */
-.tc-apply-form .tc-ff-step2 {
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  transform: translateY(12px);
-  pointer-events: none;
-  transition:
-    max-height 0.5s ease,
-    opacity 0.4s ease,
-    transform 0.4s ease;
+.tc-apply-form form.tc-ff-stepped .tc-ff-step {
+  display: none;
 }
-.tc-apply-form .tc-ff-step2.tc-ff-step2--visible {
-  max-height: 6000px;
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
+.tc-apply-form form.tc-ff-stepped .tc-ff-step.tc-ff-step--active {
+  display: block;
+  animation: tc-ff-step-in 0.4s ease both;
 }
-/* Hidden only once initApplyFormSteps() confirms the tc-ff-step1/step2
-   containers exist and applies this class itself — never hidden by
-   default, so the submit button still shows normally if the Fluent
-   Forms fields haven't been rebuilt with the two-step structure yet. */
-.tc-apply-form .ff_submit_btn_wrapper.tc-ff-submit--hidden {
-  opacity: 0;
-  max-height: 0;
-  overflow: hidden;
-  transition:
-    opacity 0.4s ease 0.1s,
-    max-height 0.4s ease;
+@keyframes tc-ff-step-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-.tc-apply-form .ff_submit_btn_wrapper.tc-ff-submit--visible {
-  opacity: 1;
-  max-height: 200px;
+@media (prefers-reduced-motion: reduce) {
+  .tc-apply-form form.tc-ff-stepped .tc-ff-step.tc-ff-step--active {
+    animation: none;
+  }
 }
 
-.tc-ff-continue__hint {
-  display: inline-block;
-  margin-left: 8px;
-  padding: 2px 10px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.2);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  vertical-align: middle;
+/* Real submit button is hidden until the final step. */
+.tc-apply-form form.tc-ff-stepped .ff_submit_btn_wrapper {
+  display: none;
+}
+.tc-apply-form form.tc-ff-stepped .ff_submit_btn_wrapper.tc-ff-submit--shown {
+  display: block;
 }
 
-.tc-ff-progress {
+/* Back / Next controls injected by initApplyFormSteps(). */
+.tc-ff-nav {
   display: flex;
   align-items: center;
-  gap: 24px;
-  margin: 0 0 20px;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 28px;
+}
+.tc-ff-nav__back[hidden],
+.tc-ff-nav__next[hidden] {
+  display: none;
+}
+.tc-ff-nav__next {
+  margin-left: auto;
+}
+
+/* Progress: "Step X of N" label + a fill bar. */
+.tc-ff-progress {
+  margin: 0 0 24px;
+}
+.tc-ff-progress__label {
+  display: block;
+  margin-bottom: 8px;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--tc-muted);
-}
-.tc-ff-progress__step {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  opacity: 0.5;
-  transition: opacity 0.3s ease;
-}
-.tc-ff-progress__step--active {
-  opacity: 1;
   color: var(--tc-heading);
 }
-.tc-ff-progress__dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  flex: none;
+.tc-ff-progress__bar {
+  display: block;
+  height: 6px;
+  border-radius: 999px;
   background: var(--tc-border-strong);
-  transition:
-    background 0.3s ease,
-    transform 0.3s ease;
+  overflow: hidden;
 }
-.tc-ff-progress__step--active .tc-ff-progress__dot {
+.tc-ff-progress__fill {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: 999px;
   background: var(--tc-blue);
-  transform: scale(1.2);
+  transition: width 0.4s ease;
 }
 
 .tc-page .fluentform .ff-el-section-break {
@@ -2398,8 +2436,10 @@
     margin-bottom: 72px;
   }
   .tc-section--tint,
-  .tc-section--dark {
-    padding: 56px 28px;
+  .tc-section--dark,
+  .tc-section--brand {
+    padding-top: 56px;
+    padding-bottom: 56px;
   }
   .tc-program-body .col-lg-4 {
     margin-bottom: 32px;
@@ -3262,7 +3302,8 @@
 .tc-statband__item:first-child {
   border-left: 0;
 }
-.tc-section--dark .tc-statband__item {
+.tc-section--dark .tc-statband__item,
+.tc-section--brand .tc-statband__item {
   border-left-color: rgba(255, 255, 255, 0.16);
 }
 .tc-statband__num {
@@ -3278,7 +3319,8 @@
   font-size: 14px;
   color: var(--tc-muted);
 }
-.tc-section--dark .tc-statband__label {
+.tc-section--dark .tc-statband__label,
+.tc-section--brand .tc-statband__label {
   color: var(--tc-muted-on-dark);
 }
 @media (max-width: 575px) {
@@ -4229,16 +4271,6 @@ body.tc-modal-lock {
   overflow: hidden;
 }
 
-/* Razorpay slot on pay page */
-.tc-razorpay-slot--pay-page {
-  background: var(--tc-surface);
-  border: 1.5px dashed var(--tc-border-strong);
-  border-radius: var(--tc-radius);
-  padding: 28px 32px;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
 /* Trust badges row on pay page */
 .tc-trust-badges--pay {
   margin-top: 16px;
@@ -4252,9 +4284,6 @@ body.tc-modal-lock {
 }
 @media (max-width: 575px) {
   .tc-pay-summary {
-    padding: 20px;
-  }
-  .tc-razorpay-slot--pay-page {
     padding: 20px;
   }
 }

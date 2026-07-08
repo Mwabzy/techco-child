@@ -60,20 +60,20 @@ function tc_render_visioner_nav()
 		return function_exists('tc_tpl_url') ? tc_tpl_url($tpl, $fallback) : home_url($fallback);
 	};
 
-	$home_url  = $tpl_url('page-home.php', '/');
+	$home_url = $tpl_url('page-home.php', '/');
 	$apply_url = $tpl_url('page-apply.php', '/admissions-apply/') . '#tc-apply-form-anchor';
-	$prog_url  = $tpl_url('page-program.php', '/program-curriculum/');
+	$prog_url = $tpl_url('page-program.php', '/program-curriculum/');
 
 	// Course-content search index (query → curriculum module anchor).
 	$tc_search = array(
-		'url'   => $prog_url,
+		'url' => $prog_url,
 		'items' => function_exists('tc_program_search_index') ? tc_program_search_index() : array(),
 	);
 
 	// Reuse the site's WhatsApp line (same filters as the floating widget) for "Talk to us".
-	$wa_number = apply_filters('techco_child_wa_number', '918143533535');
-	$wa_msg    = apply_filters('techco_child_wa_message', 'Hi VisionONE, I\'d like to know more about the Full Stack Training program.');
-	$talk_url  = $wa_number ? 'https://wa.me/' . rawurlencode($wa_number) . '?text=' . rawurlencode($wa_msg) : $apply_url;
+	$wa_number = apply_filters('techco_child_wa_number', '918143533434');
+	$wa_msg = apply_filters('techco_child_wa_message', 'Hi VisionONE, I\'d like to know more about the Full Stack Training program.');
+	$talk_url = $wa_number ? 'https://wa.me/' . rawurlencode($wa_number) . '?text=' . rawurlencode($wa_msg) : $apply_url;
 	?>
 	<header class="tc-nav" id="tc-nav">
 		<div class="container tc-nav__inner">
@@ -100,14 +100,17 @@ function tc_render_visioner_nav()
 						<input class="tc-nav__search-input" type="search" name="s" placeholder="Want to learn?"
 							aria-label="Search the site" autocomplete="off" aria-autocomplete="list"
 							aria-controls="tc-nav-search-suggestions" aria-expanded="false">
-						<div class="tc-nav__search-suggestions" id="tc-nav-search-suggestions" role="listbox" aria-label="Suggested topics" hidden></div>
+						<div class="tc-nav__search-suggestions" id="tc-nav-search-suggestions" role="listbox"
+							aria-label="Suggested topics" hidden></div>
 					</div>
 					<details class="tc-nav__explore">
 						<summary>Explore <?php echo tc_icon('chevron-down', 16); ?></summary>
 						<ul class="tc-nav__explore-menu">
 							<?php foreach ($explore as $label => $cfg):
 								list($tpl, $fallback) = $cfg; ?>
-								<li><a href="<?php echo esc_url($tpl_url($tpl, $fallback)); ?>"><?php echo esc_html($label); ?></a></li>
+								<li><a
+										href="<?php echo esc_url($tpl_url($tpl, $fallback)); ?>"><?php echo esc_html($label); ?></a>
+								</li>
 							<?php endforeach; ?>
 						</ul>
 					</details>
@@ -150,7 +153,7 @@ function tc_render_visioner_nav()
 		</div>
 	</header>
 	<script>
-		window.TC_SEARCH = <?php echo wp_json_encode( $tc_search, JSON_HEX_TAG | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE ); ?>;
+		window.TC_SEARCH = <?php echo wp_json_encode($tc_search, JSON_HEX_TAG | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE); ?>;
 	</script>
 	<script>
 		(function () {
