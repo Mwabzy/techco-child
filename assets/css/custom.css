@@ -278,10 +278,12 @@
 .tc-section--brand .tc-btn--outline {
   border-color: #fff;
   color: #fff;
+  background: transparent;
 }
 .tc-section--brand .tc-btn--outline:hover {
-  background: #fff;
-  color: var(--tc-blue);
+  background: transparent;
+  color: #fff;
+  border-color: #fff;
 }
 
 /* Homepage-only band — same geometry/contrast rules as --brand, but using
@@ -550,12 +552,12 @@
 }
 .tc-btn.tc-btn--ghost {
   border-color: var(--tc-border-strong);
-  color: var(--tc-heading);
+  color: var(--tc-blue);
   background: #fff;
 }
 .tc-btn.tc-btn--ghost:hover {
   background: rgba(15, 23, 42, 0.04);
-  color: var(--tc-heading);
+  color: var(--tc-blue);
 }
 
 /* Ghost / outline buttons on the dark CTA band stay light */
