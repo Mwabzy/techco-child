@@ -283,6 +283,130 @@
   background: #fff;
   color: var(--tc-blue);
 }
+
+/* Homepage-only band — same geometry/contrast rules as --brand, but using
+   the same navy gradient as the hero's .tc-glancecard so every homepage
+   section reads as the same tone as that card. */
+.tc-section--navy {
+  background: linear-gradient(165deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .015)),
+    linear-gradient(150deg, var(--tc-navy) 0%, #0f1c3f 60%, var(--tc-navy) 100%);
+  color: #fff;
+}
+.tc-section--navy {
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding: clamp(64px, 8vw, 104px) calc(50vw - 50%);
+  border-radius: 0;
+}
+.tc-section--navy > :is(h2, h3, .tc-section__title) {
+  color: #fff;
+}
+.tc-section--navy > .tc-section__title::after {
+  background: rgba(255, 255, 255, 0.9);
+}
+.tc-section--navy > .tc-eyebrow {
+  color: #fff;
+}
+.tc-section--navy > .tc-lead,
+.tc-section--navy > .tc-muted,
+.tc-section--navy > p {
+  color: rgba(255, 255, 255, 0.88);
+}
+.tc-section--navy .tc-stackcloud__head .tc-section__title {
+  color: #fff;
+}
+.tc-section--navy .tc-stackcloud__head .tc-section__title::after {
+  background: rgba(255, 255, 255, 0.9);
+}
+.tc-section--navy .tc-stackcloud__head .tc-eyebrow {
+  color: #fff;
+}
+.tc-section--navy .tc-stackcloud__head .tc-muted {
+  color: rgba(255, 255, 255, 0.88);
+}
+.tc-section--navy .tc-btn--outline {
+  border-color: #fff;
+  color: #fff;
+}
+.tc-section--navy .tc-btn--outline:hover {
+  background: #fff;
+  color: var(--tc-navy);
+}
+
+/* Same on-band legibility for the other centered section heads (Shift /
+   Hands-On Projects), which wrap their heading/eyebrow/copy one level
+   deeper — same reason .tc-stackcloud__head needed the rules above. */
+.tc-section--navy .tc-services__head .tc-section__title,
+.tc-section--navy .tc-tracks__head .tc-section__title {
+  color: #fff;
+}
+.tc-section--navy .tc-services__head .tc-section__title::after,
+.tc-section--navy .tc-tracks__head .tc-section__title::after {
+  background: rgba(255, 255, 255, 0.9);
+}
+.tc-section--navy .tc-services__head .tc-eyebrow,
+.tc-section--navy .tc-tracks__head .tc-eyebrow {
+  color: #fff;
+}
+.tc-section--navy .tc-services__head .tc-muted,
+.tc-section--navy .tc-tracks__head .tc-muted {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+/* Batch Enquiry heading block sits inside a plain Bootstrap column
+   (.col-lg-7, no card background) — same one-level-deep issue. */
+.tc-section--navy .tc-apply-section .col-lg-7 > .tc-eyebrow {
+  color: #fff;
+}
+.tc-section--navy .tc-apply-section .col-lg-7 > .tc-section__title {
+  color: #fff;
+}
+.tc-section--navy .tc-apply-section .col-lg-7 > .tc-section__title::after {
+  background: rgba(255, 255, 255, 0.9);
+}
+.tc-section--navy .tc-apply-section .col-lg-7 > .tc-muted {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+/* Only the salary-table heading sits directly on the navy band (its wrap
+   has no card background of its own) — needs whitening. The "Roles You Can
+   Target" / "Opportunities Across Industries" headings live inside
+   .tc-split-panel, which already has its own white card background
+   (var(--tc-surface)), so they must stay dark and are left untouched. */
+.tc-section--navy .tc-salarytable-wrap .tc-section__title--flush {
+  color: #fff;
+}
+.tc-section--navy .tc-salarytable-wrap .tc-section__title--flush::after {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* Role/industry list rows in Career Scope sit directly on the navy band
+   with a near-transparent tint — give them a light-card surface so their
+   existing dark text is legible (matches how this same component already
+   looks correct inside the white .tc-eligibility-card elsewhere). */
+.tc-section--navy .tc-split-panel .tc-eligibility-item {
+  background: var(--tc-surface);
+  border-color: var(--tc-border);
+}
+
+/* Salary table has no background of its own — give it one on navy. */
+.tc-section--navy .tc-salarytable-scroll {
+  background: var(--tc-surface);
+}
+
+/* Enquiry side panel's near-transparent gradient needs a solid surface. */
+.tc-section--navy .tc-apply-panel {
+  background: var(--tc-surface);
+}
+
+/* .tc-eligibility-section sets its own background at equal specificity to
+   .tc-section--navy; source order would otherwise let it win. The two-class
+   selector below beats it regardless of order. */
+.tc-section--navy.tc-eligibility-section {
+  background: linear-gradient(165deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .015)),
+    linear-gradient(150deg, var(--tc-navy) 0%, #0f1c3f 60%, var(--tc-navy) 100%);
+}
+
 .tc-nav__search-suggestion-title {
   display: block;
   font-size: 14.5px;
@@ -3317,7 +3441,8 @@
   border-left: 0;
 }
 .tc-section--dark .tc-statband__item,
-.tc-section--brand .tc-statband__item {
+.tc-section--brand .tc-statband__item,
+.tc-section--navy .tc-statband__item {
   border-left-color: rgba(255, 255, 255, 0.16);
 }
 .tc-statband__num {
@@ -3334,7 +3459,8 @@
   color: var(--tc-muted);
 }
 .tc-section--dark .tc-statband__label,
-.tc-section--brand .tc-statband__label {
+.tc-section--brand .tc-statband__label,
+.tc-section--navy .tc-statband__label {
   color: var(--tc-muted-on-dark);
 }
 @media (max-width: 575px) {
@@ -5297,12 +5423,14 @@ body.tc-modal-lock {
 .tc-tracks__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: 20px;
 }
 .tc-trackcard {
+  position: relative;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  padding: clamp(22px, 2.4vw, 28px);
   background: var(--tc-surface);
   border: 1px solid var(--tc-border);
   border-radius: var(--tc-radius-lg);
@@ -5311,126 +5439,58 @@ body.tc-modal-lock {
     box-shadow 0.35s var(--tc-ease),
     border-color 0.25s ease;
 }
+.tc-trackcard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--tc-blue), transparent 85%);
+  opacity: 0;
+  transition: opacity 0.3s var(--tc-ease);
+}
 .tc-trackcard:hover {
   transform: translateY(-5px);
   box-shadow: var(--tc-shadow-lg);
   border-color: var(--tc-border-strong);
 }
-.tc-trackcard__media {
-  position: relative;
-  display: block;
-  aspect-ratio: 16 / 10;
-  background-size: cover;
-  background-position: center;
-  text-decoration: none;
+.tc-trackcard:hover::before {
+  opacity: 1;
 }
-.tc-trackcard__media--placeholder {
-  display: grid;
-  place-items: center;
-  background:
-    radial-gradient(
-      130% 120% at 20% 0,
-      rgba(255, 255, 255, 0.18),
-      transparent 55%
-    ),
-    linear-gradient(150deg, #1c3f7a, var(--tc-blue) 60%, var(--tc-navy));
-}
-.tc-trackcard__media-ic {
-  width: 72px;
-  height: 72px;
-  border-radius: 18px;
-  background: #fff;
-  display: grid;
-  place-items: center;
-  box-shadow: var(--tc-shadow-md);
-}
-.tc-trackcard__len {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  display: inline-flex;
+.tc-trackcard__top {
+  display: flex;
   align-items: center;
-  gap: 5px;
-  background: rgba(255, 255, 255, 0.94);
-  color: var(--tc-heading);
-  font-size: 12px;
-  font-weight: 700;
-  padding: 5px 10px;
-  border-radius: 999px;
-  box-shadow: var(--tc-shadow-sm);
+  justify-content: space-between;
+  margin-bottom: 18px;
 }
-.tc-trackcard__len .tc-ico {
-  color: var(--tc-blue);
+.tc-trackcard__ic {
+  width: 48px;
+  height: 48px;
+  border-radius: 13px;
+  font-size: 22px;
+}
+.tc-trackcard__index {
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--tc-border-strong);
 }
 .tc-trackcard__body {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 20px 20px 22px;
   flex: 1 1 auto;
-}
-.tc-trackcard__cat {
-  color: var(--tc-blue);
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
 }
 .tc-trackcard__title {
   font-size: 19px;
-  margin: 0;
-}
-.tc-trackcard__title a {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--tc-heading);
-  text-decoration: none;
-}
-.tc-trackcard__title a:hover {
-  color: var(--tc-blue);
-}
-.tc-trackcard__title .tc-ico {
-  transition: transform 0.2s var(--tc-ease);
-}
-.tc-trackcard:hover .tc-trackcard__title .tc-ico {
-  transform: translate(3px, -3px);
+  margin: 0 0 8px;
 }
 .tc-trackcard__text {
   margin: 0;
   color: var(--tc-muted);
   font-size: 14px;
   line-height: 1.6;
-  flex: 1 1 auto;
-}
-.tc-trackcard__foot {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: 6px;
-  padding-top: 14px;
-  border-top: 1px solid var(--tc-border);
-}
-.tc-trackcard__level {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--tc-text);
-}
-.tc-trackcard__level .tc-ico {
-  color: #c77700;
-}
-.tc-trackcard__more {
-  color: var(--tc-blue);
-  font-weight: 700;
-  font-size: 13.5px;
-  text-decoration: none;
-}
-.tc-trackcard__more:hover {
-  text-decoration: underline;
 }
 
 /* --- How it works: numbered steps + imagery --- */
@@ -6638,6 +6698,336 @@ body.tc-modal-lock {
   display: flex;
   flex-direction: column;
   gap: clamp(14px, 2vw, 18px);
+}
+
+/* --- Program at a Glance: clean premium fact-table card (hero right side) --- */
+.tc-glancecard {
+  width: 100%;
+  max-width: 420px;
+  margin-inline: auto;
+  padding: clamp(24px, 3vw, 34px) clamp(24px, 3.4vw, 36px);
+  border-radius: 20px;
+  background: linear-gradient(165deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .015)),
+    linear-gradient(150deg, var(--tc-navy) 0%, #0f1c3f 60%, var(--tc-navy) 100%);
+  border: 1px solid rgba(255, 255, 255, .12);
+  box-shadow: var(--tc-shadow-lg), inset 0 1px 0 rgba(255, 255, 255, .06);
+}
+.tc-glancecard__head {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: #5FC1F0;
+  margin-bottom: clamp(16px, 2.4vw, 22px);
+}
+.tc-glancecard__list {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+.tc-glancecard__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: clamp(12px, 2vw, 20px);
+  padding: clamp(11px, 1.6vw, 14px) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+.tc-glancecard__row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.tc-glancecard__row dt {
+  margin: 0;
+  font-size: clamp(13px, 1.4vw, 14px);
+  font-weight: 500;
+  color: rgba(255, 255, 255, .68);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.tc-glancecard__row dd {
+  margin: 0;
+  font-size: clamp(13.5px, 1.5vw, 15px);
+  font-weight: 700;
+  color: #fff;
+  text-align: right;
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 991px) {
+  .tc-glancecard { margin-top: clamp(28px, 4vw, 40px); }
+}
+/* Phones: stack each row so long values sit under their label, full-width */
+@media (max-width: 575px) {
+  .tc-glancecard__row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 12px 0;
+  }
+  .tc-glancecard__row dt { white-space: normal; }
+  .tc-glancecard__row dd { text-align: left; }
+}
+
+/* --- Salary table (Career Scope section) --- */
+.tc-salarytable-wrap {
+  margin-top: clamp(32px, 4vw, 48px);
+}
+.tc-salarytable-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--tc-border);
+  border-radius: var(--tc-radius);
+  margin-top: 16px;
+}
+.tc-salarytable {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 620px;
+  font-size: 14.5px;
+}
+.tc-salarytable thead th {
+  text-align: left;
+  padding: 14px 18px;
+  background: var(--tc-blue-soft);
+  color: var(--tc-heading);
+  font-weight: 700;
+  white-space: nowrap;
+}
+.tc-salarytable tbody td {
+  padding: 14px 18px;
+  border-top: 1px solid var(--tc-border);
+  color: var(--tc-heading);
+}
+.tc-salarytable tbody tr:nth-child(even) {
+  background: rgba(36, 150, 237, .03);
+}
+.tc-salarytable__note {
+  margin-top: 12px;
+  font-size: 13px;
+}
+
+/* --- Stack panels: premium category cards (Tools & Technologies section) --- */
+.tc-stackpanels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: clamp(18px, 2.2vw, 26px);
+  margin-top: clamp(32px, 4vw, 48px);
+}
+.tc-stackpanel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: clamp(22px, 2.6vw, 28px);
+  background: var(--tc-surface);
+  border: 1px solid var(--tc-border);
+  border-radius: var(--tc-radius-lg);
+  box-shadow: var(--tc-shadow-sm);
+  transition: transform .3s var(--tc-ease), box-shadow .3s var(--tc-ease), border-color .3s var(--tc-ease);
+}
+.tc-stackpanel:hover {
+  border-color: var(--tc-blue);
+  box-shadow: var(--tc-shadow-md);
+  transform: translateY(-4px);
+}
+.tc-stackpanel__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.tc-stackpanel__ic {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+}
+.tc-stackpanel__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--tc-heading);
+}
+.tc-stackpanel__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.tc-stackpanel__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 4px;
+  border-top: 1px solid var(--tc-border);
+}
+.tc-stackpanel__item:first-child {
+  border-top: none;
+}
+.tc-stackpanel__item-ic {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+}
+.tc-stackpanel__item-ic svg {
+  width: 22px;
+  height: 22px;
+}
+.tc-stackpanel__item-label {
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--tc-heading);
+}
+
+/* --- Get In Touch: premium horizontal contact cards --- */
+.tc-contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: clamp(16px, 2vw, 22px);
+  margin-top: clamp(28px, 3.5vw, 40px);
+}
+.tc-contact-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: clamp(20px, 2.4vw, 24px);
+  background: var(--tc-surface);
+  border: 1px solid var(--tc-border);
+  border-radius: var(--tc-radius-lg);
+  box-shadow: var(--tc-shadow-sm);
+  transition: transform .3s var(--tc-ease), box-shadow .3s var(--tc-ease), border-color .3s var(--tc-ease);
+}
+.tc-contact-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--tc-shadow-md);
+  border-color: var(--tc-blue);
+}
+.tc-contact-card__ic {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+.tc-contact-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.tc-contact-card__label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--tc-muted);
+}
+.tc-contact-card__value {
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--tc-heading);
+  letter-spacing: -0.01em;
+}
+.tc-contact-card__value:hover {
+  color: var(--tc-blue);
+}
+.tc-contact-card__value--long {
+  word-break: break-word;
+}
+.tc-contact-card__meta {
+  font-size: 13px;
+  color: var(--tc-muted);
+}
+
+.tc-contact-address {
+  margin-top: clamp(20px, 2.6vw, 28px);
+  padding: clamp(18px, 2.2vw, 22px) clamp(20px, 2.6vw, 26px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--tc-radius-lg);
+}
+.tc-contact-address__label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: #5FC1F0;
+  margin-bottom: 8px;
+}
+.tc-contact-address__text {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.82);
+}
+.tc-contact-address__text strong {
+  color: #fff;
+}
+
+/* --- Curriculum: 10-module grid, 5 columns x 2 rows on desktop --- */
+.tc-curriculum-grid {
+  list-style: none;
+  margin: clamp(28px, 3.5vw, 40px) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px;
+}
+.tc-curriculum-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 18px;
+  background: var(--tc-surface);
+  border: 1px solid var(--tc-border);
+  border-radius: 16px;
+  box-shadow: var(--tc-shadow-sm);
+  transition: transform .3s var(--tc-ease), box-shadow .3s var(--tc-ease), border-color .3s var(--tc-ease);
+}
+.tc-curriculum-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--tc-shadow-md);
+  border-color: var(--tc-blue);
+}
+.tc-curriculum-card__num {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--tc-blue);
+  line-height: 1;
+}
+.tc-curriculum-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.tc-curriculum-card__meta strong {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--tc-muted);
+}
+.tc-curriculum-card__meta span {
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: var(--tc-heading);
+  font-weight: 600;
+}
+@media (max-width: 1200px) {
+  .tc-curriculum-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 760px) {
+  .tc-curriculum-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .tc-curriculum-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 992px) {

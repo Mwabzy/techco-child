@@ -68,10 +68,11 @@ $tc_apply_why = array(
 						<span class="tc-herostat"><strong>Limited</strong><span>seats per cohort</span></span>
 					</div>
 					<div class="tc-coursebanner__actions">
-						<a class="tc-btn tc-btn--light" data-magnetic href="#tc-apply-form-anchor">Start Application</a>
+						<a class="tc-btn tc-btn--light" data-magnetic href="#tc-apply-form-anchor">Enroll for Next
+							Batch</a>
 						<a class="tc-btn tc-btn--ghost"
-							href="<?php echo esc_url(tc_tpl_url('page-fees.php', '/fees-batches/')); ?>">View Fees &
-							Batches</a>
+							href="<?php echo esc_url(tc_tpl_url('page-fees.php', '/fees-batches/')); ?>">View
+							Curriculum</a>
 					</div>
 				</div>
 			</div>

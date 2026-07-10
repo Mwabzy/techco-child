@@ -2,10 +2,11 @@
 /**
  * Template Name: VisionONE — Home / Landing
  *
- * Marketing landing page that ties the Visioner site together. Reuses the
- * shared Visioner components (hero, feature cards, stats, CTA band) plus a few
- * homepage-only sections. Set a Page to this template and mark it as the front
- * page in Settings → Reading.
+ * Marketing landing page for the AI Code Development Training Program.
+ * Reuses the shared Visioner components (hero, feature cards, stats, CTA
+ * band, apply form) plus a few homepage-only sections (program-at-a-glance,
+ * salary table, curriculum list). Set a Page to this template and mark it
+ * as the front page in Settings → Reading.
  * NOTE: omits techco_child_page_banner() — provides its own hero.
  * @package Techco Child
  */
@@ -18,366 +19,419 @@ get_header();
 
 /* CLAUDE CODE: homepage copy blocks — realistic placeholders, easy to swap. */
 
-// "Why VisionOne" service cards. First card renders as the filled feature card.
-// 'color' picks the icon-tile hue; 'link' points at the most relevant page.
-$tc_why = array(
-    array('ic' => 'sliders', 'color' => 'feature', 'title' => 'Project-first learning', 'text' => 'Write real code from day one and ship a feature every week — not just watch lectures.', 'link' => array('page-program.php', '/program-curriculum/')),
-    array('ic' => 'award', 'color' => 'violet', 'title' => 'Industry mentors', 'text' => 'Live mentorship, code reviews and 1:1 guidance from working engineers, in class.', 'link' => array('page-program.php', '/program-curriculum/')),
-    array('ic' => 'chart', 'color' => 'amber', 'title' => 'Placement support', 'text' => 'Mock interviews, resume &amp; GitHub polish, and a TPO/placement pipeline.', 'link' => array('page-apply.php', '/admissions-apply/')),
-    array('ic' => 'receipt', 'color' => 'pink', 'title' => 'EMI-friendly fees', 'text' => 'Transparent pricing with No-Cost EMI options on eligible cards.', 'link' => array('page-fees.php', '/fees-batches/')),
+// Program at a glance — rendered inside the hero's floating visual.
+$tc_glance = array(
+    array('label' => 'Course', 'value' => 'AI Code Development'),
+    array('label' => 'Duration', 'value' => '12 Weeks (3 Months)'),
+    array('label' => 'Mode', 'value' => 'Classroom'),
+    array('label' => 'Schedule', 'value' => 'Mon–Fri, 3–4 hrs/day'),
+    array('label' => 'Batches', 'value' => 'Every Month'),
+    array('label' => 'Location', 'value' => 'Madhapur, Hyderabad'),
 );
 
-// "Program tracks" cards (image-2 style, in-class context — no prices).
-$tc_tracks = array(
-    array('img' => 'tc_track_img_1', 'cat' => 'Fullstack', 'title' => 'MERN Fullstack Track', 'text' => 'Build and deploy complete web apps — React front-ends wired to Node/Express APIs and MongoDB.', 'len' => '14 weeks', 'level' => 'Beginner-friendly', 'key' => 'react'),
-    array('img' => 'tc_track_img_2', 'cat' => 'Frontend', 'title' => 'Frontend Engineering', 'text' => 'Master modern HTML, CSS and JavaScript with React to craft fast, accessible interfaces.', 'len' => '8 weeks', 'level' => 'No experience needed', 'key' => 'javascript'),
-    array('img' => 'tc_track_img_3', 'cat' => 'Backend', 'title' => 'Backend & APIs', 'text' => 'Design REST APIs, model data in SQL &amp; MongoDB, and ship secure, deployable services.', 'len' => '10 weeks', 'level' => 'Some coding helps', 'key' => 'nodejs'),
+// Market stat band.
+$tc_market_stats = array(
+    array('num' => '75%+', 'label' => 'of enterprises are piloting or scaling AI dev tools'),
+    array('num' => '3–5x', 'label' => 'faster prototyping with AI coding copilots'),
+    array('num' => '#1', 'label' => 'fastest-growing skill in software job posts'),
 );
 
-$tc_stack = array(
-    array('label' => 'HTML & CSS', 'key' => 'html-css', 'brand' => '#2496ED'),
-    array('label' => 'JavaScript', 'key' => 'javascript', 'brand' => '#1C75BC'),
-    array('label' => 'React', 'key' => 'react', 'brand' => '#5FC1F0'),
-    array('label' => 'Node.js', 'key' => 'nodejs', 'brand' => '#10173D'),
-    array('label' => 'Express', 'key' => 'express', 'brand' => '#0A0E2E'),
-    array('label' => 'MongoDB', 'key' => 'mongodb', 'brand' => '#2496ED'),
-    array('label' => 'SQL', 'key' => 'sql', 'brand' => '#1C75BC'),
-    array('label' => 'Git & GitHub', 'key' => 'git-github', 'brand' => '#5FC1F0'),
-    array('label' => 'Docker', 'key' => 'docker', 'brand' => '#10173D'),
-    array('label' => 'REST APIs', 'key' => 'rest-api', 'brand' => '#0A0E2E'),
-    array('label' => 'Auth & Security', 'key' => 'auth-security', 'brand' => '#2496ED'),
-    array('label' => 'Deployment', 'key' => 'deployment', 'brand' => '#1C75BC'),
+// "Why AI Code Development Matters" feature grid.
+$tc_shift = array(
+    array('ic' => 'zap', 'color' => 'blue', 'title' => 'AI-Assisted Coding', 'text' => 'Code suggestions, autocompletion, and full functions generated in real time.'),
+    array('ic' => 'settings', 'color' => 'violet', 'title' => 'Automation', 'text' => 'Repetitive tasks — scaffolding, formatting, boilerplate — handled automatically.'),
+    array('ic' => 'rocket', 'color' => 'amber', 'title' => 'Faster Development', 'text' => 'Ideas move from concept to working application in a fraction of the time.'),
+    array('ic' => 'search', 'color' => 'green', 'title' => 'Smarter Testing &amp; Debugging', 'text' => 'AI detects bugs, suggests fixes, and writes test cases alongside developers.'),
+    array('ic' => 'brain', 'color' => 'pink', 'title' => 'Intelligent Systems', 'text' => 'Applications that reason, automate workflows, and adapt to users.'),
+    array('ic' => 'building', 'color' => 'blue', 'title' => 'Enterprise Adoption', 'text' => 'Companies of every size are standardizing on AI-powered dev tools.'),
 );
 
-$tc_steps = array(
-    array('n' => '1', 'ic' => 'chat', 'color' => 'blue', 'title' => 'Apply', 'text' => 'Submit the quick registration form and pick your preferred batch.'),
-    array('n' => '2', 'ic' => 'mail', 'color' => 'violet', 'title' => 'Get confirmed', 'text' => 'Our team confirms your seat over email &amp; WhatsApp and shares the joining kit.'),
-    array('n' => '3', 'ic' => 'sliders', 'color' => 'amber', 'title' => 'Learn &amp; build', 'text' => '14 weeks of live, project-first training with mentors and weekly reviews.'),
-    array('n' => '4', 'ic' => 'award', 'color' => 'green', 'title' => 'Get placed', 'text' => 'Graduate with a portfolio and step into interviews with placement support.'),
+// Career scope.
+$tc_roles = array(
+    'AI Code Developer',
+    'AI Software Engineer',
+    'Prompt Engineer',
+    'AI Application Developer',
+    'Machine Learning Engineer',
+    'Automation Developer',
+    'AI Tool Integration Specialist',
+    'Full Stack Developer (AI skills)',
+);
+$tc_industries = array('IT & Software', 'Startups', 'SaaS Firms', 'Finance', 'Healthcare', 'Education', 'Manufacturing', 'E-Commerce', 'Consulting');
+
+$tc_salary = array(
+    array('level' => 'Entry Level', 'role' => 'Entry Level AI Code Developer', 'india' => '₹4 – 7 LPA', 'global' => '$65,000 – $85,000'),
+    array('level' => 'Junior', 'role' => 'Junior AI Developer', 'india' => '₹7 – 12 LPA', 'global' => '$85,000 – $105,000'),
+    array('level' => 'Mid-Level', 'role' => 'Mid-Level AI Software Engineer', 'india' => '₹12 – 22 LPA', 'global' => '$105,000 – $140,000'),
+    array('level' => 'Senior', 'role' => 'Senior AI Developer / AI Architect', 'india' => '₹22 – 40+ LPA', 'global' => '$140,000 – $190,000+'),
 );
 
-// Reviews (image-3 people cards). 'img' = Customizer avatar key; 'color' tints the role line.
-$tc_tests = array(
-    array('quote' => 'I joined as a complete beginner and finished with a deployed MERN app in my portfolio. The weekly reviews kept me accountable.', 'name' => 'Placeholder Student', 'role' => 'Fullstack Developer', 'img' => 'tc_review_img_1', 'color' => 'blue'),
-    array('quote' => 'The mentors actually review your code. That feedback loop is what got me interview-ready faster than self-study ever did.', 'name' => 'Placeholder Student', 'role' => 'Frontend Engineer', 'img' => 'tc_review_img_2', 'color' => 'violet'),
-    array('quote' => 'EMI made it accessible, and the placement prep was the part I underestimated most. Worth every week.', 'name' => 'Placeholder Student', 'role' => 'MERN Developer', 'img' => 'tc_review_img_3', 'color' => 'pink'),
+// Curriculum — 10 modules.
+$tc_modules = array(
+    'Introduction to AI and AI in Software Development',
+    'Programming Foundations for AI Development',
+    'AI Coding Tools and Productivity Platforms',
+    'Prompt Engineering for Developers',
+    'Building AI-Powered Applications',
+    'APIs, Automation, and AI Integration',
+    'Debugging, Testing, and Code Optimization with AI',
+    'Git, Deployment, and Cloud Basics',
+    'Real-World Projects and Case Studies',
+    'Resume, Portfolio, and Interview Preparation',
+);
+
+// Tech stack — grouped by category.
+$tc_stack_groups = array(
+    'Frontend' => array(
+        array('label' => 'Angular 18', 'key' => 'angular', 'brand' => '#DD0031'),
+        array('label' => 'TypeScript', 'key' => 'typescript', 'brand' => '#3178C6'),
+        array('label' => 'RxJS', 'key' => 'rxjs', 'brand' => '#B7178C'),
+        array('label' => 'HTML & CSS', 'key' => 'html-css', 'brand' => '#2496ED'),
+    ),
+    'Backend & APIs' => array(
+        array('label' => '.NET 8', 'key' => 'dotnet', 'brand' => '#512BD4'),
+        array('label' => 'Entity Framework Core', 'key' => 'entity-framework', 'brand' => '#0C8F6E'),
+        array('label' => 'REST APIs', 'key' => 'rest-api', 'brand' => '#009688'),
+    ),
+    'Database' => array(
+        array('label' => 'SQL Server', 'key' => 'sql-server', 'brand' => '#A91D22'),
+        array('label' => 'Stored Procedures', 'key' => 'sql', 'brand' => '#00758F'),
+    ),
+    'Cloud & DevOps' => array(
+        array('label' => 'AWS', 'key' => 'aws', 'brand' => '#FF9900'),
+        array('label' => 'Azure', 'key' => 'azure', 'brand' => '#0078D4'),
+        array('label' => 'Git & GitHub', 'key' => 'git-github', 'brand' => '#F05032'),
+        array('label' => 'CI/CD', 'key' => 'deployment', 'brand' => '#7C3AED'),
+    ),
+    'GenAI & Agentic AI' => array(
+        array('label' => 'LLM APIs', 'key' => 'genai', 'brand' => '#7C3AED'),
+        array('label' => 'Prompt Engineering', 'key' => 'genai', 'brand' => '#7C3AED'),
+        array('label' => 'AI Agents', 'key' => 'ai-agents', 'brand' => '#D97706'),
+    ),
+);
+
+// Hands-on projects.
+$tc_projects = array(
+    array('ic' => 'chat', 'color' => 'blue', 'title' => 'AI Chatbot', 'text' => 'Conversational assistant built with LLM integration.'),
+    array('ic' => 'receipt', 'color' => 'violet', 'title' => 'AI Resume Analyzer', 'text' => 'Parses and scores resumes using AI-driven analysis.'),
+    array('ic' => 'code', 'color' => 'amber', 'title' => 'Code Generation Assistant', 'text' => 'Tool that generates and explains boilerplate code.'),
+    array('ic' => 'check', 'color' => 'green', 'title' => 'Automated Testing Tool', 'text' => 'AI-assisted test case generation and execution.'),
+    array('ic' => 'settings', 'color' => 'pink', 'title' => 'Business Automation Workflow', 'text' => 'End-to-end workflow automation using AI agents.'),
+    array('ic' => 'globe', 'color' => 'blue', 'title' => 'AI-Integrated Web Application', 'text' => 'Full-stack app with embedded AI capabilities.'),
+);
+
+// Outcomes checklist.
+$tc_outcomes = array(
+    'Use AI coding tools effectively',
+    'Build AI-powered applications',
+    'Integrate AI APIs into real systems',
+    'Automate development tasks',
+    'Create a portfolio of AI projects',
+    'Apply for AI developer roles with confidence',
 );
 ?>
 
 <div id="primary" class="content-area page-content-area tc-page tc-home pt-120 pb-120">
     <div class="container">
 
-        <!-- SECTION: Hero (split — message left, visual right) -->
+        <!-- SECTION: Hero (split — message left, program-at-a-glance visual right) -->
         <section class="tc-hero tc-home__hero tc-home__hero--split">
             <div class="row align-items-center">
                 <div class="col-lg-7">
-                    <span class="tc-eyebrow">VisionOne &middot; Fullstack Developer Training</span>
-                    <h1 class="tc-hero__title">Up Your <span
-                            class="tc-gradient-text tc-gradient-text--freeze">Skills</span> To Launch Your <span
-                            class="tc-gradient-text tc-gradient-text--freeze">Dev Career</span></h1>
-                    <p class="tc-hero__sub">Learn modern web development by building real projects, mentored
-                        by working engineers — from fundamentals to a deployed MERN app in 14 weeks, backed by
-                        placement support.</p>
+                    <span class="tc-eyebrow">Career-Ready Training Program</span>
+                    <h1 class="tc-hero__title">AI Code Development <span
+                            class="tc-gradient-text tc-gradient-text--freeze">Training Program</span></h1>
+                    <p class="tc-hero__sub">Build the future of software with Artificial Intelligence. Learn
+                        AI-assisted coding, automation, and real project delivery — the way modern development
+                        teams work today.</p>
 
                     <div class="tc-home__hero-actions">
                         <a class="tc-btn tc-btn--primary" data-magnetic
-                            href="<?php echo esc_url(tc_tpl_url('page-apply.php', '/admissions-apply/') . '#tc-apply-form-anchor'); ?>">Get
-                            Started</a>
+                            href="<?php echo esc_url(tc_tpl_url('page-apply.php', '/admissions-apply/') . '#tc-apply-form-anchor'); ?>">Enroll
+                            for the Next Batch</a>
                         <a class="tc-btn tc-btn--ghost"
-                            href="<?php echo esc_url(tc_tpl_url('page-program.php', '/program-curriculum/')); ?>">Explore
-                            the curriculum</a>
+                            href="<?php echo esc_url(tc_tpl_url('page-fees.php', '/fees-batches/')); ?>">View
+                            Curriculum</a>
                     </div>
 
-                    <!-- Feature trio (mirrors reference's icon row) -->
+                    <!-- Feature quad -->
                     <ul class="tc-herofeat">
-                        <li><span class="tc-herofeat__ic tc-herofeat__ic--blue"><?php echo tc_icon('sliders', 20); ?></span>Project-first learning</li>
-                        <li><span class="tc-herofeat__ic tc-herofeat__ic--orange"><?php echo tc_icon('award', 20); ?></span>Industry mentors</li>
-                        <li><span class="tc-herofeat__ic tc-herofeat__ic--blue"><?php echo tc_icon('chart', 20); ?></span>Placement support</li>
+                        <li><span class="tc-herofeat__ic tc-herofeat__ic--blue"><?php echo tc_icon('zap', 20); ?></span>AI-Assisted Coding</li>
+                        <li><span class="tc-herofeat__ic tc-herofeat__ic--orange"><?php echo tc_icon('settings', 20); ?></span>Automation</li>
+                        <li><span class="tc-herofeat__ic tc-herofeat__ic--blue"><?php echo tc_icon('code', 20); ?></span>Real Projects</li>
+                        <li><span class="tc-herofeat__ic tc-herofeat__ic--orange"><?php echo tc_icon('chart', 20); ?></span>Career Growth</li>
                     </ul>
-
-                    <!-- Collaboration / trust row (mirrors reference's "250+ Collaboration" + logos) -->
-                    <div class="tc-herotrust">
-                        <div class="tc-herotrust__stat">
-                            <strong class="tc-stat__num" data-animate>12,000+</strong>
-                            <span class="tc-stat__label">Learners trained</span>
-                        </div>
-                        <div class="tc-herotrust__logos">
-                            <?php foreach (array('Partner Colleges', 'Hiring Partners', 'TPO Cells') as $tname): ?>
-                                <span class="tc-herotrust__chip"><?php echo tc_icon('award', 16); ?><?php echo esc_html($tname); ?></span>
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="col-lg-5">
-                    <!-- Visual: photo-in-disc + floating stat cards + concentric rings -->
-                    <div class="tc-herovis" data-tilt>
-                        <span class="tc-herovis__ring tc-herovis__ring--1" aria-hidden="true"></span>
-                        <span class="tc-herovis__ring tc-herovis__ring--2" aria-hidden="true"></span>
-
-                        <div class="tc-herovis__disc" data-parallax="4">
-                            <?php
-                            /* CLAUDE CODE: drop a cut-out student photo (transparent PNG, ~700px)
-                               at assets/images/hero-student.png and it replaces the monogram below. */
-                            $tc_hero_img = get_stylesheet_directory() . '/assets/images/hero-student.png';
-                            if (file_exists($tc_hero_img)):
-                                ?>
-                                <img class="tc-herovis__photo"
-                                    src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/images/hero-student.png'); ?>"
-                                    alt="A VisionOne fullstack student" loading="eager" decoding="async" />
-                            <?php else: ?>
-                                <span class="tc-herovis__mono" aria-hidden="true">&lt;/&gt;</span>
-                            <?php endif; ?>
-                        </div>
-
-                        <!-- Floating card: ring progress (top-right) -->
-                        <div class="tc-herofloat tc-herofloat--tr" style="--delay: 620ms">
-                            <span class="tc-herofloat__ring" style="--pct: 92"><b>4.8<i>★</i></b></span>
-                            <span class="tc-herofloat__meta"><strong>Rated</strong>by 12k+ learners</span>
-                        </div>
-
-                        <!-- Floating card: lessons (left) -->
-                        <div class="tc-herofloat tc-herofloat--l" style="--delay: 760ms">
-                            <span class="tc-herofloat__ic tc-herofloat__ic--blue"><?php echo tc_icon('play', 20); ?></span>
-                            <span class="tc-herofloat__meta"><strong>100+</strong>Live lessons</span>
-                        </div>
-
-                        <!-- Floating card: mentors (bottom-right) -->
-                        <div class="tc-herofloat tc-herofloat--br" style="--delay: 900ms">
-                            <span class="tc-herofloat__ic tc-herofloat__ic--orange"><?php echo tc_icon('award', 20); ?></span>
-                            <span class="tc-herofloat__meta"><strong>50+</strong>Industry mentors</span>
-                        </div>
+                    <!-- Visual: clean "Program at a Glance" fact table -->
+                    <div class="tc-glancecard tc-reveal" style="--delay: 120ms">
+                        <span class="tc-glancecard__head">Program at a Glance</span>
+                        <dl class="tc-glancecard__list">
+                            <?php foreach ($tc_glance as $g): ?>
+                                <div class="tc-glancecard__row">
+                                    <dt><?php echo esc_html($g['label']); ?></dt>
+                                    <dd><?php echo esc_html($g['value']); ?></dd>
+                                </div>
+                            <?php endforeach; ?>
+                        </dl>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION: Trust strip -->
-        <section class="tc-section tc-logos tc-reveal">
-            <p class="tc-logos__label">Trusted by students &amp; colleges across India</p>
-            <!-- CLAUDE CODE: swap label text for real partner / hiring-company logo marks when available. -->
-            <div class="tc-marquee">
-                <div class="tc-marquee__track">
-                    <?php
-                    $tc_trust = array('Partner College', 'Hiring Partner', 'TPO Cell', 'Startup Partner', 'Tech Company');
-                    for ($r = 0; $r < 2; $r++):
-                        foreach ($tc_trust as $tname): ?>
-                            <span class="tc-marquee__item"><?php echo tc_icon('award', 18); ?> <?php echo esc_html($tname); ?></span>
-                        <?php endforeach;
-                    endfor; ?>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION: Why VisionOne — service cards -->
-        <section class="tc-section tc-services tc-reveal tc-section--tint">
-            <div class="tc-services__head">
-                <span class="tc-eyebrow">Why VisionOne</span>
-                <h2 class="tc-section__title">A hands-on, classroom-first way to go from beginner to hired</h2>
-            </div>
-            <div class="tc-services__grid">
-                <?php foreach ($tc_why as $i => $f):
-                    $is_feature = ($f['color'] === 'feature');
-                    $card_class = 'tc-servicecard tc-reveal' . ($is_feature ? ' tc-servicecard--feature' : '');
-                    $url = tc_tpl_url($f['link'][0], $f['link'][1]);
-                    ?>
-                    <article class="<?php echo esc_attr($card_class); ?>" style="--delay: <?php echo $i * 80; ?>ms">
-                        <span class="tc-servicecard__ic tc-servicecard__ic--<?php echo esc_attr($f['color']); ?>"><?php echo tc_icon($f['ic'], 24); ?></span>
-                        <h3 class="tc-servicecard__title"><?php echo esc_html($f['title']); ?></h3>
-                        <p class="tc-servicecard__text"><?php echo wp_kses_post($f['text']); ?></p>
-                        <a class="tc-servicecard__more" href="<?php echo esc_url($url); ?>">Learn more <?php echo tc_icon('arrow-right', 16); ?></a>
-                    </article>
-                <?php endforeach; ?>
-            </div>
-        </section>
-
-        <!-- SECTION: The Stack — scattered brand-icon cloud -->
-        <section class="tc-section tc-stackcloud tc-reveal tc-section--brand">
-            <div class="tc-stackcloud__head">
-                <span class="tc-eyebrow">The Stack</span>
-                <h2 class="tc-section__title">Tools &amp; technologies you'll master in class</h2>
-                <p class="tc-muted">A structured 14-week ladder takes you from web fundamentals through frontend,
-                    backend, databases and deployment — hands-on with the same tools working teams ship every day.</p>
-            </div>
-            <div class="tc-stackcloud__grid" data-motion-in>
-                <?php foreach ($tc_stack as $i => $tech): ?>
-                    <span class="tc-stackbadge" style="--brand: <?php echo esc_attr($tech['brand']); ?>;"
-                        tabindex="0" aria-label="<?php echo esc_attr($tech['label']); ?>">
-                        <span class="tc-stackbadge__tip" role="tooltip"><?php echo esc_html($tech['label']); ?></span>
-                        <span class="tc-stackbadge__ic"><?php echo tc_brand_icon($tech['key'], 34); ?></span>
-                    </span>
-                <?php endforeach; ?>
-            </div>
-            <div class="tc-stackcloud__cta">
-                <a class="tc-btn tc-btn--outline"
-                    href="<?php echo esc_url(tc_tpl_url('page-program.php', '/program-curriculum/')); ?>">See the full curriculum</a>
-            </div>
-        </section>
-
-        <!-- SECTION: Program tracks — course-style cards (in-class, no pricing) -->
-        <section class="tc-section tc-tracks tc-reveal">
-            <div class="tc-tracks__head">
-                <span class="tc-eyebrow">Explore Programs</span>
-                <h2 class="tc-section__title">Popular training tracks</h2>
-                <p class="tc-muted">Pick the classroom track that matches where you are — every one is
-                    project-first and finishes with a portfolio-ready build.</p>
-            </div>
-            <div class="tc-tracks__grid">
-                <?php foreach ($tc_tracks as $i => $tr):
-                    $tr_img = tc_opt_image($tr['img']);
-                    $tr_url = tc_tpl_url('page-program.php', '/program-curriculum/');
-                    ?>
-                    <article class="tc-trackcard tc-reveal" style="--delay: <?php echo $i * 90; ?>ms">
-                        <a class="tc-trackcard__media<?php echo $tr_img ? '' : ' tc-trackcard__media--placeholder'; ?>"
-                            href="<?php echo esc_url($tr_url); ?>" aria-label="<?php echo esc_attr($tr['title']); ?>"
-                            <?php if ($tr_img): ?>style="background-image: url('<?php echo esc_url($tr_img); ?>');"<?php endif; ?>>
-                            <?php if (!$tr_img): ?>
-                                <span class="tc-trackcard__media-ic"><?php echo tc_brand_icon($tr['key'], 44); ?></span>
-                            <?php endif; ?>
-                            <span class="tc-trackcard__len"><?php echo tc_icon('calendar', 14); ?> <?php echo esc_html($tr['len']); ?></span>
-                        </a>
-                        <div class="tc-trackcard__body">
-                            <span class="tc-trackcard__cat"><?php echo esc_html($tr['cat']); ?></span>
-                            <h3 class="tc-trackcard__title">
-                                <a href="<?php echo esc_url($tr_url); ?>"><?php echo esc_html($tr['title']); ?> <?php echo tc_icon('arrow-right', 16); ?></a>
-                            </h3>
-                            <p class="tc-trackcard__text"><?php echo wp_kses_post($tr['text']); ?></p>
-                            <div class="tc-trackcard__foot">
-                                <span class="tc-trackcard__level"><?php echo tc_icon('award', 15); ?> <?php echo esc_html($tr['level']); ?></span>
-                                <a class="tc-trackcard__more" href="<?php echo esc_url($tr_url); ?>">View track</a>
-                            </div>
-                        </div>
-                    </article>
-                <?php endforeach; ?>
-            </div>
-        </section>
-
-        <!-- SECTION: Outcomes stats band -->
-        <section class="tc-section tc-section--brand tc-texture-dots tc-outcomes tc-reveal">
+        <!-- SECTION: Market stat band -->
+        <section class="tc-section tc-section--navy tc-texture-dots tc-outcomes tc-reveal">
             <div class="tc-statband">
-                <div class="tc-statband__item tc-reveal" style="--delay: 0ms">
-                    <span class="tc-statband__num">14 weeks</span><span class="tc-statband__label">To job-ready</span>
-                </div>
-                <div class="tc-statband__item tc-reveal" style="--delay: 80ms">
-                    <span class="tc-statband__num">100+ lessons</span><span class="tc-statband__label">Live &amp; hands-on</span>
-                </div>
-                <div class="tc-statband__item tc-reveal" style="--delay: 160ms">
-                    <span class="tc-statband__num">1 capstone</span><span class="tc-statband__label">Deployed &amp; portfolio-ready</span>
-                </div>
-                <div class="tc-statband__item tc-reveal" style="--delay: 240ms">
-                    <span class="tc-statband__num">EMI</span><span class="tc-statband__label">No-Cost options</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION: How it works — numbered steps + imagery -->
-        <section class="tc-section tc-hiw tc-reveal">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <span class="tc-eyebrow">How it works</span>
-                    <h2 class="tc-section__title">From application to placed</h2>
-                    <ol class="tc-hiw__steps">
-                        <?php foreach ($tc_steps as $i => $s): ?>
-                            <li class="tc-hiw__step tc-reveal" style="--delay: <?php echo $i * 90; ?>ms">
-                                <span class="tc-hiw__num" aria-hidden="true"><?php echo esc_html($s['n']); ?></span>
-                                <span class="tc-hiw__card">
-                                    <span class="tc-hiw__ic tc-hiw__ic--<?php echo esc_attr($s['color']); ?>"><?php echo tc_icon($s['ic'], 20); ?></span>
-                                    <span class="tc-hiw__meta">
-                                        <strong><?php echo wp_kses_post($s['title']); ?></strong>
-                                        <span><?php echo wp_kses_post($s['text']); ?></span>
-                                    </span>
-                                </span>
-                            </li>
-                        <?php endforeach; ?>
-                    </ol>
-                </div>
-                <div class="col-lg-6">
-                    <?php $hiw1 = tc_opt_image('tc_hiw_img_1'); $hiw2 = tc_opt_image('tc_hiw_img_2'); ?>
-                    <div class="tc-hiw__media">
-                        <div class="tc-hiw__photo tc-hiw__photo--1<?php echo $hiw1 ? '' : ' is-placeholder'; ?>"
-                            <?php if ($hiw1): ?>style="background-image:url('<?php echo esc_url($hiw1); ?>');"<?php endif; ?>>
-                            <?php if (!$hiw1): ?><span class="tc-hiw__photo-ic"><?php echo tc_icon('sliders', 30); ?></span><?php endif; ?>
-                        </div>
-                        <div class="tc-hiw__photo tc-hiw__photo--2<?php echo $hiw2 ? '' : ' is-placeholder'; ?>"
-                            <?php if ($hiw2): ?>style="background-image:url('<?php echo esc_url($hiw2); ?>');"<?php endif; ?>>
-                            <?php if (!$hiw2): ?><span class="tc-hiw__photo-ic"><?php echo tc_icon('award', 34); ?></span><?php endif; ?>
-                        </div>
-                        <div class="tc-hiw__floatstat">
-                            <strong data-animate>12,000+</strong>
-                            <span>Learners trained &amp; placed</span>
-                        </div>
+                <?php foreach ($tc_market_stats as $i => $s): ?>
+                    <div class="tc-statband__item tc-reveal" style="--delay: <?php echo $i * 80; ?>ms">
+                        <span class="tc-statband__num"><?php echo esc_html($s['num']); ?></span><span
+                            class="tc-statband__label"><?php echo esc_html($s['label']); ?></span>
                     </div>
-                </div>
+                <?php endforeach; ?>
             </div>
         </section>
 
-        <!-- SECTION: Pricing + Colleges teaser (merged split panel) -->
-        <section class="tc-section tc-section--tint tc-priceteaser tc-reveal">
+        <!-- SECTION: The Shift — why AI Code Development matters -->
+        <section class="tc-section tc-services tc-reveal tc-section--navy">
+            <div class="tc-services__head">
+                <span class="tc-eyebrow">The Shift</span>
+                <h2 class="tc-section__title">Why AI Code Development Matters</h2>
+                <p class="tc-muted">Software development is being rebuilt around AI. Developers who pair human
+                    judgment with AI-powered tools ship features faster, with fewer bugs, and at a scale that was
+                    impossible just a few years ago.</p>
+            </div>
+            <div class="tc-bento tc-bento--4col">
+                <?php foreach ($tc_shift as $i => $f): ?>
+                    <div class="tc-feature tc-reveal" style="--delay: <?php echo $i * 80; ?>ms">
+                        <span
+                            class="tc-feature__ic tc-feature__ic--<?php echo esc_attr($f['color']); ?>"><?php echo tc_icon($f['ic'], 24); ?></span>
+                        <h3><?php echo wp_kses_post($f['title']); ?></h3>
+                        <p class="tc-muted"><?php echo wp_kses_post($f['text']); ?></p>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </section>
+
+        <!-- SECTION: Career scope & job opportunities -->
+        <section class="tc-section tc-section--navy tc-reveal">
+            <span class="tc-eyebrow">Career Scope</span>
+            <h2 class="tc-section__title">Career Scope &amp; Job Opportunities</h2>
+            <p class="tc-muted" style="max-width: 720px;">Demand for developers who can build with AI is climbing
+                across every sector. This program prepares you for roles such as:</p>
+
             <div class="tc-split-panel">
                 <div class="tc-split-panel__half">
-                    <span class="tc-eyebrow">Fees &amp; EMI</span>
-                    <h2 class="tc-section__title tc-section__title--flush">Transparent pricing, EMI-friendly</h2>
-                    <p class="tc-muted">Clear fees inclusive of 18% GST, with No-Cost EMI on eligible cards and
-                        secure online payment.</p>
-                    <div>
-                        <a class="tc-btn tc-btn--primary"
-                            href="<?php echo esc_url(tc_tpl_url('page-fees.php', '/fees-batches/')); ?>">View Fees &amp;
-                            Batches</a>
-                    </div>
+                    <h3 class="tc-section__title tc-section__title--flush">Roles You Can Target</h3>
+                    <ul class="tc-eligibility-grid">
+                        <?php foreach ($tc_roles as $i => $role): ?>
+                            <li class="tc-eligibility-item tc-reveal" style="--delay: <?php echo $i * 50; ?>ms">
+                                <span class="tc-eligibility-check"><?php echo tc_icon('check', 14); ?></span>
+                                <p><?php echo esc_html($role); ?></p>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
                 </div>
                 <div class="tc-split-panel__half">
-                    <span class="tc-eyebrow">For Colleges &amp; TPOs</span>
-                    <h2 class="tc-section__title tc-section__title--flush">Training partnerships for campuses</h2>
-                    <p class="tc-muted">Bulk fullstack training on campus or online, transparent per-student
-                        rates, placement reporting — and zero revenue-share.</p>
-                    <div>
-                        <a class="tc-btn tc-btn--ghost"
-                            href="<?php echo esc_url(tc_tpl_url('page-colleges.php', '/for-colleges/')); ?>">Explore
-                            college partnerships</a>
-                    </div>
+                    <h3 class="tc-section__title tc-section__title--flush">Opportunities Across Industries</h3>
+                    <ul class="tc-eligibility-grid">
+                        <?php foreach ($tc_industries as $i => $ind): ?>
+                            <li class="tc-eligibility-item tc-reveal" style="--delay: <?php echo $i * 50; ?>ms">
+                                <span class="tc-eligibility-check"><?php echo tc_icon('building', 14); ?></span>
+                                <p><?php echo esc_html($ind); ?></p>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
                 </div>
+            </div>
+
+            <div class="tc-salarytable-wrap tc-reveal" style="--delay: 100ms">
+                <h3 class="tc-section__title tc-section__title--flush">Indicative Salary Range by Experience</h3>
+                <div class="tc-salarytable-scroll">
+                    <table class="tc-salarytable">
+                        <thead>
+                            <tr>
+                                <th>Experience Level</th>
+                                <th>Role</th>
+                                <th>India (Annual)</th>
+                                <th>Global / US (Annual)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($tc_salary as $row): ?>
+                                <tr>
+                                    <td data-label="Experience Level"><?php echo esc_html($row['level']); ?></td>
+                                    <td data-label="Role"><?php echo esc_html($row['role']); ?></td>
+                                    <td data-label="India (Annual)"><?php echo esc_html($row['india']); ?></td>
+                                    <td data-label="Global / US (Annual)"><?php echo esc_html($row['global']); ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="tc-muted tc-salarytable__note">Figures are approximate market estimates for orientation
+                    only. Actual compensation varies by city, company size, industry, AI tools/stack expertise,
+                    and project portfolio.</p>
             </div>
         </section>
 
-        <!-- SECTION: Reviews — people cards -->
-        <section class="tc-section tc-reviews tc-reveal">
-            <div class="tc-reviews__head">
-                <span class="tc-eyebrow">Student stories</span>
-                <h2 class="tc-section__title">Meet some of our learners</h2>
-                <p class="tc-muted">Real words from students who started in our classroom and walked out
-                    interview-ready. (Placeholder quotes &amp; names — swap for your own.)</p>
-            </div>
-            <div class="tc-reviews__grid">
-                <?php foreach ($tc_tests as $i => $t):
-                    $av = tc_opt_image($t['img']);
-                    ?>
-                    <figure class="tc-reviewcard tc-reveal" style="--delay: <?php echo $i * 90; ?>ms">
-                        <span class="tc-reviewcard__avatar<?php echo $av ? '' : ' is-placeholder'; ?>"
-                            <?php if ($av): ?>style="background-image:url('<?php echo esc_url($av); ?>');"<?php endif; ?>
-                            aria-hidden="true"><?php echo $av ? '' : esc_html(mb_substr($t['name'], 0, 1)); ?></span>
-                        <div class="tc-reviewcard__stars" aria-hidden="true">★★★★★</div>
-                        <blockquote class="tc-reviewcard__text">&ldquo;<?php echo esc_html($t['quote']); ?>&rdquo;</blockquote>
-                        <figcaption class="tc-reviewcard__by">
-                            <strong><?php echo esc_html($t['name']); ?></strong>
-                            <em class="tc-reviewcard__role tc-reviewcard__role--<?php echo esc_attr($t['color']); ?>"><?php echo esc_html($t['role']); ?></em>
-                        </figcaption>
-                    </figure>
+        <!-- SECTION: Curriculum — 10 modules -->
+        <section class="tc-section tc-section--navy tc-hiw tc-reveal" id="tc-curriculum">
+            <span class="tc-eyebrow">Curriculum</span>
+            <h2 class="tc-section__title">Course Syllabus — 10 Modules</h2>
+            <p class="tc-muted" style="max-width: 720px;">A structured path from programming fundamentals to
+                shipping real AI-powered applications.</p>
+            <ol class="tc-curriculum-grid">
+                <?php foreach ($tc_modules as $i => $mod): ?>
+                    <li class="tc-curriculum-card tc-reveal" style="--delay: <?php echo $i * 50; ?>ms">
+                        <span class="tc-curriculum-card__num" aria-hidden="true"><?php echo esc_html(sprintf('%02d', $i + 1)); ?></span>
+                        <span class="tc-curriculum-card__meta">
+                            <strong>Module <?php echo esc_html($i + 1); ?></strong>
+                            <span><?php echo esc_html($mod); ?></span>
+                        </span>
+                    </li>
                 <?php endforeach; ?>
+            </ol>
+        </section>
+
+        <!-- SECTION: Tools & technologies (grouped stack cloud) -->
+        <section class="tc-section tc-stackcloud tc-reveal tc-section--navy">
+            <div class="tc-stackcloud__head">
+                <span class="tc-eyebrow">Hands-On Stack</span>
+                <h2 class="tc-section__title">Tools &amp; Technologies You'll Use</h2>
+                <p class="tc-muted">You'll work with the same AI tools, languages, and platforms that modern
+                    development teams use every day — applied on real project work, not just slides.</p>
+            </div>
+            <?php
+            $tc_stack_colors = array('blue', 'violet', 'amber', 'green', 'pink');
+            $tc_stack_i = 0;
+            ?>
+            <div class="tc-stackpanels">
+                <?php foreach ($tc_stack_groups as $group => $items):
+                    $tc_color = $tc_stack_colors[$tc_stack_i % count($tc_stack_colors)];
+                    $tc_stack_i++;
+                    ?>
+                    <div class="tc-stackpanel tc-reveal" style="--delay: <?php echo $tc_stack_i * 70; ?>ms">
+                        <div class="tc-stackpanel__head">
+                            <span class="tc-feature__ic tc-feature__ic--<?php echo esc_attr($tc_color); ?> tc-stackpanel__ic"><?php echo tc_icon('code', 20); ?></span>
+                            <h3 class="tc-stackpanel__title"><?php echo esc_html($group); ?></h3>
+                        </div>
+                        <ul class="tc-stackpanel__list">
+                            <?php foreach ($items as $tech): ?>
+                                <li class="tc-stackpanel__item">
+                                    <span class="tc-stackpanel__item-ic"><?php echo tc_brand_icon($tech['key'], 22); ?></span>
+                                    <span class="tc-stackpanel__item-label"><?php echo esc_html($tech['label']); ?></span>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </section>
+
+        <!-- SECTION: Hands-on projects -->
+        <section class="tc-section tc-section--navy tc-tracks tc-reveal">
+            <div class="tc-tracks__head">
+                <span class="tc-eyebrow">Apply What You Learn</span>
+                <h2 class="tc-section__title">Hands-On Projects</h2>
+                <p class="tc-muted">Every module connects to practical build work. By graduation, you'll have
+                    shipped a portfolio of real AI-powered applications.</p>
+            </div>
+            <div class="tc-tracks__grid">
+                <?php foreach ($tc_projects as $i => $p): ?>
+                    <article class="tc-trackcard tc-reveal" style="--delay: <?php echo $i * 90; ?>ms">
+                        <div class="tc-trackcard__top">
+                            <span class="tc-trackcard__ic tc-feature__ic tc-feature__ic--<?php echo esc_attr($p['color']); ?>"><?php echo tc_icon($p['ic'], 22); ?></span>
+                            <span class="tc-trackcard__index"><?php printf('%02d', $i + 1); ?></span>
+                        </div>
+                        <div class="tc-trackcard__body">
+                            <h3 class="tc-trackcard__title"><?php echo esc_html($p['title']); ?></h3>
+                            <p class="tc-trackcard__text"><?php echo esc_html($p['text']); ?></p>
+                        </div>
+                    </article>
+                <?php endforeach; ?>
+            </div>
+        </section>
+
+        <!-- SECTION: What you'll walk away with -->
+        <section class="tc-section tc-section--navy tc-eligibility-section tc-reveal">
+            <div class="tc-eligibility-card">
+                <div class="tc-eligibility-head">
+                    <span class="tc-eyebrow">Outcomes</span>
+                    <h2 class="tc-section__title">What You'll Walk Away With</h2>
+                </div>
+                <ul class="tc-eligibility-grid">
+                    <?php foreach ($tc_outcomes as $i => $o): ?>
+                        <li class="tc-eligibility-item tc-reveal" style="--delay: <?php echo $i * 60; ?>ms">
+                            <span class="tc-eligibility-check"><?php echo tc_icon('check', 14); ?></span>
+                            <p><?php echo esc_html($o); ?></p>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SECTION: Get in touch -->
+        <section class="tc-section tc-section--navy tc-reveal">
+            <span class="tc-eyebrow">Get In Touch</span>
+            <h2 class="tc-section__title">Start Your AI Code Development Journey</h2>
+            <div class="tc-contact-grid">
+                <div class="tc-contact-card tc-reveal" style="--delay: 0ms">
+                    <span class="tc-contact-card__ic tc-feature__ic--blue"><?php echo tc_icon('phone', 22); ?></span>
+                    <span class="tc-contact-card__body">
+                        <span class="tc-contact-card__label">Call Us</span>
+                        <a class="tc-contact-card__value" href="tel:+918143533434">+91 81435 33434</a>
+                        <span class="tc-contact-card__meta">Mon–Fri, 10am–7pm</span>
+                    </span>
+                </div>
+                <div class="tc-contact-card tc-reveal" style="--delay: 80ms">
+                    <span class="tc-contact-card__ic tc-feature__ic--green"><?php echo tc_icon('whatsapp', 22); ?></span>
+                    <span class="tc-contact-card__body">
+                        <span class="tc-contact-card__label">WhatsApp</span>
+                        <a class="tc-contact-card__value" href="https://wa.me/918143533434" target="_blank"
+                            rel="noopener">+91 81435 33434</a>
+                    </span>
+                </div>
+                <div class="tc-contact-card tc-reveal" style="--delay: 160ms">
+                    <span class="tc-contact-card__ic tc-feature__ic--violet"><?php echo tc_icon('mail', 22); ?></span>
+                    <span class="tc-contact-card__body">
+                        <span class="tc-contact-card__label">Email</span>
+                        <a class="tc-contact-card__value tc-contact-card__value--long"
+                            href="mailto:marketing@visionerpsolutions.com">marketing@visionerpsolutions.com</a>
+                    </span>
+                </div>
+                <div class="tc-contact-card tc-reveal" style="--delay: 240ms">
+                    <span class="tc-contact-card__ic tc-feature__ic--amber"><?php echo tc_icon('globe', 22); ?></span>
+                    <span class="tc-contact-card__body">
+                        <span class="tc-contact-card__label">Website</span>
+                        <a class="tc-contact-card__value" href="https://www.visionerpsolutions.com" target="_blank"
+                            rel="noopener">visionerpsolutions.com</a>
+                    </span>
+                </div>
+            </div>
+            <div class="tc-contact-address tc-reveal" style="--delay: 300ms">
+                <span class="tc-contact-address__label">Registered Office</span>
+                <p class="tc-contact-address__text">
+                    <strong>VisionONE ERP Solutions</strong> — VisionOne Access Private Limited<br>
+                    Plot No: 3-225 &amp; 226, 4th Floor, Mahendra Mindspace, Kavuri Hills Phase 2,<br>
+                    Madhapur, Hyderabad, Telangana, India – 500033
+                </p>
             </div>
         </section>
 
         <!-- SECTION: Final CTA -->
         <section class="tc-section tc-cta-band text-center tc-reveal">
             <span class="tc-eyebrow">Admissions open</span>
-            <h2>Your developer career starts here</h2>
-            <p class="tc-cta-band__sub">Join the next VisionOne cohort. Apply now and our team will confirm
-                your batch over email &amp; WhatsApp.</p>
+            <h2>Start Your AI Code Development Journey</h2>
+            <p class="tc-cta-band__sub">New batches begin every month. Enroll now and our team will confirm your
+                batch over email &amp; WhatsApp.</p>
             <div class="tc-cta-band__actions">
                 <a class="tc-btn tc-btn--primary" data-magnetic
-                    href="<?php echo esc_url(tc_tpl_url('page-apply.php', '/admissions-apply/') . '#tc-apply-form-anchor'); ?>">Apply Now</a>
+                    href="<?php echo esc_url(tc_tpl_url('page-apply.php', '/admissions-apply/') . '#tc-apply-form-anchor'); ?>">Enroll
+                    for the Next Batch</a>
                 <a class="tc-btn tc-btn--ghost"
-                    href="<?php echo esc_url(tc_tpl_url('page-program.php', '/program-curriculum/')); ?>">View the
-                    Program</a>
+                            href="<?php echo esc_url(tc_tpl_url('page-fees.php', '/fees-batches/')); ?>">View
+                            Curriculum</a>
             </div>
         </section>
 
