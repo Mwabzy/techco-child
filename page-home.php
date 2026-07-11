@@ -2,10 +2,11 @@
 /**
  * Template Name: VisionONE — Home / Landing
  *
- * Marketing landing page that ties the Visioner site together. Reuses the
- * shared Visioner components (hero, feature cards, stats, CTA band) plus a few
- * homepage-only sections. Set a Page to this template and mark it as the front
- * page in Settings → Reading.
+ * Marketing landing page for the AI Code Development Training Program.
+ * Reuses the shared Visioner components (hero, feature cards, stats, CTA
+ * band, apply form) plus a few homepage-only sections (program-at-a-glance,
+ * salary table, curriculum list). Set a Page to this template and mark it
+ * as the front page in Settings → Reading.
  * NOTE: omits techco_child_page_banner() — provides its own hero.
  * @package Techco Child
  */
@@ -18,8 +19,7 @@ get_header();
 
 /* CLAUDE CODE: homepage copy blocks — realistic placeholders, easy to swap. */
 
-// Hero — "AI Code Development Training Program" tags + program-at-a-glance facts.
-$tc_hero_tags = array('AI-Assisted Coding', 'Automation', 'Real Projects', 'Career Growth');
+// Program at a glance — rendered inside the hero's floating visual.
 $tc_glance = array(
     array('label' => 'Course', 'value' => 'AI Code Development'),
     array('label' => 'Duration', 'value' => '12 Weeks (3 Months)'),
@@ -29,19 +29,36 @@ $tc_glance = array(
     array('label' => 'Location', 'value' => 'Madhapur, Hyderabad'),
 );
 
-// "Why AI Code Development Matters" — icon cards.
-$tc_ai_matters = array(
-    array('ic' => 'code', 'color' => 'blue', 'title' => 'AI-Assisted Coding', 'text' => 'Code suggestions, autocompletion, and full functions generated in real time.'),
-    array('ic' => 'sliders', 'color' => 'violet', 'title' => 'Automation', 'text' => 'Repetitive tasks — scaffolding, formatting, boilerplate — handled automatically.'),
-    array('ic' => 'chart', 'color' => 'amber', 'title' => 'Faster Development', 'text' => 'Ideas move from concept to working application in a fraction of the time.'),
-    array('ic' => 'briefcase', 'color' => 'pink', 'title' => 'Smarter Testing & Debugging', 'text' => 'AI detects bugs, suggests fixes, and writes test cases alongside developers.'),
-    array('ic' => 'globe', 'color' => 'green', 'title' => 'Intelligent Systems', 'text' => 'Applications that reason, automate workflows, and adapt to users.'),
-    array('ic' => 'award', 'color' => 'blue', 'title' => 'Enterprise Adoption', 'text' => 'Companies of every size are standardizing on AI-powered dev tools.'),
+// Market stat band.
+$tc_market_stats = array(
+    array('num' => '75%+', 'label' => 'of enterprises are piloting or scaling AI dev tools'),
+    array('num' => '3–5x', 'label' => 'faster prototyping with AI coding copilots'),
+    array('num' => '#1', 'label' => 'fastest-growing skill in software job posts'),
 );
 
-// "Career Scope & Job Opportunities" — target roles, industries, indicative salary bands.
-$tc_career_roles = array('AI Code Developer', 'AI Software Engineer', 'Prompt Engineer', 'AI Application Developer', 'Machine Learning Engineer', 'Automation Developer', 'AI Tool Integration Specialist', 'Full Stack Developer (AI Skills)');
-$tc_career_industries = array('IT & Software', 'Startups', 'SaaS Firms', 'Finance', 'Healthcare', 'Education', 'Manufacturing', 'E-Commerce', 'Consulting');
+// "Why AI Code Development Matters" feature grid.
+$tc_shift = array(
+    array('ic' => 'zap', 'color' => 'blue', 'title' => 'AI-Assisted Coding', 'text' => 'Code suggestions, autocompletion, and full functions generated in real time.'),
+    array('ic' => 'settings', 'color' => 'violet', 'title' => 'Automation', 'text' => 'Repetitive tasks — scaffolding, formatting, boilerplate — handled automatically.'),
+    array('ic' => 'rocket', 'color' => 'amber', 'title' => 'Faster Development', 'text' => 'Ideas move from concept to working application in a fraction of the time.'),
+    array('ic' => 'search', 'color' => 'green', 'title' => 'Smarter Testing &amp; Debugging', 'text' => 'AI detects bugs, suggests fixes, and writes test cases alongside developers.'),
+    array('ic' => 'brain', 'color' => 'pink', 'title' => 'Intelligent Systems', 'text' => 'Applications that reason, automate workflows, and adapt to users.'),
+    array('ic' => 'building', 'color' => 'blue', 'title' => 'Enterprise Adoption', 'text' => 'Companies of every size are standardizing on AI-powered dev tools.'),
+);
+
+// Career scope.
+$tc_roles = array(
+    'AI Code Developer',
+    'AI Software Engineer',
+    'Prompt Engineer',
+    'AI Application Developer',
+    'Machine Learning Engineer',
+    'Automation Developer',
+    'AI Tool Integration Specialist',
+    'Full Stack Developer (AI skills)',
+);
+$tc_industries = array('IT & Software', 'Startups', 'SaaS Firms', 'Finance', 'Healthcare', 'Education', 'Manufacturing', 'E-Commerce', 'Consulting');
+
 $tc_salary = array(
     array('level' => 'Entry Level', 'role' => 'Entry Level AI Code Developer', 'india' => '₹4 – 7 LPA', 'global' => '$65,000 – $85,000'),
     array('level' => 'Junior', 'role' => 'Junior AI Developer', 'india' => '₹7 – 12 LPA', 'global' => '$85,000 – $105,000'),
@@ -49,27 +66,48 @@ $tc_salary = array(
     array('level' => 'Senior', 'role' => 'Senior AI Developer / AI Architect', 'india' => '₹22 – 40+ LPA', 'global' => '$140,000 – $190,000+'),
 );
 
-// "Course Syllabus — 10 Modules"
+// Curriculum — 10 modules.
 $tc_modules = array(
     'Introduction to AI and AI in Software Development',
     'Programming Foundations for AI Development',
     'AI Coding Tools and Productivity Platforms',
     'Prompt Engineering for Developers',
     'Building AI-Powered Applications',
-    'APIs, Automation and AI Integration',
-    'Testing, Debugging & Code Quality with AI',
-    'Intelligent Systems & Data-Driven Applications',
-    'Deployment, DevOps & Enterprise AI Adoption',
-    'Capstone Project — AI-Powered Application',
+    'APIs, Automation, and AI Integration',
+    'Debugging, Testing, and Code Optimization with AI',
+    'Git, Deployment, and Cloud Basics',
+    'Real-World Projects and Case Studies',
+    'Resume, Portfolio, and Interview Preparation',
 );
 
-// "Tools & Technologies You'll Use" — grouped by category, pill-list style.
-$tc_tools_groups = array(
-    array('label' => 'Frontend', 'items' => array('Angular 18', 'TypeScript', 'RxJS', 'HTML & CSS', 'Responsive UI')),
-    array('label' => 'Backend & APIs', 'items' => array('.NET 8', 'C#', 'Entity Framework Core', 'REST APIs')),
-    array('label' => 'Database', 'items' => array('SQL Server', 'Stored Procedures')),
-    array('label' => 'Cloud & DevOps', 'items' => array('AWS', 'Azure', 'Git & GitHub', 'CI/CD', 'DevOps')),
-    array('label' => 'GenAI & Agentic AI', 'items' => array('LLM APIs', 'Prompt Engineering', 'GenAI', 'AI Agents', 'Agentic AI')),
+// Tech stack — grouped by category.
+$tc_stack_groups = array(
+    'Frontend' => array(
+        array('label' => 'Angular 18', 'key' => 'angular', 'brand' => '#DD0031'),
+        array('label' => 'TypeScript', 'key' => 'typescript', 'brand' => '#3178C6'),
+        array('label' => 'RxJS', 'key' => 'rxjs', 'brand' => '#B7178C'),
+        array('label' => 'HTML & CSS', 'key' => 'html-css', 'brand' => '#2496ED'),
+    ),
+    'Backend & APIs' => array(
+        array('label' => '.NET 8', 'key' => 'dotnet', 'brand' => '#512BD4'),
+        array('label' => 'Entity Framework Core', 'key' => 'entity-framework', 'brand' => '#0C8F6E'),
+        array('label' => 'REST APIs', 'key' => 'rest-api', 'brand' => '#009688'),
+    ),
+    'Database' => array(
+        array('label' => 'SQL Server', 'key' => 'sql-server', 'brand' => '#A91D22'),
+        array('label' => 'Stored Procedures', 'key' => 'sql', 'brand' => '#00758F'),
+    ),
+    'Cloud & DevOps' => array(
+        array('label' => 'AWS', 'key' => 'aws', 'brand' => '#FF9900'),
+        array('label' => 'Azure', 'key' => 'azure', 'brand' => '#0078D4'),
+        array('label' => 'Git & GitHub', 'key' => 'git-github', 'brand' => '#F05032'),
+        array('label' => 'CI/CD', 'key' => 'deployment', 'brand' => '#7C3AED'),
+    ),
+    'GenAI & Agentic AI' => array(
+        array('label' => 'LLM APIs', 'key' => 'genai', 'brand' => '#7C3AED'),
+        array('label' => 'Prompt Engineering', 'key' => 'genai', 'brand' => '#7C3AED'),
+        array('label' => 'AI Agents', 'key' => 'ai-agents', 'brand' => '#D97706'),
+    ),
 );
 
 // "Hands-On Projects" — portfolio builds shipped during the program.
@@ -166,24 +204,118 @@ for ($m = 0; $m < 6; $m++) {
             </div>
         </section>
 
-        <!-- SECTION: Career Scope & Job Opportunities -->
-        <section id="tc-careers" class="tc-section tc-career tc-reveal tc-section--dark">
+        <!-- SECTION: Career scope & job opportunities -->
+        <section class="tc-section tc-section--navy tc-reveal">
             <span class="tc-eyebrow">Career Scope</span>
             <h2 class="tc-section__title">Career Scope &amp; Job Opportunities</h2>
-            <p class="tc-muted">Demand for developers who can build with AI is climbing across every sector. This
-                program prepares you for roles such as:</p>
+            <p class="tc-muted" style="max-width: 720px;">Demand for developers who can build with AI is climbing
+                across every sector. This program prepares you for roles such as:</p>
 
-            <h3 class="tc-career__subhead">Roles You Can Target</h3>
-            <ul class="tc-pillrow">
-                <?php foreach ($tc_career_roles as $role): ?>
-                    <li class="tc-pill tc-pill--accent"><?php echo esc_html($role); ?></li>
+            <div class="tc-split-panel">
+                <div class="tc-split-panel__half">
+                    <h3 class="tc-section__title tc-section__title--flush">Roles You Can Target</h3>
+                    <ul class="tc-eligibility-grid">
+                        <?php foreach ($tc_roles as $i => $role): ?>
+                            <li class="tc-eligibility-item tc-reveal" style="--delay: <?php echo $i * 50; ?>ms">
+                                <span class="tc-eligibility-check"><?php echo tc_icon('check', 14); ?></span>
+                                <p><?php echo esc_html($role); ?></p>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+                <div class="tc-split-panel__half">
+                    <h3 class="tc-section__title tc-section__title--flush">Opportunities Across Industries</h3>
+                    <ul class="tc-eligibility-grid">
+                        <?php foreach ($tc_industries as $i => $ind): ?>
+                            <li class="tc-eligibility-item tc-reveal" style="--delay: <?php echo $i * 50; ?>ms">
+                                <span class="tc-eligibility-check"><?php echo tc_icon('building', 14); ?></span>
+                                <p><?php echo esc_html($ind); ?></p>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tc-salarytable-wrap tc-reveal" style="--delay: 100ms">
+                <h3 class="tc-section__title tc-section__title--flush">Indicative Salary Range by Experience</h3>
+                <div class="tc-salarytable-scroll">
+                    <table class="tc-salarytable">
+                        <thead>
+                            <tr>
+                                <th>Experience Level</th>
+                                <th>Role</th>
+                                <th>India (Annual)</th>
+                                <th>Global / US (Annual)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($tc_salary as $row): ?>
+                                <tr>
+                                    <td data-label="Experience Level"><?php echo esc_html($row['level']); ?></td>
+                                    <td data-label="Role"><?php echo esc_html($row['role']); ?></td>
+                                    <td data-label="India (Annual)"><?php echo esc_html($row['india']); ?></td>
+                                    <td data-label="Global / US (Annual)"><?php echo esc_html($row['global']); ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="tc-muted tc-salarytable__note">Figures are approximate market estimates for orientation
+                    only. Actual compensation varies by city, company size, industry, AI tools/stack expertise,
+                    and project portfolio.</p>
+            </div>
+        </section>
+
+        <!-- SECTION: Curriculum — 10 modules -->
+        <section class="tc-section tc-section--navy tc-hiw tc-reveal" id="tc-curriculum">
+            <span class="tc-eyebrow">Curriculum</span>
+            <h2 class="tc-section__title">Course Syllabus — 10 Modules</h2>
+            <p class="tc-muted" style="max-width: 720px;">A structured path from programming fundamentals to
+                shipping real AI-powered applications.</p>
+            <ol class="tc-curriculum-grid">
+                <?php foreach ($tc_modules as $i => $mod): ?>
+                    <li class="tc-curriculum-card tc-reveal" style="--delay: <?php echo $i * 50; ?>ms">
+                        <span class="tc-curriculum-card__num" aria-hidden="true"><?php echo esc_html(sprintf('%02d', $i + 1)); ?></span>
+                        <span class="tc-curriculum-card__meta">
+                            <strong>Module <?php echo esc_html($i + 1); ?></strong>
+                            <span><?php echo esc_html($mod); ?></span>
+                        </span>
+                    </li>
                 <?php endforeach; ?>
-            </ul>
+            </ol>
+        </section>
 
-            <h3 class="tc-career__subhead">Opportunities Across Industries</h3>
-            <ul class="tc-pillrow">
-                <?php foreach ($tc_career_industries as $industry): ?>
-                    <li class="tc-pill"><?php echo esc_html($industry); ?></li>
+        <!-- SECTION: Tools & technologies (grouped stack cloud) -->
+        <section class="tc-section tc-stackcloud tc-reveal tc-section--navy">
+            <div class="tc-stackcloud__head">
+                <span class="tc-eyebrow">Hands-On Stack</span>
+                <h2 class="tc-section__title">Tools &amp; Technologies You'll Use</h2>
+                <p class="tc-muted">You'll work with the same AI tools, languages, and platforms that modern
+                    development teams use every day — applied on real project work, not just slides.</p>
+            </div>
+            <?php
+            $tc_stack_colors = array('blue', 'violet', 'amber', 'green', 'pink');
+            $tc_stack_i = 0;
+            ?>
+            <div class="tc-stackpanels">
+                <?php foreach ($tc_stack_groups as $group => $items):
+                    $tc_color = $tc_stack_colors[$tc_stack_i % count($tc_stack_colors)];
+                    $tc_stack_i++;
+                    ?>
+                    <div class="tc-stackpanel tc-reveal" style="--delay: <?php echo $tc_stack_i * 70; ?>ms">
+                        <div class="tc-stackpanel__head">
+                            <span class="tc-feature__ic tc-feature__ic--<?php echo esc_attr($tc_color); ?> tc-stackpanel__ic"><?php echo tc_icon('code', 20); ?></span>
+                            <h3 class="tc-stackpanel__title"><?php echo esc_html($group); ?></h3>
+                        </div>
+                        <ul class="tc-stackpanel__list">
+                            <?php foreach ($items as $tech): ?>
+                                <li class="tc-stackpanel__item">
+                                    <span class="tc-stackpanel__item-ic"><?php echo tc_brand_icon($tech['key'], 22); ?></span>
+                                    <span class="tc-stackpanel__item-label"><?php echo esc_html($tech['label']); ?></span>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
                 <?php endforeach; ?>
             </ul>
 

@@ -112,6 +112,68 @@ if (!function_exists('tc_brand_icon')) {
 				. '<circle cx="12" cy="9.2" r="1.6"/>'
 				. '<path d="M9.5 16l-2.2 3.2M14.5 16l2.2 3.2M12 16v4.2"/>'
 				. '</g>',
+
+			// Angular — red shield with the "A" chevron.
+			'angular' =>
+				'<path fill="#DD0031" d="M12 1.5l9.5 3.4-1.45 12.6L12 22.5l-8.05-4.99L2.5 4.9z"/>'
+				. '<path fill="#fff" d="M12 4.3l6.3 13.2h-2.3l-1.27-3.15H9.2L7.94 17.5H5.65zM12 8.1l-1.9 4.4h3.8z"/>',
+
+			// TypeScript — blue square, "TS" wordmark.
+			'typescript' =>
+				'<rect x="1.5" y="1.5" width="21" height="21" rx="3" fill="#3178C6"/>'
+				. '<path fill="#fff" d="M13.9 8.6H9.3v1.5h2.15v6.4h1.5v-6.4h1.95zM17.9 9.9c-.9 0-1.5.3-1.5.95 0 .55.42.78 1.2 1.05l.55.18c1.15.4 1.85.92 1.85 2.02 0 1.28-1 2-2.5 2-.9 0-1.7-.32-2.2-1l1.05-.75c.32.42.7.65 1.2.65.55 0 .9-.25.9-.68 0-.42-.28-.6-1-.85l-.5-.18c-1.05-.4-1.85-.9-1.85-2.05 0-1.2.95-1.95 2.3-1.95.85 0 1.6.32 2.05.98l-1 .78c-.25-.35-.55-.55-1-.55z"/>',
+
+			// RxJS — pink reactive-stream swirl (conceptual).
+			'rxjs' =>
+				'<g fill="none" stroke="#B7178C" stroke-width="1.6" stroke-linecap="round">'
+				. '<path d="M4 12c3-6 6-9 8-9s5 3 8 9c-3 6-6 9-8 9s-5-3-8-9z"/>'
+				. '</g><circle cx="12" cy="12" r="2" fill="#B7178C"/>',
+
+			// .NET — purple hexagon, "N" mark.
+			'dotnet' =>
+				'<path fill="#512BD4" d="M12 1.5l9 5.25v10.5L12 22.5l-9-5.25V6.75z"/>'
+				. '<path fill="#fff" d="M7.6 15.5V8.6h1.35l3.4 4.7V8.6h1.35v6.9h-1.35l-3.4-4.7v4.7zm7.9 0V8.6h1.4v6.9z"/>',
+
+			// Entity Framework — teal database + link (conceptual).
+			'entity-framework' =>
+				'<g fill="none" stroke="#0C8F6E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'
+				. '<ellipse cx="8.5" cy="6" rx="5" ry="2.2"/>'
+				. '<path d="M3.5 6v6c0 1.2 2.24 2.2 5 2.2s5-1 5-2.2V6"/>'
+				. '<path d="M13.5 10.2c1.6.2 3 .8 3 1.8v6c0 1.2-2.24 2.2-5 2.2-2 0-3.7-.5-4.5-1.2"/>'
+				. '</g>',
+
+			// SQL Server — grey/red database cylinder (conceptual).
+			'sql-server' =>
+				'<g fill="none" stroke="#A91D22" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'
+				. '<ellipse cx="12" cy="5.5" rx="7.5" ry="3"/>'
+				. '<path d="M4.5 5.5v13c0 1.66 3.36 3 7.5 3s7.5-1.34 7.5-3v-13"/>'
+				. '<path d="M4.5 12c0 1.66 3.36 3 7.5 3s7.5-1.34 7.5-3"/>'
+				. '</g>',
+
+			// AWS — orange "smile" arrow beneath a cloud silhouette.
+			'aws' =>
+				'<path fill="#232F3E" d="M6 8.5c-2.2 0-3.8 1.7-3.8 3.7 0 2 1.6 3.6 3.8 3.6h11.2c1.8 0 3.3-1.5 3.3-3.3 0-1.6-1.2-2.9-2.7-3.2C17.3 6.6 15.4 5 13 5c-2.1 0-3.9 1.3-4.6 3.1-.1 0-.2-.1-.4-.1z"/>'
+				. '<path fill="#FF9900" d="M5 18.5c3.3 2 9.6 2.7 14 .3" stroke="#FF9900" stroke-width="1.4" fill="none" stroke-linecap="round"/>'
+				. '<path fill="#FF9900" d="M17.6 17.8l1.9.5-.2 1.9z"/>',
+
+			// Azure — blue angular "ramp" mark.
+			'azure' =>
+				'<path fill="#0078D4" d="M8.5 3.5h5l-5.2 15h-5z"/>'
+				. '<path fill="#0078D4" d="M9.3 3.5h4.4l-6.6 12.8h9L4 20.5z" opacity=".85"/>',
+
+			// GenAI / LLM APIs — violet spark-node (conceptual).
+			'genai' =>
+				'<g fill="none" stroke="#7C3AED" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">'
+				. '<path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6z"/>'
+				. '<path d="M18.5 15l.7 1.9 1.9.7-1.9.7-.7 1.9-.7-1.9-1.9-.7 1.9-.7z"/>'
+				. '</g>',
+
+			// AI Agents — amber connected-nodes mark (conceptual).
+			'ai-agents' =>
+				'<g fill="none" stroke="#D97706" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'
+				. '<circle cx="6" cy="7" r="2.2"/><circle cx="18" cy="7" r="2.2"/><circle cx="12" cy="18" r="2.2"/>'
+				. '<path d="M7.9 8.3L11 16M16.1 8.3L13 16M8.2 7h7.6"/>'
+				. '</g>',
 		);
 
 		if (empty($marks[$key])) {
