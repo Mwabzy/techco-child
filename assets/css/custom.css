@@ -382,16 +382,22 @@
   background: rgba(255, 255, 255, 0.9);
 }
 
-/* Role/industry list rows in Career Scope sit directly on the navy band
+/* Role/industry list rows in Career Scope sit directly on the navy/dark band
    with a near-transparent tint — give them a light-card surface so their
    existing dark text is legible (matches how this same component already
-   looks correct inside the white .tc-eligibility-card elsewhere). */
-.tc-section--navy .tc-split-panel .tc-eligibility-item {
+   looks correct inside the white .tc-eligibility-card elsewhere). Career
+   Scope now runs on .tc-section--dark (consistent with the rest of the
+   page), so this needs to match there too. */
+.tc-section--navy .tc-split-panel .tc-eligibility-item,
+.tc-section--dark .tc-split-panel .tc-eligibility-item {
   background: var(--tc-surface);
   border-color: var(--tc-border);
 }
 
-/* Salary table has no background of its own — give it one on navy. */
+/* Salary table has no background of its own — give it one on navy. (Not
+   needed on .tc-section--dark: that system's own .tc-salarytable rules
+   already render correctly directly on the dark band, in white/cyan text —
+   a white card here would make that text unreadable.) */
 .tc-section--navy .tc-salarytable-scroll {
   background: var(--tc-surface);
 }

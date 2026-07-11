@@ -29,12 +29,8 @@ $tc_glance = array(
     array('label' => 'Location', 'value' => 'Madhapur, Hyderabad'),
 );
 
-// Market stat band.
-$tc_market_stats = array(
-    array('num' => '75%+', 'label' => 'of enterprises are piloting or scaling AI dev tools'),
-    array('num' => '3–5x', 'label' => 'faster prototyping with AI coding copilots'),
-    array('num' => '#1', 'label' => 'fastest-growing skill in software job posts'),
-);
+// Hero highlight tags.
+$tc_hero_tags = array('AI-Assisted Coding', 'Automation', 'Real Projects', 'Career Growth');
 
 // "Why AI Code Development Matters" feature grid.
 $tc_shift = array(
@@ -140,7 +136,7 @@ for ($m = 0; $m < 6; $m++) {
 }
 ?>
 
-<div id="primary" class="content-area page-content-area tc-page tc-home pb-120">
+<div id="primary" class="content-area page-content-area tc-page tc-home">
     <div class="container">
 
         <!-- SECTION: Hero (dark navy — program overview + at-a-glance card) -->
@@ -194,7 +190,7 @@ for ($m = 0; $m < 6; $m++) {
                 Developers who pair human judgment with AI-powered tools ship features faster, with fewer bugs,
                 and at a scale that was impossible just a few years ago.</p>
             <div class="tc-services__grid tc-services__grid--dark">
-                <?php foreach ($tc_ai_matters as $i => $f): ?>
+                <?php foreach ($tc_shift as $i => $f): ?>
                     <article class="tc-darkcard tc-reveal" style="--delay: <?php echo $i * 80; ?>ms">
                         <span class="tc-servicecard__ic tc-servicecard__ic--<?php echo esc_attr($f['color']); ?>"><?php echo tc_icon($f['ic'], 24); ?></span>
                         <h3 class="tc-darkcard__title"><?php echo esc_html($f['title']); ?></h3>
@@ -205,7 +201,7 @@ for ($m = 0; $m < 6; $m++) {
         </section>
 
         <!-- SECTION: Career scope & job opportunities -->
-        <section class="tc-section tc-section--navy tc-reveal">
+        <section id="tc-careers" class="tc-section tc-section--dark tc-reveal">
             <span class="tc-eyebrow">Career Scope</span>
             <h2 class="tc-section__title">Career Scope &amp; Job Opportunities</h2>
             <p class="tc-muted" style="max-width: 720px;">Demand for developers who can build with AI is climbing
@@ -266,87 +262,6 @@ for ($m = 0; $m < 6; $m++) {
             </div>
         </section>
 
-        <!-- SECTION: Curriculum — 10 modules -->
-        <section class="tc-section tc-section--navy tc-hiw tc-reveal" id="tc-curriculum">
-            <span class="tc-eyebrow">Curriculum</span>
-            <h2 class="tc-section__title">Course Syllabus — 10 Modules</h2>
-            <p class="tc-muted" style="max-width: 720px;">A structured path from programming fundamentals to
-                shipping real AI-powered applications.</p>
-            <ol class="tc-curriculum-grid">
-                <?php foreach ($tc_modules as $i => $mod): ?>
-                    <li class="tc-curriculum-card tc-reveal" style="--delay: <?php echo $i * 50; ?>ms">
-                        <span class="tc-curriculum-card__num" aria-hidden="true"><?php echo esc_html(sprintf('%02d', $i + 1)); ?></span>
-                        <span class="tc-curriculum-card__meta">
-                            <strong>Module <?php echo esc_html($i + 1); ?></strong>
-                            <span><?php echo esc_html($mod); ?></span>
-                        </span>
-                    </li>
-                <?php endforeach; ?>
-            </ol>
-        </section>
-
-        <!-- SECTION: Tools & technologies (grouped stack cloud) -->
-        <section class="tc-section tc-stackcloud tc-reveal tc-section--navy">
-            <div class="tc-stackcloud__head">
-                <span class="tc-eyebrow">Hands-On Stack</span>
-                <h2 class="tc-section__title">Tools &amp; Technologies You'll Use</h2>
-                <p class="tc-muted">You'll work with the same AI tools, languages, and platforms that modern
-                    development teams use every day — applied on real project work, not just slides.</p>
-            </div>
-            <?php
-            $tc_stack_colors = array('blue', 'violet', 'amber', 'green', 'pink');
-            $tc_stack_i = 0;
-            ?>
-            <div class="tc-stackpanels">
-                <?php foreach ($tc_stack_groups as $group => $items):
-                    $tc_color = $tc_stack_colors[$tc_stack_i % count($tc_stack_colors)];
-                    $tc_stack_i++;
-                    ?>
-                    <div class="tc-stackpanel tc-reveal" style="--delay: <?php echo $tc_stack_i * 70; ?>ms">
-                        <div class="tc-stackpanel__head">
-                            <span class="tc-feature__ic tc-feature__ic--<?php echo esc_attr($tc_color); ?> tc-stackpanel__ic"><?php echo tc_icon('code', 20); ?></span>
-                            <h3 class="tc-stackpanel__title"><?php echo esc_html($group); ?></h3>
-                        </div>
-                        <ul class="tc-stackpanel__list">
-                            <?php foreach ($items as $tech): ?>
-                                <li class="tc-stackpanel__item">
-                                    <span class="tc-stackpanel__item-ic"><?php echo tc_brand_icon($tech['key'], 22); ?></span>
-                                    <span class="tc-stackpanel__item-label"><?php echo esc_html($tech['label']); ?></span>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </div>
-                <?php endforeach; ?>
-            </ul>
-
-            <h3 class="tc-career__subhead">Indicative Salary Range by Experience</h3>
-            <div class="tc-salarytable-wrap">
-                <table class="tc-salarytable">
-                    <thead>
-                        <tr>
-                            <th>Experience Level</th>
-                            <th>Role</th>
-                            <th>India (Annual)</th>
-                            <th>Global / US (Annual)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($tc_salary as $row): ?>
-                            <tr>
-                                <td class="tc-salarytable__level"><?php echo esc_html($row['level']); ?></td>
-                                <td><?php echo esc_html($row['role']); ?></td>
-                                <td><?php echo esc_html($row['india']); ?></td>
-                                <td><?php echo esc_html($row['global']); ?></td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
-            <p class="tc-salarytable__note">Figures are approximate market estimates for orientation only. Actual
-                compensation varies by city, company size, industry, AI tool/stack expertise, and project
-                portfolio.</p>
-        </section>
-
         <!-- SECTION: Course Syllabus — 10 Modules -->
         <section id="tc-curriculum" class="tc-section tc-syllabus tc-reveal tc-section--dark">
             <span class="tc-eyebrow">Curriculum</span>
@@ -373,11 +288,11 @@ for ($m = 0; $m < 6; $m++) {
             <p class="tc-muted" style="max-width: 640px;">You'll work with the same AI tools, languages, and
                 platforms that modern development teams use every day — applied on real project work, not just
                 slides.</p>
-            <?php foreach ($tc_tools_groups as $group): ?>
-                <h3 class="tc-career__subhead"><?php echo esc_html($group['label']); ?></h3>
+            <?php foreach ($tc_stack_groups as $group_label => $items): ?>
+                <h3 class="tc-career__subhead"><?php echo esc_html($group_label); ?></h3>
                 <ul class="tc-pillrow">
-                    <?php foreach ($group['items'] as $item): ?>
-                        <li class="tc-pill"><?php echo esc_html($item); ?></li>
+                    <?php foreach ($items as $tech): ?>
+                        <li class="tc-pill"><?php echo esc_html($tech['label']); ?></li>
                     <?php endforeach; ?>
                 </ul>
             <?php endforeach; ?>
