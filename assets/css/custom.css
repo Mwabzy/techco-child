@@ -5262,6 +5262,7 @@ body.tc-modal-lock {
 }
 .tc-stackbadge__ic {
   display: flex;
+  color: var(--brand, var(--tc-blue));
 }
 .tc-stackbadge__ic svg {
   display: block;
@@ -6647,4 +6648,563 @@ body.tc-modal-lock {
 }
 @media (max-width: 760px) {
   .tc-batch-grid { grid-template-columns: 1fr; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   NAV — dark chrome (matches the dark hero below it)
+   ═══════════════════════════════════════════════════════════════ */
+.tc-nav {
+  background: var(--tc-navy-3);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+.tc-nav.is-scrolled {
+  background: var(--tc-navy-3);
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 6px 26px -10px rgba(0, 0, 0, 0.45);
+}
+.tc-nav__brand-text {
+  color: #fff;
+}
+.tc-nav__link {
+  color: var(--tc-muted-on-dark);
+}
+.tc-nav__link:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+.tc-nav__link.is-active {
+  color: var(--tc-orange);
+}
+.tc-nav__toggle {
+  border-color: rgba(255, 255, 255, 0.25);
+}
+.tc-nav__toggle-bar {
+  background: #fff;
+}
+
+/* Right-side actions: WhatsApp (green) + Enquire Now (cyan) pills */
+.tc-nav__wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: #25d366;
+  color: #073923;
+  font-weight: 700;
+  font-size: 14.5px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    transform 0.3s var(--tc-ease),
+    filter 0.2s ease;
+}
+.tc-nav__wa:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.06);
+  color: #073923;
+}
+.tc-nav__wa svg {
+  flex: 0 0 auto;
+}
+.tc-nav__cta {
+  background: var(--tc-orange);
+  color: var(--tc-navy);
+  box-shadow: 0 6px 18px -5px rgba(95, 193, 240, 0.55);
+}
+.tc-nav__cta:hover {
+  background: #86d3f6;
+  color: var(--tc-navy);
+  box-shadow: 0 12px 26px -6px rgba(95, 193, 240, 0.65);
+}
+
+@media (max-width: 991px) {
+  .tc-nav__collapse {
+    background: var(--tc-navy-3);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+  }
+  .tc-nav__actions {
+    align-items: stretch;
+  }
+  .tc-nav__wa {
+    justify-content: center;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   HOME HERO — dark "AI Code Development Training Program" redesign
+   ═══════════════════════════════════════════════════════════════ */
+.tc-home__hero.tc-section--dark {
+  padding-top: clamp(28px, 3.5vw, 48px);
+}
+.tc-home__hero.tc-section--dark .tc-hero__title {
+  color: #fff;
+}
+.tc-home__hero.tc-section--dark .tc-hero__sub {
+  color: var(--tc-muted-on-dark);
+}
+.tc-text-accent {
+  color: var(--tc-orange);
+}
+
+/* Primary / ghost CTAs read correctly on the dark field */
+.tc-section--dark .tc-btn.tc-btn--primary {
+  background: var(--tc-orange);
+  color: var(--tc-navy);
+  box-shadow: 0 10px 26px -8px rgba(95, 193, 240, 0.5);
+}
+.tc-section--dark .tc-btn.tc-btn--primary:hover {
+  background: #86d3f6;
+  color: var(--tc-navy);
+}
+.tc-section--dark .tc-btn.tc-btn--ghost {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.06);
+}
+.tc-section--dark .tc-btn.tc-btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+}
+
+/* Highlight tag pills under the CTAs */
+.tc-hero__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  margin: 30px 0 0;
+  padding: 0;
+}
+.tc-hero__tag {
+  padding: 9px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--tc-muted-on-dark);
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+/* "Program at a Glance" glass card */
+.tc-glance {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--tc-radius-lg);
+  padding: 30px 32px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.tc-glance__eyebrow {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--tc-orange);
+  margin-bottom: 18px;
+}
+.tc-glance__list {
+  margin: 0;
+}
+.tc-glance__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 13px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.tc-glance__row:first-child {
+  padding-top: 0;
+}
+.tc-glance__row:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+.tc-glance__row dt {
+  margin: 0;
+  font-size: 14.5px;
+  color: var(--tc-muted-on-dark);
+  font-weight: 500;
+}
+.tc-glance__row dd {
+  margin: 0;
+  font-size: 14.5px;
+  color: #fff;
+  font-weight: 700;
+  text-align: right;
+}
+
+@media (max-width: 991px) {
+  .tc-home__hero .col-lg-5 {
+    margin-top: 40px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Dark-band legibility — headings/body copy inside ANY .tc-section--dark
+   band (hero, Why AI Matters, Career Scope, Curriculum) read on navy.
+   ═══════════════════════════════════════════════════════════════ */
+.tc-page .tc-section--dark h1,
+.tc-page .tc-section--dark h2,
+.tc-page .tc-section--dark h3,
+.tc-page .tc-section--dark h4 {
+  color: #fff;
+}
+.tc-section--dark .tc-muted {
+  color: var(--tc-muted-on-dark);
+}
+
+/* .tc-section's default 80–128px margin-bottom sits OUTSIDE a dark band's
+   full-bleed background box, so back-to-back dark sections (Why AI Matters →
+   Career Scope → Curriculum) showed a strip of the page's light background
+   between them. The band's own padding already provides breathing room, so
+   drop the extra margin and tighten the padding for this stacked-dark run. */
+.tc-section.tc-section--dark {
+  margin-bottom: 0;
+  padding-top: clamp(48px, 5vw, 72px);
+  padding-bottom: clamp(48px, 5vw, 72px);
+}
+/* Hero (no .tc-section class, so the rule above doesn't reach it) now sits
+   directly against the next dark band too — same fix, same reasoning. */
+.tc-home__hero.tc-section--dark {
+  margin-bottom: 0;
+}
+.tc-section--dark .tc-btn.tc-btn--outline {
+  border-color: rgba(255, 255, 255, 0.28);
+  color: #fff;
+}
+.tc-section--dark .tc-btn.tc-btn--outline:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+}
+.tc-toolstack__cta {
+  margin-top: 36px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   "Why AI Code Development Matters" — dark icon-card grid
+   ═══════════════════════════════════════════════════════════════ */
+.tc-services__grid--dark {
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 36px;
+}
+.tc-darkcard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--tc-radius-lg);
+  padding: 26px;
+  transition:
+    transform 0.35s var(--tc-ease),
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+.tc-darkcard:hover {
+  transform: translateY(-4px);
+  border-color: rgba(95, 193, 240, 0.4);
+  background: rgba(255, 255, 255, 0.06);
+}
+.tc-darkcard__title {
+  font-size: 18px;
+  margin: 4px 0 0;
+}
+.tc-darkcard__text {
+  margin: 0;
+  color: var(--tc-muted-on-dark);
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   "Career Scope & Job Opportunities" — role/industry pills + salary table
+   ═══════════════════════════════════════════════════════════════ */
+.tc-career__subhead {
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--tc-muted-on-dark);
+  margin: 36px 0 14px;
+}
+.tc-pillrow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.tc-pill {
+  padding: 9px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(95, 193, 240, 0.25);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--tc-muted-on-dark);
+  font-size: 13.5px;
+  font-weight: 600;
+}
+.tc-pill--accent {
+  border-color: transparent;
+  background: var(--tc-orange);
+  color: var(--tc-navy);
+  font-weight: 700;
+}
+
+.tc-salarytable-wrap {
+  margin-top: 20px;
+  overflow-x: auto;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--tc-radius);
+}
+.tc-salarytable {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+}
+.tc-salarytable th,
+.tc-salarytable td {
+  padding: 14px 20px;
+  text-align: left;
+  white-space: nowrap;
+  font-size: 14px;
+}
+.tc-salarytable thead th {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--tc-muted-on-dark);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.tc-salarytable tbody tr {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.tc-salarytable tbody td {
+  color: #fff;
+}
+.tc-salarytable__level {
+  color: var(--tc-orange);
+  font-weight: 700;
+}
+.tc-salarytable__note {
+  margin: 14px 0 0;
+  font-size: 12.5px;
+  color: var(--tc-muted-on-dark);
+  opacity: 0.8;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   "Course Syllabus — 10 Modules" — module grid
+   ═══════════════════════════════════════════════════════════════ */
+.tc-modgrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 32px;
+}
+.tc-modcard {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--tc-radius);
+  padding: 20px 22px;
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+.tc-modcard:hover {
+  border-color: rgba(95, 193, 240, 0.4);
+  background: rgba(255, 255, 255, 0.06);
+}
+.tc-modcard__badge {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: rgba(95, 193, 240, 0.12);
+  border: 1px solid rgba(95, 193, 240, 0.3);
+  color: var(--tc-orange);
+  font-weight: 800;
+  font-size: 14px;
+}
+.tc-modcard__eyebrow {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--tc-orange);
+  margin-bottom: 4px;
+}
+.tc-modcard__title {
+  margin: 0;
+  font-size: 15.5px;
+  line-height: 1.4;
+}
+
+@media (max-width: 900px) {
+  .tc-services__grid--dark {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .tc-services__grid--dark {
+    grid-template-columns: 1fr;
+  }
+  .tc-modgrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   "Hands-On Projects" — outcomes checklist
+   ═══════════════════════════════════════════════════════════════ */
+.tc-checklist {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 32px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.tc-checklist li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+  font-size: 14.5px;
+  font-weight: 600;
+}
+.tc-checklist__ic {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--tc-orange);
+  color: var(--tc-navy);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   "Batch Enquiry" — centered dark form card
+   ═══════════════════════════════════════════════════════════════ */
+.tc-enquirycard {
+  max-width: 640px;
+  margin-top: 36px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--tc-radius-lg);
+  padding: 32px;
+}
+.tc-enquirycard__title {
+  margin: 0 0 6px;
+  font-size: 20px;
+}
+.tc-enquirycard__sub {
+  margin: 0 0 24px;
+  color: var(--tc-muted-on-dark);
+  font-size: 14px;
+}
+.tc-enquiryform__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.tc-enquiryform__field {
+  margin-bottom: 16px;
+}
+.tc-enquiryform__field--full {
+  grid-column: 1 / -1;
+}
+.tc-enquiryform__field label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+}
+.tc-enquiryform__req {
+  color: #f87171;
+}
+.tc-enquiryform__optional {
+  color: var(--tc-muted-on-dark);
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.tc-enquiryform__field input,
+.tc-enquiryform__field select,
+.tc-enquiryform__field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(7, 11, 34, 0.6);
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+.tc-enquiryform__field textarea {
+  resize: vertical;
+}
+.tc-enquiryform__field input::placeholder,
+.tc-enquiryform__field textarea::placeholder {
+  color: rgba(175, 196, 232, 0.55);
+}
+.tc-enquiryform__field select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235FC1F0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 38px;
+}
+.tc-enquiryform__field select option {
+  background: var(--tc-navy);
+  color: #fff;
+}
+.tc-enquiryform__field input:focus,
+.tc-enquiryform__field select:focus,
+.tc-enquiryform__field textarea:focus {
+  border-color: var(--tc-orange);
+}
+.tc-enquiryform__submit {
+  width: 100%;
+  text-align: center;
+  margin-top: 4px;
+}
+.tc-page .tc-enquirycard .tc-enquiryform__wa {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+  color: #25d366;
+  font-weight: 600;
+  font-size: 13.5px;
+  text-decoration: none;
+}
+.tc-page .tc-enquirycard .tc-enquiryform__wa:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .tc-enquiryform__row {
+    grid-template-columns: 1fr;
+  }
+  .tc-checklist {
+    grid-template-columns: 1fr;
+  }
 }

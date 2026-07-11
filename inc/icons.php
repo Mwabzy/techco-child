@@ -34,6 +34,7 @@ if ( ! function_exists( 'tc_icon' ) ) {
 			'credit-card'  => '<rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/>',
 			'chevron-down' => '<polyline points="6 9 12 15 18 9"/>',
 			'arrow-right'  => '<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>',
+			'check'        => '<polyline points="20 6 9 17 4 12"/>',
 		);
 
 		$class_attr = 'tc-ico' . ( $class ? ' ' . $class : '' );
