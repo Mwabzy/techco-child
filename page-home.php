@@ -207,30 +207,19 @@ for ($m = 0; $m < 6; $m++) {
             <p class="tc-muted" style="max-width: 720px;">Demand for developers who can build with AI is climbing
                 across every sector. This program prepares you for roles such as:</p>
 
-            <div class="tc-split-panel">
-                <div class="tc-split-panel__half">
-                    <h3 class="tc-section__title tc-section__title--flush">Roles You Can Target</h3>
-                    <ul class="tc-eligibility-grid">
-                        <?php foreach ($tc_roles as $i => $role): ?>
-                            <li class="tc-eligibility-item tc-reveal" style="--delay: <?php echo $i * 50; ?>ms">
-                                <span class="tc-eligibility-check"><?php echo tc_icon('check', 14); ?></span>
-                                <p><?php echo esc_html($role); ?></p>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
-                <div class="tc-split-panel__half">
-                    <h3 class="tc-section__title tc-section__title--flush">Opportunities Across Industries</h3>
-                    <ul class="tc-eligibility-grid">
-                        <?php foreach ($tc_industries as $i => $ind): ?>
-                            <li class="tc-eligibility-item tc-reveal" style="--delay: <?php echo $i * 50; ?>ms">
-                                <span class="tc-eligibility-check"><?php echo tc_icon('building', 14); ?></span>
-                                <p><?php echo esc_html($ind); ?></p>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
-            </div>
+            <h3 class="tc-career__subhead">Roles You Can Target</h3>
+            <ul class="tc-pillrow">
+                <?php foreach ($tc_roles as $role): ?>
+                    <li class="tc-pill tc-pill--accent"><?php echo esc_html($role); ?></li>
+                <?php endforeach; ?>
+            </ul>
+
+            <h3 class="tc-career__subhead">Opportunities Across Industries</h3>
+            <ul class="tc-pillrow">
+                <?php foreach ($tc_industries as $ind): ?>
+                    <li class="tc-pill"><?php echo esc_html($ind); ?></li>
+                <?php endforeach; ?>
+            </ul>
 
             <div class="tc-salarytable-wrap tc-reveal" style="--delay: 100ms">
                 <h3 class="tc-section__title tc-section__title--flush">Indicative Salary Range by Experience</h3>

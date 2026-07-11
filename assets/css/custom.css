@@ -2785,6 +2785,11 @@
   opacity: 1;
   transform: translateY(0);
   filter: none;
+  /* Drop the layer promotion once the animation settles — leaving
+     `will-change` on keeps the element on its own compositor layer
+     indefinitely, which shows up as a faint seam where two adjacent
+     full-bleed dark sections (e.g. #tc-why / #tc-careers) meet. */
+  will-change: auto;
 }
 /* Stagger children via custom property */
 .tc-reveal[style*="--delay"] {
@@ -7496,7 +7501,7 @@ body.tc-modal-lock {
    "Batch Enquiry" — centered dark form card
    ═══════════════════════════════════════════════════════════════ */
 .tc-enquirycard {
-  max-width: 640px;
+  max-width: 100%;
   margin-top: 36px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.12);
