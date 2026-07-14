@@ -721,6 +721,96 @@
   }
 
   /* ---------------------------------------------------------
+       Nav scrollspy. Highlights the nav link for whichever page
+       section is currently under the sticky nav, so `.is-active`
+       tracks scroll position instead of only the initial template.
+       --------------------------------------------------------- */
+  function initNavScrollSpy() {
+    var nav = document.getElementById("tc-nav");
+    if (!nav || !("IntersectionObserver" in window)) {
+      return;
+    }
+    var links = nav.querySelectorAll(".tc-nav__link");
+    if (!links.length) {
+      return;
+    }
+
+    var linkByHash = {};
+    var homeLink = null;
+    var sections = [];
+    Array.prototype.forEach.call(links, function (link) {
+      var href = link.getAttribute("href") || "";
+      var hashIndex = href.indexOf("#");
+      if (hashIndex === -1) {
+        homeLink = link;
+        return;
+      }
+      var id = href.slice(hashIndex + 1);
+      var section = document.getElementById(id);
+      if (!section) {
+        return;
+      }
+      linkByHash[id] = link;
+      sections.push(section);
+    });
+    if (!sections.length) {
+      return;
+    }
+
+    function setActive(link) {
+      Array.prototype.forEach.call(links, function (l) {
+        l.classList.remove("is-active");
+        l.removeAttribute("aria-current");
+      });
+      if (link) {
+        link.classList.add("is-active");
+        link.setAttribute("aria-current", "page");
+      }
+    }
+
+    var navHeight = nav.offsetHeight || 0;
+    var visible = {};
+    var current = null;
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          visible[entry.target.id] = entry.isIntersecting;
+        });
+
+        var found = null;
+        for (var i = 0; i < sections.length; i++) {
+          if (visible[sections[i].id]) {
+            found = sections[i].id;
+            break;
+          }
+        }
+
+        if (!found) {
+          if (window.scrollY <= navHeight) {
+            found = null; // top of page — Home
+          } else {
+            found = current; // scrolled past the last section — keep it lit
+          }
+        }
+
+        if (found !== current) {
+          current = found;
+          setActive(found ? linkByHash[found] : homeLink);
+        }
+      },
+      {
+        rootMargin: "-" + (navHeight + 1) + "px 0px -70% 0px",
+        threshold: 0,
+      },
+    );
+
+    sections.forEach(function (section) {
+      observer.observe(section);
+    });
+  }
+
+  /* ---------------------------------------------------------
        Motion One enhancements (progressive — only if window.Motion
        is present). Two signature effects the CSS reveal can't do:
          • [data-parallax]  scroll-linked translate on decorative layers
@@ -899,6 +989,61 @@
   }
 
   /* ---------------------------------------------------------
+       Enquiry form: keep the submit button disabled until every
+       required field holds valid data (Fluent Form fluent_form_3).
+       Layered on top of Fluent Forms' own validation, not a replacement.
+       --------------------------------------------------------- */
+  function initEnquiryFormGate() {
+    var form = document.querySelector(".fluent_form_3");
+    if (!form) {
+      return;
+    }
+    var btn =
+      form.querySelector(".ff-btn-submit") ||
+      form.querySelector('button[type="submit"]');
+    if (!btn) {
+      return;
+    }
+
+    // Required controls: prefer Fluent Forms' own required-group marker,
+    // fall back to the known enquiry field names.
+    var controls = form.querySelectorAll(
+      ".ff-el-is-required input, .ff-el-is-required select, .ff-el-is-required textarea"
+    );
+    if (!controls.length) {
+      controls = form.querySelectorAll(
+        '[name="full_name"],[name="phone"],[name="email"],[name="status"],[name="qualification"],[name="batch_month"]'
+      );
+    }
+
+    var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    function controlValid(el) {
+      var val = (el.value || "").trim();
+      if (val === "") {
+        return false;
+      }
+      var name = el.getAttribute("name") || "";
+      if (el.type === "email" || name === "email") {
+        return emailRe.test(val);
+      }
+      if (name === "phone") {
+        return (val.match(/\d/g) || []).length >= 8;
+      }
+      return true;
+    }
+
+    function evaluate() {
+      var allValid = Array.prototype.every.call(controls, controlValid);
+      btn.disabled = !allValid;
+    }
+
+    form.addEventListener("input", evaluate);
+    form.addEventListener("change", evaluate);
+    evaluate(); // start disabled until the form is valid
+  }
+
+  /* ---------------------------------------------------------
        Bootstrap on DOMContentLoaded
        --------------------------------------------------------- */
   document.addEventListener("DOMContentLoaded", function () {
@@ -914,8 +1059,10 @@
     initNavSearchSuggestions();
     initNavSearch();
     initCurriculumJump();
+    initNavScrollSpy();
     initMotion();
     initTcModals();
+    initEnquiryFormGate();
 
     // Fluent Forms fires this jQuery event on successful AJAX submit.
     if (window.jQuery) {
