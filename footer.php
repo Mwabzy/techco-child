@@ -55,26 +55,6 @@ $page_sticky_enabled = !$page_footer_sticky_disable && $global_footer_sticky;
                             mentor-led, backed by placement support.</p>
                     </div>
 
-                    <nav class="tc-footer__col" aria-label="Explore">
-                        <span class="tc-footer__col-title">Explore</span>
-                        <a href="<?php echo esc_url(tc_tpl_url('page-program.php', '/program-curriculum/')); ?>">Program</a>
-                        <a href="<?php echo esc_url(tc_tpl_url('page-fees.php', '/fees-batches/')); ?>">Fees &amp; Batches</a>
-                        <a href="<?php echo esc_url(tc_tpl_url('page-colleges.php', '/for-colleges/')); ?>">For Colleges</a>
-                    </nav>
-
-                    <nav class="tc-footer__col" aria-label="Get started">
-                        <span class="tc-footer__col-title">Get started</span>
-                        <a href="<?php echo esc_url(tc_tpl_url('page-apply.php', '/admissions-apply/') . '#tc-apply-form-anchor'); ?>">Apply Now</a>
-                    </nav>
-
-                    <div class="tc-footer__cta">
-                        <span class="tc-footer__col-title">Admissions open</span>
-                        <p>Seats are limited each cohort.</p>
-                        <a class="tc-btn tc-btn--primary" data-magnetic
-                            href="<?php echo esc_url(tc_tpl_url('page-apply.php', '/admissions-apply/') . '#tc-apply-form-anchor'); ?>">Reserve your
-                            seat</a>
-                    </div>
-
                 </div>
                 <div class="tc-footer__bar">
                     <div class="container tc-footer__bar-inner">

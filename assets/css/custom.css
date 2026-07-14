@@ -140,6 +140,19 @@
   text-rendering: optimizeLegibility;
 }
 
+/* Home is an all-dark page: paint the page base (and the body behind full-bleed
+   bands) navy so the scroll-reveal fade (opacity 0 -> 1 on full-bleed dark
+   sections) never flashes the light --tc-bg-0 base through un-revealed or
+   still-transitioning sections. Scoped to the home template so the other
+   light-themed page templates keep their light base. */
+.tc-page.tc-home {
+  background: var(--tc-bg-dark); /* navy */
+}
+body.page-template-page-home,
+body.page-template-page-home-php {
+  background: var(--tc-navy);
+}
+
 .tc-page h1,
 .tc-page h2,
 .tc-page h3,
@@ -2091,6 +2104,17 @@
 .tc-page .fluentform .ff-btn-submit:hover {
   background: #1c75bc;
 }
+/* Gated submit: disabled until every required field is valid (see custom.js initEnquiryFormGate). */
+.tc-page .fluentform .ff-btn-submit:disabled,
+.tc-page .fluentform .ff-btn-submit[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+.tc-page .fluentform .ff-btn-submit:disabled:hover,
+.tc-page .fluentform .ff-btn-submit[disabled]:hover {
+  background: var(--tc-blue);
+}
 
 /* -----------------------------------------------------------
    Admissions — multi-step form wizard (Apply page only)
@@ -2212,7 +2236,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
-  margin: 6px 0 4px;
 }
 
 /* Vertical gaps between wrapped grid rows (cards) */
@@ -4601,21 +4624,31 @@ body.tc-modal-lock {
    -hover tech tiles, and a deliberate banding rhythm.
    ═══════════════════════════════════════════════════════════════ */
 
+/* Contain the aurora glow within the hero's own box so it doesn't bleed
+   above the hero into the nav on tall/ultra-wide viewports. */
+.tc-home__hero {
+  overflow: hidden;
+}
+
 /* Display-scale hero headline — the page's single loudest voice. */
+.tc-home__hero .tc-eyebrow {
+  margin-bottom: var(--tc-space-4);
+}
 .tc-home__hero .tc-hero__title {
   font-size: clamp(38px, 5.4vw, 68px);
   line-height: 1.05;
   letter-spacing: -0.04em;
-  margin-bottom: 22px;
+  margin-bottom: var(--tc-space-5);
 }
 .tc-home__hero .tc-hero__sub {
   font-size: clamp(17px, 1.4vw, 20px);
   color: var(--tc-muted);
   max-width: 560px;
   line-height: 1.6;
+  margin-bottom: var(--tc-space-6);
 }
 .tc-home__hero-actions {
-  margin-top: 30px;
+  margin: var(--tc-space-6) 0 0;
   gap: 16px;
 }
 
@@ -5089,7 +5122,7 @@ body.tc-modal-lock {
 }
 .tc-footer__inner {
   display: grid;
-  grid-template-columns: 1.6fr 1fr 1fr 1.3fr;
+  grid-template-columns: 1fr;
   gap: 40px;
   padding: clamp(48px, 6vw, 80px) 28px clamp(36px, 4vw, 56px);
   max-width: 1240px;
@@ -6784,13 +6817,13 @@ body.tc-modal-lock {
   .tc-glancecard__row dd { text-align: left; }
 }
 
-/* --- Salary table (Career Scope section) --- */
+/* --- Salary table (Career Scope section, dark band) --- */
 .tc-salarytable-wrap {
   margin-top: clamp(32px, 4vw, 48px);
 }
 .tc-salarytable-scroll {
   overflow-x: auto;
-  border: 1px solid var(--tc-border);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--tc-radius);
   margin-top: 16px;
 }
@@ -6798,27 +6831,32 @@ body.tc-modal-lock {
   width: 100%;
   border-collapse: collapse;
   min-width: 620px;
-  font-size: 14.5px;
+  font-size: 14px;
 }
 .tc-salarytable thead th {
   text-align: left;
   padding: 14px 18px;
-  background: var(--tc-blue-soft);
-  color: var(--tc-heading);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--tc-muted-on-dark);
   font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   white-space: nowrap;
 }
 .tc-salarytable tbody td {
   padding: 14px 18px;
-  border-top: 1px solid var(--tc-border);
-  color: var(--tc-heading);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: #fff;
 }
 .tc-salarytable tbody tr:nth-child(even) {
-  background: rgba(36, 150, 237, .03);
+  background: rgba(255, 255, 255, 0.03);
 }
 .tc-salarytable__note {
   margin-top: 12px;
-  font-size: 13px;
+  font-size: 12.5px;
+  color: var(--tc-muted-on-dark);
+  opacity: 0.8;
 }
 
 /* --- Stack panels: premium category cards (Tools & Technologies section) --- */
@@ -7174,7 +7212,7 @@ body.tc-modal-lock {
   flex-wrap: wrap;
   gap: 10px;
   list-style: none;
-  margin: 30px 0 0;
+  margin: var(--tc-space-6) 0 0;
   padding: 0;
 }
 .tc-hero__tag {
@@ -7190,11 +7228,12 @@ body.tc-modal-lock {
 /* "Program at a Glance" glass card */
 .tc-glance {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(95, 193, 240, 0.25);
   border-radius: var(--tc-radius-lg);
   padding: 30px 32px;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 20px 50px -20px rgba(36, 150, 237, 0.35);
 }
 .tc-glance__eyebrow {
   display: block;
@@ -7254,6 +7293,14 @@ body.tc-modal-lock {
   color: #fff;
 }
 .tc-section--dark .tc-muted {
+  color: var(--tc-muted-on-dark);
+}
+.tc-section--dark .fluentform .ff-el-input--label label,
+.tc-section--dark .fluentform .ff-el-is-required label {
+  color: #fff;
+}
+.tc-section--dark .fluentform .ff-el-form-check-label,
+.tc-section--dark .fluentform .ff-el-custom-html {
   color: var(--tc-muted-on-dark);
 }
 
@@ -7353,49 +7400,6 @@ body.tc-modal-lock {
   background: var(--tc-orange);
   color: var(--tc-navy);
   font-weight: 700;
-}
-
-.tc-salarytable-wrap {
-  margin-top: 20px;
-  overflow-x: auto;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: var(--tc-radius);
-}
-.tc-salarytable {
-  width: 100%;
-  min-width: 560px;
-  border-collapse: collapse;
-}
-.tc-salarytable th,
-.tc-salarytable td {
-  padding: 14px 20px;
-  text-align: left;
-  white-space: nowrap;
-  font-size: 14px;
-}
-.tc-salarytable thead th {
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--tc-muted-on-dark);
-  font-weight: 700;
-  font-size: 12px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-.tc-salarytable tbody tr {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-.tc-salarytable tbody td {
-  color: #fff;
-}
-.tc-salarytable__level {
-  color: var(--tc-orange);
-  font-weight: 700;
-}
-.tc-salarytable__note {
-  margin: 14px 0 0;
-  font-size: 12.5px;
-  color: var(--tc-muted-on-dark);
-  opacity: 0.8;
 }
 
 /* ═══════════════════════════════════════════════════════════════

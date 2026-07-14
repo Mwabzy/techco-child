@@ -37,7 +37,14 @@ Build TWO forms in **wp-admin → Fluent Forms**:
    - Integrations: **Google Sheets** (FF → Integrations), **confirmation email**
      (Settings → Email Notifications), **WhatsApp** (webhook → Cloud API / provider on submit).
 2. **TPO enquiry** (Colleges page): College name · TPO contact · Email · Phone · No. of students · Message.
-Then put each real form ID into the `[fluentform id="X"]` shortcodes in `page-apply.php` / `page-colleges.php`.
+3. **Batch Enquiry** (Home page `#tc-enquiry`): Full Name · Phone Number · Email Address ·
+   Current Status (Student / Recent Graduate / Working Professional / Career Switcher) ·
+   Highest Qualification · Preferred Batch Month (dropdown) · Message (optional).
+   - Same field classes as above (`ff-validate-email`, `ff-number-only`).
+   - Settings → Confirmations: set an inline "Thank you, we'll be in touch" message —
+     this is the acknowledgement shown after submit. Syncs to the Sheet automatically.
+Then put each real form ID into the `[fluentform id="X"]` shortcodes in `page-apply.php` /
+`page-colleges.php` / `page-home.php` (the Batch Enquiry embed defaults to id 3).
 
 ## Brochure
 Upload the PDF to Media, drop its URL into the `.tc-brochure__link` href in `page-apply.php`.

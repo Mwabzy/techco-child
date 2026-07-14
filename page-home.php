@@ -141,7 +141,7 @@ for ($m = 0; $m < 6; $m++) {
 
         <!-- SECTION: Hero (dark navy — program overview + at-a-glance card) -->
         <section class="tc-hero tc-home__hero tc-section--dark">
-            <div class="row align-items-start">
+            <div class="row align-items-center">
                 <div class="col-lg-7">
                     <span class="tc-eyebrow">Career-Ready Training Program</span>
                     <h1 class="tc-hero__title">AI Code <span class="tc-text-accent">Development</span>
@@ -327,65 +327,26 @@ for ($m = 0; $m < 6; $m++) {
                 <p class="tc-enquirycard__sub">Fill in a few details and our team will contact you with batch and
                     admission information.</p>
 
-                <!-- CLAUDE CODE: presentation-only — wire this up to a real submission handler
-                     (FluentForm, admin-ajax, etc.) before going live. -->
-                <form class="tc-enquiryform" method="post" action="">
-                    <div class="tc-enquiryform__row">
-                        <div class="tc-enquiryform__field">
-                            <label>Full Name <span class="tc-enquiryform__req">*</span></label>
-                            <input type="text" name="full_name" placeholder="Your name" required>
-                        </div>
-                        <div class="tc-enquiryform__field">
-                            <label>Phone Number <span class="tc-enquiryform__req">*</span></label>
-                            <input type="tel" name="phone" placeholder="+91" required>
-                        </div>
-                    </div>
-                    <div class="tc-enquiryform__row">
-                        <div class="tc-enquiryform__field">
-                            <label>Email Address <span class="tc-enquiryform__req">*</span></label>
-                            <input type="email" name="email" placeholder="you@example.com" required>
-                        </div>
-                        <div class="tc-enquiryform__field">
-                            <label>Current Status <span class="tc-enquiryform__req">*</span></label>
-                            <select name="status" required>
-                                <option value="" selected disabled>Select your status</option>
-                                <option>Student</option>
-                                <option>Recent Graduate</option>
-                                <option>Working Professional</option>
-                                <option>Career Switcher</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="tc-enquiryform__row">
-                        <div class="tc-enquiryform__field">
-                            <label>Highest Qualification <span class="tc-enquiryform__req">*</span></label>
-                            <input type="text" name="qualification" placeholder="e.g. B.Tech / B.Sc / MCA" required>
-                        </div>
-                        <div class="tc-enquiryform__field">
-                            <label>Preferred Batch Month <span class="tc-enquiryform__req">*</span></label>
-                            <select name="batch_month" required>
-                                <option value="" selected disabled>Select a month</option>
-                                <?php foreach ($tc_batch_months as $month): ?>
-                                    <option><?php echo esc_html($month); ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="tc-enquiryform__field tc-enquiryform__field--full">
-                        <label>Message <span class="tc-enquiryform__optional">(optional)</span></label>
-                        <textarea name="message" rows="3" placeholder="Any question you have for us"></textarea>
-                    </div>
-
-                    <button type="submit" class="tc-btn tc-btn--primary tc-enquiryform__submit">Submit Enquiry</button>
-                    <a class="tc-enquiryform__wa" href="<?php echo esc_url($tc_enquiry_wa_url); ?>" target="_blank"
-                        rel="noopener nofollow">
-                        <svg viewBox="0 0 32 32" width="16" height="16" aria-hidden="true" focusable="false">
-                            <path fill="currentColor"
-                                d="M16.04 3.2c-7.1 0-12.86 5.76-12.86 12.86 0 2.27.6 4.49 1.73 6.44L3.2 28.8l6.49-1.7a12.8 12.8 0 0 0 6.35 1.62h.01c7.1 0 12.86-5.76 12.86-12.86S23.14 3.2 16.04 3.2zm0 23.5h-.01a10.6 10.6 0 0 1-5.4-1.48l-.39-.23-3.85 1.01 1.03-3.75-.25-.39a10.62 10.62 0 1 1 19.72-5.6c0 5.87-4.78 10.65-10.65 10.65zm6.16-7.97c-.34-.17-2-.99-2.31-1.1-.31-.11-.54-.17-.76.17-.22.34-.87 1.1-1.07 1.32-.2.23-.39.25-.73.08-.34-.17-1.43-.53-2.72-1.68-1-.9-1.68-2-1.88-2.34-.2-.34-.02-.52.15-.69.15-.15.34-.39.51-.59.17-.2.22-.34.34-.57.11-.23.06-.43-.03-.6-.08-.17-.76-1.84-1.05-2.52-.27-.66-.55-.57-.76-.58l-.65-.01c-.22 0-.59.08-.9.43-.31.34-1.18 1.16-1.18 2.82s1.21 3.27 1.38 3.5c.17.23 2.38 3.64 5.77 5.1.81.35 1.43.56 1.92.71.81.26 1.54.22 2.12.13.65-.1 2-.82 2.28-1.6.28-.79.28-1.46.2-1.6-.08-.14-.31-.23-.65-.4z" />
-                        </svg>
-                        Prefer WhatsApp? Chat with us instead
-                    </a>
-                </form>
+                <?php
+                // Batch Enquiry form — Fluent Forms embed (mirrors the Apply/TPO forms in
+                // page-apply.php / page-colleges.php). The acknowledgement/confirmation shown
+                // after submit is configured per-form in wp-admin → Fluent Forms →
+                // Settings → Confirmations. Submissions sync to the Google Sheet
+                // automatically via inc/google-sheets-sync.php.
+                // NOTE: id="3" follows Apply=1 / TPO=2. Confirm/replace with the real
+                // "Batch Enquiry" form ID from wp-admin → Fluent Forms.
+                if (function_exists('do_shortcode')) {
+                    echo do_shortcode('[fluentform id="3"]');
+                }
+                ?>
+                <a class="tc-enquiryform__wa" href="<?php echo esc_url($tc_enquiry_wa_url); ?>" target="_blank"
+                    rel="noopener nofollow">
+                    <svg viewBox="0 0 32 32" width="16" height="16" aria-hidden="true" focusable="false">
+                        <path fill="currentColor"
+                            d="M16.04 3.2c-7.1 0-12.86 5.76-12.86 12.86 0 2.27.6 4.49 1.73 6.44L3.2 28.8l6.49-1.7a12.8 12.8 0 0 0 6.35 1.62h.01c7.1 0 12.86-5.76 12.86-12.86S23.14 3.2 16.04 3.2zm0 23.5h-.01a10.6 10.6 0 0 1-5.4-1.48l-.39-.23-3.85 1.01 1.03-3.75-.25-.39a10.62 10.62 0 1 1 19.72-5.6c0 5.87-4.78 10.65-10.65 10.65zm6.16-7.97c-.34-.17-2-.99-2.31-1.1-.31-.11-.54-.17-.76.17-.22.34-.87 1.1-1.07 1.32-.2.23-.39.25-.73.08-.34-.17-1.43-.53-2.72-1.68-1-.9-1.68-2-1.88-2.34-.2-.34-.02-.52.15-.69.15-.15.34-.39.51-.59.17-.2.22-.34.34-.57.11-.23.06-.43-.03-.6-.08-.17-.76-1.84-1.05-2.52-.27-.66-.55-.57-.76-.58l-.65-.01c-.22 0-.59.08-.9.43-.31.34-1.18 1.16-1.18 2.82s1.21 3.27 1.38 3.5c.17.23 2.38 3.64 5.77 5.1.81.35 1.43.56 1.92.71.81.26 1.54.22 2.12.13.65-.1 2-.82 2.28-1.6.28-.79.28-1.46.2-1.6-.08-.14-.31-.23-.65-.4z" />
+                    </svg>
+                    Prefer WhatsApp? Chat with us instead
+                </a>
             </div>
         </section>
 
