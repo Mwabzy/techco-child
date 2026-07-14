@@ -2796,6 +2796,23 @@
   transition-delay: var(--delay, 0ms);
 }
 
+/* Full-bleed colour bands must never run the reveal on their OWN box. The
+   reveal fades from opacity:0 and translates down; on a translucent full-bleed
+   band that briefly exposes the light page base behind it — which reads as a
+   slate/light-blue flash sweeping through the dark sections while scrolling or
+   after a nav jump. Keep the band itself solid and static; its inner
+   `.tc-reveal` cards/content still animate normally over the opaque band. */
+.tc-section--dark.tc-reveal,
+.tc-section--brand.tc-reveal,
+.tc-section--tint.tc-reveal,
+.tc-section--navy.tc-reveal {
+  opacity: 1;
+  transform: none;
+  filter: none;
+  will-change: auto;
+  transition: none;
+}
+
 /* -----------------------------------------------------------
    Animated gradient text (hero headline)
    ----------------------------------------------------------- */
@@ -2851,28 +2868,13 @@
   background: rgba(95, 193, 240, 0.06);
 }
 
-/* Hero: a single fixed aurora bleeding in from the top-right — no divs needed. */
+/* Hero stays a single flat navy — the blue aurora glow that used to bleed in
+   from the top-right was removed: over the dark band it read as a stray
+   light-blue patch that appeared to drift as the section scrolled, breaking
+   the "one consistent dark colour" the hero should hold. */
 .tc-hero {
   position: relative;
   overflow: visible;
-}
-.tc-home__hero::before {
-  content: "";
-  position: absolute;
-  top: -140px;
-  right: -120px;
-  width: 560px;
-  height: 560px;
-  max-width: 70vw;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle at 50% 50%,
-    rgba(36, 150, 237, 0.16),
-    transparent 68%
-  );
-  filter: blur(20px);
-  pointer-events: none;
-  z-index: 0;
 }
 .tc-cta-band {
   position: relative;
@@ -2934,9 +2936,6 @@
   .tc-home__hero .col-lg-5 > * {
     opacity: 1 !important;
     animation: none !important;
-  }
-  .tc-home__hero::before {
-    display: none;
   }
 }
 
@@ -3532,6 +3531,17 @@
 
 html {
   scroll-behavior: smooth;
+  /* Suppress Chromium/Edge's blue overscroll glow when a touchpad scrolls
+     past the top/bottom edge — it reads as a stray light-blue flash since
+     it paints over our dark/light section backgrounds regardless of theme.
+     `overscroll-behavior` alone stops scroll-chaining, but the momentum/
+     rubber-band region still exposes the browser's default light canvas.
+     Pinning the root background to one dark navy means any pixels shown
+     beyond the content edges during a scroll are always the same dark
+     colour — never a light-blue flash. Content (body + .tc-page) paints
+     over this in the normal viewport, so the page itself is unchanged. */
+  overscroll-behavior: none;
+  background-color: var(--tc-navy);
 }
 
 /* Page-load fade-in (JS adds .tc-loaded on DOMContentLoaded) */
@@ -3747,8 +3757,6 @@ html {
   border: 1px solid var(--tc-border-strong);
   border-radius: 18px;
   box-shadow: var(--tc-shadow-lg);
-  z-index: 30;
-}
   z-index: 30;
 }
 .tc-nav__search-suggestions[hidden] {

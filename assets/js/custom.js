@@ -76,8 +76,13 @@
         });
       },
       {
-        threshold: 0.08,
-        rootMargin: "0px 0px -40px 0px",
+        // Fire while the element is still below the fold (positive bottom
+        // margin expands the root downward) so full-bleed dark sections
+        // finish fading in before they actually scroll into view — a late
+        // reveal here briefly shows the page's light base background
+        // through the still-transparent section.
+        threshold: 0,
+        rootMargin: "0px 0px 200px 0px",
       },
     );
 
