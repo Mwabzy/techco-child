@@ -336,7 +336,7 @@ for ($m = 0; $m < 6; $m++) {
                 // NOTE: id="3" follows Apply=1 / TPO=2. Confirm/replace with the real
                 // "Batch Enquiry" form ID from wp-admin → Fluent Forms.
                 if (function_exists('do_shortcode')) {
-                    echo do_shortcode('[fluentform id="3"]');
+                    echo do_shortcode('[fluentform id="7"]');
                 }
                 ?>
                 <a class="tc-enquiryform__wa" href="<?php echo esc_url($tc_enquiry_wa_url); ?>" target="_blank"

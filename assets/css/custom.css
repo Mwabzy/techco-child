@@ -3565,6 +3565,10 @@ html {
      over this in the normal viewport, so the page itself is unchanged. */
   overscroll-behavior: none;
   background-color: var(--tc-navy);
+  /* Offset in-page anchor jumps by the sticky nav's height (~68px) plus a
+     little breathing room, so a section's heading lands below the nav
+     instead of hidden behind it when the section links scroll to it. */
+  scroll-padding-top: 84px;
 }
 
 /* Page-load fade-in (JS adds .tc-loaded on DOMContentLoaded) */
@@ -4108,30 +4112,74 @@ html {
 }
 
 /* ==================================================================
-   India: +91 prefix on Fluent Forms phone fields (india-localization.php)
+   Country dial-code picker on Fluent Forms phone fields (india-localization.php)
    ================================================================== */
+/* One unified pill: a single bordered container holding the code picker
+   and the number input, joined by a hairline divider. */
 .tc-phone-wrap {
   position: relative;
-  display: block;
-  width: 100%;
-}
-.tc-phone-prefix {
-  position: absolute;
-  left: 1px;
-  top: 1px;
-  bottom: 1px;
-  z-index: 2;
   display: flex;
-  align-items: center;
-  padding: 0 12px;
-  color: var(--tc-navy, #0a0e2e);
-  font-weight: 700;
-  font-size: 15px;
-  pointer-events: none;
-  border-right: 1px solid rgba(0, 0, 0, 0.12);
+  align-items: stretch;
+  width: 100%;
+  background: #fff;
+  border: 1px solid rgba(10, 14, 46, 0.18);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.tc-phone-wrap:focus-within {
+  border-color: var(--tc-navy, #0a0e2e);
+  box-shadow: 0 0 0 3px rgba(10, 14, 46, 0.12);
+}
+/* Dark country-code segment on a light number field. */
+.tc-phone-cc {
+  flex: 0 0 auto;
+  max-width: 44%;
+  border: 0;
+  background: #141a3d;
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.2;
+  padding: 0 30px 0 14px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='%23ffffff' d='M0 0l5 6 5-6z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 11px center;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+.tc-phone-cc:hover {
+  background-color: #1b2350;
+}
+.tc-phone-cc:focus {
+  outline: none;
+}
+/* Dark dropdown rows to match the dark code segment. */
+.tc-phone-cc option {
+  background: #141a3d;
+  color: #fff;
 }
 .tc-phone-wrap input.ff-number-only {
-  padding-left: 58px !important;
+  flex: 1 1 auto;
+  width: auto !important;
+  min-width: 0;
+  margin: 0 !important;
+  padding-left: 14px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--tc-navy, #0a0e2e) !important;
+}
+.tc-phone-wrap input.ff-number-only::placeholder {
+  color: rgba(10, 14, 46, 0.4);
+}
+.tc-phone-wrap input.ff-number-only:focus {
+  outline: none;
+  box-shadow: none !important;
 }
 
 /* ===========================================================

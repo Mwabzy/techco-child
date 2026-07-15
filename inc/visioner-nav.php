@@ -48,15 +48,27 @@ function tc_render_visioner_nav()
 	// colleges) are no longer linked from nav; they stay in the codebase
 	// untouched but are effectively retired from the user journey.
 	$home_url = $tpl_url('page-home.php', '/');
-	$enquiry_url = $home_url . '#tc-enquiry';
+
+	// When we're already on the home template, section links must be BARE
+	// hashes (#tc-why) so they scroll the current page. Using the absolute
+	// permalink here would navigate away to the /home/ page — which, when the
+	// site's real front page is a different page, reads as "jumping to a
+	// different homepage" instead of scrolling. From any other template we
+	// keep the absolute prefix so the link returns to home, then scrolls.
+	$on_home = ('page-home.php' === $current);
+	$anchor  = function ($hash) use ($on_home, $home_url) {
+		return ($on_home ? '' : $home_url) . $hash;
+	};
+	$enquiry_url = $anchor('#tc-enquiry');
 
 	$items = array(
-		'Home' => array('url' => $home_url, 'tpl' => 'page-home.php'),
-		'Overview' => array('url' => $home_url . '#tc-why', 'tpl' => ''),
-		'Careers' => array('url' => $home_url . '#tc-careers', 'tpl' => ''),
-		'Curriculum' => array('url' => $home_url . '#tc-curriculum', 'tpl' => ''),
-		'Tools' => array('url' => $home_url . '#tc-stack', 'tpl' => ''),
-		'Projects' => array('url' => $home_url . '#tc-tracks', 'tpl' => ''),
+		// Home scrolls to the top of the current page when already here.
+		'Home' => array('url' => $on_home ? '#tc-nav' : $home_url, 'tpl' => 'page-home.php'),
+		'Overview' => array('url' => $anchor('#tc-why'), 'tpl' => ''),
+		'Careers' => array('url' => $anchor('#tc-careers'), 'tpl' => ''),
+		'Curriculum' => array('url' => $anchor('#tc-curriculum'), 'tpl' => ''),
+		'Tools' => array('url' => $anchor('#tc-stack'), 'tpl' => ''),
+		'Projects' => array('url' => $anchor('#tc-tracks'), 'tpl' => ''),
 		'Enquiry' => array('url' => $enquiry_url, 'tpl' => ''),
 	);
 
