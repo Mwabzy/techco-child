@@ -6915,6 +6915,70 @@ body.tc-modal-lock {
   opacity: 0.8;
 }
 
+/* Mobile: stack each salary row into its own card so there's no horizontal
+   scrolling. Each cell shows its column name (from data-label) beside the
+   value. */
+@media (max-width: 600px) {
+  .tc-salarytable-scroll {
+    overflow-x: visible;
+    border: 0;
+    border-radius: 0;
+  }
+  .tc-salarytable {
+    min-width: 0;
+    display: block;
+  }
+  .tc-salarytable thead {
+    /* visually hidden — labels come from data-label instead */
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  .tc-salarytable tbody,
+  .tc-salarytable tr {
+    display: block;
+  }
+  .tc-salarytable tbody tr {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--tc-radius);
+    padding: 6px 16px;
+    margin-bottom: 14px;
+  }
+  .tc-salarytable tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.04);
+  }
+  .tc-salarytable tbody td {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    padding: 10px 0;
+    border-top: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    text-align: right;
+  }
+  .tc-salarytable tbody td:last-child {
+    border-bottom: 0;
+  }
+  .tc-salarytable tbody td::before {
+    content: attr(data-label);
+    text-align: left;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--tc-muted-on-dark);
+    flex: 0 0 auto;
+  }
+}
+
 /* --- Stack panels: premium category cards (Tools & Technologies section) --- */
 .tc-stackpanels {
   display: grid;
