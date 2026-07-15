@@ -62,8 +62,8 @@ function tc_render_visioner_nav()
 	$enquiry_url = $anchor('#tc-enquiry');
 
 	$items = array(
-		// Home scrolls to the top of the current page when already here.
-		'Home' => array('url' => $on_home ? '#tc-nav' : $home_url, 'tpl' => 'page-home.php'),
+		// Home scrolls to the hero section when already here.
+		'Home' => array('url' => $on_home ? '#tc-hero' : $home_url, 'tpl' => 'page-home.php'),
 		'Overview' => array('url' => $anchor('#tc-why'), 'tpl' => ''),
 		'Careers' => array('url' => $anchor('#tc-careers'), 'tpl' => ''),
 		'Curriculum' => array('url' => $anchor('#tc-curriculum'), 'tpl' => ''),

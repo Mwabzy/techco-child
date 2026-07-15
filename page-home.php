@@ -140,7 +140,7 @@ for ($m = 0; $m < 6; $m++) {
     <div class="container">
 
         <!-- SECTION: Hero (dark navy — program overview + at-a-glance card) -->
-        <section class="tc-hero tc-home__hero tc-section--dark">
+        <section id="tc-hero" class="tc-hero tc-home__hero tc-section--dark">
             <div class="row align-items-center">
                 <div class="col-lg-7">
                     <span class="tc-eyebrow">Career-Ready Training Program</span>
