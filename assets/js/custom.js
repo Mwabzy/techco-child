@@ -769,29 +769,31 @@
     }
 
     var navHeight = nav.offsetHeight || 0;
-    var visible = {};
+    // Anchor jumps land a section's top at the CSS `scroll-padding-top` line
+    // (see html { scroll-padding-top } in custom.css), which sits below the
+    // nav. Match the scrollspy's reference line to that same offset so the
+    // section you jumped to — not the one just above it — is the one selected.
+    var scrollPad =
+      parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) ||
+      0;
+    var refOffset = Math.max(navHeight, scrollPad) + 4;
     var current = null;
 
     var observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          visible[entry.target.id] = entry.isIntersecting;
-        });
-
+      function () {
+        // Active section = the last one (in document order) whose top has
+        // scrolled to or past the reference line under the nav. Computing this
+        // by position avoids the boundary overlap where two sections both clip
+        // the detection band and the outgoing one (earlier in the DOM) wins.
         var found = null;
         for (var i = 0; i < sections.length; i++) {
-          if (visible[sections[i].id]) {
+          if (sections[i].getBoundingClientRect().top - refOffset <= 0) {
             found = sections[i].id;
-            break;
           }
         }
 
-        if (!found) {
-          if (window.scrollY <= navHeight) {
-            found = null; // top of page — Home
-          } else {
-            found = current; // scrolled past the last section — keep it lit
-          }
+        if (!found && window.scrollY > navHeight) {
+          found = current; // scrolled past the last section — keep it lit
         }
 
         if (found !== current) {
