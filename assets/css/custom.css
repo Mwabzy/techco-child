@@ -2819,6 +2819,25 @@ body.page-template-page-home-php {
   transition-delay: var(--delay, 0ms);
 }
 
+/* Section arrival highlight — a subtle one-shot glow applied by JS to the
+   destination section after an eased nav-scroll, so landing feels
+   intentional. Uses an inset accent glow (never opacity/transform) so it
+   plays cleanly on the full-bleed dark sections without a light flash. */
+@keyframes tc-section-arrive {
+  0% {
+    box-shadow: inset 0 0 0 0 rgba(95, 193, 240, 0);
+  }
+  28% {
+    box-shadow: inset 0 0 70px 0 rgba(95, 193, 240, 0.16);
+  }
+  100% {
+    box-shadow: inset 0 0 0 0 rgba(95, 193, 240, 0);
+  }
+}
+.tc-section--arrived {
+  animation: tc-section-arrive 1s var(--tc-ease);
+}
+
 /* Full-bleed colour bands must never run the reveal on their OWN box. The
    reveal fades from opacity:0 and translates down; on a translucent full-bleed
    band that briefly exposes the light page base behind it — which reads as a
@@ -3923,6 +3942,7 @@ html {
   margin-inline: auto;
 }
 .tc-nav__list {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -3949,6 +3969,32 @@ html {
 .tc-nav__link.is-active {
   color: var(--tc-blue);
   font-weight: 700;
+}
+
+/* Sliding underline indicator — a single bar (injected by JS) that
+   glides beneath the active nav link and previews on hover. Desktop
+   only; hidden while the nav is a mobile dropdown. */
+.tc-nav__underline {
+  position: absolute;
+  bottom: 3px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--tc-orange);
+  box-shadow: 0 0 12px -1px var(--tc-orange);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(0);
+  transition:
+    transform 0.42s var(--tc-ease),
+    width 0.42s var(--tc-ease),
+    opacity 0.3s ease;
+}
+@media (max-width: 991px) {
+  .tc-nav__underline {
+    display: none;
+  }
 }
 
 /* Right-side actions */

@@ -766,6 +766,12 @@
         link.classList.add("is-active");
         link.setAttribute("aria-current", "page");
       }
+      // Let the sliding underline follow the active link (decoupled).
+      if (typeof window.CustomEvent === "function") {
+        nav.dispatchEvent(
+          new CustomEvent("tc:navactive", { detail: { link: link } }),
+        );
+      }
     }
 
     var navHeight = nav.offsetHeight || 0;
@@ -779,37 +785,56 @@
     var refOffset = Math.max(navHeight, scrollPad) + 4;
     var current = null;
 
-    var observer = new IntersectionObserver(
-      function () {
-        // Active section = the last one (in document order) whose top has
-        // scrolled to or past the reference line under the nav. Computing this
-        // by position avoids the boundary overlap where two sections both clip
-        // the detection band and the outgoing one (earlier in the DOM) wins.
-        var found = null;
-        for (var i = 0; i < sections.length; i++) {
-          if (sections[i].getBoundingClientRect().top - refOffset <= 0) {
-            found = sections[i].id;
-          }
+    // Active section = the last one (in document order) whose top has scrolled
+    // to or past the reference line under the nav. Reading positions directly
+    // (rather than an IntersectionObserver band) avoids two failure modes:
+    // the boundary overlap where two sections both clip a band and the outgoing
+    // one wins, and — critically — the dead zone where a smooth-scroll rests a
+    // section between the band edges so the observer never re-fires at the true
+    // resting position. A rAF-throttled scroll listener re-evaluates on every
+    // settle and continuously during manual scrolling.
+    function computeActive() {
+      var found = null;
+      for (var i = 0; i < sections.length; i++) {
+        if (sections[i].getBoundingClientRect().top - refOffset <= 0) {
+          found = sections[i].id;
         }
+      }
 
-        if (!found && window.scrollY > navHeight) {
-          found = current; // scrolled past the last section — keep it lit
-        }
+      if (!found && window.scrollY > navHeight) {
+        found = current; // scrolled past the last section — keep it lit
+      }
 
-        if (found !== current) {
-          current = found;
-          setActive(found ? linkByHash[found] : homeLink);
-        }
-      },
-      {
-        rootMargin: "-" + (navHeight + 1) + "px 0px -70% 0px",
-        threshold: 0,
-      },
-    );
+      if (found !== current) {
+        current = found;
+        setActive(found ? linkByHash[found] : homeLink);
+      }
+    }
 
-    sections.forEach(function (section) {
-      observer.observe(section);
+    var ticking = false;
+    function onScroll() {
+      if (ticking) {
+        return;
+      }
+      ticking = true;
+      window.requestAnimationFrame(function () {
+        ticking = false;
+        computeActive();
+      });
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", function () {
+      navHeight = nav.offsetHeight || 0;
+      scrollPad =
+        parseFloat(
+          getComputedStyle(document.documentElement).scrollPaddingTop,
+        ) || 0;
+      refOffset = Math.max(navHeight, scrollPad) + 4;
+      computeActive();
     });
+
+    computeActive(); // light the correct link on load
   }
 
   /* ---------------------------------------------------------
@@ -1046,6 +1071,204 @@
   }
 
   /* ---------------------------------------------------------
+       Sliding underline indicator. A single bar glides beneath the
+       active nav link (and previews on hover). Desktop only; driven
+       by the scrollspy's "tc:navactive" event so there's no second
+       observer. The CSS transition does the gliding; under
+       prefers-reduced-motion the global CSS neutralises it to a snap.
+       --------------------------------------------------------- */
+  function initNavUnderline() {
+    var nav = document.getElementById("tc-nav");
+    if (!nav) {
+      return;
+    }
+    var list = nav.querySelector(".tc-nav__list");
+    if (!list) {
+      return;
+    }
+    var desktop = window.matchMedia("(min-width: 992px)");
+
+    var bar = document.createElement("span");
+    bar.className = "tc-nav__underline";
+    bar.setAttribute("aria-hidden", "true");
+    list.appendChild(bar);
+
+    function activeLink() {
+      return list.querySelector(".tc-nav__link.is-active");
+    }
+
+    function moveTo(link) {
+      if (!desktop.matches || !link) {
+        bar.style.opacity = "0";
+        return;
+      }
+      bar.style.transform = "translateX(" + link.offsetLeft + "px)";
+      bar.style.width = link.offsetWidth + "px";
+      bar.style.opacity = "1";
+    }
+
+    function settle() {
+      moveTo(activeLink());
+    }
+
+    nav.addEventListener("tc:navactive", function (e) {
+      moveTo((e.detail && e.detail.link) || activeLink());
+    });
+
+    // Hover preview: glide to the hovered link, snap back to active on leave.
+    Array.prototype.forEach.call(
+      list.querySelectorAll(".tc-nav__link"),
+      function (link) {
+        link.addEventListener("mouseenter", function () {
+          if (desktop.matches) {
+            moveTo(link);
+          }
+        });
+        link.addEventListener("mouseleave", settle);
+      },
+    );
+
+    var resizeTimer;
+    window.addEventListener("resize", function () {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(settle, 120);
+    });
+
+    // Initial placement once layout/fonts settle.
+    window.setTimeout(settle, 60);
+  }
+
+  /* ---------------------------------------------------------
+       Premium eased scroll for in-page section links, with a brief
+       "arrival" highlight on the destination section. Replaces the
+       browser's native smooth scroll for nav clicks only; cross-page
+       links and non-section anchors (e.g. #tc-module-N) are left alone.
+       --------------------------------------------------------- */
+  function initSmoothNav() {
+    var nav = document.getElementById("tc-nav");
+    var reduce =
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    var raf = null;
+
+    function cancel() {
+      if (raf) {
+        window.cancelAnimationFrame(raf);
+        raf = null;
+      }
+      // Restore the global CSS smooth-scroll we borrow during a tween.
+      document.documentElement.style.scrollBehavior = "";
+    }
+
+    // Abort the tween the instant the user takes over scrolling.
+    ["wheel", "touchstart", "keydown"].forEach(function (evt) {
+      window.addEventListener(
+        evt,
+        function () {
+          if (raf) {
+            cancel();
+          }
+        },
+        { passive: true },
+      );
+    });
+
+    function highlight(section) {
+      if (!section) {
+        return;
+      }
+      section.classList.remove("tc-section--arrived");
+      void section.offsetWidth; // restart the animation if re-triggered
+      section.classList.add("tc-section--arrived");
+      window.setTimeout(function () {
+        section.classList.remove("tc-section--arrived");
+      }, 1000);
+    }
+
+    function targetY(section) {
+      var offset = (nav ? nav.offsetHeight : 0) + 8;
+      return Math.max(
+        0,
+        section.getBoundingClientRect().top + window.pageYOffset - offset,
+      );
+    }
+
+    function scrollToSection(section, hash) {
+      var end = targetY(section);
+
+      function finish() {
+        if (hash && window.history && history.pushState) {
+          history.pushState(null, "", hash);
+        }
+        highlight(section);
+      }
+
+      if (reduce) {
+        window.scrollTo(0, end);
+        finish();
+        return;
+      }
+
+      var start = window.pageYOffset;
+      var dist = end - start;
+      if (Math.abs(dist) < 2) {
+        finish();
+        return;
+      }
+      var duration = Math.min(1100, Math.max(500, Math.abs(dist) * 0.6));
+      var startTime = null;
+
+      // Borrow control from the global `scroll-behavior: smooth` so it
+      // doesn't fight our per-frame scrollTo. Restored in cancel().
+      document.documentElement.style.scrollBehavior = "auto";
+
+      function step(now) {
+        if (startTime === null) {
+          startTime = now;
+        }
+        var t = Math.min(1, (now - startTime) / duration);
+        // easeInOutCubic
+        var eased = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        window.scrollTo(0, start + dist * eased);
+        if (t < 1) {
+          raf = window.requestAnimationFrame(step);
+        } else {
+          cancel();
+          finish();
+        }
+      }
+      raf = window.requestAnimationFrame(step);
+    }
+
+    document.addEventListener("click", function (e) {
+      var link = e.target.closest ? e.target.closest('a[href*="#tc-"]') : null;
+      if (!link) {
+        return;
+      }
+      // Resolve to an absolute URL so bare "#tc-why" and full home URLs
+      // are handled uniformly.
+      var resolved = document.createElement("a");
+      resolved.href = link.href;
+      if (resolved.pathname !== window.location.pathname) {
+        return; // targets another page — let the browser navigate.
+      }
+      var hash = resolved.hash;
+      if (!hash || hash.indexOf("#tc-") !== 0) {
+        return;
+      }
+      var section = document.getElementById(hash.slice(1));
+      // Only take over for real page sections, not accordion/module anchors.
+      if (!section || section.tagName !== "SECTION") {
+        return;
+      }
+      e.preventDefault();
+      cancel();
+      scrollToSection(section, hash);
+    });
+  }
+
+  /* ---------------------------------------------------------
        Bootstrap on DOMContentLoaded
        --------------------------------------------------------- */
   document.addEventListener("DOMContentLoaded", function () {
@@ -1062,6 +1285,8 @@
     initNavSearch();
     initCurriculumJump();
     initNavScrollSpy();
+    initSmoothNav();
+    initNavUnderline();
     initMotion();
     initTcModals();
     initEnquiryFormGate();
