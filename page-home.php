@@ -333,10 +333,8 @@ for ($m = 0; $m < 6; $m++) {
                 // after submit is configured per-form in wp-admin → Fluent Forms →
                 // Settings → Confirmations. Submissions sync to the Google Sheet
                 // automatically via inc/google-sheets-sync.php.
-                // NOTE: id="3" follows Apply=1 / TPO=2. Confirm/replace with the real
-                // "Batch Enquiry" form ID from wp-admin → Fluent Forms.
                 if (function_exists('do_shortcode')) {
-                    echo do_shortcode('[fluentform id="7"]');
+                    echo do_shortcode('[fluentform id="16"]');
                 }
                 ?>
                 <a class="tc-enquiryform__wa" href="<?php echo esc_url($tc_enquiry_wa_url); ?>" target="_blank"

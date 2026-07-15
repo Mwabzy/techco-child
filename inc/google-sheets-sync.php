@@ -9,7 +9,7 @@
  * Configure in wp-config.php (NOT committed):
  *   define( 'GSHEET_WEBAPP_URL',   'https://script.google.com/macros/s/XXXX/exec' );
  *   define( 'GSHEET_SHARED_TOKEN', 'some-long-random-string' );   // optional but recommended
- *   define( 'GSHEET_FORM_IDS',     '1' );  // optional: comma-separated form IDs to sync; empty/undefined = all
+ *   define( 'GSHEET_FORM_IDS',     '16' );  // optional: comma-separated form IDs to sync; empty/undefined = all
  *
  * The Apps Script verifies GSHEET_SHARED_TOKEN before writing, so the
  * endpoint can't be spammed by anyone who finds the URL.
@@ -20,13 +20,23 @@
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /**
- * Send Apply-form (id 1) submitters straight to the fee payment page instead
+ * The Fluent Forms ID of the Admissions / Apply form. Single source of truth
+ * so the payment redirect, policy-modal links, aria fix, and the Apply page
+ * shortcode all agree. If the form ever changes, update this one value
+ * (or override it with the 'tc_apply_form_id' filter).
+ */
+function tc_apply_form_id() {
+	return (int) apply_filters( 'tc_apply_form_id', 16 );
+}
+
+/**
+ * Send Apply-form submitters straight to the fee payment page instead
  * of the default "thank you" inline message.
  */
 add_filter( 'fluentform/form_submission_confirmation', 'tc_apply_form_redirect_to_payment', 20, 3 );
 
 function tc_apply_form_redirect_to_payment( $confirmation, $form_data, $form ) {
-	if ( ! isset( $form->id ) || 1 !== (int) $form->id ) {
+	if ( ! isset( $form->id ) || tc_apply_form_id() !== (int) $form->id ) {
 		return $confirmation;
 	}
 
@@ -37,7 +47,7 @@ function tc_apply_form_redirect_to_payment( $confirmation, $form_data, $form ) {
 }
 
 /**
- * Map of Apply-form (id 1) consent checkbox field names → the phrase in
+ * Map of Apply-form consent checkbox field names → the phrase in
  * their label to turn into an in-page modal trigger. Each modal is rendered
  * once on page-apply.php (tc_render_terms_modal / tc_render_privacy_modal /
  * tc_render_consent_modal) and opened via data-tc-modal-open (see
@@ -56,7 +66,7 @@ function tc_apply_form_policy_links() {
 add_filter( 'fluentform/rendering_field_data_input_checkbox', 'tc_apply_form_link_policy_field', 20, 2 );
 
 function tc_apply_form_link_policy_field( $data, $form ) {
-	if ( ! isset( $form->id ) || 1 !== (int) $form->id ) {
+	if ( ! isset( $form->id ) || tc_apply_form_id() !== (int) $form->id ) {
 		return $data;
 	}
 
@@ -106,7 +116,7 @@ function tc_apply_form_link_policy_field( $data, $form ) {
 add_filter( 'fluentform/rendering_field_html_input_checkbox', 'tc_apply_form_fix_policy_aria_label', 20, 3 );
 
 function tc_apply_form_fix_policy_aria_label( $html, $data, $form ) {
-	if ( ! isset( $form->id ) || 1 !== (int) $form->id ) {
+	if ( ! isset( $form->id ) || tc_apply_form_id() !== (int) $form->id ) {
 		return $html;
 	}
 
