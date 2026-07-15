@@ -7165,7 +7165,7 @@ body.tc-modal-lock {
 }
 .tc-nav__link:hover {
   color: #fff;
-  background: rgba(255, 255, 255, 0.08);
+  background: transparent;
 }
 .tc-nav__link.is-active {
   color: var(--tc-orange);

@@ -133,6 +133,14 @@ function tc_render_visioner_nav()
 			var nav = document.getElementById('tc-nav');
 			if (!nav) return;
 			var btn = nav.querySelector('.tc-nav__toggle');
+				// Close the open mobile menu when any link inside it is tapped,
+				// so it stops covering the section the user just jumped to.
+				nav.querySelectorAll('#tc-nav-menu a').forEach(function (link) {
+					link.addEventListener('click', function () {
+						nav.classList.remove('is-open');
+						btn.setAttribute('aria-expanded', 'false');
+					});
+				});
 			btn.addEventListener('click', function () {
 				var open = nav.classList.toggle('is-open');
 				btn.setAttribute('aria-expanded', open ? 'true' : 'false');
